@@ -1,8 +1,8 @@
-# How I created a new hero class mod for Darkest Dungeon II
+# Creating a new hero class for Darkest Dungeon II
 
-I wouldn't call this a guide, I see this more like a moral support companion on the path of creating a new hero class. Sometimes it might help, sometimes it makes things more confusing. Before this mod I had never ever created any mods for any game, so there will probably be many modding malpractices recommended. What it can help with though is providing at least some answers and solutions to some of the problems that can occur while creating such a mod. Also English is not my first language.
+I wouldn't call this a guide, I see this more like a moral support companion on the path of creating a new hero. Sometimes it might help, sometimes it makes things more confusing. Before this mod I had never created any mods for any game, so there will probably be many modding malpractices recommended. What it can help with though is providing at least some answers and solutions to some of the problems that can occur while creating such a mod. Not all of these answers are correct but at least they exist. Also English is not my first language.
 
-There is only a few guides about modding the Darkest Dungeon 2 that I'm aware of:
+There is only a few guides about modding Darkest Dungeon 2 that I'm aware of:
 - [A more fundamental DD2 modding guide](https://docs.google.com/document/d/1ga3FNrL3eGDRMFekLx9-RKhTDLMxPO603XzXcZa8O78/edit?usp=drive_link)
 - [Creating new path skills](https://docs.google.com/document/d/1glkTgWv5mXvleihcnBeC4FIDgf88fz8Qwjz46es6oFA/edit?tab=t.0#heading=h.1xklr55423w9)
 - [How to create a mod on Darkest Dungeon 2 that contains multiple tokens](https://docs.google.com/document/d/1FcWUTaz4nRhRtgW_haOZUEuLNB1u41Lqi03kav63f8Y/edit?tab=t.0#heading=h.c976l88xa9o)
@@ -18,33 +18,37 @@ Other new hero class mods for DD2:
 
 Most of them are on the very early stages of development. The most finished one is the Omen Seeker. She was the inspiration for me. Often times I had  troubles that felt impossible to solve, but when I remembered her, I knew that my pursuits were not in vain.
 
+Other resources:
+- [DD2 CSV Syntax VSCode extention](https://marketplace.visualstudio.com/items?itemName=PHombie.dd2-csv-syntax)
+
 ### What to expect from this?
 
-- I had never created any character before. The first section is about how the hero was designed but there are no artistic advices.
-- I had never touched Unity Editor before. The Darkest Dungeon II uses many different functions from this engine and I will not try to explain why certain methods are chosen.
-- I am not a very skilled DD2 player, so there will be no tips for gameplay balancing.
+- I had never created any character before so character design is not in focus here.
+- I had never touched Unity Editor before. DD2 uses many different functions from this engine and I will not try to explain why certain methods are chosen.
+- I am not a very skilled DD2 player.
 - I will try to write as much as I can about what I was trying to do, how I was trying to achieve things, what issues I encountered, what worked, what did not, what are other potential solutions that came to mind.
-- Not all things that I will write about were successful. But I never mean that something is not supposed to work. I probably missed many crucial bits of knowledge that would make those things work. The purpose of this is to just bring potentially useful ideas in.
-- Creating a new hero might require a lot of work. But the tool provided by the developers can create a working duplicate of the Highwayman in a couple of clicks. The mod creation process can be incremental, the base is already there.
+- Not all things that I will write about were successful. But I never mean that something is not supposed to work.
+- While I was able to transfer 3D models and animations from Blender to Darkside, I encountered a lot of issues and couldn't fix all of them. If any other guide on this topic is available, it would probably be better than what I can offer here.
+- Creating a new hero does require a lot of work. But the tool provided by the developers can create a working duplicate of the Highwayman in a couple of clicks. The process of creating a new hero can be incremental.
 
 ### What I couldn't do (not easily achievable?)
 
-I don't think that it is possible to create palettes, weapon kits, or skins for custom heroes using the standard tools. Right now they are limited to the vanilla heroes.
+I don't think it's possible to create palettes, weapon kits, or skins for custom heroes using the official modding tools. They are limited to the vanilla heroes as of now.
 
-There also seems to be some trouble with custom audio. From what I've read it's impossible without dwelving deep into the tech at this moment.
+There also seems to be some trouble with custom audio. I've read it's impossible without dwelving deep into tech at this moment.
 
-Shrine of Reflection narration. Since I had no control over audio, custom subtitles were not appearing on screen. Though I was able to create custom text plates with some workaround.
+Custom subtitles. Since custom audio is unavailable, subtitles will not be shown either. This was a problem for the Shrine of Reflection, but I found a workaround.
 
 ### Amount of work
 
-There was a lot of work and I think it can be divided into these groups:
-- Basic concept of the new hero class (appearance, backstory, skills).
-- Plain 3D models for the hero and the weapon.
+Creating a new hero requires:
+- An idea of the new class (appearance, backstory, skills).
+- 3D models for the hero and the weapon (meshes).
 - Preparing them for animation (retopology, rigging).
-- Textures for them.
+- Textures.
 - About 20 short (1-3s) animations.
 - About 20 static poses.
-- A couple of long (about 10s) animations (battle idle and character sheet).
+- A couple of long (about 10s) animations (battle idle and hero sheet).
 - Small UI portraits.
 - Bigger portraits for the Shrine of Reflection and Story Choices.
 - 11 Skill icons.
@@ -53,132 +57,102 @@ There was a lot of work and I think it can be divided into these groups:
 - Three hero trinkets: icons and effects.
 - Signature inn item: icon and effect.
 - Backstory narration, barks.
-- Custom battles for the Shrines of Reflection.
+- Custom battles for the Shrine of Reflection.
 - Dealing with technical issues.
 
-This is a diverse list. I believe the process can be somewhat parallelized. After the general idea of the hero is formed, the process can be branched into three areas that aren't very intertwined:
+This is a diverse list. I believe the process can be somewhat parallelized. After a general idea of the hero is formed, the process can be branched into three areas that aren't very intertwined:
 1. 3D modelling and animating.
-2. Creating the skillset.
+2. Creating and balancing skills and items.
 3. Writing the story and barks.
 
 ![Process of creating a hero](images/hero_workflow.png)\
 *Don't take this image seriously I don't know how business processes are done*
 
-Some animations require knowledge of what the skills are going to be like, but many of the skill animations are quite abstract. For example healing animations don't need to know the precise amount of targets that will be healed to look good.
+Some animations require knowledge of what the skills are going to be like, but many of skill animations are quite abstract. For example, healing animations don't need to know the amount of targets that will be healed to look good.
 
-Some of the work can be copied from the base game (like VFX and SFX). And some things are reused even by the vanilla classes (for example heroes actually have about 8 unique skill animations, some skills just use the same moves).
+Some of the work can be copied from the base game (like VFX and SFX). And some things are reused even by the vanilla heroes (have about 8 unique skill animations, some skills use the same moves).
 
-No paid software is required, but maybe it can make things easier. For example I used Blender for creating models and animations and faced some weird problems with exporting files into the game. I think the developers used Maya and it might be a better option if it is available.
+No paid software is required, but maybe it can make things easier. I used Blender for creating models and animations and faced some weird problems with exporting files into the game. I think the developers used Maya and it might be a better option if it is available.
 
-There is an official tool that helps creating trinkets, combat items, inn items, etc. This is a Microsoft Excel sheet and it requires specifically Microsoft Excel because it uses some exclusive features. I believe that this tool allows to ease the learning curve a bit. But later when I learned more about how the game handles item/skill effects I found this tool optional.
-
-Before I started working on this new class, I decided to try to shoot for the Moon. I set my goal not only to create a new hero mod, but make the new hero indistinguishable by quality from other heroes. Consciously I knew that it wasn't a very achievable bar for me alone, but at least this would keep my engine running until something acceptable is achieved.
+There is an official tool that can make creating trinkets, combat items, inn items, etc. a bit easier. This is a Microsoft Excel sheet and it requires specifically Microsoft Excel because it uses some of its exclusive features. I believe that this tool allows to ease the learning curve a bit. But later when I learned more about how the game handles item/skill effects I found this tool optional.
 
 ## Hero's concept
 
-This section will be of no interest if the concept is already done. This is mostly about how I was trying to come up with what the new hero is going to look like, what would the backstory be, what trinkets to add. I had no experience in creating characters before. I wanted to create a mod for the game that I like in the first place, I did not have any formed vision of a hero in my head when I started.
+This section is mostly about how I was trying to come up with what the new hero is going to look like, what would the backstory be, what trinkets to add. I wanted to create a mod for the game that I like in the first place, I did not have any formed vision of a hero in my head when I started.
 
-DD2 provides a lot of freedom considering that magic and fantastical lovecraftian monsters are present. Heroes can use holy magic, lovecraftian forces, beastly transformations. They can even mix their hallucinations into their skills. Enemies have more diversity in abilities.
+DD2 provides a lot of freedom considering that magic and fantastical monsters are present. Heroes can use holy magic, lovecraftian forces, beastly transformations. They can even mix their hallucinations into their skills. Enemies have even more diversity.
 
-At the same time most of the heroes seemingly do not engage in magic practices. All of them are humans with tragic past. Many of them are edgy, with fancy clothes, or have an angry face.
+At the same time most of the heroes seemingly do not engage in magic practices. All of them are humans with tragic past. They look like they know what they want and nothing would stop them.
 
-To start with it I looked at D&D classes. There is an appealing idea of a monk, a martial artist. I think this would be a great addition to the game. But I knew nothing about these arts. And also it felt like there is some imbalance in diversity of paths rank-wise. There is more close rank paths than those that prefer to be in the back. At that time I thought that was a good reason to make a back rank class. Now that I write this, I see nothing wrong with creating another front rank class.
+I looked at D&D classes. There is an appealing idea of a monk, a martial artist. I think this would be a great addition to the game. But I knew nothing about these arts. Another other idea in D&D that was appealing to me is Circle of Spores. I had already decided that the weapon would be something like a thick bird cage. I combined it and a mushroom-filled cage idea appeared.
 
-Anyway, I decided to create a back rank class, which monk I thought is not. Another other idea in D&D that was appealing to me was Circle of Spores. Somewhen during brainstorming I decided that the weapon would be something like a thick bird cage. This is a heavy thing, so the character would be on the bigger side.
+I had never drew a human. I traced the figure of MAA, tried to color it. The result was ugly, and comparing it to screenshots of heroes made me feel a bit discouraged. But I persisted, and after some iterations it started to look good.
 
-I had never drew a human. I traced the figure of MAA, tried to color it. The result was ugly, comparing it to screenshots of heroes made me feel a bit discouraged. I browsed the internet for a bit looking for knights, druids, herbalists, and adjusted the sketch. After some iterations it started looking fine. Then I tried to use the black-and-white to color drawing technique. It's said that it's good and it seemed less scary.
+Each hero design in DD2 is very creative and detailed, and it’s hard to keep up with. Stylish coats, red gloves, assymetrical armor, tall hat, spikes, bandages, abs on armor, seals. Once I colored my sketch it became clear to me that my hero didn't have anything like that, he was boring. I dehumanized him character to make him more interesting. Maybe if I had decided what his story is before drawing then it would be better.
 
-![Variants of clothes, shadows and coloring](images/concept12.png)\
-*Drawing steps*
+![Variants of clothes, shadows and coloring](images/concept13.png)\
+*I actually really liked how the hero ended up, it felt like I reached a peak that I will never be able to reach again. It still does not emanate the same level of detail and creativity, but I accepted it*
 
-I overestimated my abilities, after the first plain gray colors were put, I didn't know how to proceed, how to make it better. It wasn't inspiring at all. After a break I decided to imagine that the light is coming from a side and to be bolder with lights and shadows. When I added the first splash of light on the iron, it started to look so good I got inspired again.
+When I was trying to copy DD2’s style I noticed that most heroes and enemies have their legs almost entirely blacked out. Fun facts: Cherub is the only Cultist that has feet visible, all the Lost Battalion enemies are barefoot, no Confession boss has feet (except maybe the hooded figure).
 
-DD2 mixes smooth gradients, harsh black lines and some textures. Fine textures are subtle, but noticeable, for example, on the MAA’s shield. Heroes have some parts shadowed by black strokes (arm under shoulder plates) and some parts are shadowed softly (under the red strip of cloth).
+Visual appearance of my hero dictated some aspects of the story: not about wealth, needs to involve a bird and some kind of a curse. I don't think I'll ever be good at creating stories, but I tried. At first this guy was a guard who stole a bird to sell it but the bird cursed him. Later i remade it. He was ordered to search a house of a theft suspect. When he arrived, nobody was there. He descended into the basement and got ambushed by formless monstrous creatures. He fought his way back out, lost his sword. Inflicted wounds cursed him, it started ruining his life. He tracked the owner of the house, tried to get a cure, but accidentally transmitted the curse which killed the suspect. The transformation didn't stop, and he had nothing left but to accept it.
 
-![MAA's shield and ](images/maa_shield.png)\
-*Different shadows*
-
-Each hero design in DD2 is very creative and detailed, and it’s hard to keep up with. Stylish coats, red gloves, assymetrical armor, tall hat, spikes, bandages, abs on armor, seals. Once I colored my sketch it became clear to me that my hero didn't have anything like that. The design was boring. I had already spent the whole day drawing it, so I decided to sacrifice one of my initial goals and dehumanized the character to make it more interesting.
-
-![Turning hero into a mushroom](images/concept3crop.png)\
-*Am attempt to fix the design*
-
-I actually really liked how the character ended up, it felt like I reached a peak that I will never be able to reach again. It still does not emanate the same level of detail and creativity, but I accepted it.
-
-When I was trying to copy DD2’s style I realized that most heroes and enemies have their legs almost entirely blacked out. Fun facts: Cherub is the only Cultist that has feet visible, all the Lost Battalion enemies are barefoot, no Confession boss has feet except maybe the hooded figure.
-
-I still didn't have any story for the character. Hero backstories in DD2 usually have two traumatic aspects. First one is either environmental (oppressive peers or superiors, poverty, plague) or ambition-related (glory, knowledge, perfection). The second aspect is usually a crime (murder, illegal experiments, blasphemy) or a non-criminal choice that lead to death or suffering of other people. The Flagellant, the Bounty Hunter, and the Vestal are exceptions. Most of the have something they still strive for.
-
-The visual appearance of my hero dictated some aspects of the story: not about wealth, needs to involve a bird and some kind of a curse. I don't think I'll ever be good at creating stories, but I tried. Being a guard didn’t bring a lot of money. When the opportunity arose, he stole a rare bird. This bird turned out to be a fake, infused with a curse. He fled the town and found strange fascination with mold and mushrooms. And his name is… Duncan, because… there is a book that I plan to read and this is the author's name. And his class is… Metamorph, because he is transforming into a mushroom.
-
-Weeks later I remade the story. He was ordered to search a house of a theft suspect. When he arrived, nobody was there. He descended into the basement and got ambushed by formless monstrous creatures. He fought his way back out, lost his sword. Inflicted wounds cursed him, it started ruining his life. He tracked the owner of the house, tried to get a cure, but accidentally transmitted the curse which killed the suspect. The transformation didn't stop, and he had nothing left but to accept it. I like this version more but it still has side-story energy, there is no spark of character in it, but I couldn't make it better.
-
-Then I wanted to decide what the trinkets and the signature item will be like. Each hero has three associated trinkets and one signature inn item. I had an obtrusive idea of a mushroom trinket. But hero trinkets usually resemble something from hero’s past. Signature items usually are more tied to the present. So I drew a feather, a rusty sword, and an empty coin purse. For the signature item I chose penicillin. Weeks later, when I had more drawing experience, I returned to these items and remade them.
+Then I wanted to decide what the trinkets and the signature item will be like. Each hero has three associated trinkets and one signature inn item. I had an obtrusive idea of a mushroom trinket. But hero trinkets usually resemble something from the past. Signature items are more tied to the present.
 
 Item sprites have 512×512 pixel size. 
 
-![Signature item and hero trinkets](images/items12.png)\
-*On the left: first version of items. On the right: redrawn versions*
-
-Hero trinkets vary in visual complexity (Pile of Ash vs Annotated Textbook). Gameplay-wise these are more complex than general trinkets. General non-boss trinkets usually have two effects. Almost all hero trinkets have three effects each (the last effect is always negative, except for the Bounty Hunter’s trinkets). Hero trinkets can affect specific skills or require specific ranks for effects to trigger (general trinkets only use relative rank referencing).
+Hero trinkets vary in visual complexity (Pile of Ash vs Annotated Textbook). Gameplay-wise these are more complex than general non-boss trinkets which usually have two effects. Almost all hero trinkets have three effects each (the last effect is always negative, except for the Bounty Hunter’s trinkets). Hero trinkets can affect specific skills or require specific ranks for effects to trigger (general trinkets only use relative rank referencing).
 
 ![Some signature items and hero trinkets](images/items_complexity.png)\
 *Different amount of details in item icons*
 
-Signature inn items also vary in visual complexity (Tar-Filled Colambre vs The Very Best). There is more single target (6) signature items than the ones that have two targets (5) or the ones that target the whole party (4). Most of them have only positive effects, with the exception of four signature items that belong to Runaway, Hellion, HWM, and Flagellant. Almost all of them have one or two effects. The ones that have three effects might not apply all three. PD’s Remedy always applies two effects out of three (might be wrong), and Flagellant’s Box has a chance of applying only the two guaranteed effects out of four.
+Signature inn items also vary in visual complexity (Tar-Filled Colambre vs The Very Best). Gameplay-wise there is more single target (6) signature items than the ones that have two targets (5) or the ones that target the whole party (4). Most of them have only positive effects, with the exception of four signature items that belong to Runaway, Hellion, HWM, and Flagellant. Almost all of them have one or two effects. The ones that have three effects might not apply all three. The PD’s Remedy always applies two effects out of three (might be wrong), and the Flagellant’s Pain Box has a chance of applying only the two guaranteed effects out of four total.
 
 ## 3D Modelling, animating
 
-3D graphics is kind of a science but I just need to create two models with a couple of textures for each and then some animations. There was no need to learn lighting, complex materials, advanced texture maps, or rendering nuances. This stuff is already handled by the game.
+A new hero requires new mesh, textures and animations.
 
-When I downloaded the DD2 Modding Tools, I found there FBX files of heroes. I imported the file to see how it done. At first I saw a single bone and nothing else. Then I noticed a tiny figure near the sphere part of the bone. I spent some hours looking for a fix and nothing worked. If I switch to Edit Mode of either the mesh or the armature, the figure scales up to normal size. One way to fix it is to select the armature, switch to Pose Mode, and press Ctrl A, Ctrl G, Ctrl R, Ctrl S. The other way is to delete the armature. The tools also provide animation files but they required additional fixing steps.
+When I downloaded the DD2 Modding Tools, I found there FBX files of heroes. I imported the file to see how it is done. At first I saw a single bone and nothing else. Then I noticed a tiny figure near the sphere part of the bone.
+
+I spent some hours looking for a fix and nothing worked. If I switch to Edit Mode of either the mesh or the armature, the figure scales up to normal size. One way to fix it is to select the armature, switch to Pose Mode, and press Ctrl A, Ctrl G, Ctrl R, Ctrl S. The other way is to delete the armature. The provided modding files also have animation files but they required additional fixing steps.
 
 ![HWM imported to Blender](images/fbx_maya.png)\
-*Armature gains weird scale in Blender*
+*Armature gains weird scale in Blender. I decided to not care about it and started creating my models from scratch*
 
-I decided that screw these format wars, I will not be bothered with it. Unity will eat my Blender models and animations. I deleted the armature and kept the mesh for reference.
-
-3D modelling by itself wasn't a lot of trouble. It required a lot more learning than I expected but there is no shortage of tutorials, so everything felt solvable. I knew what my mistakes were. I created a donut by a tutorial, deleted it, created a new file, stared at the middly inspiring cube, watched more tutorials. There is a lot of ways to make a character model, I wanted to try sculpting.
-
-I am still a bit confused about the sculpting tools. Most tools by default add volume to the model, but it can be switched to do the opposite with the minus button at the top. By holding shift the brush switches to the smoothing mode. The dyntopo mode in the top right allows brushes to dynamically add vertices.
+3D modelling required a lot more learning than I expected but there is no shortage of tutorials, so everything felt solvable. There is a lot of ways to make a character model, I wanted to try sculpting.
 
 ![Sculpting steps](images/sculpting.png)\
 *On the right is the sculpted mesh that I thought was detailed enough. When I moved to the next step I realised that I should've put much more work into it. The face and clothes were too blurry. I also made a mistake of not making the model in T-pose, which bit me when I started animating.*
 
-Then I needed to do retopology. I followed a tutorial, but since the quality of the sculpt was bad, the resulting model wasn't good either. Adding details on this step was a bit annoying and I think it would be easier if they were in the sculpt. Adding mushrooms lead me to a lot of incorrect geometry and I spent hours fixing it. I could've tried added the mushrooms in a less disrupting way, but when the issue showed, my undo queue was already filled. The default undo limit in Blender is unforgiving. I increased the limit, but it was late. And I didn’t make enough backup files.
+Then did retopology, but since the quality of the sculpt was bad, the resulting model wasn't good either. Adding details on this step was a bit annoying and I think it would be easier if they were in the sculpt. Adding mushrooms lead me to a lot of incorrect geometry and I spent hours fixing it. I could've tried added the mushrooms in a less disrupting way, but when the issue showed, my undo queue was already filled. The default undo limit in Blender is unforgiving. I increased the limit, but it was late. And I didn’t make enough backup files.
 
-HWM's model uses Smooth Shading with Sharp seams. I don't know if it has any effect in the game but I did the same that because it looked good. The thought of making hands scared me so I just copied HWM's hands and attached them to my hero. At the end I felt dizzy from all the camera rotations. In the end I got a mesh with about 3300 vertices and 3900 faces. To compare, HWM’s model has about 4300 vertices and 5200 faces.
+HWM's model uses Smooth Shading with Sharp seams. I don't know if it has any effect in the game but I did the same that because it looked good. The thought of making hands scared me so I just copied HWM's hands and attached them to my hero. At the end I felt dizzy from all the camera rotations. The resulting mesh had about 3300 vertices and 3900 faces. To compare, HWM’s model has about 4300 vertices and 5200 faces.
 
 ![Retopology steps](images/retopology.png)\
-*Retopology and details*
-
-It was hard to find a way to create a cage. It is symmetrical, but still kind of complex. At first I tried to use the Skin Modifier but it didn't look good. Then I found the Array modifier and it was perfect. Then I made the glob inside the cage the same way as when I made the hero.
-
-![Weapon mesh creation steps](images/weapon_mesh.png)\
-*When I was creating the glob inside the cage, I felt like I was wasting time. The resulting mesh has about 2500 vertices. It is more than half the vertices of the hero.*
+*Retopology, smoothing, details*
 
 Before proceeding to the texturing part, I wanted to make sure that I wouldn't need to change the model. To ensure that my mesh is ready, I needed to learn more about how DD2 handles animations.
 
-In the game all hero animations are fixed (baked). There is no ragdolls, and no cloth simulation. I don't know how the clothing animation was done, but the resulting animation uses bones to move hair and cloth. This is why fast spinning at the Crossroads does not produce any funny effects.
+In the game all hero animations are fixed: there is no ragdolls, and no cloth simulation. I don't know how the clothing animation was done, but the resulting animation uses bones to move hair and cloth. This is why fast spinning at the Crossroads does not produce any funny effects.
 
 Heroes can change their facial expressions during battles. After I checked the GR’s animation bones and found a mouth bone there, I was like, oh yeah, I got it, different facial expressions are achieved with the same animation technique. But I was wrong.
 
 ![GR's armature](images/gr_mouth_bone.png)\
-*GR's armature has a bone that moves the mouth*
+*GR's armature has a bone that moves the jaw*
 
 When I tried to check if I can replicate the GR's meltdown expression using this bone, I noticed that the texture looks different on the meltdown pose vs. what I could achieve with armature. The sides of the mouth during meltdown have more black contour. My first thought was that this effect was achieved with UV texture animation. I googled if it is possible, and it is, but with some problems.
 
 ![GR's shape keys](images/gr_shape_key.png)\
 *a: one of the skill poses, b: the effect of using a bone to change the expression, c: the meltdown pose*
 
-The revelation came upon closer inspection of HWM's model. Until that moment it didn’t even click to me that he arches his eyebrows during his meltdowns, and I never saw any bones for eyebrows. I found that in Edit mode he has his stern expression, and in Object mode he has his sad expression.
+The revelation came upon closer inspection of HWM's model. Until that moment it didn’t even click to me that he arches his eyebrows during his meltdowns, and I never saw any bones for eyebrows. I found that he has different expressions in Edit Mode and in Object mode.
 
 ![HWM's shape keys](images/hwm_shape_key.png)\
 *On the left: Object Mode, on the right: Edit Mode*
 
-After poking around I found that this is done with Shape Keys. Dismas’ Shape Keys move his eyebrows. Audrey’s Shape Keys move her mouth.
+Turns out that this is done with Shape Keys. Dismas’ Shape Keys move his eyebrows. Audrey’s Shape Keys move her mouth.
 
-I wanted to try as much as I could and also made some Shape Keys for my model. I would not recommend to use Shape Keys now. There is a big discrepancy between how Blender handles Shape Keys vs. bone animations. These two methods have little coordination which brings a lot of confusion. Especially when the animation is being exported to Unity. I bore my Shape Keys up to the point of exporting animations to Unity, and they didn't work for me. Instead of trying to figure out how to fix it I freaked out and replaced them with bones. In my opinion bones are more reliable and less confusing. Shape Keys have a separate animation editor, and they don't like the mesh being edited.
+I wanted to try as much as I could and also made some Shape Keys for my model. I would not recommend to use Shape Keys now. There is a big discrepancy between how Blender handles Shape Keys vs. bone animations. These two methods have little coordination which brings a lot of confusion. I still don't know how to properly export Shape Keys to Unity. I bore my Shape Keys up to this point of exporting animations, and they didn't work for me. Instead of trying to figure out how to fix it I freaked out and replaced them with bones.
 
 After that I needed to know how to add weapons. There can be multiple weapon meshes. Some accessories are weapons in disguise so they can be changed separately from the main hero model. In Unity weapons are sometimes attached to hands when they should not be, but I ignored it.
 
@@ -187,26 +161,29 @@ After that I needed to know how to add weapons. There can be multiple weapon mes
 
 FBX file does not include everything that Blender can create, and Unity does not support everything that FBX file can store. When importing in Unity, some of information of uncommon type, like complex bone constraints and most of the modifiers, will be lost. Cloth simulations need to be somehow baked before exporting or recreated in Unity.
 
-Even though bone constraints might not be recognized in Unity, Blender bakes them before exporting, so using them shouldn't cause problems. Weapon objects can be attached to a hero by constraints like Child Of or Copy Transforms. Weapons are attached to the same armature that controls the hero.
+I thought when Blender exports animations with bone constraints, it bakes them to make everything fixed. But when I tried to animate bone constraints themselves, the animations in the game seemed a bit off to me. I used constraints like Child Of or Copy Transforms to attach the weapon to hands. Maybe it isn't true but I feel like is something off.
 
 ![HWM's weapons](images/hwm_weapon.png)\
-*HWM's weapons are attached to his hands with bones*
+*HWM's weapons are attached to his armature*
 
-Now I was ready to try to make some animations. I followed a tutorial about rigging, created a rig, corrected weights, added IK constraints. I got some trouble with rotation of the arms. I tried a lot of things trying to fix it, and in the end I deleted my rig, put my mesh into a T-pose, added more vertices where they were lacking, and instead of making a manual rig I used the Rigify add-on. This time everything was much better.
+When I tried to rig my model, some of previous mistakes showed, and I had to change my mesh: put it in the T-pose, add more vertices where they were lacking. Then I decided to use add-ons for automatic rigging. The rig that the Rigify add-on created was much better.
 
-Then I needed to deal with dangles. At first I tried to use cloth physics modifier and planned to convert the simulation to bones. Looping would be achievable after the bones are created. I was able to apply cloth modifier to parts of the mesh but it was so jittery and I couldn't fix it.
+Then I needed to do something with clothes and such.
+- At first I tried to use cloth physics modifier and planned to convert the simulation to bones. I was able to apply cloth modifier to some parts of the mesh but it was so jittery and I couldn't fix it.
+- There is an option of faking clothes with bone constraints (PierrickPicaut's tutorials on YouTube). Unfortunately the last part required an add-on that I didn’t know how to get. Without the add-on my cloth animation looked incomplete.
+- There are more add-ons like WIGGLE2 or Jiggle Physics. But it was too much for me. The first one needed an update for the new Blender version and the second one is more about jiggling, not clothes.
 
-There is an option of faking clothes with bone Constraints (PierrickPicaut on YouTube). It was a complex tutorial. Unfortunately the last part required an add-on that I didn’t know how to get. Without the add-on my cloth animation looked incomplete.
+Every tool was falling apart in my hands. I scrapped it all and decided to animate clothes manually.
 
-There are more add-ons like WIGGLE2 or Jiggle Physics. But it was too much for me. The first one needed an update for the new Blender version and the second one is more about jiggling, not clothes. Every tool was falling apart in my hands. I scrapped it all and decided to animate clothes manually.
+One Blender file can store multiple animations as Actions. Actions can be added and edited in the Action Editor. Every Action need to be protected with Fake User checkmark, otherwise it might get deleted on exiting Blender.
 
-One Blender file can store multiple animations via Action functionality. Actions can be added and edited in the Action Editor. Actions can be deleted in the Blender File Outliner. When I started animating there were some unknown Actions, I deleted them. Every Action need to be protected with Fake User checkmark, otherwise it might get deleted on exiting Blender.
+With the default export settings the hero faces the right side in the game (Blender’s negative Y direction in the game will be directed to the right side in DD2). In other words, Blender’s Suzanne Monkey will look to the enemies’ side in DD2.
 
-With the default export options the hero faces the right in the game (Blender’s negative Y direction in the game will be directed to the right side in DD2). In other words, Blender’s Suzanne Monkey will look to the enemies’ side in DD2.
+This is true for the Crossroads, fights, resolute/meltdowns. In some way this is also true for the victory pose. So to view how the character will look like in the Crossroads and fights, Ctrl+Numpad 3 will do. In camps and inns the model is rotated, the front of the chair matches the Blender’s negative Y direction.
 
-This is true for the Crossroads, fights, resolute/meltdowns, relationships. In some way this is also true for the victory pose. So to view how the character will look like in the Crossroads and fights, Ctrl+Numpad 3 will do. In camps and inns the model is rotated, the front of the chair matches the Blender’s negative Y direction.
+I believe the situation is the opposite for enemies. The game inverts the models and animations. So Blender's negative Y direction is directed to the left for eneimes in the game.
 
-I think I made a mistake when I didn't switch the rotation mode to Euler before I started animating. At one point I wanted to create a 360 degree animation and it would probably be much easier if the bones used Euler rotation. But I don't know what the actual difference between these two modes is. I couldn't find a way to switch modes for all the animations that I had already created. There is an add-on that has this function but it was giving me errors in the console.
+I probably made a mistake when I didn't switch the rotation mode to Euler before I started animating. At one point I wanted to create a 360 degree animation and it would probably be much easier if the bones used Euler rotation. But I don't know what the actual difference between these two modes is.
 
 Animations store frames at rate of 30 FPS. I think animations are automatically interpolated to match the FPS of the game.
 
@@ -239,7 +216,7 @@ List of poses:
 - Act out pose (positive and negative).
 - Being buffed pose, being guarded pose, guarding pose. The guarding pose can be the same as the being hit pose.
 
-The relationship poses should be offset to the left a bit. At first I placed the hero in the center and the animation looked awkward.
+The relationship poses should be offset to the left a bit. At first I placed the hero in the center and the relationship scene was wrong.
 
 ![Relationship respectful poses](images/relationship_pose.png)\
 *Ignore that the arrow on the second image is pointing to the left*
@@ -255,7 +232,7 @@ I marked the seams for UV unwrapping, didn't do the checkerboard testing and kin
 I opened the Shader Editor, created a new material for the hero. Then modified the material so it can work with col and ink images. For some reason the ink textures are black & red instead of black & white. The red color is pure red ({255, 0, 0} in RGB).
 
 ![Shader settings](images/shader.png)\
-*The col image is pure green and the ink image is red with a face.*
+*The col image is pure green and the ink image is red with a face. This material can be imported to Blender with File -> Append*
 
 The created material itself is not needed for the game, it's just a way to tell Blender how these two textures work together so it can show it in the right way.
 
@@ -275,7 +252,12 @@ First I filled UV islansds with base colors, then painted the ink. Turned the Di
 ![Texturing steps](images/texturing.png)\
 *Texturing steps*
 
-I repeated the same steps for the weapon. My weapon was actually two objects (the cage and the glob), so total number of texture images was 6.
+DD2 mixes smooth gradients, harsh black lines and some textures. Fine textures are subtle, but noticeable, for example, on the MAA’s shield. Heroes have some parts shadowed by black strokes (arm under shoulder plates) and some parts are shadowed softly (under the red strip of cloth).
+
+![MAA's shield and ](images/maa_shield.png)\
+*Different shadows*
+
+I repeated the same steps for the weapon. My weapon was actually two objects (the cage and the glob), so the total number of textures was 6.
 
 ## Downloading the Mod Kit
 I found Mod Kit in my Steam library in the tools category. Alternatively, the Kit can be accessed in [Google Drive](https://drive.google.com/drive/u/0/folders/1SlMxq3O2nuOp3P__G-0QIU748RGFIFnu).
@@ -502,7 +484,12 @@ Even more, this is not a complete fix. If I covered my mouse over the icon in th
 ![Strong highlight in battles](images/egg_25.png)\
 *Strong highlight in battles*
 
-I decided that it’s too little of an issue and I will not fix it.
+Another issue was that some enemy attacks trigger a weird lighting that lingers for some time after the attack.
+
+![Where does that come from](images/lighting_impact.png)\
+*The Hatchetman attacked my hero and it applied bright orange light*
+
+I don't know what is the cause of these issues and can't fix them.
 
 ## Exporting animations to Darkside
 
@@ -1038,6 +1025,11 @@ I launched this program, opened the Excel folder in it, and searched for "remedy
 ![VSC search](images/sig_5.png)\
 *Search results*
 
+There is also a VSC extension that is made for highlighting DD2 CSV Data: [DD2 CSV Syntax](https://marketplace.visualstudio.com/items?itemName=PHombie.dd2-csv-syntax).
+
+![DD2 CSV Data extension](images/dd2csv.png)\
+*DD2 CSV Data syntax highlighting*
+
 Five files contained that word. These files are designated for effect definitions, buff definitions, item definitions, loot chances, and run goal rewards.
 
 Item definitions are located in the item_data_export.Group.csv file. I clicked on the first entry from this file and it showed me the needed element.
@@ -1217,6 +1209,7 @@ element_start,mmd_penicillin_buff_blight,Buff
 m_DurationType,inn_start,
 m_DurationAmount,1,
 m_Tags,buff_pop_text,
+element_end
 
 element_start,mmd_penicillin_buff_blight,ActorDataStats
 sub_stat,resistance,blight,0.2,
@@ -1289,7 +1282,7 @@ element_end
 Here the *Item* element connects to two buffs through a *ActorDataExternalBuffs* element. Both these buffs say that they last infinite amount of time. All trinket buffs say that. It doesn't mean that it will alternate the game forever but only for the time the trinket is equipped.
 
 If a non-trinket buff says that it has infinite duration, it will be lost when the hero bearing it dies. The exceptions are buffs that are connected to a hero through their *ActorDataExternalBuffs* (not trinket's). They aren't lost on death. For example:
-```
+```csv
 element_start,highwayman,ActorDataClass
 m_Tags,hero,highwayman,hard_target,ally,
 m_Size,1,
@@ -1477,31 +1470,33 @@ element_end
 
 *ActorEffectTrigger* elements are connected to *ActorDataEffects* through the *actor_effect_triggers* field. Here the *ActorEffectTrigger* aplies an effect to one neighbor in front of the hero that bears the trinket.
 
-I am quite confused about the inner structure of *ActorEffectTrigger* elements. I will write how I understand it but it is probably wrong.
-- *m_ActorEffectType*:
-    - *turn_start*, *round_end* and such: listed effects are applied in specified moments.
-    - *target* and *performer*: effects are activated when the hero uses a skill. I think there is no difference between *target* and *performer* for this field because this differentiation is achieved in the next field.
-    - *death*: effects are activated when the hero dies. The hero has the *target* role, the one who killed the hero has the *performer* role.
-    - *on_resist*: effects are activated on bleed/burn/blight/debuff resist. Here the hero who resisted has the *target* role. The one who tried to apply bleed/burn/blight/debuff has the *performer* role.
-    - *on_[hit / crit / kill / miss]_as_target_to_target*: activates effects when the hero is attacked. It looked to me that when this value is selected both roles point to the hero. I will try to find an example for that.
-    - *on_[hit / crit / kill / miss]_as_performer_to_performer*: activates effects when the hero attacks. The situation with roles is the same.
-- *m_ActorEffectTriggerSourceType* can be either *target* or *performer*.
-- *m_ActorEffectTriggerTargetType*:
-    - *friendly_team*: target's or performer's friendly team.
-    - *enemy_team*: enemy team of target or performer.
-    - *neighbor*: neighbors of target or performer.
-    - *target*: effects are applied to skill's target(s).
-    - *performer*: effects are applied to the performer of a skill.
-- *m_NeighborFrontCount*: number of neighbors in front of the target or the performer.
-- *m_NeighborBackCount*: number of neighbors behind the target or the performer.
+I am quite confused about *ActorEffectTrigger* elements. I will write how I understand them but it is probably wrong. I guess the general idea is this:
+- *m_ActorEffectType* tells when effects are going to be applied.
+- *m_ActorEffectTriggerSourceType* tells from whom these effects should originate.
+- *m_ActorEffectTriggerTargetType* tells to whom these effects should be applied.
+
+But it gets weird in details.
+- *m_ActorEffectType*. This field can be set to:
+    - *performer*: a hero counts as a performer anytime they perform a skill (in common sense), riposte, pass a turn, initiate a rank move. Without additional setup, can only affect the performer. On miss still aplies effects.
+    - *target*: effects are applied at the same moments as with the *performer* value except on miss no effects are applied. Can apply effects both to performer and the target without additional setup.
+    - *enemy_death*: needs to be applied as a buff, it doesn't work if the *ActorEffectTrigger* element is listed inside the skill's *ActorDataEffects* element. This value doesn't allow to apply effects to corpses that appeared after the killing blow. Effects aren't applied on clearing corpses either.
+    - *death*, *deaths_door_enter*, *deaths_door_survive*: didn't test them.
+    - *on_resist*: effects are activated on bleed/burn/blight/debuff resist. Didn't test it.
+    - *on_[hit / crit / kill / miss]_as_target_to_target*: activates effects when the hero is attacked. It looked to me that when this value is chosen then values of *m_ActorEffectTriggerSourceType* and *m_ActorEffectTriggerTargetType* fields don't have much role.
+    - *on_[hit / crit / kill / miss]_as_performer_to_performer*: activates effects when the hero attacks. Otherwise the same specifics as for the previous one.
+- *m_ActorEffectTriggerSourceType* can be either *target*, *performer*, or blank. This field tells from who listed effects should originate from. It has meaning for two-sided effects like copying or stealing tokens.
+- *m_ActorEffectTriggerTargetType* tells to whom the effects should be applied.
+    - *friendly_team*, *enemy_team*
+    - *performer*, *target*
+    - *neighbor*: if this value is chosen then the effects will be applied to the neighbors of *m_ActorEffectTriggerSourceType*. If this field is set then additional fields are available:
+        - *m_NeighborActorEffectTriggerSourceType* is either *performer* or *target*. It tells whose neighbors will be affected.
+        - *m_NeighborFrontCount*: number of neighbors in front of the target or the performer.
+        - *m_NeighborBackCount*: number of neighbors behind the target or the performer.
 - *m_IncludeSourceActor* tells if the target or the performer should get effects too.
 - *m_ActorCount*: number of heroes/monsters to be affected. If this number is less than the number of heroes/monsters that previous fields stated, then effecs are applied randomly to no more than to *m_ActorCount* heroes/monsters.
-- *m_NeighborActorEffectTriggerSourceType* is either *performer* or *target*. It tells whose neighbors will be affected. I have absolutely no idea why this exists. I had one theory and made an experiment but it failed, I will write about it later.
 - *m_UseActorDataEffectsConditionCalculationInput*. I have no idea what this does, didn't even try to understand it.
 
-I will write *ActorEffectTrigger* examples from different sources because not a lot of trinkets use this feature.
-
-It would seem that *m_ActorEffectTriggerSourceType* doesn't have a lot of meaning since the next field (*m_ActorEffectTriggerTargetType*) has symmetrical values (what's the difference between affecting target's friendly team and affecting performer's enemy team if the skill used is not friendly?). I think there is meaning but I am not sure I understand it right.
+I will show some examples of skills and buffs that use *ActorEffectTrigger* elements.
 
 The Aspirant's Burning Stars copies burn from self to target. The copy effect by itself copies burn from the target to the performer, which is the opposite. *ActorEffectTrigger* elements allow to do this:
 ```csv
@@ -1514,21 +1509,7 @@ m_ActorCount,1,
 effects,copy_all_burn_dot,
 element_end
 ```
-The source (performer) became the target and the target became the source (performer).
-
-The Ritualist's Vulnerability Hex gives the Ritualist one Unchecked Power token when the hexed enemy dies. The CSV data says:
-```csv
-element_start,occ_vulnerability_hex_p1_u_death_aet,ActorEffectTrigger
-m_ActorEffectType,death,
-m_ActorEffectTriggerSourceType,target,
-m_ActorEffectTriggerTargetType,enemy_team,
-m_IncludeSourceActor,True,
-m_ActorCount,4,
-effects,add_1_unchecked_power_p1_if_target_occultist,
-element_end
-```
-
-Here the *m_ActorEffectTriggerSourceType* should be set to *target* (the hexed enemy). If this was inverted the Ritualist wouldn't get tokens in cases when the hexed enemy was killed by another enemy.
+The source (performer) became the target and the target became the source (performer). So the effect was reversed in direction. For the regular copying (from target to performer) this is unnecessary as it can be achieved with a regular *Effect* element directly.
 
 It looks like when *on_[hit / crit / kill / miss]_as_target_to_target* or *on_[hit / crit / kill / miss]_as_performer_to_performer* is used, the hero takes both the target and the performer roles. For example here is a part from the Virtuoso's Finale data.
 ```csv
@@ -1553,9 +1534,44 @@ m_ActorCount,4,
 effects,stress_damage_1_infernal_killing_Blow,
 element_end
 ```
-The Virtuoso's Finale removes 1 Stress from allies when an enemy is killed. The Killer's Glow adds 1 Stress to allies when an enemy is killed. Both of them have *m_ActorEffectType* set to *on_kill_as_performer_to_performer*. Both of them target the friendly team. They are very similar except for one line: the Finale has *m_ActorEffectTriggerSourceType* set to performer, and The Killer's Glow has *m_ActorEffectTriggerSourceType* set to target. I can't think of any explanation other than that *target* and *performer* are the same in this situation. There is also that long weird field in the Finale skill but I doubt that it has anything to do with this situation.
 
-There is one more confusing *ActorEffectTrigger* element. The Tribecaller enemy from K1 has a passive: when an adjacent ally is hit, the Tribecaller gets 1 Berserk token.
+The Virtuoso's Finale removes 1 Stress from allies when an enemy is killed. The Killer's Glow adds 1 Stress to allies when an enemy is killed. Their *ActorEffectTrigger* elements are very similar except for one line: the Finale has *m_ActorEffectTriggerSourceType* set to *performer*, and The Killer's Glow has it set to *target*. I can't think of any explanation other than that *target* and *performer* are the same in this situation. There is also that long weird field in the Finale skill but I doubt that it has anything to do with this situation.
+
+Now about *m_NeighborActorEffectTriggerSourceType*. Not a lot of elements have this field. One of them was very interesting to me. The Flagellant's Fester skill clears a corpse and applies blight to its neighbors. Here is the definition of the corresponding *ActorEffectTrigger*:
+```csv
+element_start,flg_fester_neighbor_blight,ActorEffectTrigger
+m_ActorEffectType,target,
+m_ActorEffectTriggerSourceType,performer,
+m_ActorEffectTriggerTargetType,neighbor,
+m_NeighborFrontCount,1,
+m_NeighborBackCount,1,
+m_NeighborActorEffectTriggerSourceType,target,
+m_IncludeSourceActor,False,
+m_ActorCount,2,
+effects,skill_dot_medium_blight,
+element_end
+```
+
+What confused me is that *m_ActorEffectTriggerSourceType,performer* is set to performer. I thought it would be perfectly fine if it was set to target, and then there would be no need for overriding the neighbor targeting.
+
+I had this theory:
+
+The application of blight needs to account the blight RES Piercing stat. If the *m_ActorEffectTriggerSourceType* were set to *target*, then the Piercing stat would be taken from the targeted corpse. To make it use the Flagellant's Piercing stat this field should be set to *performer*.
+
+But then I made an experimet. I created a test hero with three skills and insane Blight RES Piercing stat. The first skill is the same as Flagellant's skill. The second skill is the modification of the first one. I changed *m_ActorEffectTriggerSourceType*'s value to *target* and removed the *m_NeighborActorEffectTriggerSourceType* field. The third skill applies a 1000% Blight RES buff to an enemy.
+
+- The test hero had 2000% Blight RES Piercing.
+- The Woodsman had 3000% Blight RES.
+- The Widow (the right one) had 1000% Blight RES.
+
+What I expected: the second skill (modified) would be resisted by both neighbors since the corpse doesn't have Blight RES Piercing increased. And the first skill would successfully apply blight to the Widow but not to the Woodsman.
+
+![A little experiment](images/m_ActorEffectTriggerSourceType.png)\
+*This is possible that I conducted this experiment wrong*
+
+But what happened is both skills gave the same result: the Woodsman resisted Blight and the Widow was afflicted, which meant that in both cases hero's Blight RES Piercing was accounted for. This left me confused. I don't believe that this has something to do with tracing of who inflicted what, because the Asprant's Burning Stars skill inverts direction of the copy effect.
+
+There is one more confusing *ActorEffectTrigger* element. It isn't so unclear as it is just complicated though. The Tribecaller enemy from K1 has a passive: when an adjacent ally is hit, the Tribecaller gets 1 Berserk token.
 
 The problem here is that this *on_hit_as_target_to_target* event is not actually triggered on the Tribecaller when an ally is hit. This event can only be triggered when the bearer of the buff is hit, it doesn't care for allies.
 
@@ -1589,43 +1605,26 @@ effects,add_1_enrage_33pct_tribecaller,
 element_end
 ```
 
-Now about *m_NeighborActorEffectTriggerSourceType*. Not a lot of elements have this field. One of them was very interesting to me. The Flagellant's Fester clears a corpse and applies blight to its neighbors. Here is the definition of the corresponding *ActorEffectTrigger*:
+To make sure that two Tribecallers won't apply the buff twice, *m_InstanceLimit* field is used.
+
 ```csv
-element_start,flg_fester_neighbor_blight,ActorEffectTrigger
-m_ActorEffectType,target,
-m_ActorEffectTriggerSourceType,performer,
-m_ActorEffectTriggerTargetType,neighbor,
-m_NeighborFrontCount,1,
-m_NeighborBackCount,1,
-m_NeighborActorEffectTriggerSourceType,target,
-m_IncludeSourceActor,False,
-m_ActorCount,2,
-effects,skill_dot_medium_blight,
+element_start,beastmen_tribecaller_enrager,Buff
+m_DurationType,infinite,
+m_InstanceLimit,1,
 element_end
 ```
 
-What left me stunned is that *m_ActorEffectTriggerSourceType,performer* is set to performer. I don't understand why it is set to performer.
+Meaning of *ActorEffectTrigger*'s fields seems to alter a lot depending on what is set in the *m_ActorEffectType* field. I did some testing and gathered this data:
 
-I had this theory:
+![Trigger mess](images/aet.png)\
+*Each big square stands for one combination of m_ActorEffectType's value and where the ActorEffectTrigger is placed. For example, the square that has "target, one-sided effect" shows what happened if I set the m_ActorEffectType to target, place ActorEffectTrigger element in a skill, and connect a one-sided effect to this skill. One-sided such effects are effects such as applying a token, healing, applying a RES buff, etc. "external buff" means that the ActorEffectTrigger element is placed in hero's ActorDataEffects element, which means it is always on the alert, as opposed to when it is attached to a skill. In the latter it only awakes when this skill is used*
 
-The application of blight needs to account the blight RES Piercing stat. If the *m_ActorEffectTriggerSourceType* were set to *target*, then the Piercing stat would be taken from the corpse. To make it use the Flagellant's Piercing stat this field should be set to *performer*. But then the skill would apply blight to the Flagellant's neighbors. To override this behaviour the m_NeighborActorEffectTriggerSourceType field is used.
-
-But then I made an experimet. I created a test hero with three skills and insane Blight RES Piercing stat. The first skill is the same as Flagellant's skill. The second skill is the modification of the first one. I changed *m_ActorEffectTriggerSourceType*'s value to *target* and removed the *m_NeighborActorEffectTriggerSourceType* field. The third skill applies a 1000% Blight RES buff to an enemy.
-
-- The test hero had 2000% Blight RES Piercing.
-- The Woodsman had 3000% Blight RES.
-- The Widow (the right one) had 1000% Blight RES.
-
-What I expected: the second skill would be resisted by both neighbors since the corpse doesn't have Blight RES Piercing increased. And the first skill would successfully apply blight to the Widow but not to the Woodsman.
-
-![A little experiment](images/m_ActorEffectTriggerSourceType.png)\
-*This is possible that I conducted this experiment wrong but I sincerely doubt it*
-
-But what happened is both skills gave the same result: the Woodsman resisted Blight and the Widow was afflicted, which meant that in both cases hero's Blight RES Piercing was accounted for. So I don't understand the purpose of the *m_NeighborActorEffectTriggerSourceType* field when *m_ActorEffectTriggerSourceType* is enough.
-
-There was one more thought: maybe there is some kind of situation where it should be ensured that the application of Blight is traceable back to the Flagellant. For example: a synthetic enemy that attacks anybody who tries to apply Blight to them. Maybe if the Fester skill wasn't the way it is, then this synthetic enemy would try to attack the corpse instead of attacking the Flagellant. But why wouldn't it be traceable in my modified version of the skill? The Fester skill uses the Flagellant's Blight RES Piercing in both versions, so it should be traceable.
+I can't figure out a general rule for this data, it looks so weird.
 
 Some trinkets (like Cursed Coin or Hag's Hoard) have some kind of scaling of their effects. The Cursed Coin trinket increases damage per positive token. The Hag's Hoard trinket increases healing received per positive token.
+
+![Cursed Coin trinket description](images/trinket_7.png)\
+*Cursed Coin trinket*
 
 It looks like it is achieved through *Condition* elements. If a condition element is set to *GREATER_THAN*, *GREATER_THAN_OR_EQUAL*, *LESS_THAN*, *LESS_THAN_OR_EQUAL*, *EQUAL*, or *BOOL*, then the effect will be aplied at max once. But with the *MULTIPLE* value it is different.
 
@@ -1803,6 +1802,7 @@ element_end
 - *m_IsFriendly* tells from which team this skill will choose a target. If it's set to *False*, the skill will offer to choose a target from the enemy team. If it's set to*True*, the skill will offer to choose a target from the friendly team.
 - *launch_ranks* is the list of ranks from which the skill is accessible. *1* stands for the front rank. *4* stands for the back rank.
 - *target_ranks* is the list of enemy ranks that the skill can target (friendly ranks if the skill is friendly). The enemy ranks are the same as friendly ones: *1* stands for the front rank for both teams. If the skill only targets the performer then this field is not used.
+- *target_ranks* can be replaced with *m_TargetRelativeRanks* for relative rank selection.
 - If *m_IsMultiHit* is set to *True* then the skill will try to target all ranks that are specified in the *target_ranks* field.
 - *token_ignores* tells which tokens are ignored by the skill.
 - *m_Tags* assigns tags to the skill. Tags can be anything. Common skill tags are *melee*, *ranged*, and *heal*. They don't do anything by themselves but they are required for some mechanics. For example Act 1 boss can block melee skills, and if the skill doesn't have the *melee* tag, it will not be blocked.
@@ -1961,6 +1961,8 @@ The Hatchetman's Finishing Blow skill deals double damage if the target has a Co
 
 ![Hatchetman's skill description](images/path_5.png)\
 *Hatchetman's skill*
+
+Here's the CSV definition of this skill.
 
 ```csv
 element_start,pillager_melee_sever,ActorDataSkill
@@ -2259,10 +2261,7 @@ token_mmd_token_heal_u_description=Example Token Description
 
 Tokens can be shown in the Token Glossary depending on a hero's path. Path-related tokens use *m_TokenGlossaryPathTag* fields.
 
-![My tokens](images/token_3.png)\
-*Tokens on the left look good in the Token Glossary, but awful in tooltips so I had to redo them. New tokens look good enough in tooltips but in the Token Glossary they look too simple. I couldn’t catch the right balance*
-
-To transfer this mod to my main mod folder, I copied the contents of the localization file and CSV file to the appropriate files in my main mod folder. Then I moved token_mod/F data in the hero_mod folder.
+To transfer a new mod with tokens to my main mod folder, I copied the contents of the localization file and CSV file to the appropriate files in my main mod folder. Then I moved token_mod/F data in the hero_mod folder.
 
 Everything was good except the tooltips. They were showing text instead of icons.
 
@@ -2358,7 +2357,7 @@ One way of localizing is to look at the blue text in the game and copy it to the
 *Missing localization*
 
 I wrote this in my localization file:
-```
+```csv
 effect_tooltip_loot_id_mmd_forager_loot=Get an Inn Item (50%)
 ```
 And it fixed it.
@@ -2537,7 +2536,7 @@ Entire effect list phrase can be a bit confusing. The skill that I showed has tw
 *At first I thought entire effect list means everything in the picture*
 
 I tried to use this effect list override. `[ActorDataSkill ID]` part is the Id of the skill, `[ActorDataEffectType]` can be substituted with *target*, *performer*, *enemy_team*, *friendly_team*, etc. I wrote these lines in the localization file:
-```
+```csv
 effect_skill_mmd_disturbing_spores_enemy_team_override=<color=#{notable}>Enemy on Rank 1: <sprite={q}mmd_tokens{q} name={q}mmd_token_disturb{q}></color>
 effect_skill_mmd_disturbing_spores_friendly_team_override=<color=#{notable}>Ally on Rank 1: <sprite={q}mmd_tokens{q} name={q}mmd_token_disturb{q}></color>
 ```
@@ -2548,7 +2547,7 @@ This gave me the following result:
 *This is embarassing but I edited this image. When I was documenting my actions I made a mistake (forgot to the closing `</color>` element) and the tooltip was different. The skill had changed since then and I didn't want to restore its previous form*
 
 An alternative way to fix tooltip is to use the second type of override. `EffectDefinition ID` is the Id of the *Effect* element. This time there is only one localization line as this skill uses one effect for both teams.
-```
+```csv
 effect_skill_mmd_disturbing_spores_rank_1_effect_override=<color=#{notable}>Rank 1: <sprite={q}mmd_tokens{q} name={q}mmd_token_disturb{q}>
 ```
 This changed the tooltip into this:
@@ -2580,7 +2579,7 @@ The application of deduction yielded me the conclusion that additional informati
 performer_buff_desc_execution_1_tooltip_override=<color=#{buff}>Execution 1\n
 ```
 So I did the same. I created a fake buff and attached it to the *ActorDataSkill* via *performer_buffs*.
-```
+```csv
 element_start,mmd_slowdown_fake_ignore_resist,Buff
 m_DurationType,skill_calculate,
 m_DurationAmount,1,
@@ -2756,7 +2755,7 @@ If paths, items, or buffs aren't locked behind the Altar of Hope (if they don't 
 
 It was shown that this CSV entry adds a specific item to the Valley Inn stock with 100% chance.
 
-```
+```csv
 element_start,inn_valley,LootTable
 m_chances,1,
 m_qtys,1,
@@ -3038,7 +3037,7 @@ element_end
 
 Heroes have barks before and after reflection sessions. They are set in the localization file.
 
-```
+```csv
 story_bark_herostory_MMD_01=A simple search was all that was required...
 hero_story_mmd_chapter_title_0=A Search Order
 bark_node_exit_success_storyhero+herostory_MMD_01=I believed that these were just rumors.
@@ -3249,7 +3248,7 @@ Then I went to nested_classes folder and there was a Resource Actor for my hero�
 To give it an idle animation I created an Animation Controller and added my idle animation node. Then I added an Animator component in the prefab file and attached the controller file.
 
 ![Summon's animation controller](images/summon_4.png)\
-**
+*Later I added an impact pose. In the game the summon held the pose much longer than needed. Turned out it's because of the Has Exit Time checkbox in transition settings. Disabling it fixed the problem*
 
 To give it a skill I copied my hero’s attack RZIS file, renamed it, attached an icon sprite and a Playable to it. Then I attached this RZIS to the corpse’s Resource Actor file. Corpses have zero turns each round. It can be changed by changing the value of *speed_number_of_turns* to 1.
 
@@ -3586,4 +3585,4 @@ I liked the meditative process of 3D modelling, texturing, drawing, animating, c
 - Day 26: added trinket effects, set loot tables up.
 - Day 27: learned how the Shrine of Reflection works, added barks.
 - Day 28: implemented the Shrine of Reflection story.
-- Days 29-32: preparing everything for publication.
+- Days 29-34: preparing everything for publication.
