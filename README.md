@@ -1,8 +1,51 @@
 # Creating a new hero class for Darkest Dungeon II
 
-I wouldn't call this a guide, I see this more like a moral support companion on the path of creating a new hero. Sometimes it might help, sometimes it makes things more confusing. Before this mod I had never created any mods for any game, so there will probably be many modding malpractices recommended. What it can help with though is providing at least some answers and solutions to some of the problems that can occur while creating such a mod. Not all of these answers are correct but at least they exist. Also English is not my first language.
+I wouldn't call this a guide, I see it more as a moral support companion on the path of creating a new hero. It might help, it might make things more confusing. Before this mod, I had never created any mods for any game, so there will probably be many modding malpractices recommended because I didn't consult with anyone experienced in this. However, it can provide at least some answers and solutions to some problems that can occur while creating such a mod. Not all of these answers are correct, but at least they exist. Also English is not my first language.
 
-There is only a few guides about modding Darkest Dungeon 2 that I'm aware of:
+Table of contents:
+- [Intro](#intro)
+    - [What to expect from this?](#what-to-expect-from-this)
+    - [What I couldn't do](#what-i-couldnt-do)
+    - [Amount of work](#amount-of-work)
+- [Hero's concept](#heros-concept)
+- [3D Modelling, animating](#3d-modelling-animating)
+- [Texturing](#texturing)
+- [Downloading the Mod Kit](#downloading-the-mod-kit)
+- [Creating a placeholder hero](#creating-a-placeholder-hero)
+- [Exporting models to Darkside](#exporting-models-to-darkside)
+    - [Adding meshes](#adding-meshes)
+    - [Adding textures](#adding-textures)
+    - [Fixing the outline](#fixing-the-outline)
+    - [Adding effect anchors](#adding-effect-anchors)
+    - [Fixing the inn light](#fixing-the-inn-light)
+- [Exporting animations to Darkside](#exporting-animations-to-darkside)
+- [Skill icons and portraits](#skill-icons-and-portraits)
+- [Adding VFX](#adding-vfx)
+- [Adding SFX](#adding-sfx)
+- [CSV data I](#csv-data-i)
+- [Creating a signature inn item](#creating-a-signature-inn-item)
+- [CSV data II](#csv-data-ii)
+- [Creating hero-specific trinkets](#creating-hero-specific-trinkets)
+- [Skills](#skills)
+- [Paths](#paths)
+- [Creating tokens](#creating-tokens)
+- [Localization](#localization)
+    - [Syntax](#syntax)
+    - [Names and barks](#names-and-barks)
+    - [Skill localization](#skill-localization)
+- [Altar of Hope](#altar-of-hope)
+- [Loot tables](#loot-tables)
+- [Act 5 boss](#act-5-boss)
+- [Shrine of Reflection](#shrine-of-reflection)
+- [Run goals](#run-goals)
+- [Kingdoms](#kingdoms)
+- [A summoning skill](#a-summoning-skill)
+- [CSV data III](#csv-data-iii)
+- [Afterword](#afterword)
+
+## Intro
+
+Some guides about modding Darkest Dungeon 2 that I'm aware of:
 - [A more fundamental DD2 modding guide](https://docs.google.com/document/d/1ga3FNrL3eGDRMFekLx9-RKhTDLMxPO603XzXcZa8O78/edit?usp=drive_link)
 - [Creating new path skills](https://docs.google.com/document/d/1glkTgWv5mXvleihcnBeC4FIDgf88fz8Qwjz46es6oFA/edit?tab=t.0#heading=h.1xklr55423w9)
 - [How to create a mod on Darkest Dungeon 2 that contains multiple tokens](https://docs.google.com/document/d/1FcWUTaz4nRhRtgW_haOZUEuLNB1u41Lqi03kav63f8Y/edit?tab=t.0#heading=h.c976l88xa9o)
@@ -16,28 +59,28 @@ Other new hero class mods for DD2:
 - [The Houndmaster by THE COLLECTOR](https://steamcommunity.com/sharedfiles/filedetails/?id=3597158251)
 - [The Weaver by THE COLLECTOR, 大脏尾，我们走!](https://steamcommunity.com/sharedfiles/filedetails/?id=3633470434)
 
-Most of them are on the very early stages of development. The most finished one is the Omen Seeker. She was the inspiration for me. Often times I had  troubles that felt impossible to solve, but when I remembered her, I knew that my pursuits were not in vain.
+Most of them are in the very early stages of development. The most finished one is the Omen Seeker. She was my inspiration. Often I had troubles that felt impossible to solve, but when I remembered her, I knew that my pursuits were not in vain.
 
 Other resources:
-- [DD2 CSV Syntax VSCode extention](https://marketplace.visualstudio.com/items?itemName=PHombie.dd2-csv-syntax)
+- [DD2 CSV Syntax VSCode extension](https://marketplace.visualstudio.com/items?itemName=PHombie.dd2-csv-syntax)
 
 ### What to expect from this?
 
 - I had never created any character before so character design is not in focus here.
-- I had never touched Unity Editor before. DD2 uses many different functions from this engine and I will not try to explain why certain methods are chosen.
+- I had no experience with Unity Editor before. DD2 uses many different functions from this engine and I will not try to explain why certain methods are chosen.
 - I am not a very skilled DD2 player.
 - I will try to write as much as I can about what I was trying to do, how I was trying to achieve things, what issues I encountered, what worked, what did not, what are other potential solutions that came to mind.
 - Not all things that I will write about were successful. But I never mean that something is not supposed to work.
 - While I was able to transfer 3D models and animations from Blender to Darkside, I encountered a lot of issues and couldn't fix all of them. If any other guide on this topic is available, it would probably be better than what I can offer here.
-- Creating a new hero does require a lot of work. But the tool provided by the developers can create a working duplicate of the Highwayman in a couple of clicks. The process of creating a new hero can be incremental.
+- Creating a new hero does require a lot of work. But the tool provided by the developers can create a working duplicate of the Highwayman in a couple of clicks. The process of creating a hero can be incremental.
 
-### What I couldn't do (not easily achievable?)
+### What I couldn't do
 
 I don't think it's possible to create palettes, weapon kits, or skins for custom heroes using the official modding tools. They are limited to the vanilla heroes as of now.
 
-There also seems to be some trouble with custom audio. I've read it's impossible without dwelving deep into tech at this moment.
+There also seem to be issues with custom audio. I've read that it's impossible without delving deep into tech at this moment.
 
-Custom subtitles. Since custom audio is unavailable, subtitles will not be shown either. This was a problem for the Shrine of Reflection, but I found a workaround.
+Since custom audio is unavailable, custom subtitles will not be shown either. This was a problem for the Shrine of Reflection, but I found a workaround.
 
 ### Amount of work
 
@@ -68,32 +111,32 @@ This is a diverse list. I believe the process can be somewhat parallelized. Afte
 ![Process of creating a hero](images/hero_workflow.png)\
 *Don't take this image seriously I don't know how business processes are done*
 
-Some animations require knowledge of what the skills are going to be like, but many of skill animations are quite abstract. For example, healing animations don't need to know the amount of targets that will be healed to look good.
+Some animations require knowledge of what the skills will be like, but many skill animations are quite abstract. For example, healing animations don't need to know the amount of targets to look good.
 
-Some of the work can be copied from the base game (like VFX and SFX). And some things are reused even by the vanilla heroes (have about 8 unique skill animations, some skills use the same moves).
+Some of the work can be copied from the base game (like VFX and SFX), and some things are reused even by vanilla heroes (many have about 8 unique skill animations, some skills use the same moves).
 
-No paid software is required, but maybe it can make things easier. I used Blender for creating models and animations and faced some weird problems with exporting files into the game. I think the developers used Maya and it might be a better option if it is available.
+No paid software is required, but it might make things easier. I used Blender for creating models and animations and faced some weird problems with exporting files into the game. I think the developers used Maya and it might be a better option if available.
 
-There is an official tool that can make creating trinkets, combat items, inn items, etc. a bit easier. This is a Microsoft Excel sheet and it requires specifically Microsoft Excel because it uses some of its exclusive features. I believe that this tool allows to ease the learning curve a bit. But later when I learned more about how the game handles item/skill effects I found this tool optional.
+There is an official tool that can make creating trinkets, combat items, inn items, etc. a bit easier. This is a Microsoft Excel sheet and it requires specifically Microsoft Excel because it uses some of its exclusive features. I believe this tool eases the learning curve a bit. Later, when I learned more about how the game works, I found this tool optional.
 
 ## Hero's concept
 
-This section is mostly about how I was trying to come up with what the new hero is going to look like, what would the backstory be, what trinkets to add. I wanted to create a mod for the game that I like in the first place, I did not have any formed vision of a hero in my head when I started.
+This section is mostly about how I was trying to come up with what the new hero would look like, what would the backstory be, what trinkets to add. I wanted to create a mod for the game that I like in the first place, I did not have any formed vision of a hero in my head when I started.
 
 DD2 provides a lot of freedom considering that magic and fantastical monsters are present. Heroes can use holy magic, lovecraftian forces, beastly transformations. They can even mix their hallucinations into their skills. Enemies have even more diversity.
 
-At the same time most of the heroes seemingly do not engage in magic practices. All of them are humans with tragic past. They look like they know what they want and nothing would stop them.
+At the same time, most heroes seemingly do not engage in magic practices. All of them are humans with tragic past. They look like they know what they want and nothing will stop them.
 
-I looked at D&D classes. There is an appealing idea of a monk, a martial artist. I think this would be a great addition to the game. But I knew nothing about these arts. Another other idea in D&D that was appealing to me is Circle of Spores. I had already decided that the weapon would be something like a thick bird cage. I combined it and a mushroom-filled cage idea appeared.
+I looked at D&D classes. There is an appealing idea of a monk, a martial artist. I think this would be a great addition to the game, but I know nothing about these arts. Another other idea in D&D that was appealing to me is Circle of Spores. I had already decided that the weapon would be something like a thick bird cage. I combined it and a mushroom-filled cage idea appeared.
 
-I had never drew a human. I traced the figure of MAA, tried to color it. The result was ugly, and comparing it to screenshots of heroes made me feel a bit discouraged. But I persisted, and after some iterations it started to look good.
+I had never drawn a human. I traced the MAA'figure, tried to color it. The result was... poor, and comparing it to screenshots of heroes was discouraging. But I persisted, and after several iterations it began to look good.
 
-Each hero design in DD2 is very creative and detailed, and it’s hard to keep up with. Stylish coats, red gloves, assymetrical armor, tall hat, spikes, bandages, abs on armor, seals. Once I colored my sketch it became clear to me that my hero didn't have anything like that, he was boring. I dehumanized him character to make him more interesting. Maybe if I had decided what his story is before drawing then it would be better.
+Each hero design in DD2 is very creative and detailed, and it’s hard to keep up with. Stylish coats, red gloves, assymetrical armor, tall hat, spikes, bandages, abs on armor, seals. Once I colored my sketch it became clear to me that my hero didn't have anything like that, he was boring. I dehumanized him to make him more interesting. Maybe if I had decided on his story before drawing, it would have been better.
 
 ![Variants of clothes, shadows and coloring](images/concept13.png)\
 *I actually really liked how the hero ended up, it felt like I reached a peak that I will never be able to reach again. It still does not emanate the same level of detail and creativity, but I accepted it*
 
-When I was trying to copy DD2’s style I noticed that most heroes and enemies have their legs almost entirely blacked out. Fun facts: Cherub is the only Cultist that has feet visible, all the Lost Battalion enemies are barefoot, no Confession boss has feet (except maybe the hooded figure).
+When I was trying to copy DD2’s style I noticed that most heroes and enemies have their legs almost entirely blacked out. Fun facts: Cherub is the only Cultist with feet visible, all the Lost Battalion enemies are barefoot, no Confession boss has feet (except maybe the hooded figure).
 
 Visual appearance of my hero dictated some aspects of the story: not about wealth, needs to involve a bird and some kind of a curse. I don't think I'll ever be good at creating stories, but I tried. At first this guy was a guard who stole a bird to sell it but the bird cursed him. Later i remade it. He was ordered to search a house of a theft suspect. When he arrived, nobody was there. He descended into the basement and got ambushed by formless monstrous creatures. He fought his way back out, lost his sword. Inflicted wounds cursed him, it started ruining his life. He tracked the owner of the house, tried to get a cure, but accidentally transmitted the curse which killed the suspect. The transformation didn't stop, and he had nothing left but to accept it.
 
@@ -114,33 +157,33 @@ A new hero requires new mesh, textures and animations.
 
 When I downloaded the DD2 Modding Tools, I found there FBX files of heroes. I imported the file to see how it is done. At first I saw a single bone and nothing else. Then I noticed a tiny figure near the sphere part of the bone.
 
-I spent some hours looking for a fix and nothing worked. If I switch to Edit Mode of either the mesh or the armature, the figure scales up to normal size. One way to fix it is to select the armature, switch to Pose Mode, and press Ctrl A, Ctrl G, Ctrl R, Ctrl S. The other way is to delete the armature. The provided modding files also have animation files but they required additional fixing steps.
+I spent some hours looking for a fix and nothing worked. If I switch to Edit Mode of either the mesh or the armature, the figure scales up to normal size. One way to fix it is to select the armature, switch to Pose Mode, and press Ctrl+A, Ctrl+G, Ctrl+R, Ctrl+S. Another way is to delete the armature. The provided modding files include animation files, but they require additional fixing steps.
 
 ![HWM imported to Blender](images/fbx_maya.png)\
 *Armature gains weird scale in Blender. I decided to not care about it and started creating my models from scratch*
 
-3D modelling required a lot more learning than I expected but there is no shortage of tutorials, so everything felt solvable. There is a lot of ways to make a character model, I wanted to try sculpting.
+3D modelling required a lot more learning than I expected, but there is no shortage of tutorials, so everything felt manageable. There are many ways to create a character model, I wanted to try sculpting.
 
 ![Sculpting steps](images/sculpting.png)\
 *On the right is the sculpted mesh that I thought was detailed enough. When I moved to the next step I realised that I should've put much more work into it. The face and clothes were too blurry. I also made a mistake of not making the model in T-pose, which bit me when I started animating.*
 
-Then did retopology, but since the quality of the sculpt was bad, the resulting model wasn't good either. Adding details on this step was a bit annoying and I think it would be easier if they were in the sculpt. Adding mushrooms lead me to a lot of incorrect geometry and I spent hours fixing it. I could've tried added the mushrooms in a less disrupting way, but when the issue showed, my undo queue was already filled. The default undo limit in Blender is unforgiving. I increased the limit, but it was late. And I didn’t make enough backup files.
+Then did retopology, but since the quality of the sculpt was bad, the resulting model wasn't good either. Adding details on this step was a bit annoying and I think it would be easier if they were in the sculpt. Adding mushrooms lead me to a lot of incorrect geometry and I spent hours fixing it. I could've tried added the mushrooms in a less disrupting way, but when the issue showed, my undo queue was already filled. The default undo limit in Blender is unforgiving. I increased the limit, but it was too late. And I didn’t make enough backup files.
 
-HWM's model uses Smooth Shading with Sharp seams. I don't know if it has any effect in the game but I did the same that because it looked good. The thought of making hands scared me so I just copied HWM's hands and attached them to my hero. At the end I felt dizzy from all the camera rotations. The resulting mesh had about 3300 vertices and 3900 faces. To compare, HWM’s model has about 4300 vertices and 5200 faces.
+HWM's model uses Smooth Shading with Sharp seams. I don't know if it has any effect in the game, but I did the same because it looked good. The thought of making hands scared me so I just copied HWM's hands and attached them to my hero. At the end I felt dizzy from all the camera rotations. The resulting mesh had about 3300 vertices and 3900 faces. To compare, HWM’s model has about 4300 vertices and 5200 faces.
 
 ![Retopology steps](images/retopology.png)\
 *Retopology, smoothing, details*
 
 Before proceeding to the texturing part, I wanted to make sure that I wouldn't need to change the model. To ensure that my mesh is ready, I needed to learn more about how DD2 handles animations.
 
-In the game all hero animations are fixed: there is no ragdolls, and no cloth simulation. I don't know how the clothing animation was done, but the resulting animation uses bones to move hair and cloth. This is why fast spinning at the Crossroads does not produce any funny effects.
+In the game all hero animations are fixed: there are no ragdolls and no cloth simulation. I don't know how the clothing animation was created, but the resulting animation uses bones to move hair and cloth. This is why fast spinning at the Crossroads does not produce any funny effects.
 
 Heroes can change their facial expressions during battles. After I checked the GR’s animation bones and found a mouth bone there, I was like, oh yeah, I got it, different facial expressions are achieved with the same animation technique. But I was wrong.
 
 ![GR's armature](images/gr_mouth_bone.png)\
 *GR's armature has a bone that moves the jaw*
 
-When I tried to check if I can replicate the GR's meltdown expression using this bone, I noticed that the texture looks different on the meltdown pose vs. what I could achieve with armature. The sides of the mouth during meltdown have more black contour. My first thought was that this effect was achieved with UV texture animation. I googled if it is possible, and it is, but with some problems.
+When I tried to replicate the GR's meltdown expression using this bone, I noticed that the texture looks different on the meltdown pose vs. what I could achieve with the armature. The sides of the mouth during meltdown have more black contour. My first thought was that this effect was achieved by using UV texture animation. I searched if it is possible, and it is, but with some problems.
 
 ![GR's shape keys](images/gr_shape_key.png)\
 *a: one of the skill poses, b: the effect of using a bone to change the expression, c: the meltdown pose*
@@ -152,16 +195,16 @@ The revelation came upon closer inspection of HWM's model. Until that moment it 
 
 Turns out that this is done with Shape Keys. Dismas’ Shape Keys move his eyebrows. Audrey’s Shape Keys move her mouth.
 
-I wanted to try as much as I could and also made some Shape Keys for my model. I would not recommend to use Shape Keys now. There is a big discrepancy between how Blender handles Shape Keys vs. bone animations. These two methods have little coordination which brings a lot of confusion. I still don't know how to properly export Shape Keys to Unity. I bore my Shape Keys up to this point of exporting animations, and they didn't work for me. Instead of trying to figure out how to fix it I freaked out and replaced them with bones.
+I wanted to try as much as I could and also made some Shape Keys for my model. I would not recommend using Shape Keys now. There is a big discrepancy between how Blender handles Shape Keys vs. bone animations. These two methods have little coordination which brings a lot of confusion. I still don't know how to properly export Shape Keys to Unity. I bore my Shape Keys up to this point of exporting animations, and they didn't work for me. Instead of trying to figure out how to fix it I freaked out and replaced them with bones.
 
-After that I needed to know how to add weapons. There can be multiple weapon meshes. Some accessories are weapons in disguise so they can be changed separately from the main hero model. In Unity weapons are sometimes attached to hands when they should not be, but I ignored it.
+Heroes can have multiple weapon meshes. Some accessories are weapons in disguise so they can be changed separately from the main hero model. In Unity weapons are sometimes attached to hands when they should not be, but I ignored it.
 
 ![GR's weapons](images/gr_weapons.png)\
 *Grave Robber has at four additional meshes: accessories, a bottle, a dagger, and a pickaxe.*
 
 FBX file does not include everything that Blender can create, and Unity does not support everything that FBX file can store. When importing in Unity, some of information of uncommon type, like complex bone constraints and most of the modifiers, will be lost. Cloth simulations need to be somehow baked before exporting or recreated in Unity.
 
-I thought when Blender exports animations with bone constraints, it bakes them to make everything fixed. But when I tried to animate bone constraints themselves, the animations in the game seemed a bit off to me. I used constraints like Child Of or Copy Transforms to attach the weapon to hands. Maybe it isn't true but I feel like is something off.
+I thought when Blender exports animations with bone constraints, it bakes them to make everything fixed. But when I tried to animate bone constraints themselves, the animations in the game seemed a bit off to me. I used constraints like Child Of or Copy Transforms to attach the weapon to hands. Maybe it isn't true but I feel like something is off.
 
 ![HWM's weapons](images/hwm_weapon.png)\
 *HWM's weapons are attached to his armature*
@@ -169,7 +212,7 @@ I thought when Blender exports animations with bone constraints, it bakes them t
 When I tried to rig my model, some of previous mistakes showed, and I had to change my mesh: put it in the T-pose, add more vertices where they were lacking. Then I decided to use add-ons for automatic rigging. The rig that the Rigify add-on created was much better.
 
 Then I needed to do something with clothes and such.
-- At first I tried to use cloth physics modifier and planned to convert the simulation to bones. I was able to apply cloth modifier to some parts of the mesh but it was so jittery and I couldn't fix it.
+- At first I tried to use cloth physics modifier and planned to convert the simulation to bones. I was able to apply the Cloth modifier to some parts of the mesh, but it was so jittery and I couldn't fix it.
 - There is an option of faking clothes with bone constraints (PierrickPicaut's tutorials on YouTube). Unfortunately the last part required an add-on that I didn’t know how to get. Without the add-on my cloth animation looked incomplete.
 - There are more add-ons like WIGGLE2 or Jiggle Physics. But it was too much for me. The first one needed an update for the new Blender version and the second one is more about jiggling, not clothes.
 
@@ -185,7 +228,7 @@ I believe the situation is the opposite for enemies. The game inverts the models
 
 I probably made a mistake when I didn't switch the rotation mode to Euler before I started animating. At one point I wanted to create a 360 degree animation and it would probably be much easier if the bones used Euler rotation. But I don't know what the actual difference between these two modes is.
 
-Animations store frames at rate of 30 FPS. I think animations are automatically interpolated to match the FPS of the game.
+Animations store frames at rate of 30 FPS. I think the game automatically interpolates animations to match the FPS.
 
 List of animations:
 - Up to 11 skill start animations (antic, anticipation), usually 2-4 seconds long.
@@ -221,33 +264,29 @@ The relationship poses should be offset to the left a bit. At first I placed the
 ![Relationship respectful poses](images/relationship_pose.png)\
 *Ignore that the arrow on the second image is pointing to the left*
 
-Reaching that point I had enough confidence to figure out how to fix the broken import of Darkside animations into Blender. First I imported the fbx file using default import settings. Clicked on it again to select armature. Switched to Pose Mode. Pressed A to select all bones. Excluded the root bone by pressing shift and double clicking on it. Opened the graph editor. Searched for “scale”. In the top right of the Graph Editor switched Pivot Point to 2D Cursor. Then pressed A, S, Y, typed 100, Enter. This solution makes the animation look okay in Blender. But when I tried to export it in Unity, it looked weird. But at least it was something.
+Reaching that point I had enough confidence to figure out how to fix the broken import of Darkside animations into Blender. First I imported the fbx file using default import settings. Clicked on it again to select armature. Switched to Pose Mode. Pressed A to select all bones. Excluded the root bone by pressing shift and double clicking on it. Opened the graph editor. Searched for “scale”. In the top right of the Graph Editor switched Pivot Point to 2D Cursor. Then pressed A, S, Y, typed 100, Enter. This solution makes the animation look okay in Blender. But when I tried to export it in Unity, it looked odd. But at least it was something.
 
 ## Texturing
 
 Hero and weapon models only need two textures. One is for colors (col) and another is for RH’s signature black strokes (ink). I believe it is made this way to make creating palettes easier. Both ink and color hero textures have 4096×4096 pixel size. Weapons have varied texture sizes. GR’s pickaxe textures are 1024×1024 pixels, and her dagger textures are 512×512 pixels.
 
-I marked the seams for UV unwrapping, didn't do the checkerboard testing and kind of regretted about it later. The purpose of this testing is to ensure that every part of the model gets the appropriate texture resolution. For example, my hero’s face look a bit pixelated because I didn’t provide a big enough UV island. The armor, on the other hand, was able to handle fine texturing.
+I marked the seams for UV unwrapping, didn't do the checkerboard testing even though I should have. The purpose of this testing is to ensure that every part of the model gets the appropriate texture resolution. For example, my hero’s face look a bit pixelated because I didn’t provide a big enough UV island. The armor, on the other hand, was able to handle fine texturing.
 
-I opened the Shader Editor, created a new material for the hero. Then modified the material so it can work with col and ink images. For some reason the ink textures are black & red instead of black & white. The red color is pure red ({255, 0, 0} in RGB).
+I opened the Shader Editor, created a new material for the hero. Then modified the material so it can work with col and ink images. The ink textures are black & red instead of black & white for some reason. The red color is pure red ({255, 0, 0} in RGB).
 
 ![Shader settings](images/shader.png)\
 *The col image is pure green and the ink image is red with a face. This material can be imported to Blender with File -> Append*
 
 The created material itself is not needed for the game, it's just a way to tell Blender how these two textures work together so it can show it in the right way.
 
-I don't understand how the lighting works in the game, so I created another material for HWM and put his textures on to have a reference of how bright, dark, or colorful textures need to be.
-
-The material that I created did its work, but I noticed that changing the threshold in the Math node changed the size of black strokes a bit. They get bigger when increasing the threshold value from 0 to 0.2. I could not figure out why exactly it is happening. At first I thought it’s because the ink texture isn’t strictly red and black, there is some anti-aliasing happening, but the threshold effect seems to be stronger than just one pixel width. Later I found that this theory is wrong, even using a pixel perfect brush, the effect is still there. I decided not to bother with it, this level of detail is too fine for me.
+The material that I created did its work, but I noticed that changing the threshold in the Math node changed the size of black strokes a bit. They get bigger when increasing the threshold value from 0 to 0.2. I could not figure out why exactly it was happening. At first I thought it’s because the ink texture isn’t strictly red and black, there is some anti-aliasing happening, but the threshold effect seems to be stronger than just one pixel width. Later I found that this theory is wrong, even using a pixel perfect brush, the effect is still there. I decided not to bother with it, this level of detail is too fine for me.
 
 ![Example of how black strokes change](images/threshold.png)\
 *The top image is screenshot from the game, lower images show how my material behaves on different settings*
 
-I switched to Texture Paint Mode. For some reason in the Texture Paint mode the Paint Hard brush did not do anything. Other brushes did work. It is possible to mask parts of the model to draw on selected parts only. Paint Mask option at the top makes everything that is not selected unpaintable. In the UV viewer hovering over an island and pressing L allows to select the whole UV island. Clicking on an Image Texture node in Node Editor allows to switch between col and ink images to paint on.
+Drawing textures in Blender is available with Texture Paint Mode. It has some brushes, allows to mask parts of the model. Separated UV islands can be selected by hovering over an island in the UV editor and pressing L. Clicking on an Image node in the Node Editor allows to switch between col and ink images to paint on. When a Blender session is done, all changed textures must be saved manually, otherwise they will be lost.
 
-When a Blender session is done, all changed textures must be saved manually, otherwise they will be lost.
-
-First I filled UV islansds with base colors, then painted the ink. Turned the Diffuse Color mode on to turn the shadows off and adjusted the ink where it was shadowed before. Then made a backup of color texture, took Paint Soft brush and started adding details to the color texture. Then I opened the image in Krita to add textures.
+First, I filled UV islansds with base colors, then painted the ink, then turned the Diffuse Color mode on to disable shadows and adjusted the ink where it was shadowed before. Then I selected the Paint Soft brush and added details to the color texture. Then I opened the image in another editor to add textures, though I think it should be possible to add more brushes to Blender.
 
 ![Texturing steps](images/texturing.png)\
 *Texturing steps*
@@ -257,7 +296,7 @@ DD2 mixes smooth gradients, harsh black lines and some textures. Fine textures a
 ![MAA's shield and ](images/maa_shield.png)\
 *Different shadows*
 
-I repeated the same steps for the weapon. My weapon was actually two objects (the cage and the glob), so the total number of textures was 6.
+I repeated the same process for the weapon. My weapon is actually two objects (the cage and the glob), so the total number of textures is six.
 
 ## Downloading the Mod Kit
 I found Mod Kit in my Steam library in the tools category. Alternatively, the Kit can be accessed in [Google Drive](https://drive.google.com/drive/u/0/folders/1SlMxq3O2nuOp3P__G-0QIU748RGFIFnu).
@@ -266,13 +305,13 @@ The Kit won’t start without Unity installed. Version 2022.3.16f is specified i
 
 During installation Unity got stuck at “Installing playback engines”, and there was a recommendation on the Unity forum to shut down the Windows Module Installer process in the Task Manager. I did it and the installation finished, though I have no idea why it works.
 
-After that I encountered another error. On opening, Unity showed error about not finding license. Turns out that I needed to download Unity Hub. After downloading I opened it and it suggested to download the newest Unity version. I didn't need that. To point to the already existing instance I needed to specify the downloaded .exe somewhere in Unity folder in Program Files.
+After that I encountered another error. On opening, Unity showed an error about not finding a license. It turned out that I needed to download Unity Hub. After downloading, I opened it, and it suggested to download the newest Unity version. I didn't need that. To point to the already existing instance I needed to specify the downloaded .exe file somewhere in the Unity folder in Program Files.
 
-Then I tried to launch the Mod Tools, and got another error. Now it says that project has invalid dependencies. When I tried to use the Google Drive version of the Tools, I got the same error. I tried changing my DNS options, tried restarting. After an hour the problem got solved and I have no idea how it happened. It might had been a temporal issue with Unity servers, it might had been an unexpected sum of my actions, it might had been my regional problem.
+Then I tried to launch the Mod Tools and got another error. This time it said that the project had invalid dependencies. The Google Drive version of the Tools gave me the same error. I tried changing my DNS options, restarting. After an hour the problem resolved itself, and I have no idea how it happened. It may have been  temporal issues, it may have been an unexpected sum of my actions.
 
-After that I was able to open the DD2 Mod Tools. Unity greeted me with a bunch windows of modding tools in my face. I was very happy to see the Hero Creation Tool and the Token Creation Tool among them, even though I still knew nothing about modding. At least hero creation is in some way intended. I closed all of them. They can be accessed again through the “Window” tab at the top.
+After that I was able to open the DD2 Mod Tools. Unity greeted me with a bunch windows of modding tools in my face. I was very happy to see the Hero Creation Tool and the Token Creation Tool among them, even though I still knew nothing about modding. At least hero creation is in some way intended. I closed all of them. They can be accessed again through the Window tab at the top.
 
-The inner Unity console greeted me less hospitably. There was a bunch of errors. But I could not be bothered with them. I decided to follow some examples from the official guide, which unfortunately is very short, but I was happy that it exists.
+The Unity console greeted me less hospitably, there was a bunch of errors. But I could not be bothered with them. To learn the tools followed some examples from the official guide, which is unfortunately quite short, but I was happy that it existed.
 
 Sometimes when I accidentally modified files outside my mod folder, the mod builder started glitching and produced less files than ususal. It can be fixed with the Verify Integrity function in Steam.
 
@@ -280,7 +319,7 @@ Sometimes when I accidentally modified files outside my mod folder, the mod buil
 
 First I will reference the [official guide](https://docs.google.com/document/d/1ga3FNrL3eGDRMFekLx9-RKhTDLMxPO603XzXcZa8O78/edit?usp=drive_link). This guide covers item creation, skins and palettes for vanilla heroes, publishing a mod, some basics and possible issues, turning game cheats on. I will repeat many things from this guide but in my own understanding.
 
-To create a new character (duplicate of HWM), click on Window -> EmptyCharacterCreatorWindow. It will ask an ID. I would recommend the ID to be short but unique enough so other mods will not use the same ID. My mod uses mmd as ID, which stands for Metamorph Duncan.
+To create a new character (a duplicate of HWM), click Window -> EmptyCharacterCreatorWindow. It will ask for an ID. I recommend the ID to be short but unique enough to make sure the game or other mods won't have conflicts. My mod uses mmd as the ID, which stands for Metamorph Duncan.
 
 ![Character creation tool](images/egg_1.png)\
 *Character creation tool*
@@ -292,10 +331,10 @@ I’ll call the first folder “F” and the second folder “Export folder”.
 The export folder is mostly empty at the start. The only file that has something in it is the CSV file that has most of the gameplay-related data about the hero. Like their stats, Altar unlocks, skill effects, skill updates, differences between paths.
 
 In F there is a bunch of other folders:
-- The animation folder contains all animations in fbx format and also an Animation Controller.
+- The animation folder contains all animations in FBX format and an Animation Controller.
 - The boss_body_spectre folder is designated for Act 5 boss-related data. When the boss summons a ghost from the past it uses data from this folder.
 - The materials folder stores default textures for a hero and weapons.
-- Not all animations are controlled via Animation Controller. Skill animations consist of four parts. First is antic animation, that is played when a skill is selected. Then there is an idle animation that is played when a skill is selected but not executed. Then a skill execution pose. And the last part is recovery animation. The first two parts are controlled via Animatoin Controller. The last two parts should be made into a Playable file that goes to the playables folder. This folder also contains files for Act Out and Riposte actions.
+- Not all animations are controlled via Animation Controller. Skill animations consist of four parts: antic animation (played when a skill is selected), idle animation (played when a skill is selected but not executed), skill execution pose, and recovery animation. The first two parts are controlled via Animation Controller. The last two parts should be made into a Playable file in the playables folder. This folder also contains files for Act Out and Riposte actions.
 - The icons folder stores skill icons and a skill background icon. It also has a Sprite Atlas but I don’t think it is actually used. The same is for the portraits folder which stores different portraits that are used in UI.
 - The data folder stores objects that serve as connectors between different objects. The files that have Resource Zoom In Skill addition in the Inspector gather skill icons, SFX, and playables together. The file that has a hero id as its name connects the 3D model, skill files, and portraits together.
 - hero_paths folder is for images of path seals.
@@ -304,18 +343,18 @@ In F there is a bunch of other folders:
 - nested_classes has data about corpse of the hero.
 - palettes and skins folders are supposed to store palettes and skins but I couldn't make them work so I deleted their contents because they were adding unwanted palettes and textures to unrelated heroes.
 
-Just to make this duplicate appear in the game, click on the Steamworks file and in the Inspector click Build Assets. This tool allows to set title, description, and preview image for the mod. This tool needs to be used every time a change in F folder is made.
+To make this duplicate appear in the game, click on the Steamworks file and click Build Assets in the Inspector. This tool allows to set the title, description, and preview image for the mod. This tool needs to be used every time a change is made in the F folder.
 
 ![Steamworks tool](images/egg_2.png)\
 *Steamworks tool*
 
 When I first tried to build the mod, the console showed me “SBP ErrorException”. For some reason Unity Build Settings were set for “Dedicated Server”. Selecting “Windows, Mac, Linux” fixed this error.
 
-After the building is finished, copy the exports folder and paste it in mods folder that is located here:
+After the build is finished, copy the exports folder and paste it in the mods folder that is located here:
 ```
 C:\Program Files (x86)\Steam\steamapps\common\Darkest Dungeon® II\Darkest Dungeon II_Data\StreamingAssets\mods
 ```
-It will be like this:
+If there is no mods folder, create it. It will then be like this:
 ```
 C:\Program Files (x86)\Steam\steamapps\common\Darkest Dungeon® II\Darkest Dungeon II_Data\StreamingAssets\mods\egg_export
 ```
@@ -330,35 +369,35 @@ This placeholder hero works, doesn't crash the game and doesn't break anything. 
 
 ### Adding meshes
 
-This is the part I'm least comfortable with. I encountered a bunch of issues and the solutions that I came up with are very dirty.
+This is the part I'm least comfortable with. I encountered a bunch of issues, and the solutions that I came up with are... inelegant.
 
-To replace the model, it first needs to be exported from Blender into an FBX file. This file only needs the mesh (hero and weapons) and the armature. I used default Transform options. In armature section I checked Only Deform Bones and unchecked Add Leaf Bones. I also unchecked the animation option.
+First, I exported my model from Blender as an FBX file. This file requires only the mesh (hero and weapons) and the armature. I used default Transform options. In the armature section I checked Only Deform Bones and unchecked Add Leaf Bones. I also unchecked the animation option.
 
 ![Blender mesh export options](images/egg_4.png)\
 *Blender mesh export options*
 
 I named the exported file "egg_exported" and moved it inside the F folder.
 
-In Unity files can have links to each other. If in the Unity File Explorer the files are moved, the links stay valid. If the file is deleted and then another file was created with the same name the links are lost. A file can be replaced using Windows File Explorer (replacing them without prior deleting) and links will not be lost.
+In Unity, files can have links to each other. If files are moved in the Unity File Explorer, the links remain valid. If a file is deleted and then another file is created with the same name, the links are lost. A file can be replaced using Windows File Explorer (replacing it without prior deletion) and links will not be lost.
 
-In this section I will not use the second option and will try to do things in Unity, restoring the connections between files manually.
+I will not use the second option and will try to do things in Unity, restoring connections between files manually.
 
 ![FBX file for the mesh](images/egg_5.png)\
 *FBX file for the mesh*
 
-It looks like the game only interacts with prefab files. It doesn't use FBX files unless they are connected to a prefab file. I double clicked on the egg_art_prefab file. Then I dragged my exported file to the Hierarchy window. This also showed my mesh intersecting with another model in the Scene Viewer.
+Adding files to Unity can be done by dragging them from Windows Explorer to Unity Explorer. I added my FBX file, double-clicked on the egg_art_prefab file, then dragged my exported file to the Hierarchy window. This showed my mesh intersecting with another model in the Scene Viewer.
 
 ![Adding the mesh](images/egg_6.png)\
 *Adding the mesh*
 
-Then I clicked on the egg_exported element in the Hierarchy window. In the Inspector window I addd three components: Animator, Animator State Sender, Timeline Property Map Bhv. The Animator component needs its settings changed. These components are just copy from the example, I don't really know what they do, but they are needed for animations.
+Then I clicked on the egg_exported element in the Hierarchy window. In the Inspector window, I addd three components: Animator, Animator State Sender, and Timeline Property Map Bhv. The Animator component requires configuration. These components are copies from the example, I don't really know what they do, but they are required for animations.
 
 ![Setting animation components](images/egg_7.png)\
 *Setting animation components*
 
 ### Adding textures
 
-To add textures to this model I went to F/materials folder. Inside I deleted everything except the mat_egg file. Then I imported my texture images. Then I clicked on the mat_egg file. It opened the material properties in the Inspector. I dragged my hero textures into the Base and Ink slots.
+To add textures to this model, I went to the F/materials folder. Inside, I deleted everything except the mat_egg file, imported my texture images, then clicked on the mat_egg file, which opened the material properties in the Inspector. I dragged my hero textures into the Base and Ink slots.
 
 ![Adding textures](images/egg_8.png)\
 *My textures are called mmd here but the name does not matter*
@@ -368,7 +407,7 @@ Then I duplicated the mat_egg file two times and renamed them to mat_egg_glob an
 ![Multiple materials](images/egg_9.png)\
 *Multiple materials*
 
-To apply the materials to the models I dragged them to the white figures.
+To apply the materials to the models, I dragged them to the white figures.
 
 ![Applying materials](images/egg_10.png)\
 *Applying materials*
@@ -382,7 +421,7 @@ It should have added an outline to the model. But for me it didn't. So I started
 
 ### Fixing the outline
 
-If the outline works, the fix is not needed.
+If the outline works correctly, this fix is not needed.
 
 ![Outline effect](images/egg_17.png)\
 *Left: with outline. right: without outline*
@@ -391,19 +430,19 @@ If the outline works, the fix is not needed.
 
 <summary>How tried to locate the source of the problem</summary>
 
-I knew the problem was with my model somehow. Because when I imported a cube, the shader worked.
+I knew the problem was with my model, because when I imported a cube, the shader worked.
 
 For some reason my meshes didn’t have tangents data. I don’t know what that is but that was missing. The normals looked fine but the tangents display was black.
 
 ![Comparing Tangents data](images/egg_12.png)\
 *Top left: HWM has an outline and my model doesn't even though they have the same material settings. Right side: HWM's model has Normals and Tangents data, but my model only has Normals*
 
-I did some more tests and found that with UV Spheres the more segments there are the worse is the tangent situation. The tangent situation exactly matched the outline situation. So I knew for sure that the outline was connected to the tangents.
+I made some more tests and found that with UV Spheres, the more segments there are the worse is the tangent situation. The tangent situation exactly matched the outline situation. So I knew that the outline was connected to the tangents.
 
 ![Tangents on UV spheres](images/egg_13.png)\
 *The more segments a UV sphere had, the worse was the outline*
 
-So the problem most probably had something to do with the mesh. It looks like the size of polygons matters. There is logic behind it but from a standpoint without foundational knowledge this behavior causes confusion. I reduced my model to a single cuboid shape, added a couple of other cubes, deformed one of them, and imported all three into Unity. To my surprise, tangents for my reduced model were still not calculated.
+So my mesh was the problem. It looks like polygon size matters. There is logic behind this but without foundational knowledge, this behavior causes confusion. I reduced my model to a single cuboid, added a couple of other cubes, deformed one, and imported all three into Unity. To my surprise, tangents for my reduced model still weren't calculated.
 
 ![Simple shapes and tangents](images/egg_14.png)\
 *The only thing that differs between these is Scale*
@@ -412,7 +451,7 @@ So now I new that the issue was with the scale of my mesh.
 
 </details>
 
-What did not help:
+What did not work:
 - Scaling the model up 10 times in Object Mode and exporting it.
 - Increasing the scale parameter in Blender export settings.
 
@@ -420,31 +459,28 @@ Possible solutions:
 - Scaling the model up 10 times in Object Mode, applying Transforms, and exporting it.
 - Unchecking the Convert Units parameter in import settings in the Unity Inspector.
 
-I did the second one. I clicked on the egg_exported file, and in the Inspector unchecked the Convert Units option. Then I clicked outside the Inspector and applied changes.
+I did the second one. I clicked on the egg_exported file and unchecked the Convert Units option in the Inspector. Then I clicked outside the Inspector to apply changes.
 
 ![Simple shapes and tangents](images/egg_15.png)\
 *The only thing that differs between these is Scale*
 
-This made the model too big. To fix this I clicked on egg_exported in the Hierarchy Viewer and in the Inspector set the Scale fields to 0.01. Unchecking Convert Units needs to be done to all animation files too.
+This made the model too big. To fix this, I clicked on egg_exported in the Hierarchy Viewer and set the Scale fields to 0.01 in the Inspector. Unchecking Convert Units needs to be done for all animation files too.
 
 ![Scaling back](images/egg_16.png)\
 *Scaling back to normal*
 
-Just to note. My hero model in Blender has adequate sizes. The scale is close to 1 and his height is 1.96 m. I don't know why Unity refuses to calculate tangents for small models.
+Just a note. My model in Blender has adequate dimensions. The scale is close to 1, and his height is 1.96 m. I don't know why Unity refuses to calculate tangents.
 
 ### Adding effect anchors
 
-Some visual effects like stress damage/heal crowns and buff/debuff texts are connected to anchors in the model. I wasn't deleting HWM's model from the prefab to access these anchors. I found five anchors: hit_head, hit_projectile, hit_body, hit_root, stamp_loc, pop_text_loc.
+Some visual effects like stress damage/heal crowns and buff/debuff texts are connected to anchors in the model. I didn't delete the HWM's model from the prefab to access these anchors. I found five anchors: hit_head, hit_projectile, hit_body, hit_root, stamp_loc, and pop_text_loc.
 
-I moved the hit_head to the bone that moved the head of my hero. Then I moved hit_projectile and hit_body to a bone around the center of my hero. Other three anchors I moved to the root bone.
+I moved hit_head to the bone that controls my hero's head. Then I moved hit_projectile and hit_body to a bone near the center of my hero. The other three anchors I moved to the root bone.
 
 ![Moving Anchors](images/egg_18.png)\
 *On this image my model is on the right side but it's because the list is too long*
 
-After that the mdl_highwayman element in the Hierarchy window needs to be deleted. Then the mdl_egg file in the Unity File Explorer needs to be deleted too. When I wrote this I thought that unchecking the field left to the name in the Inspector window would do the same thing as deleting but later none of my Playable files worked.
-
-<!-- ![Disabling the HWM's model](images/egg_19.png)\ -->
-<!-- *Disabling the HWM's model* -->
+After that, the mdl_highwayman element in the Hierarchy window needs to be deleted. Then the mdl_egg file in the Unity File Explorer needs to be deleted too. When I wrote this, I thought that unchecking the field left to the name in the Inspector window would do the same thing as deleting, but later none of my Playable files worked.
 
 Then I built the mod using the Steamworks file, and copied the exports folder to the mod folder of the game.
 
@@ -455,73 +491,73 @@ Unfortunately there was one issue.
 
 ### Fixing the inn light
 
-In inns heroes get highlighted when item is overing over them. For my model the light was too strong.
+In inns, heroes get highlighted when an item is hovering over them. For my model, the light was too strong.
 
 ![Bad inn light](images/egg_21.png)\
 *Hero here is in the T-pose but the issue was also present in my main mod where animations were already implemented*
 
-I tried many things, in the end came to a weird solution. First I clicked on the egg_exported file in the Unity File Explorer and checked the Bake Axis Conversion in the Inspector Window. After that the model got rotated.
+I tried many things, in the end came to a weird solution. First, I clicked on the egg_exported file in the Unity File Explorer and checked  Bake Axis Conversion in the Inspector Window.
 
 ![Bad inn light](images/egg_22.png)\
 *First step of a weird solution*
 
-Then I clicked on the egg_exported element in the Hierarchy window and changed the settings in the Inspector window. I set X Scale to negative, Y Scale to negative, X Rotation to 180.
+Then I clicked on the egg_exported element in the Hierarchy window and changed the settings in the Inspector window. I set X Scale to negative, Y Scale to negative, and X Rotation to 180.
 
 ![Bad inn light](images/egg_23.png)\
 *Second step of a weird solution*
 
-After this the inn light became more sensible.
+After this, the inn lighting became more sensible.
 
-Since the model was rotated, the anchors in the armature got displaced. And in the game some effects play much lower than needed. Inverting the Z Position value for stamp_loc and pop_text_loc fixed the issue.
+Since the model was rotated, the anchors in the armature became displaced. Inverting the Z Position value for stamp_loc and pop_text_loc fixed the issue.
 
 ![Fixed inn light](images/egg_24.png)\
 *Fixed inn light*
 
-This is a very weird solution and I most probably did something wrong during the export of models. But I tried a lot of things and couldn't find a better solution.
+This is a very weird solution, and I most certainly did something wrong during model export. But I tried many things and couldn't find a better solution.
 
-Even more, this is not a complete fix. If I covered my mouse over the icon in the turn order, the lighting was much bigger than it was on other heroes.
+Moerover, this is not a complete fix. If I hovered my mouse over the icon in the turn order, the lighting was stronger than on other heroes.
 
 ![Strong highlight in battles](images/egg_25.png)\
 *Strong highlight in battles*
 
-Another issue was that some enemy attacks trigger a weird lighting that lingers for some time after the attack.
+Another issue was that some enemy attacks trigger orange lighting that lingers for some time after the attack.
 
 ![Where does that come from](images/lighting_impact.png)\
 *The Hatchetman attacked my hero and it applied bright orange light*
 
-I don't know what is the cause of these issues and can't fix them.
+I don't know the cause of these issues and can't fix them.
 
 ## Exporting animations to Darkside
 
 F/animations folder stores animation files in FBX format. One FBX file can store multiple animation clips.
 
-When Blender exports animations to FBX, one Action transforms into one Animation Clip.
+When Blender exports animations to FBX, each Action transforms into one Animation Clip.
 
-I don't know why files have different amount of clips, maybe it was easier to maintain this way.
+In Darkside animation files have various amount of clips. I don't know why, maybe it was easier to maintain.
 
 ![FBX with multiple animations](images/egg_26.png)\
 *FBX file with two animation clips: antic and idle. Animation clips have a triangle as the icon*
 
-Names of the files in this folder do not have strict rules. It is better to have file names and clip names that resemble what is stored inside. I think there is only one way in Unity to change names of Animation Clips, and it doesn't work if the file has multiple clips. If a file has multiple clips, their names should be set before creating an FBX file.
+File names in this folder do not have strict rules. It is better to use file names and clip names that reflect what is stored inside. I believe there is only one way in Unity to rename Animation Clips, and it doesn't work if the file contains multiple clips. If a file has multiple clips, their names should be set before creating FBX files.
 
-If an FBX file has only one clip inside, this file can be named ID@ID_name and Unity will change the name of the clip to ID_name. At least it will make an illusion of renaming it.
+If an FBX file contains only one clip, this file can be named ID@ID_name, and Unity will rename the clip to ID_name. At least it will make an illusion of renaming.
 
-I beleieve in Unity it doesn't make a difference if there is one FBX file that has all animations in it or if there are fifty FBX files each for one animation. At first I wanted to export only one file with all animations. But something in Blender went not my way and the animations that I exported were broken. Some animation clips were doubled, and some of them were stuck in T-pose. It wasn't a Unity problem because when I opened the FBX files in Blender they were broken too.
+I believe there is no difference in Unity whether there is one FBX file that has all animations in it or if there are fifty FBX files each containing one animation. At first, I wanted to export one file with all animations, but something in Blender went not my way and my exported animations were broken. Some animation clips were duplicated, and some of them were stuck in T-pose. This wasn't a Unity problem because when I opened the FBX files in Blender, they were broken too.
 
-These issues disappeared when I tried to export each Action into a separate FBX file. I don't know why this helped, but it did for me.
+These issues disappeared when I exported each Action into a separate FBX file. I don't know why this helped, but it did.
 
-To export a single animation I selected the action in the Action Editor and then exported using the same settings that I used for the mesh, but this time I checked the animation section on. To tell it to export only one animation I unchecked the NLA Strips and All Actions fields.
+To export a single animation, I selected the action in the Action Editor and exported using the same settings that I used for the mesh, but with the animation section enabled. To export only one animation, I unchecked the NLA Strips and All Actions fields.
 
 ![Animation export settings](images/egg_29.png)\
 *Animation export settings*
 
-In F/animations folder I deleted everything except the last file with the name egg_animation_controller. Then I moved all my exported animations in this folder.
+I deleted everything in the F/animations folder except the file named egg_animation_controller. Then I moved all my exported animations into this folder.
 
-If Convert Units field was checked off during the outline fix, this option should be checked off for all animation files too. If they don't match, the animation in the game will look broken.
+If the Convert Units field was unchecked during the outline fix, this option should be unchecked for all animation files too. If they don't match, the animations in the game will look broken.
 
-If Bake Axis Conversion field was checked on during the highlight fix, this option should be checked on for all animation files too. If they don't match, the animation in the game will look broken.
+If the Bake Axis Conversion field was checked during the lighting fix, this option should be checked for all animation files too. If they don't match, the animation in the game will look broken.
 
-Unity can change settings of multiple files at once. When one file is selected, clicking on another file while holding Shift will choose both files and every file between them. After that changing settings in the Inspector will change settings of every file.
+Unity can change settings for multiple files at once. When one file is selected, clicking on another file while holding Shift selects both files and all files between them. After that, changing settings in the Inspector will change settings for every file.
 
 I tried to use “Copy transform” constrains to create my idle battle animation. In Unity animation preview it looked right, but in the game it looked like the animation ignored the constraint for some reason. After checking the “Import Constraints” option on, the animation became closer to what it was supposed to be, but I feel like there is still something off.
 
@@ -539,46 +575,46 @@ The Animation Controller in the F/animations folder serves as the connector betw
 ![Animation Controller](images/egg_32.png)\
 *Animation Controller*
 
-Since other animation files were deleted, clicking on a node will show None in the Motion field in the Inspector window. Motion field expects an animation clip as an input. If some animations are missing, the game will not break, the hero will just play an idle animation if it exists, otherwise the hero will just be in a default pose.
+Since other animation files were deleted, clicking on a node will show None in the Motion field in the Inspector window. The Motion field expects an animation clip as input. If some animations are missing, the game will not break, the hero will just play an idle animation if it exists, otherwise the hero will be in a default pose.
 
-There is a lot of nodes:
-- inn_item_antic is an animation that plays when an inn item is hovered over a hero.
-- inn_item_idle is an animation or a pose that plays when an inn item is hovered over a hero for a longer time than the duration of inn_item_antic
-- inn_item_recover is an animation after an inn item stopped hovering over a hero.
-- inn_idle is a default pose in inns.
-- embark is an animation of a hero exiting an inn and looking at a landscape while all relationships are revealed.
-- victory is a pose during loot collecting after a fight.
-- hero is an animation that plays at the Crossroads and in character sheet.
-- relationship_test_positive is a pose that is used when hero's relationship is revealed and it's a positive one.
-- relationship_test_negative is a pose that is used when hero's relationship is revealed and it's a negative one one.
-- resolute is a pose when a hero overcomes devastating the horrors of campaigns.
-- meltdown is a pose when a hero does not overcome devastating the horrors of campaigns.
-- move_forward is an animation that is played when a hero uses their turn to move to a front rank.
-- move_backward is an animation that is played when a hero uses their turn to move to a back rank.
-- move_forward 0 is a recovery animation after moving front.
-- move_backward 0 is a recovery animation after moving back.
-- impact_backstab is a pose when an ally backstabs a hero as an act out.
-- actout_caster is a pose when a hero buffs an ally as an act out.
-- impact_is_guarding is a pose when a hero shields an ally as an act out.
-- Friendly_buff is a pose when a hero is buffed.
-- Friendly_buff 0 is a recovery animation after being buffed.
-- impact_dodge is a pose when enemy's attack is dodged.
-- impact_was_guarded is a pose when an ally guards a hero.
-- impact_small is a pose when a hero is hit by an enemy.
-- impact_recover is a recovery animation after a hero is hit.
-- I can't remember any bark animstions so I don't know when bark_positive, bark_negative, bark_listen are used.
-- deaths_door_exit is supposed to be used when a hero is healed from 0 HP. I think all heroes just use a default idle battle animation.
-- Death node isn't used I think.
-- there 14 nodes that are related to skills, I will write about skill animations separately because they require additional steps.
+There are many nodes:
+- inn_item_antic: an animation that plays when an inn item is hovered over a hero
+- inn_item_idle: an animation or a pose that plays when an inn item hovers over a hero longer than the duration of inn_item_antic
+- inn_item_recover: an animation that plays after an inn item stops hovering over a hero
+- inn_idle: the default pose in inns
+- embark: an animation of a hero exiting an inn and viewing the landscape while all relationships are revealed
+- victory: a pose displayed while collecting loot after a fight
+- hero: an animation that plays at the Crossroads and in the character sheet
+- relationship_test_positive: a pose used when a hero's relationship is revealed as positive
+- relationship_test_negative: a pose used when a hero's relationship is revealed as negative
+- resolute: a pose when a hero overcomes the devastating horrors of campaigns
+- meltdown: a pose when a hero does not overcome the devastating horrors of campaigns
+- move_forward: an animation played when a hero uses their turn to move forward
+- move_backward: an animation played when a hero uses their turn to move back
+- move_forward 0: a recovery animation after moving front.
+- move_backward 0: a recovery animation after moving back.
+- impact_backstab: a pose when an ally backstabs a hero as an act out
+- actout_caster: a pose when a hero buffs an ally as an act out
+- impact_is_guarding: a pose when a hero shields an ally as an act out
+- friendly_buff: a pose when a hero is buffed
+- friendly_buff 0: a recovery animation after being buffed
+- impact_dodge: a pose when an enemy's attack is dodged
+- impact_was_guarded: a pose when an ally guards a hero
+- impact_small: a pose when a hero is hit by an enemy
+- impact_recover: a recovery animation after a hero is hit
+- I can't remember any bark animations, so I do not know when bark_positive, bark_negative, and bark_listen are used
+- deaths_door_exit: supposed to be used when a hero is healed from 0 HP
+- The Death node isn't used I think
+- there are 14 nodes related to skills, I will write about skill animations separately because they require additional steps
 
 The Idle node is expandable and reveals some more nodes:
 - idle_neutral is an idle battle animstion.
 - deaths_door_antic is an animation when a hero enters Death's Door state.
 - deaths_door_idle is an idle animation when a hero has 0 HP.
 
-Names of nodes can be changed, but I think it's better to not rename the nodes that aren't connected to any other ones. Nodes like embark, victory, hero aren't connected to anything else and I think the game uses their names to find the right animation.
+Node names can be changed, but I think it's better not to rename nodes that aren't connected to other nodes. Nodes like embark, victory, and hero aren't connected to anything else, and I think the game uses their names to find the right animation.
 
-After slotting animation clips in nodes, rebuilding the mod with Steamworks tool, and copying the exports folder, the game will now show animations.
+After assigning animation clips to nodes, rebuilding the mod with Steamworks tool, and copying the exports folder, the game will now show animations.
 
 ![Animation at the Crossroads](images/egg_33.png)\
 *This is a different animation that I created to test if bone constraints can be exported correctly. Hand and cage are connected with a bone constraint*
@@ -670,14 +706,14 @@ Now after rebuilding the mod and copying the exports folder, the animations shou
 *Skill animations in game*
 
 ## Skill icons and portraits
-Skill icons are 450×450 pix PNG images with transparency channel. The background in the skill Icon is transparent but I can't remember if it's ever used.
+Skill icons are 450×450 pixel PNG images with a transparency channel. The background in the skill icon is transparent, but I can't remember if it's ever used.
 
 ![Skill icon](images/skill_icon_transparency.png)\
 *Skill icons are mostly transparent*
 
-The borders of the skill icon in the game are pushed a little inward (about 35 pix margin) so the icon can get more depth. The art has a soft black half-transparent shadowy outline.
+The borders of the skill icon in the game are pushed a little inward (about 35 pixel margin) to give icons more depth. The art has a soft black semi-transparent black outline.
 
-I tried to replicate the style, but there is a couple of mistakes I noticed about my skill icons. My icons are a little too detailed and it makes them stand out. Second, I didn’t notice it at first, but other icons use a lot of geometrical broken lines, I didn't do them at all.
+There are a couple of mistakes about my skill icons. My icons are a little too detailed and it makes them stand out. Second, I didn’t notice it at first, but other icons use a lot of geometrical broken lines, I didn't do them at all.
 
 ![Skill icon drawing](images/skill_icon.png)\
 *I wanted the icons to stand out a bit so I used this peachy color*
@@ -751,7 +787,7 @@ To adjust where the target effect will be played, Bone Path field is used. It ca
 
 There is more signals in the Assets/Data/Playables/Signals for different situations but I didn't explore them.
 
-When I copied VFXs from Assets/Data/Characters/Shared/vfx_shared_prefabs, those effects were playing every time the hero appearing on screen. It was fixed after clicking on the vfx prefab and unchecking the Play On Awake option in the Inspector window.
+When I copied VFXs from Assets/Data/Characters/Shared/vfx_shared_prefabs, those effects were playing every time the hero appeared on screen. It was fixed after clicking on the vfx prefab and unchecking the Play On Awake option in the Inspector window.
 
 There are also VFXs that play during antic animations (HWM's blade shining, or PD's chemicals chemicing). I didn’t do them for my hero but I believe the assignment of these VFXs is somehow related to the Toggle Active State By Animator State Component in VFX elements in hero art_prefabs.
 
@@ -762,7 +798,7 @@ There was an issue when VFX wasn’t playing in the game after building assets. 
 
 ## Adding SFX
 
-There is some oddness to how the game handles audio. There was some discussion about it but I tuned out and decided that it is not possible to do custom audio. So all SFX will be copied from existing audio.
+There is some oddness to how the game handles audio. There was some discussion about it, but I tuned out and decided that custom audio is not possible. So all SFX will be copied from existing audio.
 
 SFX need to be connected to the RZIS files. I think that there is a limitation but I didn't experiment with it. I think that all SFX need to come from one single hero.
 
@@ -820,17 +856,17 @@ m_Chance,1,
 element_end
 ```
 
-I believe there is no way to make comments in CSV files. I used // to add some comments, and it worked until I tried to comment out whole elements. When I did that the game started glitching. It looks like the game treats these // symbols the same way as other letters. So when an entire element is commented out, the game just sees a bunch of comma separated values instead of comments and tries to parse them.
+I believe there is no way to add comments in CSV files. I used // to add some comments, and it worked until I tried to comment out entire elements. When I did that, the game began glitching. It looks like the game treats these // symbols the same as other letters, so when an entire element is commented out, the game just sees comma-separated values instead of comments and tries to parse them.
 
 ```csv
 // fake comment
 ```
 
-Editing CSV data doesn't require rebuilding the mod with the Steamworks tool. CSV files can be edited in the Exports folder and then this folder can be copied into the mod folder straight away. Editing CSV files in the mod folder directly is a bit risky because it can be accidentally replaced and changes will be lost.
+Editing CSV data doesn't require rebuilding the mod with the Steamworks tool. CSV files can be edited in the Exports folder and then copied into the mod folder. Editing CSV files in the mod folder directly is a bit risky because they can be accidentally replaced.
 
 There is an official tool that is intended to make editing CSV data easier. Personally I found that editing CSV data directly is easier. And this tool does not cover all possible situations. It will be needed to explore raw CSV data to find out how certain effects are implemented.
 
-At the same time the tool does provide an interface that makes learning CSV data easier. So I will try to explain a bit about tool too. But again this is tool is not required. This tool is a Microsoft Excel file, and it's published in [Google Drive](https://drive.google.com/drive/u/0/folders/1SlMxq3O2nuOp3P__G-0QIU748RGFIFnu?ths=true). Its called dd2_mod_data_exporter.xlsm. It specifically requires Microsoft Excel and not alternatives because it uses features exclusive to this program.
+At the same time the tool does provide an interface that makes learning CSV data easier. So I will try to explain a bit about tool too. This tool is a Microsoft Excel file, and it's published in [Google Drive](https://drive.google.com/drive/u/0/folders/1SlMxq3O2nuOp3P__G-0QIU748RGFIFnu?ths=true). Its called dd2_mod_data_exporter.xlsm. It specifically requires Microsoft Excel and not any alternative because it uses features exclusive to this program.
 
 The installation of this tool is covered in the [official guide](https://docs.google.com/document/d/1ga3FNrL3eGDRMFekLx9-RKhTDLMxPO603XzXcZa8O78/edit?usp=drive_link). Since this Excel file uses macroses, it requires some more steps after downloading.
 
@@ -841,7 +877,7 @@ I will focus on the inn item creation. The corresponding sheet looks like this:
 ![Inn item sheet](images/csv_2.png)\
 *Inn item sheet*
 
-But first I will write about some technical issues that I encountered using this tool. For some reason the export buttons were not intractable at all. No matter what I tried, they stayed out of my reach, unclickable, unselectable, unmovable. The workaround is opening the Visual Basic tool in Excel's Developer tab. Double clicking on Sheet8 (rest) opened the code. Here the button functionality can be called directly by selecting the ExportGroupedButton_Click() function and clicking on the run button on top. This will create a CSV file in a folder. This CSV file should be placed in the Exports folder so the game can find it.
+But first I will write about some technical issues that I encountered using this tool. For some reason the export buttons were completely unresponsive no matter what I did. The workaround is to open the Visual Basic tool in Excel's Developer tab. Double clicking on Sheet8 (rest) opened the code. Here the button functionality can be called directly by selecting the ExportGroupedButton_Click() function and clicking on the run button on top. This will create a CSV file in a folder. This CSV file should be placed in the Exports folder so the game can find it.
 
 ![Calling the function directly](images/csv_1.png)\
 *Calling the function directly*
@@ -882,8 +918,8 @@ The first element (**rh_example_rest_item**) has the *Item* type. Elements of th
 - **m_maxQty** field tells what is the stack size of this item.
 - ...
 - **m_numberOfTargets** field tells if this item affects one hero, two heroes, or the full party. Here it is set to 1 which means that this item will not be shared with other heroes.
-- **m_buyCostId** field tells the cost of the item. Here it says **cost_relics_32** whcih is actually an Id of another element that stores a number of relics. This element is not present in the table because it is one of the predefined elements. This is one of the ways for elements to be connected to each other. They use specialized fields and Ids to form a network of elements, and it's quite a powerful instrument.
-- **m_effectIds** field has two values. Some fields allow multiple values and some don't. Those that allow it use plural form in Ids. For example **m_tags** also allows to use multiple values. There is no practical limit on how many values a field can have.
+- **m_buyCostId** field tells the cost of the item. Here it says **cost_relics_32** which is actually an Id of another element that stores a number of relics. This element is not present in the table because it is one of the predefined elements. This is one of the ways for elements to be connected to each other. They use specialized fields and Ids to form a network of elements, and it's quite a powerful instrument.
+- **m_effectIds** field has two values. Some fields allow multiple values and some don't. Those that allow it use plural form in Ids. For example **m_tags** also allows to use multiple values. There is no practical limit to how many values a field can contain.
 
 **m_effectIds** links this element to two more elements: **rh_example_effect_add_buff_rest** and **rh_example_buff_substat_resistance_inn_start**. Both of them have the *Effect* type.
 
@@ -899,12 +935,12 @@ It doesn't mean that inn items cannot apply buffs. Applying a buff is an instant
 
 The second effect, **rh_example_effect_add_positive_quirk_hidden**, is less complicated. It adds one quirk with 100% chance. Quirks are also elements, and they can have tags the same way as Items can. Some quirks are tagged *positive*, some are tagged *meltdown*, some are tagged *pipeweed*. This second effect says that it adds a *positive* quirk, meaning it will add any quirk that has the *positive* tag.
 
-Another way to connect elements is to use the same ID. Only some element types support this sort of connection. In this example the **rh_example_buff_substat_resistance_inn_start** belongs to two elements. One is a *Buff* element, another one is an *ActorDataStats* element. I don't know why this buff needs to have two elements, why not just do one element? Connecting elements via fields allows to reuse elements in different situations. Connecting via sharing IDs does not.
+Another way to connect elements is to use the same ID. Only some element types support this sort of connection. In this example the **rh_example_buff_substat_resistance_inn_start** belongs to two elements. One is a *Buff* element, another one is an *ActorDataStats* element. I don't know why this buff needs to have two types of elements.
 
 The last element is **Inn_valley** element. *LootTable* elements have special behavior. CSV file can have multiple LootTable elements with the same ID, and the game will merge all these elements into one table. In this example, the **Inn_valley** element says that the Valley Inn will have this new item for sale with 100% chance. The game already **Inn_valley** table with lots of items for sale, but nothing will be overwritten, the game will merge these elements, extending the inn store.
 
 ![RH's example inn item](images/csv_3.png)\
-*Connection between elements*
+*Connection between elements of the example item*
 
 After executing this tool's code a CSV file appears with the following content:
 ```csv
@@ -970,7 +1006,7 @@ It can sometimes help what went wrong with the mod. It often pointed me the Ids 
 A single CSV file can add an item to the inn store, but it can't assign any graphics to it. The item icon will be a white square. To create an item with an icon, the ItemCreationTool in Darkside is needed.
 
 ![Item Creation Tool](images/sig_1.png)\
-*Settings of the ItemCreationTool*
+*Tool for item creation*
 
 The tool created “mmd_penicillin” folder in the UserMods folder. Inside there is Art folder, Resource Item, and Prefab Asset.
 
@@ -989,9 +1025,9 @@ The Resource Item was already connected to the Prefab Asset so no aditional chan
 Then I needed to write the CSV data. The tool generated a CSV file in the Exports folder. 
 
 For this item I wanted to make these effects:
-- Some chance of removing a disease.
-- Some chance of increasing disease RES for 1 region.
-- Some chance of increasing blight RES for 1 region.
+- A chance of removing a disease.
+- A chance of increasing disease RES for 1 region.
+- A chance of increasing blight RES for 1 region.
 
 In this file I deleted all elements except the Item element. The ID of the element should match the ID that was used in the ItemCreationTool. This way the game can connect CSV data with graphic data. Then I changed the effect list.
 ```csv
@@ -1013,12 +1049,12 @@ element_end
 
 Right now this is a generic inn item that targets the whole party and has three effects that aren't yet defined. The official tool does not provide an example how to make the item signature.
 
-This is where exploring raw CSV files is required. There is a lot of CSV files in this folder:
+This is where exploring raw CSV files is required. There are many CSV files in this folder:
 ```
 C:\Program Files (x86)\Steam\steamapps\common\Darkest Dungeon® II\Darkest Dungeon II_Data\StreamingAssets\Excel
 ```
 
-I needed to search for a signature item to see how it should be done. Since there is a lot of files, some additional program that allows searching through multiple files is required. One such program is Visual Studio Code.
+I needed to search for a signature item to see how it should be done. Since there are many files, some additional program that allows searching through multiple files is required. One such program is Visual Studio Code.
 
 I launched this program, opened the Excel folder in it, and searched for "remedy", because PG's signature item is called Experimental Remedy. It gave me quite a long list of entries.
 
@@ -1535,7 +1571,7 @@ effects,stress_damage_1_infernal_killing_Blow,
 element_end
 ```
 
-The Virtuoso's Finale removes 1 Stress from allies when an enemy is killed. The Killer's Glow adds 1 Stress to allies when an enemy is killed. Their *ActorEffectTrigger* elements are very similar except for one line: the Finale has *m_ActorEffectTriggerSourceType* set to *performer*, and The Killer's Glow has it set to *target*. I can't think of any explanation other than that *target* and *performer* are the same in this situation. There is also that long weird field in the Finale skill but I doubt that it has anything to do with this situation.
+The Virtuoso's Finale removes 1 Stress from allies when an enemy is killed. The Killer's Glow adds 1 Stress to allies when an enemy is killed. Their *ActorEffectTrigger* elements are very similar except for one line: the Finale has *m_ActorEffectTriggerSourceType* set to *performer*, and The Killer's Glow has it set to *target*. I can't think of any explanation other than that *target* and *performer* are the same in this situation. There is also that long weird field in the Finale skill, but I doubt that it has anything to do with this situation.
 
 Now about *m_NeighborActorEffectTriggerSourceType*. Not a lot of elements have this field. One of them was very interesting to me. The Flagellant's Fester skill clears a corpse and applies blight to its neighbors. Here is the definition of the corresponding *ActorEffectTrigger*:
 ```csv
@@ -1679,7 +1715,7 @@ There is two ways to make a trinket affect specific skills. GR's His Rings trink
 ![His Rings trinket description](images/trinket_6.png)\
 *His Rings trinket*
 
-Here is a shortened definition of this trinket. I didn't include Cost elements and irrelevant buffs.
+Here is a shortened definition of this trinket. I didn't include Cost elements or irrelevant buffs.
 
 ```csv
 element_start,trinket_hero_gr_his_rings,Item
@@ -1754,7 +1790,7 @@ One way to limit a buff to a specific skill is to use the *m_ConditionId* field 
 
 The second way to do this is to use the *all_conditions* field in *Effect* elements. This is used in *Effect* elements that are connected to the **trinket_gr_his_rings_03** buff.
 
-I don't know what is the difference between these two ways. I'm inclined to believe that they are the same.
+I don't know what is the difference between these two ways. I didn't test it.
 
 ## Skills
 
@@ -2277,7 +2313,7 @@ It is not a complete solution to the merging problem because every time I used t
 
 ## Localization
 
-### Synthax
+### Syntax
 
 The localization file in the Exports folder allows to set names to heroes, skills, items, etc. It also stores barks, token descriptions, skill tooltip adjustments and other stuff.
 
@@ -2490,7 +2526,7 @@ story_bark_valley_stagecoach_item_01
 story_bark_valley_supply_01
 story_bark_valley_trinket_01
 ```
-All barks can be changed this way, not only the ones that have no fallbacks. And there is a lot of barks.
+All barks can be changed this way, not only the ones that have no fallbacks. And there are many barks.
 
 ![Typo?](images/loc_1.png)\
 *Is it me or there is a typo? Maybe it's an old file, but it might've been unnoticed because this bark does have a fallback version*
@@ -3044,7 +3080,7 @@ bark_node_exit_success_storyhero+herostory_MMD_01=I believed that these were jus
 
 story_bark_herostory_MMD_02=I was not aware of my actions back then.
 hero_story_mmd_chapter_title_1=Ambushed
-bark_node_exit_success_storyhero+herostory_MMD_02=My impatience almost kiled me.
+bark_node_exit_success_storyhero+herostory_MMD_02=My impatience almost killed me.
 bark_node_exit_failure_storyhero+herostory_MMD_02=I did nothing wrong!
 
 story_bark_herostory_MMD_03=The universe is a cruel, uncaring void.
@@ -3223,6 +3259,10 @@ element_end
 
 Camp animations in Kingdoms are just inn animations, they don't require any additional setup.
 
+## Publishing the mod
+
+
+
 ## A summoning skill
 
 When the idea came to my head I wanted to base a summon on militia. It sounded simple enough, there were already an item that summoned them and I think they are the only friendly summons. I tested if the militia worked in the Confessions, added flare to Valley Inn’s stock, equipped it, and it worked. So I knew that summoning was possible.
@@ -3261,12 +3301,12 @@ But then there was something that bothered me. If I open a character sheet while
 ![Broken sheet](images/summon_5.png)\
 *No stats, no quirks, no names. Metamorph was replaced with “actor”. Everything was purple instead of blue*
 
-I spent a lot of time trying to fix it. Technically the summon is here and it can use skills, everything kind of works, but just I couldn’t leave this unattended. What I tried:
+I spent a lot of time trying to fix this. Technically the summon is here and it can use skills, everything kind of works, but just I couldn’t leave this unattended. What I tried:
 1. Block the sheet menu. If it doesn’t appear on a screen then there is no problem, I thought. Militia already have this quirk. Unfortunately I couldn’t replicate that. I couldn't find a setting to control this behaviour.
 2. Turn the summon into a whole hero class. I didn't try much with this approach because I was skeptical about it. Even if it would fix the sheet issue, it would bring other problems (removing it from roster and merging the mods). I tried to merge to hero mods in a couple of ways but resigned quickly. It might be possible, it might even be the best way to create a summon, but I wasn't inspired about it.
-3. I had a genius idea to remove the summon’s turns and make it act only with Act Outs. Technically banter is Act Out, so it can be triggered without relationships. First I tested this idea on my main hero. I added him a custom quirk, attached an Act Out skill on it, set the probability of it happening to 100%, watched it happen. My hero did really act out and attacked enemies while having no relationships. The problem here however is that Act Outs are tied to relationships and quirks. And this corpse summon can’t have quirks. Maybe I didn't try enoguh.
+3. I had a genius idea to remove the summon’s turns and make it act only with Act Outs. Technically banter is Act Out, so it can be triggered without relationships. First I tested this idea on my main hero. I added him a custom quirk, attached an Act Out skill on it, set the probability of it happening to 100%, watched it happen. My hero did really act out and attacked enemies while having no relationships. The problem here however is that Act Outs are tied to relationships and quirks. And this corpse summon can’t have quirks. Maybe I didn't try enough.
 
-While it seemed to be impossible to add quirks, I was able to add tokens easily. So I decided to use riposte instead. I copied a riposte RZIS file, configured it, and attached it to the resource file. Then I edited CSV data to give summons riposte tokens every round.
+While it seemed to be impossible to add quirks, I was able to add tokens. So I decided to use riposte instead. I copied a riposte RZIS file, configured it, and attached it to the resource file. Then I edited CSV data to give summons riposte tokens every round.
 
 I will describe CSV data of my summon. First I removed the corpse tag because it was breaking the game. I put an *ally* tag instead. I also deleted *m_ClearContainerTypes*, *m_IgnoredSkillAttributeTypes* and *m_SkillBlockId* fields. I set *m_IsTickTriggerValid* field to true because everything that can act has this set to *True*. I don't know what these fields do though.
 ```csv
@@ -3332,7 +3372,7 @@ add_stats,8,4,0.15,
 element_end
 ```
 
-Then there is the riposte skill data
+The riposte skill data:
 ```csv
 element_start,mmd_corpse_riposte,ActorDataSkill
 m_IsFriendly,False,
@@ -3379,12 +3419,12 @@ Creating multiple summons is also possible. It is enough to duplicate the Resour
 ![Summon variation](images/summon_6.png)\
 *I summoned both versions. One version has higher HP. I added the ability to generate block to one version and the ability to generate deaths door armor to the other one. They both worked as expected.*
 
-I guess it is possible to set the spawn animation. For that a Playable file should be attached to the Spawn On Create Timeline field in the Resource Actor file. And the checkbox above it should be checked. But when the spawn animation is complete, the summon froze instead of switching to an idle pose. Unfortunately I didn't have enough brainpower to fix this the right way.
+I guess it is possible to set the spawn animation. For that a Playable file should be attached to the Spawn On Create Timeline field in the Resource Actor file. And the checkbox above it should be checked. But when the spawn animation is complete, the summon froze instead of switching to an idle pose. Unfortunately I didn't have enough brainpower to fix this correctly.
 
 ![Animation on spawn](images/summon_7.png)\
 *Animation on spawn. I believe there is no example in Darkside that uses this option*
 
-Instead I used a different solution. In the prefab file I created an empty object, attached a Playable Director component to it and set it to play my spawn animation. It worked. But it only worked because this summon is a corpse that has no turns. If my summon was a hero, then the spawn animation would play every time hero sheet is opened.
+Instead I used a different solution. In the prefab file I created an empty object, attached a Playable Director component to it and set it to play my spawn animation. It worked. But it worked only because this summon is a corpse that has no turns. If my summon was a hero, then the spawn animation would play every time hero sheet is opened.
 
 ## CSV data III
 
@@ -3555,7 +3595,7 @@ Now that's it, I have nothing else to write about.
 
 This process was a lot of fun. I remember how happy I was when I imported my 3D model and saw it in the game for the first time, even though it was just a T-pose. I felt so smart when I created skills that I didn’t even know were possible, and when I made the Shrine of Reflection work, even if some workarounds were needed.
 
-I liked the meditative process of 3D modelling, texturing, drawing, animating, coding CSV (that is how it felt for me), figuring out how the game works, polishing things.
+I loved the process of 3D modeling, texturing, drawing, animating, editing CSV data, figuring out how the game works, polishing things.
 
 - Day 1: trying to come up with the idea.
 - Day 2: drew a concept art.
