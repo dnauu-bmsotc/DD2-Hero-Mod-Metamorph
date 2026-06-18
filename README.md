@@ -14,7 +14,7 @@ Table of contents:
 - [Intro](#intro)
     - [What I couldn't do](#what-i-couldnt-do)
     - [Amount of work](#amount-of-work)
-- [3D modelling, animating](#3d-modelling-animating)
+- [3D modeling, animating](#3d-modeling-animating)
 - [Texturing](#texturing)
 - [Downloading the Mod Kit](#downloading-the-mod-kit)
 - [Creating a placeholder hero](#creating-a-placeholder-hero)
@@ -97,7 +97,7 @@ Creating a new hero requires:
 - Dealing with technical issues
 
 I believe the process can be somewhat parallelized. After a general idea of the hero is formed, the process can be branched into three areas that aren't very intersected:
-1. 3D modelling and animating
+1. 3D modeling and animating
 2. Creating and balancing effects of skills and items
 3. Writing the story and barks
 
@@ -112,7 +112,7 @@ No paid software is required, but it might make things easier. I used Blender fo
 
 There is an official tool that can make creating trinkets, combat items, inn items, etc. a bit easier. This is a Microsoft Excel sheet and it requires specifically Microsoft Excel because it uses some of its exclusive features. But later, when I learned more about how the game works, this tool appeared optional to me.
 
-## 3D modelling, animating
+## 3D modeling, animating
 
 A new hero requires new mesh, textures and animations. DD2 Modding Tools provide examples of those. When I tried to import one of the models to Blender, I saw a tiny figure near a big bone.
 
@@ -123,7 +123,7 @@ HWM’s model has about 4300 vertices and 5200 faces.
 ![HWM imported to Blender](images/fbx_maya.png)\
 *Armature gains weird scale in Blender*
 
-3D modelling required a lot more learning than I expected, but there are many tutorials. Out of many ways to create a character model, I wanted to try sculpting. I made a mistake by not making the sculpt detailed enough and by not making it in T-pose. HWM's model uses Smooth Shading with Sharp seams. I don't know if it has any effect in the game, but I did the same because it looked good.
+3D modeling required a lot more learning than I expected, but there are many tutorials. Out of many ways to create a character model, I wanted to try sculpting. I made a mistake by not making the sculpt detailed enough and by not making it in T-pose. HWM's model uses Smooth Shading with Sharp seams. I don't know if it has any effect in the game, but I did the same because it looked good.
 
 ![Sculpting steps](images/concept14.png)\
 *Coming up with concept and creating 3D models*
@@ -160,7 +160,7 @@ At first I tried to rig my model myself, but it turned out bad, so I used the Ri
 
 There are many ways of simulating clothes in Blender: Cloth physics modifier, complex bone constraints (PierrickPicaut's tutorials on YouTube), add-ons like WIGGLE2 or Jiggle Physics. But every tool was falling apart in my hands. I scrapped it all and decided to animate clothes manually.
 
-One Blender file can store multiple animations as Actions. Actions can be added and edited in the Action Editor. Every Action need to be protected with Fake User checkmark, otherwise it might get deleted on exiting Blender.
+One Blender file can store multiple animations as Actions. Actions can be added and edited in the Action Editor. Every Action need to be protected with Fake User check mark, otherwise it might get deleted on exiting Blender.
 
 With the default export settings the hero faces the right side in the game (Blender’s negative Y direction in the game will be directed to the right side in the game). In other words, Blender’s Suzanne Monkey will look to the enemies’ side in the game.
 
@@ -178,13 +178,13 @@ List of animations:
 - Character sheet animation.
 - Embark animation (after leaving an inn).
 - Idle battle animation (can be more than 10s).
-- Entering deathsdoor.
-- Idle deathsdoor.
+- Entering Death’s Door.
+- Idle Death’s Door.
 - Inn item focus animation (about 1s).
 - Move rank animation and recover animation (both less than 1s). Move forward and move backward can share the same animations (HWM uses the same animations for moving back or forth).
 - Bark animations: bark negative, bark non-negative, listening to barks. I don’t remember them in the game. Maybe I just didn’t pay enough attention.
 - Recovering from being hit.
-- Recovering from dodge (few heros have this animation).
+- Recovering from dodge (a few heroes have this animation).
 - Recovering from being buffed.
 
 List of poses:
@@ -208,7 +208,7 @@ Reaching that point I had enough confidence to figure out how to fix the broken 
 
 ## Texturing
 
-Hero and weapon models only need two textures. One is for colors (col) and another is for RH’s signature black strokes (ink).cBoth ink and color hero textures have 4096×4096 pixel size. Weapons have varied texture sizes. GR’s pickaxe textures are 1024×1024 pixels, and her dagger textures are 512×512 pixels. The ink textures are black & red instead of black & white for some reason. The red color is pure red ({255, 0, 0} in RGB).
+Hero and weapon models only need two textures. One is for colors (col) and another is for RH’s signature black strokes (ink). Both ink and color hero textures have 4096×4096 pixel size. Weapons have varied texture sizes. GR’s pickaxe textures are 1024×1024 pixels, and her dagger textures are 512×512 pixels. The ink textures are black & red instead of black & white for some reason. The red color is pure red ({255, 0, 0} in RGB).
 
 I marked seams for UV unwrapping, didn't do the checkerboard testing even though I should have. The purpose of this testing is to ensure that every part of the model gets the appropriate texture resolution.
 
@@ -256,7 +256,7 @@ After that I was able to open the DD2 Mod Tools. Unity greeted me with a bunch w
 
 The Unity console greeted me less hospitably, there was a bunch of errors. But I could not be bothered with them. To learn the tools followed some examples from the official guide, which is unfortunately quite short, but I was happy that it existed.
 
-Sometimes when I accidentally modified files outside my mod folder, the mod builder started glitching and produced less files than ususal. It can be fixed with the Verify Integrity function in Steam.
+Sometimes when I accidentally modified files outside my mod folder, the mod builder started glitching and produced less files than usual. It can be fixed with the Verify Integrity function in Steam.
 
 ## Creating a placeholder hero
 
@@ -299,7 +299,7 @@ If there is no mods folder, create it. It will then be like this:
 ```
 C:\Program Files (x86)\Steam\steamapps\common\Darkest Dungeon® II\Darkest Dungeon II_Data\StreamingAssets\mods\egg_export
 ```
-After that a new hero will be availabe at the Crossroads.
+After that a new hero will be available at the Crossroads.
 
 ![Placeholder hero](images/egg_3.png)\
 *Second Highwayman. The text is blue but it's just an indicator for missing localization.*
@@ -412,7 +412,7 @@ Just a note. My model in Blender has adequate dimensions. The scale is close to 
 
 Some visual effects like stress damage/heal crowns and buff/debuff texts are connected to anchors in the model. I didn't delete the HWM's model from the prefab to access these anchors. I found five anchors: hit_head, hit_projectile, hit_body, hit_root, stamp_loc, and pop_text_loc.
 
-I moved hit_head to the bone that controls my hero's head. Then I moved hit_projectile and hit_body to a bone near the center of my hero. The other three anchors I moved to the root bone.
+I moved hit_head to the bone that controls my hero's head. and hit_projectile with hit_body to a bone near the center of my hero. The other three anchors I moved to the root bone.
 
 ![Moving Anchors](images/egg_18.png)\
 *On this image my model is on the right side but it's because the list is too long*
@@ -452,7 +452,7 @@ Since the model was rotated, the anchors in the armature became displaced. Inver
 
 This is a very weird solution, and I most certainly did something wrong during model export.
 
-Moerover, this is not a complete fix. Hovering over the icon in the turn order highlighted my hero stronger than other heroes.
+Moreover, this is not a complete fix. Hovering over the icon in the turn order highlighted my hero stronger than other heroes.
 
 ![Strong highlight in battles](images/egg_25.png)\
 *Strong highlight in battles*
@@ -481,7 +481,7 @@ In Darkside animation files have various amount of clips.
 
 I think there is no difference in Unity whether there is one FBX file that has all animations in it or if there are fifty FBX files each containing one animation. At first, I wanted to export one file with all animations, but something in Blender went not my way and my exported animations were broken. Some animation clips were duplicated, and some of them were stuck in T-pose. This wasn't a Unity problem because when I opened the FBX files in Blender, they were broken too. For unknown to me reasons issues disappeared when I exported each Action into a separate FBX file.
 
-Exporting a single animation can be dony by unchecking the NLA Strips and All Actions fields in export settings.
+Exporting a single animation can be done by unchecking the NLA Strips and All Actions fields in export settings.
 
 ![Animation export settings](images/egg_29.png)\
 *Animation export settings*
@@ -537,7 +537,7 @@ There are many nodes:
 - there are 14 nodes related to skills, I will write about skill animations separately because they require additional steps
 
 The Idle node is expandable and reveals some more nodes:
-- idle_neutral is an idle battle animstion.
+- idle_neutral is an idle battle animation.
 - deaths_door_antic is an animation when a hero enters Death's Door state.
 - deaths_door_idle is an idle animation when a hero has 0 HP.
 
@@ -598,7 +598,7 @@ element_end
 
 I would guess that Override Name field exists so skills can share antic and idle animations without adding extra nodes. It makes more sense with Path skills, because each path skill is a separate skill with a separate Resource file.
 
-The F/playables folder also has files for riposte and agressive act out (backstabbing or making a following up attack). It is better to modify the existing riposte file and not replacing it because when I tried to do that the game glitched. The act out file was more lenient. Both of these files are attachable to the hero Resource file same as skill Playables, just in a different section.
+The F/playables folder also has files for riposte and aggressive act out (backstabbing or making a following up attack). It is better to modify the existing riposte file and not replacing it because when I tried to do that the game glitched. The act out file was more lenient. Both of these files are attachable to the hero Resource file same as skill Playables, just in a different section.
 
 To add more skill nodes to the animation controller, press RMB and create an empty state for an antic animation. Then RMB on the Any State node, make transition to the new node. Click on the transition and set the condition to select_skill_[hero id]_[skill name].
 
@@ -650,7 +650,7 @@ There are a couple of mistakes about my skill icons. My icons are a little too d
 If the icon is big enough to overlap the frame, transparency might look weird.
 
 ![My skill icon](images/skill_icon_transparency_2.png)\
-*The frame is viible under the mushroom*
+*The frame is visible under the mushroom*
 
 In Darkside skill icons are stored in the F/icons folder. The image type needs to be changed to Sprite before it can be used in RZIS files.
 
@@ -664,7 +664,7 @@ The portrait images are stored in the F/portraits folder and in F/shared folder.
 These sprites need to be connected to the hero Resource Actor file. If they are not connected to this file, the game will show white squares instead.
 
 ![Adding portraits](images/portraits.png)\
-*There is a column to the right that is filled with < none >s. I believe this is where the Sprite Atlas thing can be applied. But the UI is confusing so I didn’t do it*
+*There is a column to the right that is filled with ```<none>```s. I believe this is where the Sprite Atlas thing can be applied. But the UI is confusing so I didn’t do it*
 
 Reference Sprite is the base image, Glow Reference Sprite is the misty aura around the hero. Highlight Reference is the image with harsh and clean rim light. The misty aura animation is handled by the game, the image by itself is static.
 
@@ -797,7 +797,7 @@ There is an official tool that is intended to make editing CSV data easier. Pers
 
 At the same time the tool does provide an interface that makes learning CSV data easier. So I will try to explain a bit about tool too. This tool is a Microsoft Excel file, and it's published in [Google Drive](https://drive.google.com/drive/u/0/folders/1SlMxq3O2nuOp3P__G-0QIU748RGFIFnu?ths=true). Its called dd2_mod_data_exporter.xlsm. It specifically requires Microsoft Excel and not any alternative because it uses features exclusive to this program.
 
-The installation of this tool is covered in the [official guide](https://docs.google.com/document/d/1ga3FNrL3eGDRMFekLx9-RKhTDLMxPO603XzXcZa8O78/edit?usp=drive_link). Since this Excel file uses macroses, it requires some more steps after downloading.
+The installation of this tool is covered in the [official guide](https://docs.google.com/document/d/1ga3FNrL3eGDRMFekLx9-RKhTDLMxPO603XzXcZa8O78/edit?usp=drive_link). Since this Excel file uses macros, it requires some more steps after downloading.
 
 This Excel book has multiple sheets for different items: trinket, rest (inn item), combat (combat item), sc_general (stagecoach cargo), sc_pet, memory (Altar of Hope memories).
 
@@ -811,7 +811,7 @@ But first I will write about some technical issues that I encountered using this
 ![Calling the function directly](images/csv_1.png)\
 *Calling the function directly*
 
-One more technical trouble emerged because I live in a country that uses comma as the decimal separator (probabilites are written in decimal form here). This is a problem because the game uses commas to separate different values in CSV files. There is a setting in Excel that is supposed to fix this behaviour but it didn't work for me I don't know why. This can be fixed by finding this line in the code:
+One more technical trouble emerged because I live in a country that uses comma as the decimal separator (probabilities are written in decimal form here). This is a problem because the game uses commas to separate different values in CSV files. There is a setting in Excel that is supposed to fix this behaviour but it didn't work for me I don't know why. This can be fixed by finding this line in the code:
 ```vba
 csvValue = csvValue & exportCell
 ```
@@ -999,7 +999,7 @@ There is also a VSC extension that is made for highlighting DD2 CSV Data: [DD2 C
 
 Five files contained that word. These files are designated for effect definitions, buff definitions, item definitions, loot chances, and run goal rewards.
 
-Item definitions are located in the item_data_export.Group.csv file. I clicked on the first entry from this file and it showed me the needed element.
+Item definitions are located in the ```item_data_export.Group.csv``` file. I clicked on the first entry from this file and it showed me the needed element.
 
 There were three important lines:
 ```
@@ -1262,7 +1262,7 @@ element_end
 ```
 HWM has seven buffs in his *ActorDataExternalBuffs* element. They all have duration set to infinity, and they all are related to the Altar of Hope. The last buff looks different, but it's a buff that says that every time an inn is reached, HWM will loot his signature item with 5% chance.
 
-Many trinkets apply effects on turn start, on turn end, on battle start, on round start, on round end, on spawn, on reaching an inn, on being heit, etc. For these effects an *ActorDataEffects* element is required. For example, the Sacred Scribblings trinket can apply a vulnerability token on turn start.
+Many trinkets apply effects on turn start, on turn end, on battle start, on round start, on round end, on spawn, on reaching an inn, on being hit, etc. For these effects an *ActorDataEffects* element is required. For example, the Sacred Scribblings trinket can apply a vulnerability token on turn start.
 
 ![Sacred Scribblings trinket description](images/trinket_2.png)\
 *Sacred Scribblings trinket*
@@ -1323,7 +1323,7 @@ element_end
 
 ```
 
-Here the *Item* element connects to two buffs thgrough an *ActorDataExternalBuffs* element. The first buff increases burn duration dealt it does that using an *ActorDataStats* element. The second buff uses an *ActorDataEffects* element to apply effects on start of every turn.
+Here the *Item* element connects to two buffs through an *ActorDataExternalBuffs* element. The first buff increases burn duration dealt it does that using an *ActorDataStats* element. The second buff uses an *ActorDataEffects* element to apply effects on start of every turn.
 
 *m_showValue* field tells if the tooltip should show how many tokens will be applied. Here it is set to False, which means the tooltip will say "vulnerability token" instead of "1 vulnerability token".
 
@@ -1353,7 +1353,7 @@ Here the *Item* element connects to two buffs thgrough an *ActorDataExternalBuff
 
 Sometimes even this is not enough. The *ActorEffectTrigger* type provides even more customizability. This element allows to:
 - affect hero's neighbors or target's neighbors
-- apply effects on allies or enemies on hero's dath
+- apply effects on allies or enemies on hero's death
 - apply effects to random targets
 - apply effects on DOT/debuff resist
 - copying tokens from a hero to others (the opposite is possible without *ActorEffectTrigger* elements)
@@ -1435,7 +1435,7 @@ element_end
 
 ```
 
-*ActorEffectTrigger* elements are connected to *ActorDataEffects* through the *actor_effect_triggers* field. Here the *ActorEffectTrigger* aplies an effect to one neighbor in front of the hero that bears the trinket.
+*ActorEffectTrigger* elements are connected to *ActorDataEffects* through the *actor_effect_triggers* field. Here the *ActorEffectTrigger* applies an effect to one neighbor in front of the hero that bears the trinket.
 
 I am quite confused about *ActorEffectTrigger* elements. I will write how I understand them but it is probably wrong. I guess the general idea is this:
 - *m_ActorEffectType* tells when effects are going to be applied.
@@ -1460,7 +1460,7 @@ But it gets weird in details.
         - *m_NeighborFrontCount*: number of neighbors in front of the target or the performer.
         - *m_NeighborBackCount*: number of neighbors behind the target or the performer.
 - *m_IncludeSourceActor* tells if the target or the performer should get effects too.
-- *m_ActorCount*: number of heroes/monsters to be affected. If this number is less than the number of heroes/monsters that previous fields stated, then effecs are applied randomly to no more than to *m_ActorCount* heroes/monsters.
+- *m_ActorCount*: number of heroes/monsters to be affected. If this number is less than the number of heroes/monsters that previous fields stated, then effects are applied randomly to no more than to *m_ActorCount* heroes/monsters.
 - *m_UseActorDataEffectsConditionCalculationInput*. I have no idea what this does, didn't even try to understand it.
 
 I will show some examples of skills and buffs that use *ActorEffectTrigger* elements.
@@ -1538,7 +1538,7 @@ What I expected: the second skill (modified) would be resisted by both neighbors
 
 But what happened is both skills gave the same result: the Woodsman resisted Blight and the Widow was afflicted, which meant that in both cases hero's Blight RES Piercing was accounted for. This left me confused. I don't believe that this has something to do with tracing of who inflicted what, because the Asprant's Burning Stars skill inverts direction of the copy effect.
 
-There is one more confusing *ActorEffectTrigger* element. It isn't so unclear as it is just complicated though. The Tribecaller enemy from K1 has a passive: when an adjacent ally is hit, the Tribecaller gets 1 Berserk token.
+There is one more confusing *ActorEffectTrigger* element. It isn't so unclear as it is just complicated though. The Tribecaller enemy from K1 has a passive: when an adjacent ally is hit, the Tribecaller gets one Berserk token.
 
 The problem here is that this *on_hit_as_target_to_target* event is not actually triggered on the Tribecaller when an ally is hit. This event can only be triggered when the bearer of the buff is hit, it doesn't care for allies.
 
@@ -1593,7 +1593,7 @@ Some trinkets (like Cursed Coin or Hag's Hoard) have some kind of scaling of the
 ![Cursed Coin trinket description](images/trinket_7.png)\
 *Cursed Coin trinket*
 
-It looks like it is achieved through *Condition* elements. If a condition element is set to *GREATER_THAN*, *GREATER_THAN_OR_EQUAL*, *LESS_THAN*, *LESS_THAN_OR_EQUAL*, *EQUAL*, or *BOOL*, then the effect will be aplied at max once. But with the *MULTIPLE* value it is different.
+It looks like it is achieved through *Condition* elements. If a condition element is set to *GREATER_THAN*, *GREATER_THAN_OR_EQUAL*, *LESS_THAN*, *LESS_THAN_OR_EQUAL*, *EQUAL*, or *BOOL*, then the effect will be applied at max once. But with the *MULTIPLE* value it is different.
 
 ```csv
 element_start,trinket_hwy_cursed_coin_01,Buff
@@ -1630,7 +1630,7 @@ In each Prefab file I added new sprites, and then connected each Resource Item t
 
 All my CSV data is stored in one file so the trinket CSV data also went in that file.
 
-Making a trinket accessable to only one class is done this way:
+Making a trinket accessible to only one class is done this way:
 ```csv
 element_start,trinket_hero_hwy_cursed_coin,Item
 m_type,trinket,
@@ -1840,7 +1840,7 @@ Skills can apply buffs in a similar way the inn items do. Skills need intermedia
 ![Absinthe description](images/path_4.png)\
 *Absinthe skill*
 
-Here's the definitin of the Venomdrop's Absinthe skill:
+Here's the definition of the Venomdrop's Absinthe skill:
 
 ```csv
 element_start,gr_absinthe_p3,ActorDataSkill
@@ -2255,7 +2255,7 @@ C:\Program Files (x86)\Steam\steamapps\common\Darkest Dungeon® II\Darkest Dunge
 
 I didn't translate my mod into any other language but by the look in the Localization/Poedit/ folder I guess that it can be done using Poedit software.
 
-Localization files use different synthax than CSV files. Every entry in localization files is one line and they have structure similar to this:
+Localization files use different syntax than CSV files. Every entry in localization files is one line and they have structure similar to this:
 ```
 item_translation_id=Item's name on screen
 ```
@@ -2270,7 +2270,7 @@ If something needs to be written in multiple lines, `\n` is used:
 actor_verbose_description_mmd=“Defences crumble as the spores\nfill the air.”
 ```
 
-Text can be colored by using this synthax:
+Text can be colored by using this syntax:
 ```
 actor_class_mmd_corpse=<color=#{deathdoor}>Parasitic Form</color>
 ```
@@ -2461,10 +2461,7 @@ story_bark_valley_stagecoach_item_01
 story_bark_valley_supply_01
 story_bark_valley_trinket_01
 ```
-All barks can be changed this way, not only the ones that have no fallbacks. And there are many barks.
-
-![Typo?](images/loc_1.png)\
-*Is it me or there is a typo? Maybe it's an old file, but it might've been unnoticed because this bark does have a fallback version*
+All barks can be changed this way, not only the ones that have no fallbacks. And there are many many barks.
 
 ### Skill localization
 
@@ -2483,13 +2480,13 @@ I will explain how I fixed some of my skills.
 ![Wrong tooltip 1](images/loc_2.png)\
 *This tooltip misses a rank condition on the second line (this skill has the same effect for enemies and allies). Skill tooltips often break when a skill has multiple conditions*
 
-Since there is no blue text apart from the skill name, a deeper dive into localization synthax is required. The rules for adjusting tooltips are written in the beginning of this file:
+Since there is no blue text apart from the skill name, a deeper dive into localization syntax is required. The rules for adjusting tooltips are written in the beginning of this file:
 ```
 C:\Program Files (x86)\Steam\steamapps\common\Darkest Dungeon® II\Darkest Dungeon II_Data\StreamingAssets/Localization/Sources/hero_skill_hardcode_tooltips.txt.
 ```
 These rules explain how to get the localization Ids of skills, effects, buffs, conditions, etc.
 
-| Purpose | Synthax |
+| Purpose | Syntax |
 | --- | --- |
 | ENTIRE Effect List | <span style="white-space: nowrap;">effect_skill_[ActorDataSkill ID]_[ActorDataEffectType]_override=TEXT</span> |
 | Effect | <span style="white-space: nowrap;">effect_skill_[EffectDefinition ID]_override=TEXT</span> |
@@ -3167,7 +3164,7 @@ skills,flg_punish,flg_lash_gift,flg_redeem,flg_rain_of_sorrows,flg_suffer,
 element_end
 ```
 
-Hero upgrades in Kingdoms work in a way similar to how they work in the Altar of Hope. These upgrades are buffs that are attached to a hero through a *ActorDataExternalBuffs* element and their unlocking condition is specified using an *m_UnlockId* field. This time, however, *Unlock* elements shouldn't be excplicitly defined.
+Hero upgrades in Kingdoms work in a way similar to how they work in the Altar of Hope. These upgrades are buffs that are attached to a hero through a *ActorDataExternalBuffs* element and their unlocking condition is specified using an *m_UnlockId* field. This time, however, *Unlock* elements shouldn't be explicitly defined.
 
 ```csv
 element_start,highwayman,ActorDataExternalBuffs
@@ -3228,7 +3225,7 @@ But then there was something else that bothered me. Opening character sheet whil
 *No stats, no quirks, no names. Metamorph was replaced with “actor”. Everything was purple instead of blue*
 
 Technically the summon is here and it can use skills, everything kind of works, but just I couldn’t leave this unattended. What I tried:
-1. Block the sheet menu. If it doesn’t appear on a screen then there is no problem. Militia already have this quirk. Unfortunately I couldn't find a setting to control this behaviour.
+1. Block the sheet menu. If it doesn’t appear on a screen then there is no problem. Militia already have this quirk. Unfortunately I couldn't find a setting to control this behavior.
 2. Turn the summon into a whole hero class. I didn't try much with this approach because I was skeptical about it. Even if it would fix the sheet issue, it would bring other problems (removing it from roster and merging the mods). I tried to merge to hero mods in a couple of ways but resigned quickly. It might be possible, it might even be the best way to create a summon, but I wasn't inspired about it.
 3. I had a genius idea to remove the summon’s turns and make it act only with Act Outs. Technically banter is Act Out, so it can be triggered without relationships. First I tested this idea on my main hero. I added him a custom quirk, attached an Act Out skill on it, set the probability of it happening to 100%, watched it happen. My hero did really act out and attacked enemies while having no relationships. The problem here however is that Act Outs are tied to relationships and quirks. And this corpse summon can’t have quirks. Maybe I didn't try enough.
 
@@ -3345,7 +3342,7 @@ element_end
 Creating multiple summons is also possible. It is enough to duplicate the Resource Actor file, rename it, duplicate CSV data and change Ids.
 
 ![Summon variation](images/summon_6.png)\
-*I summoned both versions. One version has higher HP. I added the ability to generate block to one version and the ability to generate deaths door armor to the other one. They both worked as expected.*
+*I summoned both versions. One version has higher HP. I added the ability to generate block to one version and the ability to generate Death’s Door Armor to the other one. They both worked as expected.*
 
 I guess it is possible to set the spawn animation. For that a Playable file should be attached to the Spawn On Create Timeline field in the Resource Actor file. And the checkbox above it should be checked. But when the spawn animation is complete, the summon froze instead of switching to an idle pose. Unfortunately I didn't have enough brainpower to fix this correctly.
 
@@ -3485,7 +3482,7 @@ Now about my skills and tokens.
 
 There is a problem with positional tokens. They aren’t applied if the enemy dies from the skill. They also aren’t applied if the target is already a corpse. Strangely, killing an enemy while they have a positional token doesn’t remove the token. If an enemy dies the token also disappears.
 
-Rank-locked token behaviour is also not very clear when an enemy takes more than one rank. I guess in situations where there is one size 2 enemy, the game treats rank-locked tokens as if there were three ranks total. So if this big enemy moves to any side, the rank token will be transfered to another enemy, even if the big enemy moved only by one rank. When a big enemy dies (a big corpse disappears), the game assigns the token to the rank closest to the front. But I didn't test it enough.
+Rank-locked token behaviour is also not very clear when an enemy takes more than one rank. I guess in situations where there is one size 2 enemy, the game treats rank-locked tokens as if there were three ranks total. So if this big enemy moves to any side, the rank token will be transferred to another enemy, even if the big enemy moved only by one rank. When a big enemy dies (a big corpse disappears), the game assigns the token to the rank closest to the front. But I didn't test it enough.
 
 This is why my Hyphae Rock skill has its limitation. When I tried to bypass it, my first idea was to replace the corpses with something else. Like one of the infernal torches transforms corpses into Carion Eaters. Unfortunately I couldn’t implement it. I think it is because when an enemy dies they kind of disappear and a corpse appears on their place and the link between them is lost and it's not possible to know what corpse to transform.
 
@@ -3497,7 +3494,7 @@ For my Disturbing Spores skill I wanted to assign positional tokens to the first
 ![Disturbing Spores skill description](images/metatoken_3.png)\
 *Disturbing Spores skill*
 
-The problem: when I tried to clear corpses and apply a positional token at the same time, the corpses were cleared but if the first rank was occupied with a corpse, then the token wouldn't be applied. It often lead to assymetric situations where only the hero's team gained a positional token. Order of effects didn't make anything different.
+The problem: when I tried to clear corpses and apply a positional token at the same time, the corpses were cleared but if the first rank was occupied with a corpse, then the token wouldn't be applied. It often lead to asymmetric situations where only the hero's team gained a positional token. Order of effects didn't make anything different.
 
 The solution was to clear corpses as a skill action and add an intermediary token that handles the application of positional tokens:
 1. Skill clears corpses.
@@ -3531,7 +3528,7 @@ I loved the process of 3D modeling, texturing, drawing, animating, editing CSV d
 - Day 2: drew a concept art.
 - Day 3: drew a signature item and trinkets, installed modding tools.
 - Day 4: watched some tutorials, created my first inn item.
-- Day 5: transformed the inn item into a signature item, started 3D modelling.
+- Day 5: transformed the inn item into a signature item, started 3D modeling.
 - Day 6: finished a mesh for the hero.
 - Day 7: created a mesh for the weapon.
 - Day 8: textured the meshes.
