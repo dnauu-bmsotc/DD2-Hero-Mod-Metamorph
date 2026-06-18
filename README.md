@@ -1,10 +1,17 @@
 # Creating a new hero class for Darkest Dungeon II
 
-I wouldn't call this a guide, I see it more as a moral support companion on the path of creating a new hero. It might help, it might make things more confusing. Before this mod, I had never created any mods for any game, so there will probably be many modding malpractices recommended because I didn't consult with anyone experienced in this. However, it can provide at least some answers and solutions to some problems that can occur while creating such a mod. Not all of these answers are correct, but at least they exist. Also English is not my first language.
+## Intro
+
+This isn't exactly a guide, rather a document about everything I experienced while creating a new hero mod. It might help, it might make things more confusing. Before this mod, I had never created any mods for any game, and I didn't consult with anyone experienced in this while creating it. However, this can at least provide some answers to some questions. Not all of these answers are correct, but at least they exist. Also English is not my first language.
+
+I will try to write as much as possible about what I was trying to do, what solutions tried, what issues encountered, what worked, what did not, what are other potential solutions that came to mind. Not all ideas were successful, but I never mean that something is not supposed to work.
+
+While I was able to transfer 3D models and animations from Blender to Darkside, this process produced lot of issues and I couldn't fix all of them. If any other guide on this topic is available, it would probably be better than what I can offer here.
+
+The strongest part of this document is probably description of CSV data. There was a lot of work done. Half of this whole narration is about explaining CSV data of various complexity.
 
 Table of contents:
 - [Intro](#intro)
-    - [What to expect from this?](#what-to-expect-from-this)
     - [What I couldn't do](#what-i-couldnt-do)
     - [Amount of work](#amount-of-work)
 - [Hero's concept](#heros-concept)
@@ -43,15 +50,13 @@ Table of contents:
 - [CSV data III](#csv-data-iii)
 - [Afterword](#afterword)
 
-## Intro
-
-Some guides about modding Darkest Dungeon 2 that I'm aware of:
+Some guides about modding Darkest Dungeon 2:
 - [A more fundamental DD2 modding guide](https://docs.google.com/document/d/1ga3FNrL3eGDRMFekLx9-RKhTDLMxPO603XzXcZa8O78/edit?usp=drive_link)
 - [Creating new path skills](https://docs.google.com/document/d/1glkTgWv5mXvleihcnBeC4FIDgf88fz8Qwjz46es6oFA/edit?tab=t.0#heading=h.1xklr55423w9)
 - [How to create a mod on Darkest Dungeon 2 that contains multiple tokens](https://docs.google.com/document/d/1FcWUTaz4nRhRtgW_haOZUEuLNB1u41Lqi03kav63f8Y/edit?tab=t.0#heading=h.c976l88xa9o)
 - [How to package a mod not for Steam Workshop](https://docs.google.com/document/d/1RYOe7yJqThgUv3s-1MlVGdBEv0dwof8zc2PVu57C-dE/edit?usp=sharing)
 
-Other new hero class mods for DD2:
+Other mods for DD2 that add new hero classes:
 - [The Omen Seeker by \*mpregs you\*, Purple, Wallimod, Crisdroid](https://steamcommunity.com/sharedfiles/filedetails/?id=3646513756)
 - [The Gunslinger by THE COLLECTOR](https://steamcommunity.com/sharedfiles/filedetails/?id=3540263153)
 - [The Cello by THE COLLECTOR](https://steamcommunity.com/sharedfiles/filedetails/?id=3483096926)
@@ -59,97 +64,54 @@ Other new hero class mods for DD2:
 - [The Houndmaster by THE COLLECTOR](https://steamcommunity.com/sharedfiles/filedetails/?id=3597158251)
 - [The Weaver by THE COLLECTOR, 大脏尾，我们走!](https://steamcommunity.com/sharedfiles/filedetails/?id=3633470434)
 
-Most of them are in the very early stages of development. The most finished one is the Omen Seeker. She was my inspiration. Often I had troubles that felt impossible to solve, but when I remembered her, I knew that my pursuits were not in vain.
+Most these mods are in early stages of development. The most finished one is the Omen Seeker. She was my inspiration. Often I had troubles that felt impossible to solve, but when I remembered her, I knew that my pursuits were not in vain.
 
 Other resources:
 - [DD2 CSV Syntax VSCode extension](https://marketplace.visualstudio.com/items?itemName=PHombie.dd2-csv-syntax)
 
-### What to expect from this?
-
-- I had never created any character before so character design is not in focus here.
-- I had no experience with Unity Editor before. DD2 uses many different functions from this engine and I will not try to explain why certain methods are chosen.
-- I am not a very skilled DD2 player.
-- I will try to write as much as I can about what I was trying to do, how I was trying to achieve things, what issues I encountered, what worked, what did not, what are other potential solutions that came to mind.
-- Not all things that I will write about were successful. But I never mean that something is not supposed to work.
-- While I was able to transfer 3D models and animations from Blender to Darkside, I encountered a lot of issues and couldn't fix all of them. If any other guide on this topic is available, it would probably be better than what I can offer here.
-- Creating a new hero does require a lot of work. But the tool provided by the developers can create a working duplicate of the Highwayman in a couple of clicks. The process of creating a hero can be incremental.
-
 ### What I couldn't do
 
-I don't think it's possible to create palettes, weapon kits, or skins for custom heroes using the official modding tools. They are limited to the vanilla heroes as of now.
+There is an official tool for creating palettes, weapon kits, and skins for heroes. But this tool right now is limited to vanilla heroes only.
 
-There also seem to be issues with custom audio. I've read that it's impossible without delving deep into tech at this moment.
+There also seem to be issues with custom audio. It doesn't seem possible without delving deep into tech at this moment.
 
-Since custom audio is unavailable, custom subtitles will not be shown either. This was a problem for the Shrine of Reflection, but I found a workaround.
+Since control over audio is limited, custom narration subtitles can't be shown on screen. This was a problem for the Shrine of Reflection, but there is a workaround: narration can be conveyed by creating custom enemies with text instead of 3D models.
 
 ### Amount of work
 
 Creating a new hero requires:
-- An idea of the new class (appearance, backstory, skills).
-- 3D models for the hero and the weapon (meshes).
-- Preparing them for animation (retopology, rigging).
-- Textures.
-- About 20 short (1-3s) animations.
-- About 20 static poses.
-- A couple of long (about 10s) animations (battle idle and hero sheet).
-- Small UI portraits.
-- Bigger portraits for the Shrine of Reflection and Story Choices.
-- 11 Skill icons.
-- Skill gameplay effects for different paths.
-- Visual effects for skills.
-- Three hero trinkets: icons and effects.
-- Signature inn item: icon and effect.
-- Backstory narration, barks.
-- Custom battles for the Shrine of Reflection.
-- Dealing with technical issues.
+- 3D models for the hero and the weapon (meshes)
+- Preparing models for animation (retopology, rigging)
+- Textures
+- About 20 short (1-3s) animations
+- About 20 static poses
+- A couple of long (about 10s) animations (battle idle and hero sheet)
+- VFX for animations
+- Small UI portraits
+- Bigger portraits for the Shrine of Reflection and Story Choices
+- 11 skill icons (450x450 pixels)
+- Skill effects for different paths
+- Three hero trinkets: icons (512x512 pixels) and effects
+- A signature inn item: an icon (512x512 pixels) and effects
+- Hero story, barks
+- Custom battles for the Shrine of Reflection
+- Dealing with technical issues
 
-This is a diverse list. I believe the process can be somewhat parallelized. After a general idea of the hero is formed, the process can be branched into three areas that aren't very intertwined:
-1. 3D modelling and animating.
-2. Creating and balancing skills and items.
-3. Writing the story and barks.
+I believe the process can be somewhat parallelized. After a general idea of the hero is formed, the process can be branched into three areas that aren't very intersected:
+1. 3D modelling and animating
+2. Creating and balancing effects of skills and items
+3. Writing the story and barks
 
 ![Process of creating a hero](images/hero_workflow.png)\
 *Don't take this image seriously I don't know how business processes are done*
 
-Some animations require knowledge of what the skills will be like, but many skill animations are quite abstract. For example, healing animations don't need to know the amount of targets to look good.
+Some animations require knowledge of what the skill effects will be like, but many animations are quite abstract. For example, healing animations don't need to know the amount of targets to look good.
 
-Some of the work can be copied from the base game (like VFX and SFX), and some things are reused even by vanilla heroes (many have about 8 unique skill animations, some skills use the same moves).
+Some of the work can be copied from the game (like VFX and SFX), and some things are reused even by vanilla heroes (many have about 8 unique skill animations, some skills share animations).
 
-No paid software is required, but it might make things easier. I used Blender for creating models and animations and faced some weird problems with exporting files into the game. I think the developers used Maya and it might be a better option if available.
+No paid software is required, but it might make things easier. I used Blender for creating models and animations and faced many problems with exporting files into the game. I guess the developers used Maya and it might be a better option if available.
 
-There is an official tool that can make creating trinkets, combat items, inn items, etc. a bit easier. This is a Microsoft Excel sheet and it requires specifically Microsoft Excel because it uses some of its exclusive features. I believe this tool eases the learning curve a bit. Later, when I learned more about how the game works, I found this tool optional.
-
-## Hero's concept
-
-This section is mostly about how I was trying to come up with what the new hero would look like, what would the backstory be, what trinkets to add. I wanted to create a mod for the game that I like in the first place, I did not have any formed vision of a hero in my head when I started.
-
-DD2 provides a lot of freedom considering that magic and fantastical monsters are present. Heroes can use holy magic, lovecraftian forces, beastly transformations. They can even mix their hallucinations into their skills. Enemies have even more diversity.
-
-At the same time, most heroes seemingly do not engage in magic practices. All of them are humans with tragic past. They look like they know what they want and nothing will stop them.
-
-I looked at D&D classes. There is an appealing idea of a monk, a martial artist. I think this would be a great addition to the game, but I know nothing about these arts. Another other idea in D&D that was appealing to me is Circle of Spores. I had already decided that the weapon would be something like a thick bird cage. I combined it and a mushroom-filled cage idea appeared.
-
-I had never drawn a human. I traced the MAA'figure, tried to color it. The result was... poor, and comparing it to screenshots of heroes was discouraging. But I persisted, and after several iterations it began to look good.
-
-Each hero design in DD2 is very creative and detailed, and it’s hard to keep up with. Stylish coats, red gloves, assymetrical armor, tall hat, spikes, bandages, abs on armor, seals. Once I colored my sketch it became clear to me that my hero didn't have anything like that, he was boring. I dehumanized him to make him more interesting. Maybe if I had decided on his story before drawing, it would have been better.
-
-![Variants of clothes, shadows and coloring](images/concept13.png)\
-*I actually really liked how the hero ended up, it felt like I reached a peak that I will never be able to reach again. It still does not emanate the same level of detail and creativity, but I accepted it*
-
-When I was trying to copy DD2’s style I noticed that most heroes and enemies have their legs almost entirely blacked out. Fun facts: Cherub is the only Cultist with feet visible, all the Lost Battalion enemies are barefoot, no Confession boss has feet (except maybe the hooded figure).
-
-Visual appearance of my hero dictated some aspects of the story: not about wealth, needs to involve a bird and some kind of a curse. I don't think I'll ever be good at creating stories, but I tried. At first this guy was a guard who stole a bird to sell it but the bird cursed him. Later i remade it. He was ordered to search a house of a theft suspect. When he arrived, nobody was there. He descended into the basement and got ambushed by formless monstrous creatures. He fought his way back out, lost his sword. Inflicted wounds cursed him, it started ruining his life. He tracked the owner of the house, tried to get a cure, but accidentally transmitted the curse which killed the suspect. The transformation didn't stop, and he had nothing left but to accept it.
-
-Then I wanted to decide what the trinkets and the signature item will be like. Each hero has three associated trinkets and one signature inn item. I had an obtrusive idea of a mushroom trinket. But hero trinkets usually resemble something from the past. Signature items are more tied to the present.
-
-Item sprites have 512×512 pixel size. 
-
-Hero trinkets vary in visual complexity (Pile of Ash vs Annotated Textbook). Gameplay-wise these are more complex than general non-boss trinkets which usually have two effects. Almost all hero trinkets have three effects each (the last effect is always negative, except for the Bounty Hunter’s trinkets). Hero trinkets can affect specific skills or require specific ranks for effects to trigger (general trinkets only use relative rank referencing).
-
-![Some signature items and hero trinkets](images/items_complexity.png)\
-*Different amount of details in item icons*
-
-Signature inn items also vary in visual complexity (Tar-Filled Colambre vs The Very Best). Gameplay-wise there is more single target (6) signature items than the ones that have two targets (5) or the ones that target the whole party (4). Most of them have only positive effects, with the exception of four signature items that belong to Runaway, Hellion, HWM, and Flagellant. Almost all of them have one or two effects. The ones that have three effects might not apply all three. The PD’s Remedy always applies two effects out of three (might be wrong), and the Flagellant’s Pain Box has a chance of applying only the two guaranteed effects out of four total.
+There is an official tool that can make creating trinkets, combat items, inn items, etc. a bit easier. This is a Microsoft Excel sheet and it requires specifically Microsoft Excel because it uses some of its exclusive features. But later, when I learned more about how the game works, this tool appeared optional to me.
 
 ## 3D Modelling, animating
 
@@ -1024,6 +986,8 @@ The Resource Item was already connected to the Prefab Asset so no aditional chan
 
 Then I needed to write the CSV data. The tool generated a CSV file in the Exports folder. 
 
+Gameplay-wise there is more single target (6) signature items than the ones that have two targets (5) or the ones that target the whole party (4). Most of them have only positive effects, with the exception of four signature items that belong to Runaway, Hellion, HWM, and Flagellant. Almost all of them have one or two effects. The ones that have three effects might not apply all three. The PD’s Remedy always applies two effects out of three (might be wrong), and the Flagellant’s Pain Box has a chance of applying only the two guaranteed effects out of four total.
+
 For this item I wanted to make these effects:
 - A chance of removing a disease.
 - A chance of increasing disease RES for 1 region.
@@ -1708,7 +1672,9 @@ m_conditionIds,performer_is_highwayman,
 element_end
 ```
 
-Hero-specific trinkets have some effects that general trinkets don't. The most notable difference is that hero-specific trinkets can alter specific skills.
+Each hero has three associated trinkets and one signature inn item. Hero trinkets usually resemble something from the past. Signature items are more tied to the present.
+
+Hero-specific trinkets have some effects that general trinkets don't. Hero trinkets are more complex than general non-boss trinkets which usually have two effects. Almost all hero trinkets have three effects each (the last effect is always negative, except for the Bounty Hunter’s trinkets). Hero trinkets can affect specific skills or require specific ranks (general trinkets only use relative rank referencing).
 
 There is two ways to make a trinket affect specific skills. GR's His Rings trinket uses both of them.
 
@@ -1786,11 +1752,9 @@ element_end
 
 Here **gr_pick_to_the_face** is the Id of the Pick to the Face skill. **gr_dead_of_night** is the Id of the Dead of Night skill.
 
-One way to limit a buff to a specific skill is to use the *m_ConditionId* field in the *Buff* element. This is used in the **trinket_gr_his_rings_02** buff.
+A buff can be limited to a specific skill by using the *m_ConditionId* field in the *Buff* element. This is used in the **trinket_gr_his_rings_02** buff.
 
-The second way to do this is to use the *all_conditions* field in *Effect* elements. This is used in *Effect* elements that are connected to the **trinket_gr_his_rings_03** buff.
-
-I don't know what is the difference between these two ways. I didn't test it.
+An effect can be limited to a specific skill by using the *all_conditions* field in *Effect* elements. This is used in *Effect* elements that are connected to the **trinket_gr_his_rings_03** buff.
 
 ## Skills
 
@@ -1989,7 +1953,7 @@ This skill has *gr_artemisia* tag, probably because it was its previous name. It
 
 Since it is a path skill, it has *m_ConditionIdOverride* and *m_SkillHistoryIdOverride* fields but more on that later. *m_CritMultiplier* here tells that crit will add 50% to the healed value.
 
-**target_has_blight_dot_hidden** condition is not visible in the tooltip (hence the _hidden suffix). To make a requirement invisible in tooltips *m_IsVisible* field should be set to *False*.
+**target_has_blight_dot_hidden** condition is not visible in the tooltip (emphasized by the _hidden suffix). To make a requirement invisible in tooltips the *m_IsVisible* field should be set to *False*.
 
 Some buffs can be applied directly to the skill. Usually these are combo buffs that affect damage, RES Piercing, DOT dealt etc. For example: increasing crit chance if the target has a Combo token, or increasing Blight RES Piercing if the target has Bleeding.
 
