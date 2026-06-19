@@ -1,12 +1,39 @@
 # Creating a new hero class for Darkest Dungeon II
 
+## Pre-intro
+
+It is better to create a new hero from scratch, using the official EmptyCharacterCreator tool. It can create a working copy of HWM in a couple of clicks, without mistakes that I did in my mod.
+
+But if the goal is to base a mod on this particular one (with minor changes) or to use it as an example, then, to add this particular mod to a Darkside project:
+1. Download and install Darkside from official resources
+2. Download the `mmd_with_dependencies.unitypackage` from `Darkside package` folder on this page
+3. In the Darkside project, open the `Assets/UserMods` folder (or create it if it isn't there yet)
+4. In this folder click RMB, select Import package, Custom package
+5. Select the downloaded package file, click Import
+6. Open the `mmd/mmd_tokens` folder
+7. Click on the `Sprite Assets` folder, check the Addressable field on
+8. Write `Sprite Assets` in the Addressable field instead of a path
+9. Change the group to `mmd`
+10. Build the mod using the `Steamworks` file in the `UserMods/mmd` folder, copy the Exports folder to the DD2 mods folder, check if the mod works
+
+DD2 mods folder (Steam version):
+```
+C:\Program Files (x86)\Steam\steamapps\common\Darkest Dungeon® II\Darkest Dungeon II_Data\StreamingAssets\mods\
+```
+
+Since mods have to have unique IDs, a clone of this mod will not be compatible with the original one (the game will be stuck in an endless loading screen if both of them are activated), unless its ID is canged.
+
+Changing hero's ID is described in the [last section](#changing-heros-id).
+
+This document was written in the summer of 2026.
+
 ## Intro
 
-This isn't exactly a guide, rather a document about everything I experienced while creating a new hero mod. It might help, it might make things more confusing. Before this mod, I had never created any mods for any game, and I didn't consult with anyone experienced in this while creating it. However, this can at least provide some answers to some questions. Not all of these answers are correct, but at least they exist. Also English is not my first language.
+This isn't exactly a guide, rather a document about everything I've experienced while creating a new hero mod. It might help, it might make things more confusing. Before this mod, I had never created any mods for any game, and I didn't consult with anyone experienced in this while creating it. However, this can at least provide some answers to some questions. Not all of these answers are correct, but at least they exist. Also English is not my first language.
 
 I will try to write as much as possible about what I was trying to do, what solutions tried, what issues encountered, what worked, what did not, what are other potential solutions that came to mind. Not all ideas were successful, but I never mean that something is not supposed to work.
 
-While I was able to transfer 3D models and animations from Blender to Darkside, this process produced lot of issues and I couldn't fix all of them. If any other guide on this topic is available, it would probably be better than what is offered here.
+While I was able to transfer 3D models and animations from Blender to Darkside, this process produced a lot of issues. If any other guide on this topic is available, it would probably be better than what is offered here.
 
 The strongest part of this document is probably description of CSV data. There was a lot of work done. Half of this whole narration is about explaining CSV data of various complexity.
 
@@ -48,6 +75,7 @@ Table of contents:
 - [A summoning skill](#a-summoning-skill)
 - [CSV data III](#csv-data-iii)
 - [Afterword](#afterword)
+- [Changing hero's ID](#changing-heros-id)
 
 Some guides about modding Darkest Dungeon 2:
 - [A more fundamental DD2 modding guide](https://docs.google.com/document/d/1ga3FNrL3eGDRMFekLx9-RKhTDLMxPO603XzXcZa8O78/edit?usp=drive_link)
@@ -365,7 +393,7 @@ If the outline works correctly, this fix is not needed.
 
 <details>
 
-<summary>How tried to locate the source of the problem</summary>
+<summary>Click to see how I tried to locate the source of the problem</summary>
 
 I knew the problem was with my model, because when I imported a cube, the shader worked.
 
@@ -390,13 +418,13 @@ So now I new that the issue was with the scale of my mesh.
 
 What did not work:
 - Scaling the model up 10 times in Object Mode and exporting it.
-- Increasing the scale parameter in Blender export settings.
+- Or, increasing the scale parameter in Blender export settings.
 
 Possible solutions:
 - Scaling the model up 10 times in Object Mode, applying Transforms, and exporting it.
-- Unchecking the Convert Units parameter in import settings in the Unity Inspector.
+- Or, unchecking the Convert Units field in import settings in the Unity Inspector.
 
-I did the second one.
+I did the second one (unchecking the Convert Units field). It doesn't require applying Transforms, which break animations.
 
 ![Simple shapes and tangents](images/egg_15.png)\
 *The only thing that differs between these is Scale*
@@ -457,12 +485,7 @@ Moreover, this is not a complete fix. Hovering over the icon in the turn order h
 ![Strong highlight in battles](images/egg_25.png)\
 *Strong highlight in battles*
 
-Another issue was that some enemy attacks trigger orange lighting that lingers for some time after the attack.
-
-![Where does that come from](images/lighting_impact.png)\
-*The Hatchetman attacked my hero and it applied bright orange light*
-
-I don't know the cause of these issues and can't fix them.
+I don't know how to fix this issue but it is small enough.
 
 ## Exporting animations to Darkside
 
@@ -1328,9 +1351,9 @@ Here the *Item* element connects to two buffs through an *ActorDataExternalBuffs
 *m_showValue* field tells if the tooltip should show how many tokens will be applied. Here it is set to False, which means the tooltip will say "vulnerability token" instead of "1 vulnerability token".
 
 *ActorDataEffects* element can have many different fields:
-- *turn_end_effects*
-- *battle_start_effects*
-- *round_start_effects*
+- *turn_start_effects*, *turn_end_effects*
+- *combat_start_effects*, *combat_end_effects*
+- *round_start_effects*, *round_end_effects*
 - *target_effects* (when a hero uses a skill)
 - *target_apply_limit_effects* (apply one effect only from a list of effects)
 - *turn_start_apply_limit_effects*
@@ -1542,7 +1565,7 @@ There is one more confusing *ActorEffectTrigger* element. It isn't so unclear as
 
 The problem here is that this *on_hit_as_target_to_target* event is not actually triggered on the Tribecaller when an ally is hit. This event can only be triggered when the bearer of the buff is hit, it doesn't care for allies.
 
-The desired effect was achieved by giving this buff to all Beast Clan members. On battle start the Tribecaller gives this buff to all allies. And when an ally is hit, the event gets triggered and it checks if this ally has an adjacent Tribecaller, and if there is one or two, it gives them one Enrage token.
+The desired effect was achieved by giving this buff to all Beast Clan members. On combat start the Tribecaller gives this buff to all allies. And when an ally is hit, the event gets triggered and it checks if this ally has an adjacent Tribecaller, and if there is one or two, it gives them one Enrage token.
 
 ```csv
 element_start,beastmen_tribecaller_combat_start_aet,ActorEffectTrigger
@@ -2798,7 +2821,7 @@ The first two tables add trinkets to the standard hero trinket loot tables. The 
 
 It is possible to create custom loot tables.
 
-My Forager path loots an inn item when a battle starts. For this I created a loot table with limited assortment.
+My Forager path loots an inn item when a combat starts. For this I created a loot table with limited assortment.
 
 ```csv
 element_start,mmd_forager_loot,LootTable
@@ -3553,3 +3576,66 @@ I loved the process of 3D modeling, texturing, drawing, animating, editing CSV d
 - Day 27: learned how the Shrine of Reflection works, added barks.
 - Day 28: implemented the Shrine of Reflection story.
 - Days 29-34: preparing everything for publication.
+
+
+## Changing hero's ID
+
+To change ID of a hero, all filenames in every folder and prefab should be changed.
+
+1. Acquire the free [Mulligan Renamer](https://assetstore.unity.com/packages/tools/utilities/mulligan-renamer-99843) asset from Unity AssetStore.
+2. Install it in the Darkside project.
+
+![Mulligan renamer](images/id_1.png)\
+*Mulligan Renamer*
+
+3. Open the renamer through Window -> Red Blue -> Mulligan Renamer.
+4. Open Unity Search window through Window -> Panels -> Search.
+5. Search `mmd`.
+6. Switch to the All tab (716 elements).
+7. Click on the first element, then scroll to the end, Shift+Click on the last element. This should select all elements.
+8. Drag selected files to the Renamer.
+
+![Renaming all files](images/id_2.png)\
+*Renaming all files*
+
+9. In the Renamer set the Search for String field to `mmd`.
+10. Set the Replace with field to the new ID.
+11. Click Rename.
+12. Open the CSV file in the exports folder, replace all `mmd` strings with the new ID, save file.
+13. Open the localization file in the exports folder, replace all `mmd` strings with the new ID, save file.
+
+![Replacing ID in CSV and localization files](images/id_3.png)\
+*Replacing ID in CSV and localization files. Case sensitivity should be disabled*
+
+14. In Darkside, click on the Steamworks tool and switch it to Debug mode.
+
+![Debug mode](images/id_4.png)\
+*Debug mode*
+
+15. Change the Sanitized Name field to the new ID.
+
+![Sanitized Name](images/id_5.png)\
+*Sanitized Name*
+
+16. Switch the Steamworks tool back to Normal mode.
+17. Go to the `Sprite Assets` folder in the token folder.
+18. Click on the TMP Sprite Asset file, rename tokens.
+
+![Fixing tokens](images/id_6.png)\
+*Fixing tokens*
+
+19. If the new hero needs to apply the same tokens as the Metamorph (otherwise there will be duplicates of tokens) then:
+    1. Delete token definitions in the CSV file of the new hero (lines 405 - 855).
+    2. Find and replace `[id]_token_curse` with `mmd_token_curse`. 
+    2. Find and replace `[id]_token_mire` with `mmd_token_mire`. 
+    2. Find and replace `[id]_token_heal` with `mmd_token_heal`. 
+    2. Find and replace `[id]_token_disturb` with `mmd_token_disturb`. 
+    3. Save the file.
+20. Build the mod, copy the exports folder to the DD2 mod folder.
+
+After that Duncan's doppelganger should appear in the game.
+
+![Two Duncans](images/id_7.png)\
+*I don't know why would anybody want my hero doubled but at least it works*
+
+I don't know reliable this ID changing is, but I'm inclined to believe that there shouldn't be any big problems.
