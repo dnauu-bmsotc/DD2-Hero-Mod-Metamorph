@@ -3587,7 +3587,7 @@ I don't know reliable this ID changing is, but I'm inclined to believe that ther
 ## Afterword
 
 This process was a lot of fun. I remember how happy I was when my 3D model appeared the game for the first time, even though it was just a T-pose. I felt so smart when I created skills that I didn’t even know were possible, and when I made the Shrine of Reflection work, even if some workarounds were needed.
-
+<!-- 
 I loved the process of 3D modeling, texturing, drawing, animating, editing CSV data, figuring out how the game works, polishing things.
 
 - Day 1: trying to come up with the idea.
@@ -3619,4 +3619,4 @@ I loved the process of 3D modeling, texturing, drawing, animating, editing CSV d
 - Day 27: learned how the Shrine of Reflection works, added barks.
 - Day 28: implemented the Shrine of Reflection story.
 - Days 29-36: preparing everything for publication.
-
+ -->
