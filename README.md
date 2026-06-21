@@ -139,7 +139,7 @@ Models use Smooth Shading with Sharp seams.
 
 In the game all animations are fixed: there are no ragdolls and no cloth simulation. I don't know how animations were created, but the resulting files use bones for hair and cloth animations.
 
-Heroes can change their facial expressions. There is a bone that is attached to mouth.
+Heroes can change their facial expressions. There is a bone that is attached to the mouth.
 
 ![GR's armature](images/gr_mouth_bone.png)\
 *GR's armature has a bone that moves the jaw*
@@ -282,7 +282,7 @@ In the `F` folder there is a bunch of other folders:
 - The `animation` folder contains all animations in FBX format and an Animation Controller.
 - The `boss_body_spectre` folder is designated for Act 5 boss-related data. When the boss summons a ghost from the past it uses data from this folder.
 - The `materials` folder stores textures and materails for models.
-- Not all animations are controlled via Animation Controller. Skill animations consist of four parts: antic animation (played when a skill is selected), idle animation (played when a skill is selected but not executed), skill execution pose, and recovery animation. The first two parts are controlled via Animation Controller. The last two parts should be made into a Playable file in the `playables` folder. This folder also contains files for Act Out, Riposte, and Exultation (Act 5) skills.
+- Not all animations are controlled via an Animation Controller. Skill animations consist of four parts: antic animation (played when a skill is selected), idle animation (played when a skill is selected but not executed), skill execution pose, and recovery animation. The first two parts are controlled via Animation Controller. The last two parts should be made into a Playable file in the `playables` folder. This folder also contains files for Act Out, Riposte, and Exultation (Act 5) skills.
 - The `icons` folder stores skill icons. It also has a Sprite Atlas but I don’t think it is actually used. The same is for the `portraits` folder which stores different portraits that are used in UI.
 - The `data` folder stores objects that serve as connectors between different objects. Files that have Resource Zoom In Skill addition in the Inspector window connect skill icons, SFX, and playables together. The file that has a hero id as its name connects the 3D model, skill files, and portraits together.
 - `hero_paths` folder is for images of path seals.
@@ -346,7 +346,7 @@ To add textures to this model, I went to the `F/materials` folder, deleted every
 ![Adding textures](images/egg_8.png)\
 *My textures are called mmd here but a texture's name does not matter I believe*
 
-Then I duplicated the mat_egg file (Ctrl+C, Ctrl+V) and renamed it. New material file is for the weapon. Textures in this material need to be switched to weapon's textures.
+Then I duplicated the mat_egg file (Ctrl+C, Ctrl+V) and renamed it. The new material file is for the weapon. Textures in this material need to be switched to weapon's textures.
 
 ![Multiple materials](images/egg_9.png)\
 *Multiple materials*
@@ -1251,7 +1251,7 @@ add_stats,-2,
 element_end
 ```
 
-Here the *Item* element connects to two buffs through a *ActorDataExternalBuffs* element. Both these buffs say that they last infinite amount of time. For trinkets (and memories) it means that these buffs work for any amount of time as long as trinkets are equipped.
+Here the *Item* element connects to two buffs through an *ActorDataExternalBuffs* element. Both these buffs say that they last an infinite amount of time. For trinkets (and memories) it means that these buffs work for any amount of time as long as trinkets are equipped.
 
 If a non-trinket buff says that it has infinite duration, it will be lost when a run ends (in an inn or not).
 
@@ -1440,7 +1440,7 @@ element_end
 
 ```
 
-Here the *ActorEffectTrigger* applies an effect to one neighbor in front of the hero that bears the trinket.
+Here the *ActorEffectTrigger* applies an effect to one neighbor in front of the hero.
 
 *ActorEffectTrigger* elements are connected to *ActorDataEffects* through the *actor_effect_triggers* field.
 
@@ -1787,7 +1787,7 @@ m_CostId,hero_skill_upgrade,
 element_end
 ```
 
-Skills can apply buffs in a similar way the inn items do, using an intermediary *Effect* elements to apply buffs.
+Skills can apply buffs in a similar way the inn items do, using intermediary *Effect* elements to apply buffs.
 
 ![Absinthe description](images/path_4.png)\
 *Absinthe skill*
@@ -2305,7 +2305,7 @@ The description and the four main traits are specified like this:
 actor_verbose_description_highwayman=“Violently versatile, ruthlessly pragmatic.”
 actor_descriptors_highwayman=+ Any Rank\n+ High Dmg\n+ Versatile\n+ Riposte
 ```
-The hero’s canonical name wasn’t working for me until I disabled and reenabled the mod.
+Hero’s canonical name wasn’t working for me until I disabled and reenabled the mod.
 
 Path localization is done in this way:
 ```
