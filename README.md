@@ -1339,8 +1339,8 @@ Here the *Item* element connects to two buffs through an *ActorDataExternalBuffs
 - *target_effects* (when a hero uses a skill)
 - *target_apply_limit_effects* (apply one effect only from a list of effects)
 - *turn_start_apply_limit_effects*
-- *turn_start_friendly_team_effects*, *turn_end_friendly_team_effects*
-- *friendly_team_effects*, *enemy_team_effects* (I don't think they do anything for buffs, but *ActorDataEffects* elemenst are not limited to buffs)
+- *turn_start_friendly_team_effects*, *turn_end_friendly_team_effects*, *turn_start_enemy_team_effects*, *turn_end_enemy_team_effects* I think these don't work consistently in *ActorDataEffects* elements. For me turn-end team-wide effects worked much better when I listed them in *ActorEffectTrigger* elements.
+- *friendly_team_effects*, *enemy_team_effects*
 - *move_effects* (when a hero moves between ranks)
 - *on_hit_as_performer_to_target_effects* (when a hero hits an enemy, this enemy gets something)
 - *on_hit_as_performer_to_performer_effects* (a hero gets something when they hit an enemy)
@@ -3510,7 +3510,11 @@ The challenge here is that I don't know who hits a cursed target. In the previou
 3. If the enemy had a Combo token, it gets removed.
 4. On hit the Cursed Spores token applies an X token to the enemy.
 5. On hit the Cursed Spores token applies a Y token to the ally.
-6. On turn end the Y token converts all X tokens to Combo tokens and removes itself.
+6. On hero's turn end the Y token converts all X tokens to Combo tokens and removes itself.
+
+This also needs to account for situations when an enemy attacks a hero and gets riposted. Both sides get tokens, but turn end effects aren't triggered until it's the end of hero's turn, even though tokens were applied during enemy's turn. To fix this, X token should also get a turn end effect:
+
+7. On enemy's turn end the X token removes all Y tokens and converts all X tokens to Combo tokens.
 
 ## Cloning this mod
 
