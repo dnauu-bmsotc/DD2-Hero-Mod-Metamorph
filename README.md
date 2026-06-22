@@ -2796,6 +2796,14 @@ Three things are to be configured here.
 - The Prefab Reference is a prefab file that contains the model.
 - The skills section needs a RZIS file that defines the attack skill. If CSV data for Act 5 wasn’t changed, the file needs to be named failure_[id]_attack.
 - Turn Order Icon.
+- SFX settings.
+
+I don't know why but I couldn't make the ghost use SFX other than the example SFX.
+
+![Ghost of the past sounds](images/ghost_2.png)\
+*Audio settings in Resource Actor and RZIS files*
+
+Now the boss will summon a new ghost.
 
 ![Ghost of the past](images/ghost_1.png)\
 *I forgot that Ghosts have a VFX under them so it doesn't look like they just float. Later I copied this effect from another hero's ghost*
