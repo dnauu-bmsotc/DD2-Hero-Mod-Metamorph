@@ -1354,6 +1354,7 @@ Here the *Item* element connects to two buffs through an *ActorDataExternalBuffs
 - *on_miss_as_performer_to_performer_effects*
 - *enter_biome_effects*
 - *performer_after_target_apply_limit_effects*, *performer_after_target_apply_limit*, *performer_after_target_effects*
+- *performer_from_target_effects*
 - etc.
 
 Sometimes even these are not enough. The *ActorEffectTrigger* type provides even more customizability. This element allows to:
@@ -3189,9 +3190,13 @@ While it seemed to be impossible to add quirks, tokens can be added without trou
 
 I will describe CSV data of my summon. First I removed the corpse tag because it was breaking the game. I put a *meat* tag instead. Thrilling Tablet counts the amount of *ally* tags in hero party so I didn't set it to *ally*.
 
-I also deleted *m_ClearContainerTypes*, *m_IgnoredSkillAttributeTypes* and *m_SkillBlockId* fields. I set *m_IsTickTriggerValid* field to true because everything that can act has this set to *True*. I don't know what these fields do though.
+I deleted the *m_SkillBlockId* field and set *m_IsTickTriggerValid* field to true because everything that can act has this set to *True*. I don't know what these fields do though.
 
 Removing the *m_DeathRound* field didn't have any effect for some reason. Summons still disappeared after three turns. So I just set it to a big number.
+
+Since I based the summon on a corpse, the *m_ClearContainerTypes* has to stay. When I tested the final boss, my hero's spectre didn't disappear after hero's death. Turned out the boss applies hidden tokens to heroes to track if there is any hero that faces their failure. Removing this field broke this fight.
+
+I believe *m_IgnoredSkillAttributeTypes* blocks some effects from being applied. Corpses ignore tokens, quirks, and buffs. I allowed my summon to get tokens and buffs.
 
 ```csv
 element_start,mmd_corpse,ActorDataClass
@@ -3202,6 +3207,8 @@ m_IsTickTriggerValid,True,
 m_DeathRound,30,
 m_TokenViewValid,False,
 m_IsEffectsReasonValid,False,
+m_ClearContainerTypes,BuffContainer,TokenContainer,DotContainer,
+m_IgnoredSkillAttributeTypes,QUIRK_ADD,
 element_end
 
 element_start,mmd_corpse,ActorDataStats
