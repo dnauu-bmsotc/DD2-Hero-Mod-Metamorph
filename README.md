@@ -525,8 +525,8 @@ There are many nodes:
 - embark: an animation of a hero exiting an inn and viewing the landscape while all relationships are revealed
 - victory: a pose displayed while collecting loot after a fight
 - hero: an animation that plays at the Crossroads and in the character sheet
-- relationship_test_positive: a pose used when a hero's relationship is revealed as positive
-- relationship_test_negative: a pose used when a hero's relationship is revealed as negative
+- relationship_test_positive: a pose used when hero's relationship is revealed as positive
+- relationship_test_negative: a pose used when hero's relationship is revealed as negative
 - resolute: a pose when a hero overcomes the devastating horrors of campaigns
 - meltdown: a pose when a hero does not overcome the devastating horrors of campaigns
 - move_forward: an animation played when a hero uses their turn to move forward
@@ -731,7 +731,7 @@ There are more signals in the Assets/Data/Playables/Signals for different situat
 
 When I copied VFXs from the `Assets/Data/Characters/Shared/vfx_shared_prefabs` folder, those effects were playing every time the hero appeared on screen. It was fixed after clicking on the VFX prefab and unchecking the Play On Awake option in the Inspector window.
 
-There are also VFX that play during antic animations (HWM's blade shining, or PD's chemicals chemicing). I didn’t do them for my hero but I believe the assignment of these VFX is somehow related to the Toggle Active State By Animator State Component in VFX elements in the hero's prefab file.
+There are also VFX that play during antic animations (HWM's blade shining, or PD's chemicals chemicing). I didn’t do them for my hero but I believe the assignment of these VFX is somehow related to the Toggle Active State By Animator State Component in VFX elements in hero's prefab file.
 
 ![Antic VFX](images/vfx_5.png)\
 *I am not sure that this component is what triggers the antic VFX, but I found no other connections*
@@ -1681,7 +1681,6 @@ m_ConditionActorType,NONE,
 m_ConditionString,gr_dead_of_night,
 m_ConditionNumberType,BOOL,
 element_end
-
 ```
 
 Here **gr_pick_to_the_face** is the ID of the Pick to the Face skill. **gr_dead_of_night** is the ID of the Dead of Night skill.
@@ -1881,6 +1880,11 @@ Since it is a path skill, it has *m_ConditionIdOverride* and *m_SkillHistoryIdOv
 
 Some buffs can be applied directly to the skill. Usually these are combo buffs that affect damage, RES Piercing, DOT dealt etc. For example, increasing crit chance if the target has a Combo token, or increasing Blight RES Piercing if the target has Bleeding.
 
+*m_Tags* field can be used to add visual indicators to the sides of a healthbar. If a buff is tagged as *buff*, then it will add an indicator to the left to a healthbar. If a buff is tagged as *debuff*, then it will add an indicator to the right to a healthbar. I guess tagging a negative buff as *debuff* will also allow targets to resist this buff.
+
+![Debuff tag](images/debuff_tag.png)\
+*A buff tagged as debuff*
+
 The Hatchetman's Finishing Blow skill deals double damage if the target has a Combo token.
 
 ![Hatchetman's skill description](images/path_5.png)\
@@ -1950,6 +1954,51 @@ Combo tokens need to be manually removed by listing the **end_combo** effect.
 *m_IsForced* is used for skills that make other skills unavailable if this skill can be used. Examples of forced skills: Sharpshoot's Double Tap (second shot), **pyro_bomb**, **medic_salve**, **harvest_hunger**, etc.
 
 I don't know what *m_IsBlockPass* is but it is always used when a skill is forced and it is always set to *True*.
+
+Warlock's Chaotic Offering grants one Unchecked Power on Round Start if this skill is equipped.
+
+![Chaotic Offering](images/chaotic_offering.png)\
+*Warlock's Chaotic Offering*
+
+When the Warlock enters a combat, he tries to apply a buff to self. If he has the skill equipped, the buff is applied, otherwise it isn't. This buff gives one Uchecked Power at Round Start. Equipment check is defined by a *Condition* element.
+
+```csv
+element_start,occ_warlock,ActorDataPath
+m_ActorClassIds,occultist,
+m_UnlockId,occultist_7,
+m_OrderPriority,2,
+m_Tags,warlock,occ_path,
+element_end
+
+element_start,occ_warlock,ActorDataEffects
+combat_start_effects,occ_chaotic_offering_p2_buff_e,occ_chaotic_offering_p2_u_buff_e,
+element_end
+
+element_start,occ_chaotic_offering_p2_buff_e,Effect
+m_Chance,1,
+buffs,occ_chaotic_offering_p2_buff,
+all_conditions,skill_equipped_occ_chaotic_offering_p2,
+m_IsVisible,False,
+element_end
+
+element_start,occ_chaotic_offering_p2_buff,Buff
+m_DurationType,combat_end,
+m_DurationAmount,1,
+m_Tags,buff,
+m_InstanceLimit,1,
+element_end
+
+element_start,occ_chaotic_offering_p2_buff,ActorDataEffects
+round_start_effects,add_1_unchecked_power_p2_chaotic_chance,
+element_end
+
+element_start,skill_equipped_occ_chaotic_offering_p2,Condition
+m_ConditionType,skill_equipped,
+m_ConditionActorType,PERFORMER,
+m_ConditionString,occ_chaotic_offering_p2,
+m_ConditionNumberType,BOOL,
+element_end
+```
 
 Some CSV words that can be helpful when creating skills:
 - adding tokens: *m_TokenAddId*, *m_TokenAddTag*
@@ -2054,6 +2103,7 @@ element_end
 ```
 
 Another way to add a buff can be found in the Surgeon’s data. To recover some health after a kill, ActorDataEffects element is used:
+
 ```csv
 element_start,plg_surgeon,ActorDataPath
 m_ActorClassIds,plague_doctor,
@@ -2183,7 +2233,7 @@ token_name_mmd_token_heal_u_sheet=<color=#{notable}>Healing Spores+</color>
 token_mmd_token_heal_u_description=Example Token Description
 ```
 
-Tokens can be shown in the Token Glossary depending on a hero's path. Path-related tokens use *m_TokenGlossaryPathTag* fields.
+Tokens can be shown in the Token Glossary depending on hero's path. Path-related tokens use *m_TokenGlossaryPathTag* fields.
 
 To merge a token mod with my main mod, I copied the contents of the localization file and CSV file to the appropriate files in my main mod folder, then moved token_mod/F data in the hero mod folder.
 
@@ -2593,7 +2643,7 @@ sub_stat,resistance,death,0.05,
 element_end
 ```
 
-These buffs need to be attached to the hero's *ActorDataExternalBuffs* element.
+These buffs need to be attached to hero's *ActorDataExternalBuffs* element.
 
 ```csv
 element_start,hellion,ActorDataExternalBuffs
@@ -2869,7 +2919,7 @@ m_IsRollBattleModifier,False,
 m_TokenViewValid,False,
 element_end
 ```
-*m_BackgroundSceneOverride* allows to change background of the fight. *m_PlayerActors* allows to set the hero's party. I used a militia fighter but ideally it should be a custom origin character. *m_ResultActors* tells who will appear on screen after the reflection session ends. *m_EnemyActors* allows to set the enemy party. Here I used my custom enemy called **mmd_story_plate_1**.
+*m_BackgroundSceneOverride* allows to change background of the fight. *m_PlayerActors* allows to set hero's party. I used a militia fighter but ideally it should be a custom origin character. *m_ResultActors* tells who will appear on screen after the reflection session ends. *m_EnemyActors* allows to set the enemy party. Here I used my custom enemy called **mmd_story_plate_1**.
 
 ```csv
 element_start,mmd_story_plate_1,ActorDataClass
@@ -3490,7 +3540,7 @@ For my Disturbing Spores skill I wanted to assign positional tokens to the first
 ![Disturbing Spores skill description](images/metatoken_3.png)\
 *Disturbing Spores skill*
 
-The problem: when I tried to clear corpses and apply a positional token at the same time, the corpses were cleared but if the first rank was occupied with a corpse, then the token wouldn't be applied. It often lead to asymmetric situations where only the hero's team gained a positional token. Order of effects didn't make anything different.
+The problem: when I tried to clear corpses and apply a positional token at the same time, the corpses were cleared but if the first rank was occupied with a corpse, then the token wouldn't be applied. It often lead to asymmetric situations where only hero's team gained a positional token. Order of effects didn't make anything different.
 
 The solution was to clear corpses as a skill action and add an intermediary token that handles the application of positional tokens:
 1. Skill clears corpses.
