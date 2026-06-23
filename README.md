@@ -39,6 +39,7 @@
 - [Kingdoms](#kingdoms)
 - [A summoning skill](#a-summoning-skill)
 - [CSV data III](#csv-data-iii)
+- [Testing](#testing)
 - [Cloning this mod](#cloning-this-mod)
 - [Afterword](#afterword)
 
@@ -627,6 +628,11 @@ When I made a test animation using bone constraints, the transition between anim
 ![Glitched animation](images/egg_38.png)\
 *Glitched animation and probable cause*
 
+Now after rebuilding the mod and copying the `exports` folder, new animations should appear in the game.
+
+![Skill animations in game](images/egg_37.png)\
+*Skill animations in the game*
+
 Some error displays:
 - Endless loading screen. This was happening if I didn't set Resource files right.
 - White skill icons and glitched text. This was happening if I made an error in the CSV file.
@@ -637,17 +643,12 @@ Some error displays:
 *There once was a warning about mismatching names. I think this happened because I copied and renamed the files in the Windows explorer instead of doing it in Unity. Letting it fix it did not cause problems*
 -->
 
-There was one issue. If the mod is enabled, any character who passes a turn gets zoomed in as if they are performing a skill. To fix this, go to the `F/shared/Data` folder, click on pass_heal and disable the Zoom In option in the Inspector. Do the same for the pass_stress file.
+There was one issue. If the mod is enabled, any character who passes a turn gets zoomed in as if they are performing a skill.
 
 ![Pass skill](images/pass_zoom.png)\
-*Pass skill*
+*Passing a turn gets a zoom in like other skills*
 
-Now after rebuilding the mod and copying the `exports` folder, new animations should appear in the game.
-
-![Skill animations in game](images/egg_37.png)\
-*Skill animations in the game*
-
-
+To fix this, go to the `F/shared/Data` folder, click on the pass_heal file and disable the Zoom In option in the Inspector window. Do the same for the pass_stress file.
 
 ## Skill icons and portraits
 Skill icons are 450×450 pixel PNG images with a transparency channel.
@@ -657,13 +658,15 @@ Skill icons are 450×450 pixel PNG images with a transparency channel.
 
 Borders of skill icons in the game are pushed a little inward (about 35 pixel margin) to give icons more depth. The art has a soft black semi-transparent black outline.
 
+<!-- 
 ![Skill icon drawing](images/skill_icon.png)\
 *I wanted the icons to stand out by the colors, but I couldn't balance the details right so the icons stand out more than I wanted*
+-->
 
-If the icon is big enough to overlap the frame, transparency might look weird.
+If the icon is big enough to overlap the frame, transparency might look weird. I don't remember if transparency matters closer to the center of an icon. Relationship buffs and debuffs add effects outside the border only.
 
 ![My skill icon](images/skill_icon_transparency_2.png)\
-*The frame is visible under the mushroom*
+*In one of my skill icons the frame is visible under the mushroom*
 
 In Darkside skill icons are stored in the `F/icons` folder. The image type needs to be changed to Sprite before it can be used in RZIS files.
 
@@ -932,13 +935,6 @@ element_end
 ```
 
 This text describes the same six elements. The 32 relics cost element isn't generated because the game already has it.
-
-The game write logs to this file:
-```
-C:\Users\xxx\AppData\LocalLow\RedHook\Darkest Dungeon II\Player.log
-```
-
-It can sometimes help to find what went wrong with the mod. It often pointed me the IDs that I misspelled.
 
 ## Creating a signature inn item
 
@@ -1533,7 +1529,7 @@ At first I was confused because seemingly the same effect can be achieved by set
 Turns out, the application of blight needs to account the blight RES Piercing stat. If the *m_ActorEffectTriggerSourceType* were set to *target*, then the Piercing stat would be taken from the targeted corpse. To make it use the Flagellant's Piercing stat this field should be set to *performer*.
 
 ![A little experiment](images/fester_1.png)\
-*I conducted a little experiment: I created two skills that are similar to Fester but one of them used *target* for *m_ActorEffectTriggerSourceType*. Then I gave +2000% Blight RES Piercing to a hero, +1000% Blight RES to a Lost Soul, and +3000% Blight RES to a Widow. A Lost Soul between them wasn't buffed. The skill, that used the performer value, was able to apply Blight to a target with less Blight RES. The second skill, that used the target value, wasn't able to apply Blight to any target.*
+*I conducted a little experiment: I created two skills that are similar to Fester but one of them used *target* for *m_ActorEffectTriggerSourceType*. Then I gave +2000% Blight RES Piercing to a hero, +1000% Blight RES to a Lost Soul, and +3000% Blight RES to a Widow. A Lost Soul between them wasn't buffed. The skill, that used the performer value, was able to apply Blight to a target with less Blight RES. The second skill, that used the target value, wasn't able to apply Blight to any target*
 
 Meaning of *ActorEffectTrigger*'s fields seems to alter a lot depending on what is set in the *m_ActorEffectType* field. I did some testing and gathered this data:
 
@@ -3191,7 +3187,7 @@ element_end
 ...
 ```
 
-Camp animations in Kingdoms are just inn animations, they don't require any additional setup.
+Camp animations in Kingdoms use inn animations.
 
 ## A summoning skill
 
@@ -3470,7 +3466,7 @@ The ID of this token is shared with the ID of the second shot skill. I believe t
 Many restrictions of this skill can be removed. This allows, for example, to select an enemy target and a friendly target in one skill. Not simultaneously, but still.
 
 <video src="./images/hp_transfer.mp4" width="100%" controls></video>\
-*Damaging an enemy and healing an ally in one turn*
+*Damaging an enemy and healing an ally in "one turn"*
 
 The Tribecaller enemy from K1 has a passive: when an adjacent ally is hit, the Tribecaller gets one Berserk token.
 
@@ -3557,6 +3553,50 @@ The challenge here is that I don't know who hits a cursed target. In the previou
 This also needs to account for situations when an enemy attacks a hero and gets riposted. Both sides get tokens, but turn end effects aren't triggered until it's the end of hero's turn, even though tokens were applied during enemy's turn. To fix this, X token should also get a turn end effect:
 
 7. On enemy's turn end the X token removes all Y tokens and converts all X tokens to Combo tokens.
+
+There is much more to explore in CSV files. I haven't tried to understand Abomination's transformations, various DoT mechanics, edge cases of forced skills, obscure fields and values.
+
+## Testing
+
+There is a log file. When the game opens it clears this file and writes some messages there.
+
+```
+C:\Users\xxx\AppData\LocalLow\RedHook\Darkest Dungeon II\Player.log
+```
+
+This file often pointed me the IDs that I misspelled. Messages about missing IDs and some other warnings after a "VALIDATION" word.
+
+Sometimes when the save has an ongoing expedition, mod changes won't be registered by the game until this expedition is ended.
+
+Sometimes to make the game register mod changes it might be needed to turn the mod off, load the save, exit to main menu, and turn the mod back on.
+
+Turning game cheats on is very helpful. The [official guide](https://docs.google.com/document/d/1ga3FNrL3eGDRMFekLx9-RKhTDLMxPO603XzXcZa8O78/edit?usp=drive_link) explains how to do it. For unknown reasons cheat interface was glitching, and some options became inaccessible. But it allowed me to:
+- add candles
+- add stress, heal stress
+- deal damage to heroes, heal health
+- skip a region, get a trophy for the Mountain
+- get relics or baubles
+- teleporting to Altar or Crossroads
+- there are many other buttons, but I don't know what most of them do
+
+There is a mod that allows to skip Cultist fights before bosses:
+[Skip Mountain Cultist](https://steamcommunity.com/sharedfiles/filedetails/?id=3740321028)
+
+I haven't encountered any differences between local and Workshop versions of my mod. Uploading a mod to Workshop worked without issues.
+<!-- 
+Some issues that might appear with modded heroes:
+- passing a turn zooms in a hero as if it is a normal skill
+- meltdown and resolute poses aren't held long enough
+- overly strong inn highlight
+- overly strong turn order highlight
+- ?winning against the ghost of the past
+- ?losing against the ghost of the past
+- ?shrine of reflection
+- ?kingdoms skillsets and hero upgrades
+- ?shackles blocks
+- ?getting stunned on extra action
+- ?getting riposted, moving, passing a turn, using a combat item
+-->
 
 ## Cloning this mod
 
