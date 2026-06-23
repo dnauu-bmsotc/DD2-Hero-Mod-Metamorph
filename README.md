@@ -1459,7 +1459,7 @@ But it gets weird in details.
     - *on_resist*: effects are activated on bleed/burn/blight/debuff resist. Didn't test it.
     - *on_[hit / crit / kill / miss]_as_target_to_target*: activates effects when the hero is attacked. It seems that when this value is chosen then values of *m_ActorEffectTriggerSourceType* and *m_ActorEffectTriggerTargetType* fields don't have much role.
     - *on_[hit / crit / kill / miss]_as_performer_to_performer*: activates effects when the hero attacks. Otherwise the same specifics as for the previous one.
-- *m_ActorEffectTriggerSourceType* can be either *target*, *performer*, or blank. This field tells from who listed effects should originate from. It has meaning for two-sided effects like copying or stealing tokens.
+- *m_ActorEffectTriggerSourceType* can be either *target*, *performer*, or blank. This field tells from who listed effects should originate from. It has meaning for two-sided effects like copying or stealing tokens. It also matters for skills like Fester, where effects should account for Flagellant's Blight RES Piercing, not corpse's.
 - *m_ActorEffectTriggerTargetType* tells to whom the effects should be applied.
     - *friendly_team*, *enemy_team*
     - *performer*, *target*
@@ -1512,7 +1512,8 @@ element_end
 
 The Virtuoso's Finale removes 1 Stress from allies when an enemy is killed. The Killer's Glow adds 1 Stress to allies when an enemy is killed. Their *ActorEffectTrigger* elements are very similar except for one line: the Finale has *m_ActorEffectTriggerSourceType* set to *performer*, and The Killer's Glow has it set to *target*. I can't think of any explanation other than that *target* and *performer* are the same in this situation. There is also that long weird field in the Finale skill, but I doubt that it has anything to do with this situation.
 
-Now about *m_NeighborActorEffectTriggerSourceType*. Not a lot of elements have this field. One of them was very interesting to me. The Flagellant's Fester skill clears a corpse and applies blight to its neighbors. Here is the definition of the corresponding *ActorEffectTrigger*:
+
+The Flagellant's Fester skill clears a corpse and applies blight to its neighbors. Here is the definition of the corresponding *ActorEffectTrigger*:
 ```csv
 element_start,flg_fester_neighbor_blight,ActorEffectTrigger
 m_ActorEffectType,target,
@@ -1527,26 +1528,12 @@ effects,skill_dot_medium_blight,
 element_end
 ```
 
-What confused me is that *m_ActorEffectTriggerSourceType,performer* is set to performer. I thought it would be perfectly fine if it was set to target, and then there would be no need for overriding the neighbor targeting.
+At first I was confused because seemingly the same effect can be achieved by setting *m_ActorEffectTriggerSourceType* to *target*. This way it wouldn't be necessary to override whose neighbors will be affected.
 
-I had this theory:
+Turns out, the application of blight needs to account the blight RES Piercing stat. If the *m_ActorEffectTriggerSourceType* were set to *target*, then the Piercing stat would be taken from the targeted corpse. To make it use the Flagellant's Piercing stat this field should be set to *performer*.
 
-The application of blight needs to account the blight RES Piercing stat. If the *m_ActorEffectTriggerSourceType* were set to *target*, then the Piercing stat would be taken from the targeted corpse. To make it use the Flagellant's Piercing stat this field should be set to *performer*.
-
-But then I made an experimet. I created a test hero with three skills and insane Blight RES Piercing stat. The first skill is the same as the Flagellant's skill. The second skill is a modification of the first one. I changed *m_ActorEffectTriggerSourceType*'s value to *target* and removed the *m_NeighborActorEffectTriggerSourceType* field. The third skill applies a 1000% Blight RES buff to an enemy.
-
-- The test hero had 2000% Blight RES Piercing.
-- The Woodsman had 3000% Blight RES.
-- The Widow (the right one) had 1000% Blight RES.
-
-What I expected: the second skill (modified) would be resisted by both neighbors since the corpse doesn't have Blight RES Piercing increased. And the first skill would successfully apply blight to the Widow but not to the Woodsman.
-
-![A little experiment](images/m_ActorEffectTriggerSourceType.png)\
-*This is possible that this experiment was conducted wrong*
-
-But what happened is both skills gave the same result: the Woodsman resisted Blight and the Widow was afflicted, which meant that in both cases hero's Blight RES Piercing was accounted for.
-
-This left me confused. I don't believe that this has something to do with tracing who inflicted what, because the Asprant's Burning Stars skill inverts direction of the copy effect.
+![A little experiment](images/fester_1.png)\
+*I conducted a little experiment: I created two skills that are similar to Fester but one of them used *target* for *m_ActorEffectTriggerSourceType*. Then I gave +2000% Blight RES Piercing to a hero, +1000% Blight RES to a Lost Soul, and +3000% Blight RES to a Widow. A Lost Soul between them wasn't buffed. The skill, that used the performer value, was able to apply Blight to a target with less Blight RES. The second skill, that used the target value, wasn't able to apply Blight to any target.*
 
 Meaning of *ActorEffectTrigger*'s fields seems to alter a lot depending on what is set in the *m_ActorEffectType* field. I did some testing and gathered this data:
 
@@ -3479,6 +3466,11 @@ The ID of this token is shared with the ID of the second shot skill. I believe t
 
 ![Scheme of Sharpshoot's Double Tap](images/metatoken_5.png)\
 *Scheme of the Sharpshoot's Double Tap skill*
+
+Many restrictions of this skill can be removed. This allows, for example, to select an enemy target and a friendly target in one skill. Not simultaneously, but still.
+
+<video src="./images/hp_transfer.mp4" width="100%" controls></video>\
+*Damaging an enemy and healing an ally in one turn*
 
 The Tribecaller enemy from K1 has a passive: when an adjacent ally is hit, the Tribecaller gets one Berserk token.
 
