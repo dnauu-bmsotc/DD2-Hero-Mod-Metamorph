@@ -2834,7 +2834,7 @@ Three things are to be configured here.
 I don't know why but I couldn't make the ghost use SFX other than the example SFX.
 
 ![Ghost of the past sounds](images/ghost_2.png)\
-*Audio settings in Resource Actor and RZIS files*
+*Audio settings in Resource Actor and RZIS example files*
 
 Now the boss will summon a new ghost.
 
@@ -3191,119 +3191,41 @@ Camp animations in Kingdoms use inn animations.
 
 ## A summoning skill
 
-I didn't want to make the summon a separate hero class, so I copied the `Data/Characters/Shared/common_corpse/common_corpse_art_prefab` file and attached a new model in it. Since I didn’t use any scale references in Blender the model was too big. Fortunately changing the scale in the Inspector window doesn't break anything.
+I think there are two ways to create a summon:
+1. Base it on a hero
+2. Base it on an NPC
+
+Both ways have their difficulties. If a summon is based on a hero then it should be removed from rosters. It might be a more powerful way of creating a summon, but I felt like there would be a lot of unexpected nuances that I wouldn't be able to solve easily, so I didn't try making a summon by creating a hero.
+
+Instead I modified my hero's corpse. First, I duplicated the `Data/Characters/Shared/common_corpse/common_corpse_art_prefab` file and attached a new model in it. Then I added materials and animation components as to a hero.
+
+Since I didn’t use any scale references in Blender the model was too big. Fortunately changing scaling models using the Inspector window doesn't break anything.
+
+Every hero has a separate corpse even though all corpses look the same. So adding another corpse does't affect other ones.
 
 ![Summon prefab](images/summon_2.png)\
-*It's better to delete the grave object instead of dragging it down*
+*Summon's prefab*
 
-I believed that duplicating a corpse file would be easier for further setup. In CSV files corpses are similar to heroes but don't do anything and disappear after some turns. Both of these things seemed possible to change.
+Then I created an Animation controller and added idle, impact, and antic animations.
 
-Every hero has a separate corpse even though all corpses look the same. So adding another corpse wouldn't affect other ones.
-
-Using a corpse is limiting which I will write about later. It might be possible to create a custom hero that will be a summon. But this new hero will need to be removed from the Altar of Hope and the Crossroads. I don't know if it's possible because I didn't try.
+![Summon animation controller](images/summon_4.png)\
+*There are two attacks because this controller is used by two different summons*
 
 In the `nested_classes` folder there was a Resource Actor for my hero’s corpse. I switched the prefab reference to my new prefab file. So when my hero dies this new creature appears instead of a grave.
 
-To give it an idle animation I created an Animation Controller and added an idle animation node. Then I added an Animator component to my model in the prefab file and attached the Animation Controller to it.
-
-![Summon's animation controller](images/summon_4.png)\
-*Later I added an impact pose. In the game the summon held the impact pose much longer than needed. Turned out it's because of the Has Exit Time checkbox in transition settings. Disabling it fixed the issue*
-
 To give it a skill I copied an attack RZIS file, renamed it, attached an icon sprite and a Playable to it. Then I attached this RZIS to the corpse’s Resource Actor file.
 
-Corpses have zero turns each round. It can be changed by changing the value of *speed_number_of_turns* to 1 in its CSV file.
+To add it a spawn animation, I created a Playable file, and attached it to the summon's Resource Actor file.
 
-There was a glitch. When the summon killed an enemy, this enemy turned into a corpse, but only visually. This enemy corpse was still attacking. Removing the *corpse* tag in summon's CSV data seemed to fix it.
+![Adding a spawn animation](images/summon_10.png)\
+*Adding a spawn animation*
 
-The fights ended if other heroes died (I guess it is because of “m_IsBattleComplete: true” line). The summon didn’t stay in the party after the fight. It disappeared after three rounds but it can be changed.
+But when I summoned it, it played a summon animation and froze. It can be fixed by setting the clip's Post-Extrapolate field to None in the Playable file.
 
-Opening character sheet while it's the summon's turn shows a very broken sheet.
+![Fixing a spawn animation](images/summon_11.png)\
+*Fixing a spawn animation*
 
-![Broken sheet](images/summon_5.png)\
-*No stats, no quirks, no names. Metamorph was replaced with “actor”. Everything was purple instead of blue*
-
-Technically the summon is there and it can use skills, everything kind of works, but it bothered me. What I tried:
-1. Block the sheet menu. If it doesn’t appear on a screen then there is no problem. Militia already have this quirk. Unfortunately I couldn't find a setting to control this behavior.
-2. Turn the summon into a whole hero class. I didn't try much with this approach because I was skeptical about it. Even if it would fix the sheet issue, it would bring other problems (removing it from roster and merging the mods). It might be possible, it might even be the best way to create a summon, I just wasn't inspired about it.
-3. I had a genius idea to remove summon’s turns and make it act only with Act Outs. Technically banter is Act Out, so it can be triggered without relationships. First I tested this idea on my main hero. I added him a custom quirk, attached an Act Out skill on it, set the probability of it happening to 100%, watched it happen. My hero did really act out and attacked enemies while having no relationships. The problem here however is that only heroes can have quirks. Or so I convinced myself. Maybe I didn't try enough.
-
-While it seemed to be impossible to add quirks, tokens can be added without troubles. So I decided to use riposte instead. I copied a riposte RZIS file, configured it, attached it to the resource file, then edited CSV data to give the summon riposte skill and riposte tokens.
-
-I will describe CSV data of my summon. First I removed the corpse tag because it was breaking the game. I put a *meat* tag instead. Thrilling Tablet counts the amount of *ally* tags in hero party so I didn't set it to *ally*.
-
-I deleted the *m_SkillBlockId* field and set *m_IsTickTriggerValid* field to true because everything that can act has this set to *True*. I don't know what these fields do though.
-
-Removing the *m_DeathRound* field didn't have any effect for some reason. Summons still disappeared after three turns. So I just set it to a big number.
-
-Since I based the summon on a corpse, the *m_ClearContainerTypes* has to stay. When I tested the final boss, my hero's spectre didn't disappear after hero's death. Turned out the boss applies hidden tokens to heroes to track if there is any hero that faces their failure. Removing this field broke this fight.
-
-I believe *m_IgnoredSkillAttributeTypes* blocks some effects from being applied. Corpses ignore tokens, quirks, and buffs. I allowed my summon to get tokens and buffs.
-
-```csv
-element_start,mmd_corpse,ActorDataClass
-m_Tags,meat,
-m_IsBattleComplete,True,
-m_Size,1,
-m_IsTickTriggerValid,True,
-m_DeathRound,30,
-m_TokenViewValid,False,
-m_IsEffectsReasonValid,False,
-m_ClearContainerTypes,BuffContainer,TokenContainer,DotContainer,
-m_IgnoredSkillAttributeTypes,QUIRK_ADD,
-element_end
-
-element_start,mmd_corpse,ActorDataStats
-key_map,health_max,speed,speed_number_of_turns,
-add_stats,38,5,0,
-sub_stat,resistance,stun,0.2,
-⁝
-element_end
-```
-
-Then there are effects that the summon gets every round. Even if it doesn’t have turns, effects can still be applied a round's start.
-```csv
-element_start,mmd_corpse,ActorDataEffects
-round_start_effects,mmd_corpse_round_start_effect_1,mmd_corpse_round_start_effect_2,mmd_corpse_round_start_effect_3,mmd_corpse_round_start_effect_4,
-element_end
-
-element_start,mmd_corpse_round_start_effect_1,Effect
-m_Chance,0.9,
-m_TokenAddId,riposte,
-m_TokenAddAmount,1,
-m_ShowValue,False,
-element_end
-
-...
-```
-
-This summon has an attack skill. Even though it has no turns, I left it there in case it gains an extra turn. It can hit everywhere from everywhere but in the Resource Actor file I still added turn pass skills just to be sure it doesn’t get stuck without valid turns.
-```csv
-element_start,mmd_corpse_attack,ActorDataSkill
-m_IsFriendly,False,
-launch_ranks,1,2,3,4,
-target_ranks,1,2,3,4,
-⁝
-element_end
-
-element_start,mmd_corpse_attack,ActorDataStats
-key_map,health_damage,health_damage_range,crit_chance,
-add_stats,8,4,0.15,
-element_end
-
-element_start,mmd_corpse_riposte,ActorDataSkill
-m_IsFriendly,False,
-launch_ranks,1,2,3,4,
-target_ranks,1,2,3,4,
-⁝
-element_end
-
-element_start,mmd_corpse_riposte,ActorDataStats
-key_map,health_damage,health_damage_range,crit_chance,
-add_stats,8,2,0.1,
-element_end
-```
-
-The summoning skill can be implemented this way:
+A summoning skill can be defined this way:
 ```csv
 element_start,mmd_parasitic_forms,ActorDataSkill
 ⁝
@@ -3324,17 +3246,57 @@ m_SummonIfRoom,True,
 element_end
 ```
 
+The **hero_party_has_less_than_4_allies_hidden** only checks if the party has less than four actors with the *ally* tag. If the summon doesn't use this tag, the summoning skill might not be blocked.
+
+Corpses have zero turns each round. It can be changed by changing the value of *speed_number_of_turns* to 1 in its *ActorDataStats* element.
+
+There was a glitch. When the summon killed an enemy, this enemy turned into a corpse, but only visually. This enemy corpse was still attacking. Removing the *corpse* tag in summon's CSV data seemed to fix it.
+
+Opening character sheet while it's the summon's turn shows a very broken sheet.
+
+![Broken sheet](images/summon_5.png)\
+*No stats, no quirks, no names. Metamorph was replaced with “actor”. Everything was purple instead of blue*
+
+I would guess that since this summon is not a hero, this sheet can't be fixed. I see several potential solutions:
+1. Block the sheet menu. If it doesn’t appear on a screen then there is no problem. Militia already have this quirk. Unfortunately I couldn't find a setting to control this behavior.
+2. Remove its turns entirely so there will be no time to open the sheet. But it needs to do something. Here I see two options:
+    - The summon gains taunt and riposte tokens on each Round Start. Even though it doesn't have any turns, Round Start effects are still applied to it.
+    - The summon uses Act Out system. Technically banter is Act Out, so it can be triggered without relationships. I tried to trigger an Act Out by giving my hero a quirk that causes them to Act Out (like the Crimson Curse does). It worked. Unfortunately, I don't know how to add quirks to a non-hero actor.
+3. Make it act randomly. It can be achieved by adding a "m_ActorControllerType,RANDOM," line to the summon's *ActorDataClass* element. If it has pass skills then it will choose randomly between common skills and passing a turn. Common skills can be made into forced skills, and if, for example, the Shackles block all of its common skills, it will use its turn pass skill. But the pass turn skill can be removed entirely from it, then, if all skills are blocked, it will skip a turn the same way enemies do when all heroes are in stealth.
+
+I didn't know that making something act randomly was possible until I saw the mod that [makes enemies controllable](https://steamcommunity.com/sharedfiles/filedetails/?id=3319111967).
+
+I will describe *ActorDataClass* of my summon. First I removed the corpse tag because it was breaking the game. I put a *meat* tag instead. Thrilling Tablet counts the amount of *ally* tags in hero party so I didn't add it.
+
+I deleted the *m_SkillBlockId* field and set *m_IsTickTriggerValid* field to true but I don't know what these fields do.
+
+Removing the *m_DeathRound* field didn't have any effect for some reason. Summons still disappeared after three turns. So I just set it to a big number.
+
+Since I based the summon on a corpse, the *m_ClearContainerTypes* has to stay. When I tested the final boss, my hero's spectre didn't disappear after hero's death. Turned out the boss applies hidden tokens to heroes to track if there is any hero that faces their failure. Removing this field broke this fight.
+
+I believe *m_IgnoredSkillAttributeTypes* blocks some effects from being applied. Corpses ignore tokens, quirks, and buffs. I allowed my summon to get tokens and buffs.
+
+```csv
+element_start,mmd_corpse,ActorDataClass
+m_Tags,meat,
+m_IsBattleComplete,True,
+m_Size,1,
+m_IsTickTriggerValid,True,
+m_DeathRound,30,
+m_TokenViewValid,False,
+m_IsEffectsReasonValid,False,
+m_ClearContainerTypes,BuffContainer,TokenContainer,DotContainer,
+m_IgnoredSkillAttributeTypes,QUIRK_ADD,
+m_ActorControllerType,RANDOM,
+element_end
+```
+
 Creating multiple summons is also possible. It is enough to duplicate the Resource Actor file, rename it, duplicate CSV data and change Ids.
 
 ![Summon variation](images/summon_6.png)\
 *I summoned both versions. One version has higher HP. I added the ability to generate block to one version and the ability to generate Death’s Door Armor to the other one. They both worked as expected.*
 
-I guess it is possible to set the spawn animation. For that a Playable file should be attached to the Spawn On Create Timeline field in the Resource Actor file. And the checkbox above it should be checked. But when the spawn animation is complete, the summon froze instead of switching to an idle pose. Unfortunately I didn't have enough brainpower to fix this correctly.
-
-![Animation on spawn](images/summon_7.png)\
-*Animation on spawn. I believe there is no example in Darkside that uses this option*
-
-Instead I used a different solution. In the prefab file I created an empty object, attached a Playable Director component to it and set it to play my spawn animation. It worked. But it worked only because this summon is a corpse that has no turns. If my summon was a hero, then the spawn animation would play every time hero sheet is opened.
+VFX and SFX can be added the same way. But there was a problem when this summon wasn't playing any SFX when it was on enemies' side (Act 5, Shrine of Reflection), unless it was SFX from enemies from HWM's first Shrine fight.
 
 ## CSV data III
 
@@ -3554,7 +3516,7 @@ This also needs to account for situations when an enemy attacks a hero and gets 
 
 7. On enemy's turn end the X token removes all Y tokens and converts all X tokens to Combo tokens.
 
-There is much more to explore in CSV files. I haven't tried to understand Abomination's transformations, various DoT mechanics, edge cases of forced skills, obscure fields and values.
+There is much more to explore in CSV files. I haven't tried to understand Abomination's transformations, various DoT mechanics, edge cases of forced skills, obscure fields and values, Flagellant's Toxic state.
 
 ## Testing
 
@@ -3583,6 +3545,13 @@ There is a mod that allows to skip Cultist fights before bosses:
 [Skip Mountain Cultist](https://steamcommunity.com/sharedfiles/filedetails/?id=3740321028)
 
 I haven't encountered any differences between local and Workshop versions of my mod. Uploading a mod to Workshop worked without issues.
+
+Some other mods can serve as example. Downloaded mods are stored in this folder:
+
+```C:\Program Files (x86)\Steam\steamapps\workshop\content```
+
+This folder only has files from `exports` folders, assets are not easily accessable, but CSV and localization data are open.
+
 <!-- 
 Some issues that might appear with modded heroes:
 - passing a turn zooms in a hero as if it is a normal skill
