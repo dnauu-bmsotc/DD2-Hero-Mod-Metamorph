@@ -109,7 +109,7 @@ I believe the process can be somewhat parallelized. After a general idea of the 
 2. Creating and balancing effects of skills and items
 3. Writing story and barks
 
-![Process of creating a hero](images/hero_workflow.png)\
+![Image: Process of creating a hero](images/hero_workflow.png)\
 *Don't take this image seriously I don't know how business processes are done*
 
 Some animations require knowledge of what the skill effects will be like, but many animations are quite abstract. For example, healing animations don't need to know the amount of targets to look good.
@@ -120,34 +120,34 @@ Some of the work can be copied from the game (like VFX and SFX), and some things
 
 A new hero requires new meshes, textures, and animations. Modding Tools provide examples of those, but when I tried to import one of the models to Blender, I saw a tiny figure near a big bone. Resetting armature's transforms in Pose Mode seemed to bring them back to normal size.
 
-![HWM imported to Blender](images/fbx_maya.png)\
+![Image: HWM imported to Blender](images/fbx_maya.png)\
 *Armature gains weird scale in Blender*
 
 It is more difficult with animation files. Scale transforms are keyframed, even though they don't change. They can be deleted in the Graph Editor. Then resetting armature's transforms in Pose Mode holds models in right scale throughout the animation. These are destructive changes, but their results can be used as examples.
 
-![Animation transform](images/animation_transform.png)\
+![Image: Animation transform](images/animation_transform.png)\
 *Crusader's animation after deleting scale keyframes*
 
 3D modeling required a lot more learning than I expected, but there are many tutorials. Out of many ways to create a character model, I wanted to try sculpting. I made a mistake by not making the sculpt detailed enough and by not making it in T-pose.
 
-![Sculpting steps](images/concept14.png)\
+![Image: Sculpting steps](images/concept14.png)\
 *Coming up with concept and creating 3D models*
 
 Models use Smooth Shading with Sharp seams.
 
-![Smooth Shading difference](images/smooth.png)\
+![Image: Smooth Shading difference](images/smooth.png)\
 *Model on the right doesn't use Smooth Shading, which makes polygons more visible*
 
 In the game all animations are fixed: there are no ragdolls and no cloth simulation. I don't know how animations were created, but the resulting files use bones for hair and cloth animations.
 
 Heroes can change their facial expressions. There is a bone that is attached to the mouth.
 
-![GR's armature](images/gr_mouth_bone.png)\
+![Image: GR's armature](images/gr_mouth_bone.png)\
 *GR's armature has a bone that moves the jaw*
 
 I thought that all expressions are made with bones, but when I tried to replicate the GR's meltdown expression using this bone, textures looked different on the meltdown pose vs. what I could achieve with the armature. The sides of the mouth during meltdown have more black contour.
 
-![GR's shape keys](images/gr_shape_key.png)\
+![Image: GR's shape keys](images/gr_shape_key.png)\
 *a: one of the skill poses, b: the effect of using a bone to change the expression, c: the meltdown pose*
 
 Turns out that this is done with Shape Keys. Dismas’ Shape Keys control his eyebrows. Audrey’s Shape Keys control her mouth.
@@ -156,14 +156,14 @@ I tried to use Shape Keys too, but for me personally they brought more confusion
 
 Heroes can have multiple weapon meshes. Some accessories are weapons in disguise so they can be changed separately from the main hero model.
 
-![GR's weapons](images/gr_weapons.png)\
+![Image: GR's weapons](images/gr_weapons.png)\
 *Grave Robber has four additional meshes: accessories, a bottle, a dagger, and a pickaxe*
 
 FBX file does not include everything that Blender can create, and Unity does not support everything that FBX file can store. When importing in Unity, some of information of uncommon type, for example modifiers, might be lost. Cloth simulations need to be somehow baked into bones before exporting.
 
 I tried to use Child Of and Copy Transforms constraints to attach weapons to hands. After exporting to Unity, animations worked, but something was off to them, but I can't identify what exactly.
 
-![HWM's weapons](images/hwm_weapon.png)\
+![Image: HWM's weapons](images/hwm_weapon.png)\
 *HWM's weapons are attached to his armature*
 
 At first I tried to rig my model myself, but it turned out bad, so I used the Rigify add-on instead and it became much better. I also didn't know that rotation mode of bones should be set to Euler so I was stuck with quaternions.
@@ -209,7 +209,7 @@ List of poses:
 
 Relationship poses should be offset to the left a bit.
 
-![Relationship respectful poses](images/relationship_pose.png)\
+![Image: Relationship respectful poses](images/relationship_pose.png)\
 *Ignore that the arrow on the second image is pointing to the left*
 
 Animations store frames at rate of 30 FPS, in the game they are interpolated to match the FPS.
@@ -222,26 +222,26 @@ I marked seams for UV unwrapping, didn't do the checkerboard testing even though
 
 Model's material needs to be configured to be able to handle two texture images.
 
-![Shader settings](images/shader.png)\
+![Image: Shader settings](images/shader.png)\
 *The col image is pure green and the ink image is red with a face. This material can be imported to Blender with File -> Append*
 
 The created material itself is not needed for the game, it's just a way to tell Blender how these two textures work together so it can show them in the right way.
 
 This material did its work, but I noticed that changing the threshold in the Math node changed the size of black strokes a bit. They get bigger when increasing the threshold value from 0 to 0.2 and I can not figure out why it is happening. It looks like the game uses something in-between.
 
-![Example of how black strokes change](images/threshold.png)\
+![Image: Example of how black strokes change](images/threshold.png)\
 *The top image is screenshot from the game, lower images show how my material behaves on different settings*
 
 Drawing textures in Blender can be done in Texture Paint Mode. It has some brushes, allows to mask parts of the model. Separated UV islands can be selected by hovering over an island in the UV editor and pressing L. Clicking on an Image node in the Node Editor allows to switch between col and ink images to paint on. When a Blender session is done, all changed textures must be saved manually, otherwise texture changes might be lost.
 
 Shadows can be turned off by using the Diffuse Color rendering mode.
 
-![Texturing steps](images/texturing.png)\
+![Image: Texturing steps](images/texturing.png)\
 *Texturing*
 
 DD2 mixes smooth gradients, harsh black lines and some textures. Fine textures are subtle, but noticeable, for example, on the MAA’s shield. Heroes have some parts shadowed by black strokes (arm under shoulder plates) and some parts are shadowed softly (under the red strip).
 
-![MAA's shield and ](images/maa_shield.png)\
+![Image: MAA's shield and ](images/maa_shield.png)\
 *Different shadows*
 
 The same texturing process is applicable for weapons.
@@ -270,7 +270,7 @@ Sometimes when I accidentally modified files outside my mod folder, the mod buil
 
 To create a new character (a duplicate of HWM), click Window -> EmptyCharacterCreatorWindow. It will ask for an ID. I recommend the ID to be short but unique enough to make sure the game or other mods won't have conflicts. My mod uses mmd as the ID.
 
-![Character creation tool](images/egg_1.png)\
+![Image: Character creation tool](images/egg_1.png)\
 *Character creation tool*
 
 After that a new folder with ID as its name is created. There are two folders and a building tool inside. The first folder stores graphics, the second folder (one with the _export suffix) stores gameplay and language data. The tool’s purpose is to compile all the mod data from the first folder into the second in a way that DD2 will be able to read it. After building a mod, the exports folder can be copied into the DD2's mods folder for local testing. This tool can also upload mods to Steam Workshop.
@@ -294,7 +294,7 @@ In the `F` folder there is a bunch of other folders:
 
 To make this duplicate appear in the game, click on the Steamworks file and click Build Assets in the Inspector. This tool allows to set the title, description, and preview image for the mod. This tool needs to be used every time a change is made in the `F` folder.
 
-![Steamworks tool](images/egg_2.png)\
+![Image: Steamworks tool](images/egg_2.png)\
 *Steamworks tool*
 
 When I first tried to build the mod, the console showed me “SBP ErrorException”. For some reason Unity Build Settings were set for “Dedicated Server”. Selecting “Windows, Mac, Linux” fixed this error.
@@ -309,7 +309,7 @@ C:\Program Files (x86)\Steam\steamapps\common\Darkest Dungeon® II\Darkest Dunge
 ```
 After that a new hero will be available at the Crossroads.
 
-![Placeholder hero](images/egg_3.png)\
+![Image: Placeholder hero](images/egg_3.png)\
 *Second Highwayman. The text is blue but it's just an indicator for missing localization data*
 
 This placeholder hero works, doesn't crash the game and doesn't break anything. Almost anything. There is one issue that I found about this placeholder hero: when the mod is active, the camera starts to zoom heroes when they pass a turn as if they are using a skill. I will write about this later.
@@ -322,44 +322,44 @@ This is the part I'm least comfortable with. I encountered a lot of issues, and 
 
 First, I exported my model from Blender to an FBX file. This file requires meshes (hero and weapons) and an armature.
 
-![Blender mesh export options](images/egg_4.png)\
+![Image: Blender mesh export options](images/egg_4.png)\
 *Blender's export options for meshes and an armature*
 
 In Unity files can have links to each other. If files are moved in the Unity File Explorer, links remain valid. If a file is deleted and then another file is created with the same name, links are lost. A file can be replaced using Windows File Explorer (replacing it without prior deletion) and links will not be lost. I will try to do things in Unity, restoring links between files manually.
 
-![FBX file for the mesh](images/egg_5.png)\
+![Image: FBX file for the mesh](images/egg_5.png)\
 *FBX file with meshes and an armature*
 
 Files can be added to a Unity project by dragging them from Windows Explorer to Unity Explorer. I added my FBX file, double-clicked on the egg_art_prefab file, then dragged the FBX file to the Hierarchy window. This showed my mesh intersecting with another model in the Scene Viewer.
 
-![Adding the mesh](images/egg_6.png)\
+![Image: Adding the mesh](images/egg_6.png)\
 *egg_exported is the exported from Blender FBX file*
 
 Clicking on the egg_exported element in the Hierarchy window showed its properties in the Inspector window. There I added three components: Animator, Animator State Sender, and Timeline Property Map Bhv. The Animator component required configuration. These components are copies from examples, I don't really know what they do, but they are required for animations.
 
-![Setting animation components](images/egg_7.png)\
+![Image: Setting animation components](images/egg_7.png)\
 *Adding animation components*
 
 ### Adding textures
 
 To add textures to this model, I went to the `F/materials` folder, deleted everything inside except the mat_egg file, added my texture images, then clicked on the mat_egg file, which opened its properties in the Inspector window. Textures can be dragged into the Base and Ink slots.
 
-![Adding textures](images/egg_8.png)\
+![Image: Adding textures](images/egg_8.png)\
 *My textures are called mmd here but a texture's name does not matter I believe*
 
 Then I duplicated the mat_egg file (Ctrl+C, Ctrl+V) and renamed it. The new material file is for the weapon. Textures in this material need to be switched to weapon's textures.
 
-![Multiple materials](images/egg_9.png)\
+![Image: Multiple materials](images/egg_9.png)\
 *Multiple materials*
 
 Materials can be applied to a model by dragging them from Unity Explorer to the model in the Scene View.
 
-![Applying materials](images/egg_10.png)\
+![Image: Applying materials](images/egg_10.png)\
 *Applying materials*
 
 This model lacks the black outline. It can be added in the mesh's properties by clicking a plus button in the Materials section and choosing the mat_default_character_outline file for it.
 
-![Adding the outline shader](images/egg_11.png)\
+![Image: Adding the outline shader](images/egg_11.png)\
 *Adding the outline shader*
 
 It should have added an outline to the model. But for me it didn't.
@@ -368,12 +368,12 @@ It should have added an outline to the model. But for me it didn't.
 
 If the outline works correctly, this fix is not needed.
 
-![Outline effect](images/egg_17.png)\
+![Image: Outline effect](images/egg_17.png)\
 *Left: with outline. right: without outline*
 
 The issue was connected to tangents. For some reason Unity couldn't calculate them.
 
-![Tangents](images/egg_39.png)\
+![Image: Tangents](images/egg_39.png)\
 *My model had Normals data, but not Tangents data*
 
 <!-- 
@@ -385,17 +385,17 @@ I knew the problem was with my model, because when I imported a cube, the shader
 
 For some reason my meshes didn’t have tangents data. I don’t know what that is but that was missing. The normals looked fine but the tangents display was black.
 
-![Comparing Tangents data](images/egg_12.png)\
+![Image: Comparing Tangents data](images/egg_12.png)\
 *Top left: HWM has an outline and my model doesn't even though they have the same material settings. Right side: HWM's model has Normals and Tangents data, but my model only has Normals*
 
 I made some more tests and found that with UV Spheres, the more segments there are the worse is the tangent situation. The tangent situation exactly matched the outline situation. So I knew that the outline was connected to the tangents.
 
-![Tangents on UV spheres](images/egg_13.png)\
+![Image: Tangents on UV spheres](images/egg_13.png)\
 *The more segments a UV sphere had, the worse was the outline*
 
 So my mesh was the problem. It looks like polygon size matters. There is logic behind this but without foundational knowledge, this behavior causes confusion. I reduced my model to a single cuboid, added a couple of other cubes, deformed one, and imported all three into Unity. To my surprise, tangents for my reduced model still weren't calculated.
 
-![Simple shapes and tangents](images/egg_14.png)\
+![Image: Simple shapes and tangents](images/egg_14.png)\
 *The only thing that differs between these is Scale*
 
 So now I new that the issue was with the scale of my mesh.
@@ -413,12 +413,12 @@ Possible solutions:
 
 I did the second one (unchecking the Convert Units field). It doesn't require applying Transforms, which might break animations.
 
-![Disabling units conversion](images/egg_15.png)\
+![Image: Disabling units conversion](images/egg_15.png)\
 *Disabling units conversion*
 
 This made the model too big. To fix this, I clicked on egg_exported in the Hierarchy Viewer and set the Scale fields to 0.01 in the Inspector. Unchecking Convert Units needs to be done for all animation files too.
 
-![Scaling back](images/egg_16.png)\
+![Image: Scaling back](images/egg_16.png)\
 *Scaling back to normal*
 
 Just a note. My model in Blender has adequate dimensions. The scale is close to 1, and his height is 1.96 m.
@@ -429,7 +429,7 @@ Some visual effects like stress crowns, damage/heal numbers, and buff/debuff tex
 
 I moved hit_head to the bone that controls my hero's head, moved hit_projectile with hit_body to a bone near the center of my hero. The other three anchors I moved to the root bone.
 
-![Moving Anchors](images/egg_18.png)\
+![Image: Moving Anchors](images/egg_18.png)\
 *On this image my model is on the right side but it's because the list is too long*
 
 After that, the mdl_highwayman element in the Hierarchy window needs to be deleted. Then the mdl_egg file in the Unity File Explorer needs to be deleted too.
@@ -438,7 +438,7 @@ I thought that unchecking the field left to the name in the Inspector window wou
 
 Then I built the mod using the Steamworks file and copied the `exports` folder into the game's mod folder.
 
-![Textured model in the game](images/egg_20.png)\
+![Image: Textured model in the game](images/egg_20.png)\
 *Textured model in the game*
 
 Unfortunately there was one issue.
@@ -447,31 +447,31 @@ Unfortunately there was one issue.
 
 In inns, heroes get highlighted when an item is hovering over them. For my model, the light was too strong.
 
-![Bad inn light](images/egg_21.png)\
+![Image: Bad inn light](images/egg_21.png)\
 *Don't mind the pose*
 
 I tried many things, in the end came to a weird solution. First, I clicked on the egg_exported file in the Unity File Explorer and checked Bake Axis Conversion on in the Inspector Window.
 
-![Bad inn light](images/egg_22.png)\
+![Image: Bad inn light](images/egg_22.png)\
 *First step of a weird solution*
 
 Then I clicked on the egg_exported element in the Hierarchy window and changed the settings in the Inspector window. I set X Scale to negative, Y Scale to negative, and X Rotation to 180.
 
-![Bad inn light](images/egg_23.png)\
+![Image: Bad inn light](images/egg_23.png)\
 *Second step of a weird solution*
 
 After this, the inn lighting became more sensible.
 
 Since the model was rotated, the anchors in the armature became displaced. Inverting the Z Position value for stamp_loc and pop_text_loc fixed them.
 
-![Fixed inn light](images/egg_24.png)\
+![Image: Fixed inn light](images/egg_24.png)\
 *Fixed inn light*
 
 This is a very weird solution, and I most certainly did something wrong during model export.
 
 Moreover, this is not a complete fix. Hovering over the icon in the turn order highlighted my hero stronger than other heroes.
 
-![Strong highlight in battles](images/egg_25.png)\
+![Image: Strong highlight in battles](images/egg_25.png)\
 *Strong highlight in battles*
 
 I don't know how to fix this issue but it is small enough.
@@ -486,7 +486,7 @@ If an FBX file contains only one clip, this file can be named ID@ID_name, and Un
 
 When Blender exports animations to FBX, each Action transforms into one Animation Clip.
 
-![FBX with multiple animations](images/egg_26.png)\
+![Image: FBX with multiple animations](images/egg_26.png)\
 *FBX file with two animation clips: antic and idle. Animation clips have a triangle as the icon*
 
 In Darkside animation files have various amount of clips. I think there is no difference in Unity whether there is one FBX file that has all animations in it or if there are fifty FBX files each containing one animation.
@@ -495,7 +495,7 @@ At first, I wanted to export one file with all animations, but something in Blen
 
 Exporting a single animation can be done by unchecking the NLA Strips and All Actions fields in export settings.
 
-![Animation export settings](images/egg_29.png)\
+![Image: Animation export settings](images/egg_29.png)\
 *Animation export settings*
 
 I deleted everything in the `F/animations` folder except the file named egg_animation_controller and added my animations instead.
@@ -508,12 +508,12 @@ Unity can change settings for multiple files at once. When one file is selected,
 
 Loop Time option should be checked on for animation clips that need to be looped. If a file has multiple clips, they can be configured separately by selecting them in the Clips section.
 
-![Animation looping](images/egg_31.png)\
+![Image: Animation looping](images/egg_31.png)\
 *Making animations looped*
 
 The Animation Controller file in the `F/animations` folder brings many (but not all) animations together in one network. One node has one animation clip assigned to it. Double clicking on the Animation Controller file opens its graph.
 
-![Animation Controller](images/egg_32.png)\
+![Image: Animation Controller](images/egg_32.png)\
 *Animation Controller*
 
 Since original animation files were deleted, clicking on a node will show None in the Motion field in the Inspector window. The Motion field expects an animation clip as input. If some animations are missing, the game will not break, the hero will just play an idle animation if it exists, otherwise the hero will be in a default pose.
@@ -557,7 +557,7 @@ Node names can be changed, but I think it's better not to rename nodes that aren
 
 After assigning animation clips to nodes, rebuilding the mod with Steamworks tool, and copying the `exports` folder, the game will show animations.
 
-![Animation at the Crossroads](images/egg_33.png)\
+![Image: Animation at the Crossroads](images/egg_33.png)\
 *This is a different animation that I made for a test*
 
 Adding skill animations requires more work.
@@ -567,7 +567,7 @@ Adding skill animations requires more work.
 4. Find the antic animation clip and drag it to the top row in the Timeline window, resize it so it's about 60 frames.
 5. Find the idle animation clip and drag it to the top row in the Timeline window. Set the Ease Out Duration parameter in the Inspector window for the recovery clip. This parameter can be anything, for example the Flagellant has some animations with Ease Out Duration of 16 frames and some of 24 frames.
 
-![Setting up a Playable file](images/egg_35.png)\
+![Image: Setting up a Playable file](images/egg_35.png)\
 *Setting up a Playable file*
 
 6. In the `F/data` folder duplicate the [hero id]_wicked_slice file. This is a Resource Zoom In Skill file that serves as the connector between animations, icons, and gameplay effects of a skill. There is a such file for every skill, I’ll call this type of files RZIS.
@@ -620,17 +620,17 @@ HWM and many other heroes don't have dodge recovery animation, and the default a
 
 The position of the hero and the target during animation can be adjusted in the RZIS parameters. Decreasing X value for the Performer Team moves the hero to the left. Decreasing the X value for the Enemy Team moves the enemy to the right. Decreasing both parameters moves the hero and the target apart.
 
-![Overly bright VFX](images/vfx_2.png)\
+![Image: Overly bright VFX](images/vfx_2.png)\
 *Ignore VFX*
 
 When I made a test animation using bone constraints, the transition between animations caused severe artifacts. I believe it was because my animation was too simple and Blender removed redundant frames during export. Setting the simplify to zero in Blender's export settings and disabling the Animation Compression option in Unity seemed to solve the issue.
 
-![Glitched animation](images/egg_38.png)\
+![Image: Glitched animation](images/egg_38.png)\
 *Glitched animation and probable cause*
 
 Now after rebuilding the mod and copying the `exports` folder, new animations should appear in the game.
 
-![Skill animations in game](images/egg_37.png)\
+![Image: Skill animations in game](images/egg_37.png)\
 *Skill animations in the game*
 
 Some error displays:
@@ -639,13 +639,13 @@ Some error displays:
 - Invisible skill icons. This was fixed after turning the mod off, loading the save, quitting, turning the mod back on.
 
 <!-- 
-![The main object name should match the asset filename](images/egg_34.png)\
+![Image: The main object name should match the asset filename](images/egg_34.png)\
 *There once was a warning about mismatching names. I think this happened because I copied and renamed the files in the Windows explorer instead of doing it in Unity. Letting it fix it did not cause problems*
 -->
 
 There was one issue. If the mod is enabled, any character who passes a turn gets zoomed in as if they are performing a skill.
 
-![Pass skill](images/pass_zoom.png)\
+![Image: Pass skill](images/pass_zoom.png)\
 *Passing a turn gets a zoom in like other skills*
 
 To fix this, go to the `F/shared/Data` folder, click on the pass_heal file and disable the Zoom In option in the Inspector window. Do the same for the pass_stress file.
@@ -653,24 +653,24 @@ To fix this, go to the `F/shared/Data` folder, click on the pass_heal file and d
 ## Skill icons and portraits
 Skill icons are 450×450 pixel PNG images with a transparency channel.
 
-![Skill icon](images/skill_icon_transparency.png)\
+![Image: Skill icon](images/skill_icon_transparency.png)\
 *Skill icons are mostly transparent*
 
 Borders of skill icons in the game are pushed a little inward (about 35 pixel margin) to give icons more depth. The art has a soft black semi-transparent black outline.
 
 <!-- 
-![Skill icon drawing](images/skill_icon.png)\
+![Image: Skill icon drawing](images/skill_icon.png)\
 *I wanted the icons to stand out by the colors, but I couldn't balance the details right so the icons stand out more than I wanted*
 -->
 
 If the icon is big enough to overlap the frame, transparency might look weird. I don't remember if transparency matters closer to the center of an icon. Relationship buffs and debuffs add effects outside the border only.
 
-![My skill icon](images/skill_icon_transparency_2.png)\
+![Image: My skill icon](images/skill_icon_transparency_2.png)\
 *In one of my skill icons the frame is visible under the mushroom*
 
 In Darkside skill icons are stored in the `F/icons` folder. The image type needs to be changed to Sprite before it can be used in RZIS files.
 
-![Converting image to a sprite](images/skill_icon_sprite.png)\
+![Image: Converting image to a sprite](images/skill_icon_sprite.png)\
 *Converting image into a sprite*
 
 There are some Sprite Atlases in the `F/icons` folder. I guess they are supposed to be used but I encountered no issues from ignoring them.
@@ -679,7 +679,7 @@ Portraits are stored in the `F/portraits`, `F/shared`, and `F/hero_story` folder
 
 These sprites need to be connected to the hero Resource Actor file in the `F/data` folder. If they are not connected to this file, the game will show white squares instead.
 
-![Adding portraits](images/portraits.png)\
+![Image: Adding portraits](images/portraits.png)\
 *There is a column to the right that is filled with `<none>`s. I believe this is where the Sprite Atlas thing can be applied. But the UI is confusing so I didn’t do it*
 
 Portraits for Story Choices and Hospitals consist of three parts. Reference Sprite is the base image, Glow Reference Sprite is the misty aura around the hero (the aura animation is handled by the game, the image by itself is static). Highlight Reference is the image with harsh rim light.
@@ -696,7 +696,7 @@ Then I opened the art_prefab file of my hero and dragged the VFX file to the arm
 
 For some reason the VFX elements are scattered in space, so I clicked on each element of the VFX and in the Inspector window set Position values to zeros. It gathered effects in the origin of coordinates, but they weren't aligned with any animations.
 
-![VFX elements scattered in space](images/vfx_6.png)\
+![Image: VFX elements scattered in space](images/vfx_6.png)\
 *The fact that they are so dispositioned tells me that this isn't the supposed way to work with VFX*
 
 To preview what the VFX in the Playable file is going to look like:
@@ -708,7 +708,7 @@ To preview what the VFX in the Playable file is going to look like:
 6. In the Timeline window click on the white dot in a circle next to the “None (Animator)” and select the model.
 7. If animations aren't played on dragging the timeline cursor, remove the Animation Clips from the timeline and reattach them.
 
-![](images/vfx_1.png)\
+![Image: ](images/vfx_1.png)\
 *Here the VFX duration is too long which led to my hero being stuck in one pose until the VFX was finished*
 
 To edit the VFX position while keeping the animation, press on the lock button on the top right of the Timeline window.
@@ -725,7 +725,7 @@ There are also markers (signals) under the timeline scale. They can be used to a
 
 These target-attached VFXs are a bit different. They don’t need to be attached to the art_prefab file. And they need to be edited inside their prefab, not in the hero’s prefab. To attach a target effect, click on a marker and slot the prefab file in the Prefab field in the Inspector window.
 
-![Target-attached VFX](images/vfx_7.png)\
+![Image: Target-attached VFX](images/vfx_7.png)\
 *The VFX’s pinpoint is aligned with a target’s mark in target’s skeleton. Here the effect is attached to the hit_projectile target. And the pinpoint of the effect is at it’s bottom. So in the game the effect is played off the ground.*
 
 To adjust where the target effect will be played, Bone Path field is used. It can be changed to hit_root for ground effects, hit_projectile for body effects, or hit_head for head effects.
@@ -736,7 +736,7 @@ When I copied VFXs from the `Assets/Data/Characters/Shared/vfx_shared_prefabs` f
 
 There are also VFX that play during antic animations (HWM's blade shining, or PD's chemicals chemicing). I didn’t do them for my hero but I believe the assignment of these VFX is somehow related to the Toggle Active State By Animator State Component in VFX elements in hero's prefab file.
 
-![Antic VFX](images/vfx_5.png)\
+![Image: Antic VFX](images/vfx_5.png)\
 *I am not sure that this component is what triggers the antic VFX, but I found no other connections*
 
 Once I renamed my VFX files and they suddenly disappeared from the game. I am not sure what exactly happened but reattaching VFX to the timeline the problem was fixed.
@@ -751,12 +751,12 @@ SFX of a skill includes all three parts: antic sounds, execution sounds, recover
 
 After selecting a RZIS, the Inspector window will show the Override Sfx Skill field. It needs to be filled with the RZIS file of the skill that has suitable SFX.
 
-![Selecting skill SFX](images/sfx_1.png)\
+![Image: Selecting skill SFX](images/sfx_1.png)\
 *Setting the SFX skill source*
 
 After that I selected the hero’s Resource Actor file and in the Inspector window there was the Override Sfx Subpath Resource Actor field. I changed it to the Resource Actor file of the hero from whom SFX is copied.
 
-![Selecting hero SFX](images/sfx_2.png)\
+![Image: Selecting hero SFX](images/sfx_2.png)\
 *Setting the SFX hero source*
 
 I don't know how to listen to audio outside the game.
@@ -817,12 +817,12 @@ This book has multiple sheets for different items: trinket, rest (inn item), com
 
 I will focus on the inn item creation. The corresponding sheet looks like this:
 
-![Inn item sheet](images/csv_2.png)\
+![Image: Inn item sheet](images/csv_2.png)\
 *Inn item sheet*
 
 But first I will write about some technical issues that I encountered using this tool. For some reason the export buttons were completely unresponsive no matter what I did. The workaround is to open the Visual Basic tool in Excel's Developer tab. Double clicking on Sheet8 (rest) opened the code. Here the button functionality can be called directly by selecting the ExportGroupedButton_Click() function and clicking on the run button on top. This will create a CSV file in a folder. This CSV file should be placed in the `exports` folder so the game can find it.
 
-![Calling the function directly](images/csv_1.png)\
+![Image: Calling the function directly](images/csv_1.png)\
 *Calling the function directly*
 
 One more technical trouble emerged because I live in a country that uses comma as the decimal separator (probabilities are written in decimal form). This is a problem because the game uses commas to separate different values in CSV files. There is a setting in Excel that is supposed to fix this behaviour but it didn't work for me. This can be fixed by finding this line in the code:
@@ -840,7 +840,7 @@ End If
 
 Getting back on track, here is the sheet again.
 
-![Inn item sheet](images/csv_2.png)\
+![Image: Inn item sheet](images/csv_2.png)\
 *The same table*
 
 This sheet describes six elements.
@@ -881,7 +881,7 @@ Another way to connect elements is to use the same ID. Only some element types s
 
 The last element is **Inn_valley** element. *LootTable* elements have special behavior. CSV file can have multiple LootTable elements with a shared ID, and the game will merge all these elements into one table. In this example, the **Inn_valley** element says that the Valley Inn will have this new item for sale with 100% chance. The game already **Inn_valley** table with lots of items for sale, but nothing will be overwritten, the game will merge these elements, extending the inn store.
 
-![RH's example inn item](images/csv_3.png)\
+![Image: RH's example inn item](images/csv_3.png)\
 *Connections between elements of the example item*
 
 After executing this tool's code a CSV file appears with the following content:
@@ -940,19 +940,19 @@ This text describes the same six elements. The 32 relics cost element isn't gene
 
 A single CSV file can add an item to the inn's store, but it can't assign any graphics to it. It's icon will be a white square. ItemCreationTool in Darkside can be used to create an item with an icon.
 
-![Item Creation Tool](images/sig_1.png)\
+![Image: Item Creation Tool](images/sig_1.png)\
 *Tool for item creation*
 
 This tool created `mmd_penicillin` folder in the `UserMods` folder. Inside, there is an `Art` folder, a Resource Item file, and a Prefab Asset file.
 
 The `Art` folder has some example sprites. They can be deleted. After adding a custom image, it needs to be configured in the Inspector window. Texture Type needs to be set to Sprite, Sprite Mode to Single, and Pixels Per Unit to 1.
 
-![Adding a sprite](images/sig_3.png)\
+![Image: Adding a sprite](images/sig_3.png)\
 *Ignore additional sprites in the folder*
 
 Double clicking on the Prefab Asset file opens it in the Hierarchy window. In this window there is a default_item_icon element. Clicking on it will open it's properties in the Inspector window, where a custom sprite can be attached.
 
-![Assigning the sprite](images/sig_4.png)\
+![Image: Assigning the sprite](images/sig_4.png)\
 *Assigning the sprite to the Prefab Asset*
 
 The Resource Item is already connected to the Prefab Asset so no aditional changes are required.
@@ -993,12 +993,12 @@ I needed to search for a signature item to see how it should be done. Since ther
 
 There is also a VSC extension that is made for highlighting DD2 CSV data: [DD2 CSV Syntax](https://marketplace.visualstudio.com/items?itemName=PHombie.dd2-csv-syntax).
 
-![DD2 CSV Data extension](images/dd2csv.png)\
+![Image: DD2 CSV Data extension](images/dd2csv.png)\
 *DD2 CSV Data syntax highlighting*
 
 I searched for "remedy" to find PG's signature item. It produced a long list of entries.
 
-![VSC search](images/sig_5.png)\
+![Image: VSC search](images/sig_5.png)\
 *Search results*
 
 Five files contained that word. These files are designated for effect definitions, buff definitions, item definitions, loot chances, and run goal rewards.
@@ -1077,7 +1077,7 @@ element_end
 
 The *all_conditions* field tells what targets will roll for this effect. It is set to **target_is_diseased_hidden** which means the effect will roll only for heroes that have a disease. It is called hidden to emphasize that this condition isn't showed in the tooltip. I believe this line is optional here because nothing will happen if the game will try to remove a disease from a hero that isn't diseased. Conditions listed in *Effect* elements don't block items from being used.
 
-![Experimental remedy](images/remedy.png)\
+![Image: Experimental remedy](images/remedy.png)\
 *Heroes can use Experimental Remedy even if they have full HP and don't have diseases or negative quirks*
 
 The second effect is disease RES buff. This one is not new.
@@ -1186,7 +1186,7 @@ element_end
 
 After building the mod using the Steamwork tool and copying the `exports` folder, the item appeared in the inn shop.
 
-![Signature inn item in the game](images/sig_2.png)\
+![Image: Signature inn item in the game](images/sig_2.png)\
 *Connections between elements. The screenshot is old so IDs and numbers are different*
 
 This method of searching through CSV files, copying and modifying elements was my primary way of adding gameplay elements to my hero. If I wanted to create something, I tried to remember if the game already has something similar. And if it does, it meant I can probably implement something similar.
@@ -1197,14 +1197,14 @@ A trinket element connects to *Buff* elements via an intermediary *ActorDataExte
 
 For a *Buff* element to do something it requires additional elements: *ActorDatatStats*, *ActorDataEffects*, or *ActorEffectTrigger* elements.
 
-![Trinket elements scheme](images/trinket_1.png)\
+![Image: Trinket elements scheme](images/trinket_1.png)\
 *General scheme of trinket elements*
 
 *ActorDataStats* type is a more simple type among them. Elements of this type can increase or decrease hero's stats, buff or debuff DOT dealt, etc.
 
 An example of a trinket that only uses ActorDataStats elements for buffs is the Sharpness Charm trinket.
 
-![Sharpness Charm trinket description](images/trinket_3.png)\
+![Image: Sharpness Charm trinket description](images/trinket_3.png)\
 *Vague Sharpness Charm trinket*
 
 Here is its definition in CSV files, without cost elements.
@@ -1265,7 +1265,7 @@ HWM has seven buffs in his *ActorDataExternalBuffs* element. They all have durat
 
 Many trinkets apply effects on turn start, on battle start, on round end, on being hit, etc. For these effects an *ActorDataEffects* element is required. For example, the Sacred Scribblings trinket can apply a vulnerability token on turn start.
 
-![Sacred Scribblings trinket description](images/trinket_2.png)\
+![Image: Sacred Scribblings trinket description](images/trinket_2.png)\
 *Sacred Scribblings trinket*
 
 Here is its definition in CSV files, without cost elements.
@@ -1362,7 +1362,7 @@ Sometimes even these are not enough. The *ActorEffectTrigger* type provides even
 
 An example of a trinket that targets neighboring allies is the Hastening History trinket.
 
-![Hastening History trinket description](images/trinket_4.png)\
+![Image: Hastening History trinket description](images/trinket_4.png)\
 *Hastening History trinket*
 
 Here is its definition in CSV files, without cost elements.
@@ -1528,19 +1528,19 @@ At first I was confused because seemingly the same effect can be achieved by set
 
 Turns out, the application of blight needs to account the blight RES Piercing stat. If the *m_ActorEffectTriggerSourceType* were set to *target*, then the Piercing stat would be taken from the targeted corpse. To make it use the Flagellant's Piercing stat this field should be set to *performer*.
 
-![A little experiment](images/fester_1.png)\
+![Image: A little experiment](images/fester_1.png)\
 *I conducted a little experiment: I created two skills that are similar to Fester but one of them used *target* for *m_ActorEffectTriggerSourceType*. Then I gave +2000% Blight RES Piercing to a hero, +1000% Blight RES to a Lost Soul, and +3000% Blight RES to a Widow. A Lost Soul between them wasn't buffed. The skill, that used the performer value, was able to apply Blight to a target with less Blight RES. The second skill, that used the target value, wasn't able to apply Blight to any target*
 
 Meaning of *ActorEffectTrigger*'s fields seems to alter a lot depending on what is set in the *m_ActorEffectType* field. I did some testing and gathered this data:
 
-![Trigger mess](images/aet.png)\
+![Image: Trigger mess](images/aet.png)\
 *ActorEffectTrigger elements behave differently depending on what they are attached to (they can be attached to a skill, or they can be attached as a hero buff). In this image, one big square stands for one combination of m_ActorEffectType value and attachment place. For example, the square that has "target, one-sided effect" shows what happened when I tried to use ActorEffectTrigger to apply a one-sided effect, set its type to target, and attached it to a skill.*
 
 I can't figure out a general rule for this data, it looks so weird.
 
 Some trinkets (like Cursed Coin or Hag's Hoard) have some kind of scaling of their effects. The Cursed Coin trinket increases damage per positive token. The Hag's Hoard trinket increases healing received per positive token.
 
-![Cursed Coin trinket description](images/trinket_7.png)\
+![Image: Cursed Coin trinket description](images/trinket_7.png)\
 *Cursed Coin trinket*
 
 It looks like it is achieved through *Condition* elements. If a condition element is set to *GREATER_THAN*, *GREATER_THAN_OR_EQUAL*, *LESS_THAN*, *LESS_THAN_OR_EQUAL*, *EQUAL*, or *BOOL*, then the effect will be applied at max once. But with the *MULTIPLE* value it is different.
@@ -1573,7 +1573,7 @@ Trinkets can be created the same way as inn items. In Darkside they are almost t
 
 Since I already had a signature inn item, I duplicated the Prefab file and the Resource Item file three times and renamed them.
 
-![Hero trinkets](images/trinket_5.png)\
+![Image: Hero trinkets](images/trinket_5.png)\
 *Inn items and trinkets can be placed inside the main mod folder without any issues*
 
 I added my images in the `Art` folder, changed their type to Sprite, then connected each Resource Item file to its according Prefab file.
@@ -1595,7 +1595,7 @@ Hero trinkets have some effects that general trinkets don't. Almost all hero tri
 
 There are two ways to make a trinket affect specific skills. GR's His Rings trinket uses both of them.
 
-![His Rings trinket description](images/trinket_6.png)\
+![Image: His Rings trinket description](images/trinket_6.png)\
 *His Rings trinket*
 
 Here is a shortened definition of this trinket, without cost elements or irrelevant buffs.
@@ -1676,7 +1676,7 @@ An effect can be limited to a specific skill by using the *all_conditions* field
 
 A skill element starts with an *ActorDataSkill* element. Same as trinkets and inn items, this element needs to be connected to other elements to obtain more interesting properties.
 
-![General scheme of skill elements](images/path_1.png)\
+![Image: General scheme of skill elements](images/path_1.png)\
 *General scheme of skill elements*
 
 I described adding custom skills in the section about importing Animations. But it is possible to do without touching animations.
@@ -1685,12 +1685,12 @@ I described adding custom skills in the section about importing Animations. But 
 2. In the `F/data` folder in Darkside rename one of the RZIS files to the ID of the *ActorDataSkill* element. These should match.
 3. If this was one of the HWM's five starting skills, then find the *SkillSet* element in hero's CSV file and replace one of the IDs inside to the ID of the custom skill.
 
-![Custom skill from scratch](images/path_3.png)\
+![Image: Custom skill from scratch](images/path_3.png)\
 *I created a new character and did these three steps and it worked. The skill tooltip is empty because I didn't add anything but basic data*
 
 I will explain a couple of simple skills. The first one is HWM's Wicked Slice.
 
-![Wicked Slice skill description](images/path_2.png)\
+![Image: Wicked Slice skill description](images/path_2.png)\
 *Wicked Slice skill*
 
 Here is the definition of unupgraded version of the skill:
@@ -1772,7 +1772,7 @@ element_end
 
 Skills can apply buffs in a similar way the inn items do, using intermediary *Effect* elements to apply buffs.
 
-![Absinthe description](images/path_4.png)\
+![Image: Absinthe description](images/path_4.png)\
 *Absinthe skill*
 
 Here's the definition of the Venomdrop's Absinthe skill:
@@ -1865,12 +1865,12 @@ Some buffs can be applied directly to the skill. Usually these are combo buffs t
 
 *m_Tags* field can be used to add visual indicators to the sides of a healthbar. If a buff is tagged as *buff*, then it will add an indicator to the left to a healthbar. If a buff is tagged as *debuff*, then it will add an indicator to the right to a healthbar. I guess tagging a negative buff as *debuff* will also allow targets to resist this buff.
 
-![Debuff tag](images/debuff_tag.png)\
+![Image: Debuff tag](images/debuff_tag.png)\
 *A buff tagged as debuff*
 
 The Hatchetman's Finishing Blow skill deals double damage if the target has a Combo token.
 
-![Hatchetman's skill description](images/path_5.png)\
+![Image: Hatchetman's skill description](images/path_5.png)\
 *Hatchetman's skill*
 
 Here's the CSV definition of this skill.
@@ -1940,7 +1940,7 @@ I don't know what *m_IsBlockPass* is but it is always used when a skill is force
 
 Warlock's Chaotic Offering grants one Unchecked Power on Round Start if this skill is equipped.
 
-![Chaotic Offering](images/chaotic_offering.png)\
+![Image: Chaotic Offering](images/chaotic_offering.png)\
 *Warlock's Chaotic Offering*
 
 When the Warlock enters a combat, he tries to apply a buff to self. If he has the skill equipped, the buff is applied, otherwise it isn't. This buff gives one Uchecked Power at Round Start. Equipment check is defined by a *Condition* element.
@@ -2041,7 +2041,7 @@ element_end
 
 **path_descriptor_hwy_sharpshot** here is a fake buff that just marks the place where path description will be placed.
 
-![Path description](images/path_7.png)\
+![Image: Path description](images/path_7.png)\
 *Path description in the localization file*
 
 Path buffs are added in various ways. For example Yellowhand’s bleed on riposte is a regular effect on the riposte skill. This effect is present in all HWM paths, but inside of the effect there is a condition that checks if the performer has Yellowhand’s tag.
@@ -2172,7 +2172,7 @@ Even though the connections are established, the game wants more clarification.
 3. Paste the RZIS file inside the path folder.
 4. Rename the file to match the ID of the skill.
 
-![Folder with RZIS files](images/path_6.png)\
+![Image: Folder with RZIS files](images/path_6.png)\
 *RZIS files of path skills*
 
 The upgraded versions of path skills don't need separate RZIS files.
@@ -2190,7 +2190,7 @@ The guide focuses on creating multiple tokens but creating one token is similar:
 6. Move the created tmp_[token id] file in the `Sprite Assets` folder.
 7. Inspect the file, set BX to 0, set BY to the same value as H.
 
-![Fixing tokens position](images/token_5.png)\
+![Image: Fixing tokens position](images/token_5.png)\
 *If this isn't done, the token sprite will be cropped in tooltips*
 
 8. Build the mod using the Steamworks tool and copy the `exports` folder.
@@ -2198,7 +2198,7 @@ The guide focuses on creating multiple tokens but creating one token is similar:
 
 After that the token should appear in the Glossary and in tooltips of skills that use this token.
 
-![Happi tokens](images/token_4.png)\
+![Image: Happi tokens](images/token_4.png)\
 *The name of the token can be set in the localization file.*
 
 To make a token positional the “m_IsRankToken,True,” line needs to be added to the *Token* element. Then the “m_IsLockedTeamPosition,True,” line needs to be added in all *Effect* elements that apply this token. The first line is for the visual square bracket under the token only.
@@ -2222,12 +2222,12 @@ To merge a token mod with my main mod, I copied the contents of the localization
 
 Everything was good except the tooltips. They were showing text instead of icons.
 
-![Token tooltip](images/token_2.png)\
+![Image: Token tooltip](images/token_2.png)\
 *The tooltip just showed raw text from my localization file instead of substituting it with my image*
 
 I changed the group of the `Sprite Assets` folder to the main mod's group. Then I wrote Sprite Assets in the Addressable field instead of what was there. This fixed the problem
 
-![Moving tokens folder](images/token_1.png)\
+![Image: Moving tokens folder](images/token_1.png)\
 *It looks like it doesn’t really matter to what folder the token data is being moved to as long as Addressables and Groups are correct*
 
 It is not a complete solution to the merging problem because every time I used the Verify Integrity function in Steam it reset the Addressable field and the Group. Setting these fields back made tokens work right again.
@@ -2308,7 +2308,7 @@ buff_combo_increase_bleed_amount_2=<color=#{buff}>+2 <sprite name={q}icon_bleed{
 
 One way of localizing is to look at the blue text in the game and copy it to the localization file. For example I had this blue text:
 
-![Missing localization](images/loc_10.png)\
+![Image: Missing localization](images/loc_10.png)\
 *Missing localization*
 
 I wrote this in my localization file:
@@ -2317,7 +2317,7 @@ effect_tooltip_loot_id_mmd_forager_loot=Get an Inn Item (50%)
 ```
 And it fixed it.
 
-![Fixed localization](images/loc_11.png)\
+![Image: Fixed localization](images/loc_11.png)\
 *Fixed localization*
 
 This is an intuitive way of localizing, but sometimes it is not enough.
@@ -2466,7 +2466,7 @@ It is better to keep tooltip adjustments minimal, because if a skill is changed,
 
 I will explain how I fixed some of my skills.
 
-![Wrong tooltip 1](images/loc_2.png)\
+![Image: Wrong tooltip 1](images/loc_2.png)\
 *This tooltip misses a rank condition on the second line (this skill has the same effect for enemies and allies). Skill tooltips often break when a skill has multiple conditions*
 
 Since there is no blue text apart from the skill name, a deeper dive into localization syntax is required. The rules for adjusting tooltips are written in the beginning of this file:
@@ -2489,7 +2489,7 @@ These rules explain how to get the localization Ids of skills, effects, buffs, c
 
 Entire effect list phrase can be a bit confusing. The skill that I showed has two effect lists:
 
-![Loc misleading](images/loc_12.png)\
+![Image: Loc misleading](images/loc_12.png)\
 *At first I thought entire effect list means everything in the picture*
 
 I tried to use this effect list override. `[ActorDataSkill ID]` part is the ID of the skill, `[ActorDataEffectType]` can be substituted with *target*, *performer*, *enemy_team*, *friendly_team*, etc. I wrote these lines in the localization file:
@@ -2500,7 +2500,7 @@ effect_skill_mmd_disturbing_spores_friendly_team_override=<color=#{notable}>Ally
 
 This gave me the following result:
 
-![Skill 1 fixed](images/loc_4.png)\
+![Image: Skill 1 fixed](images/loc_4.png)\
 *This is embarassing but this is an edited image. I forgot to the closing `</color>` element and the tooltip was wrong*
 
 An alternative way to fix a tooltip is to use the second type of override (Effect override). `EffectDefinition ID` is the ID of the *Effect* element. This time there is only one localization line as this skill uses one effect for both teams.
@@ -2509,7 +2509,7 @@ effect_skill_mmd_disturbing_spores_rank_1_effect_override=<color=#{notable}>Rank
 ```
 This changed the tooltip into this:
 
-![Skill 2 tooltip alternative fix but not there yet](images/loc_3.png)\
+![Image: Skill 2 tooltip alternative fix but not there yet](images/loc_3.png)\
 *I think this way is a bit better because it uses less overriding*
 
 It almost worked, I just needed to remove the generated condition explanation. This is easily achievable with the *m_IsVisible* field in CSV data:
@@ -2522,12 +2522,12 @@ element_end
 ```
 After this the tooltip looked like this:
 
-![Skill 2 tooltip alternative fix](images/loc_5.png)\
+![Image: Skill 2 tooltip alternative fix](images/loc_5.png)\
 *This skill was fixed. But it didn't last long because positional tokens are weird and I had to remake the skill*
 
 The next weird skill that I had was the Slowdown. Here the problem was the opposite. I made it so the skill ignores the Stun RES, but the tooltip wasn’t showing it.
 
-![Skill 2 tooltip](images/loc_6.png)\
+![Image: Skill 2 tooltip](images/loc_6.png)\
 *Some details aren't generated by the tooltip engine*
 
 The application of deduction yielded me the conclusion that additional information is supplemented via fake buffs and effects. For example there is a buff called **execution_1_tooltip**, and it has a condition **always_return_false_hidden**, which means this buff is never active. One of the localization files says:
@@ -2551,7 +2551,7 @@ performer_buff_desc_mmd_slowdown_fake_ignore_resist_override=Ignores  RES
 
 Now the tooltip has a new note.
 
-![Skill 2 fixed](images/loc_7.png)\
+![Image: Skill 2 fixed](images/loc_7.png)\
 *I forgot to make this skill a free action*
 
 This hassle with fake buffs is only required if additional information needs to be printed above effect lists (in the same section where max usage info is printed)
@@ -2833,12 +2833,12 @@ Three things are to be configured here.
 
 I don't know why but I couldn't make the ghost use SFX other than the example SFX.
 
-![Ghost of the past sounds](images/ghost_2.png)\
+![Image: Ghost of the past sounds](images/ghost_2.png)\
 *Audio settings in Resource Actor and RZIS example files*
 
 Now the boss will summon a new ghost.
 
-![Ghost of the past](images/ghost_1.png)\
+![Image: Ghost of the past](images/ghost_1.png)\
 *I forgot that Ghosts have a VFX under them so it doesn't look like they just float. Later I copied this effect from another hero's ghost*
 
 The localization file needs these lines:
@@ -2932,7 +2932,7 @@ To create this enemy,
 9. Then I copied a Resource Actor file of a corpse and renamed it (ID of the enemy).
 10. Inspected it, connected my prefab file.
 
-![Custom enemy](images/shrine_2.png)\
+![Image: Custom enemy](images/shrine_2.png)\
 *At first I tried to use images with text instead of text elements, but it looked bad in the game*
 
 To lock a skill behind the Shrine of Reflection, the *m_ProfileUnlockId* field is used.
@@ -2946,7 +2946,7 @@ element_end
 
 This is how it looks in the game.
 
-![First reflection](images/shrine_3.png)\
+![Image: First reflection](images/shrine_3.png)\
 *Each block of text required separate prefab and resource files, but it might be possible to change text without duplicating files, I just don't know how*
 
 The second reflection configuration has a couple of differences. First, the *all_conditions* field needs a second condition. It needs to require previous reflection completed.
@@ -2998,7 +2998,7 @@ element_end
 ```
 **mmd_corpse_story** is a modification of my custom creature that I will write about later.
 
-![Second reflection](images/shrine_4.png)\
+![Image: Second reflection](images/shrine_4.png)\
 *I didn't think this fight through, it is not a riddle, just randomness*
 
 Heroes have barks before and after reflection sessions. They are set in the localization file.
@@ -3044,7 +3044,7 @@ C:\Users\xxx\AppData\LocalLow\RedHook\Darkest Dungeon II\SaveFiles\xxx\profiles\
 ```
 Search for the hero ID and locate the unlocks. Delete unlock lines. Steam Cloud synchronization needs to be turned off because it will restore deleted lines.
 
-![Resetting shrine of reflection](images/shrine_1.png)\
+![Image: Resetting shrine of reflection](images/shrine_1.png)\
 *Resetting Shrine of Reflection progress*
 
 It is possible to reentry a Shrine of Reflection node after completing it. To do this go to this folder:
@@ -3059,7 +3059,7 @@ If somehow a latter Shrine of Reflection session is resolved while the previous 
 
 Wanderer paths have a candle bonus for reaching the second inn.
 
-![Wanderer bonus](images/goal_1.png)\
+![Image: Wanderer bonus](images/goal_1.png)\
 *The left image is without the Wanderer bonus*
 
 This can be set in CSV files:
@@ -3203,12 +3203,12 @@ Since I didn’t use any scale references in Blender the model was too big. Fort
 
 Every hero has a separate corpse even though all corpses look the same. So adding another corpse does't affect other ones.
 
-![Summon prefab](images/summon_2.png)\
+![Image: Summon prefab](images/summon_2.png)\
 *Summon's prefab*
 
 Then I created an Animation controller and added idle, impact, and antic animations.
 
-![Summon animation controller](images/summon_4.png)\
+![Image: Summon animation controller](images/summon_4.png)\
 *There are two attacks because this controller is used by two different summons*
 
 In the `nested_classes` folder there was a Resource Actor for my hero’s corpse. I switched the prefab reference to my new prefab file. So when my hero dies this new creature appears instead of a grave.
@@ -3217,12 +3217,12 @@ To give it a skill I copied an attack RZIS file, renamed it, attached an icon sp
 
 To add it a spawn animation, I created a Playable file, and attached it to the summon's Resource Actor file.
 
-![Adding a spawn animation](images/summon_10.png)\
+![Image: Adding a spawn animation](images/summon_10.png)\
 *Adding a spawn animation*
 
 But when I summoned it, it played a summon animation and froze. It can be fixed by setting the clip's Post-Extrapolate field to None in the Playable file.
 
-![Fixing a spawn animation](images/summon_11.png)\
+![Image: Fixing a spawn animation](images/summon_11.png)\
 *Fixing a spawn animation*
 
 A summoning skill can be defined this way:
@@ -3254,7 +3254,7 @@ There was a glitch. When the summon killed an enemy, this enemy turned into a co
 
 Opening character sheet while it's the summon's turn shows a very broken sheet.
 
-![Broken sheet](images/summon_5.png)\
+![Image: Broken sheet](images/summon_5.png)\
 *No stats, no quirks, no names. Metamorph was replaced with “actor”. Everything was purple instead of blue*
 
 I would guess that since this summon is not a hero, this sheet can't be fixed. I see several potential solutions:
@@ -3293,7 +3293,7 @@ element_end
 
 Creating multiple summons is also possible. It is enough to duplicate the Resource Actor file, rename it, duplicate CSV data and change Ids.
 
-![Summon variation](images/summon_6.png)\
+![Image: Summon variation](images/summon_6.png)\
 *I summoned both versions. One version has higher HP. I added the ability to generate block to one version and the ability to generate Death’s Door Armor to the other one. They both worked as expected.*
 
 VFX and SFX can be added the same way. But there was a problem when this summon wasn't playing any SFX when it was on enemies' side (Act 5, Shrine of Reflection), unless it was SFX from enemies from HWM's first Shrine fight.
@@ -3302,7 +3302,7 @@ VFX and SFX can be added the same way. But there was a problem when this summon 
 
 I will try to explain how the Sharpshoot's Double Tap skill and one of the Tribecaller's passives work, then I will write about my Disturbing Spores skill and Cursed Spores token. CSV definitions of these are a bit complicated.
 
-![Sharpshoot's Double Tap skill description](images/metatoken_4.png)\
+![Image: Sharpshoot's Double Tap skill description](images/metatoken_4.png)\
 *Sharpshoot's Double Tap*
 
 This Second Shot mechanic is actually just an extra action with a lot of limitations. What is interesting is how these limitations were achieved. I believe this skill works this way:
@@ -3422,17 +3422,17 @@ element_end
 ```
 The ID of this token is shared with the ID of the second shot skill. I believe this is how a token can add a foreign skill to a hero. I don't know why but this skill's *ActorDataEffects* file is connected not via the same ID, but through a *m_ActorDataEffectsId* field.
 
-![Scheme of Sharpshoot's Double Tap](images/metatoken_5.png)\
+![Image: Scheme of Sharpshoot's Double Tap](images/metatoken_5.png)\
 *Scheme of the Sharpshoot's Double Tap skill*
 
 Many restrictions of this skill can be removed. This allows, for example, to select an enemy target and a friendly target in one skill. Not simultaneously, but still.
 
-<video src="./images/hp_transfer.mp4" width="100%" controls></video>\
+![Video: Tribecaller](images/hp_transfer.webp)\
 *Damaging an enemy and healing an ally in "one turn"*
 
 The Tribecaller enemy from K1 has a passive: when an adjacent ally is hit, the Tribecaller gets one Berserk token.
 
-![Tribecaller](images/tribecaller.png)\
+![Image: Tribecaller](images/tribecaller.png)\
 *Tribecaller's passive*
 
 The problem here is that this *on_hit_as_target_to_target* event is not actually triggered on the Tribecaller when an ally is hit. This event can only be triggered when the bearer of the buff is hit, it doesn't care for allies.
@@ -3482,12 +3482,12 @@ Rank-locked token behaviour is also not very clear when an enemy takes more than
 
 This is why my Hyphae Rock skill has its limitation. When I tried to bypass it, my first idea was to replace the corpses with something else. Like one of the infernal torches transforms corpses into Carion Eaters. Unfortunately I couldn’t implement it. I think it is because when an enemy dies they kind of disappear and a corpse appears on their place and the link between them is lost and it's not possible to know what corpse to transform.
 
-![Heavy Cage skill description](images/metatoken_2.png)\
+![Image: Heavy Cage skill description](images/metatoken_2.png)\
 *I had a choice between adding this limitation and removing all corpses behind the enemy*
 
 For my Disturbing Spores skill I wanted to assign positional tokens to the first ranks no matter what. So I decided that the skill should clear corpses.
 
-![Disturbing Spores skill description](images/metatoken_3.png)\
+![Image: Disturbing Spores skill description](images/metatoken_3.png)\
 *Disturbing Spores skill*
 
 The problem: when I tried to clear corpses and apply a positional token at the same time, the corpses were cleared but if the first rank was occupied with a corpse, then the token wouldn't be applied. It often lead to asymmetric situations where only hero's team gained a positional token. Order of effects didn't make anything different.
@@ -3501,7 +3501,7 @@ There is actually a something that is supposed to achieve this without intermedi
 
 The Cursed Spores token is applies a Combo token to a target when this target is hit. The problem was that if a skill removes a Combo token then my effect doesn't reapply it. I guess when the game gets instructions to both add and remove a certain token then this token won't be applied. Or with a block token: if the game gets instructions to remove block tokens, add block tokens, and add vulnerability token at the same time, then the result would be a vulnerability token. But it's just a guess, I didn't test it.
 
-![Cursed Spores token description](images/metatoken_6.png)\
+![Image: Cursed Spores token description](images/metatoken_6.png)\
 *Cursed Spores token*
 
 The challenge here is that I don't know who hits a cursed target. In the previous case I knew that the performer was the Metamorph and his turn is going to end right now. With this token I can't just wait until the Metamorph's turn. I had to change the tactic a bit:
@@ -3597,7 +3597,7 @@ To change ID of a hero, all filenames in every folder and prefab should be chang
 1. Acquire the free [Mulligan Renamer](https://assetstore.unity.com/packages/tools/utilities/mulligan-renamer-99843) asset from Unity AssetStore.
 2. Install it in the Darkside project.
 
-![Mulligan renamer](images/id_1.png)\
+![Image: Mulligan renamer](images/id_1.png)\
 *Mulligan Renamer*
 
 3. Open the renamer through Window -> Red Blue -> Mulligan Renamer.
@@ -3607,7 +3607,7 @@ To change ID of a hero, all filenames in every folder and prefab should be chang
 7. Click on the first element, then scroll to the end, Shift+Click on the last element. This should select all elements.
 8. Drag selected files to the Renamer.
 
-![Renaming all files](images/id_2.png)\
+![Image: Renaming all files](images/id_2.png)\
 *Renaming all files*
 
 9. In the Renamer set the Search for String field to `mmd`.
@@ -3616,24 +3616,24 @@ To change ID of a hero, all filenames in every folder and prefab should be chang
 12. Open the CSV file in the `exports` folder, replace all `mmd` strings with the new ID, save file.
 13. Open the localization file in the `exports` folder, replace all `mmd` strings with the new ID, save file.
 
-![Replacing ID in CSV and localization files](images/id_3.png)\
+![Image: Replacing ID in CSV and localization files](images/id_3.png)\
 *Replacing ID in CSV and localization files. Case sensitivity should be disabled*
 
 14. In Darkside, click on the Steamworks tool and switch it to Debug mode.
 
-![Debug mode](images/id_4.png)\
+![Image: Debug mode](images/id_4.png)\
 *Debug mode*
 
 15. Change the Sanitized Name field to the new ID.
 
-![Sanitized Name](images/id_5.png)\
+![Image: Sanitized Name](images/id_5.png)\
 *Sanitized Name*
 
 16. Switch the Steamworks tool back to Normal mode.
 17. Go to the `Sprite Assets` folder in the token folder.
 18. Click on the TMP Sprite Asset file, rename tokens.
 
-![Fixing tokens](images/id_6.png)\
+![Image: Fixing tokens](images/id_6.png)\
 *Fixing tokens*
 
 19. If the new hero needs to apply the same tokens as the Metamorph (otherwise there will be duplicates of tokens) then:
@@ -3647,7 +3647,7 @@ To change ID of a hero, all filenames in every folder and prefab should be chang
 
 After that Duncan's doppelganger should appear in the game.
 
-![Two Duncans](images/id_7.png)\
+![Image: Two Duncans](images/id_7.png)\
 *I don't know why would anybody want my hero doubled but at least it works*
 
 I don't know reliable this ID changing is, but I'm inclined to believe that there shouldn't be any big problems.
