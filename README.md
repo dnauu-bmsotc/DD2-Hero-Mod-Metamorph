@@ -3428,7 +3428,7 @@ The ID of this token is shared with the ID of the second shot skill. I believe t
 Many restrictions of this skill can be removed. This allows, for example, to select an enemy target and a friendly target in one skill. Not simultaneously, but still.
 
 ![Video: Tribecaller](images/hp_transfer.webp)\
-*Damaging an enemy and healing an ally in "one turn"*
+*Damaging an enemy and healing an ally in "one turn". It takes much time for a simple effect, but they can become complicated if needed. There can also be a selection of skills rather than just one follow-up skill*
 
 The Tribecaller enemy from K1 has a passive: when an adjacent ally is hit, the Tribecaller gets one Berserk token.
 
