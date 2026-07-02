@@ -85,6 +85,8 @@ There also seem to be issues with custom audio. Options provided by official too
 
 Since control over audio is limited, custom narration subtitles can't be shown on screen. This was a problem for the Shrine of Reflection.
 
+It also looks like that custom overstress states are not very customizable.
+
 ### Amount of work
 
 Creating a new hero requires:
@@ -2276,6 +2278,7 @@ Some common colors:
 - `<color=#{burn}></color>`
 - `<color=#{blight}></color>`
 - `<color=#{stress}></color>`
+- `<color=#{disease_quirk}></color>`
 
 And some specific colors:
 - `<color=#{stat_reg}></color>`
@@ -2312,7 +2315,7 @@ One way of localizing is to look at the blue text in the game and copy it to the
 *Missing localization*
 
 I wrote this in my localization file:
-```csv
+```
 effect_tooltip_loot_id_mmd_forager_loot=Get an Inn Item (50%)
 ```
 And it fixed it.
@@ -2363,7 +2366,52 @@ party_name_plague_doctor_grave_robber_runaway_hellion=Sisters of Battle
 party_name_hellion_plague_doctor_man_at_arms_highwayman=Highway to Hell
 ```
 
-Most of the barks have a fallback localization, but there are some that don't. I hope this is the full list of the barks that have no fallback version and need to be written.
+The amount of all possible party names for a given number `n` of heroes can be calculated as number of permutations of `n` taken `4`. For example, for five heroes this would be:
+
+```P(5,4) = 5! / (5 - 4)! = 120```
+
+If some heroes (`r`) out of selection should be present in all party combinations, number of parties can be calculated as:
+
+```C(n-r, 4-r) × 4!```
+
+If one hero out of five should be present in all parties, then this number can be calculated as `C(5-1, 4-1) × 4! = 96`. If two heroes out of five should be present in all parties, then it would be further reduced to `C(5-2, 4-2) × 4! = 72`.
+
+This code prints all party combinations for a given number of heroes with some of them being required. It can be run using any online Python interpreter.
+
+```python
+import itertools
+
+def print_party_combinations(required_heroes, nonfocus_heroes):
+    names = list(generate_party_combinations(required_heroes, nonfocus_heroes))
+    names.sort(key=lambda x: tuple(x.index(kw) for kw in required_heroes))
+    print_party_names(names)
+
+def generate_party_combinations(required_heroes, nonfocus_heroes):
+    n_free_slots = 4 - len(required_heroes)
+    secondary_combinations = list(itertools.combinations(nonfocus_heroes, n_free_slots))
+    for comb in secondary_combinations:
+        four_heroes = required_heroes + list(comb)
+        permutations = list(itertools.permutations(four_heroes))
+        for perm in permutations:
+            yield list(perm)
+
+def print_party_names(combinations):
+    loc_line = "party_name_{}_{}_{}_{}="
+    for comb in combinations:
+        print(loc_line.format(*comb))
+
+required_heroes=["mmd"]
+nonfocus_heroes=["grave_robber", "plague_doctor", "man_at_arms", "highwayman"]
+
+print_party_combinations(required_heroes, nonfocus_heroes)
+```
+
+`required_heroes` is a list with heroes that should be present in all parties, `nonfocus_heroes` is a list of heroes that will be included in party names but not in all of them.
+
+![Image: online python interpreter](images/party_names.png)\
+*An online interpreter*
+
+Most of hero barks have a fallback localization, but there are some that don't. I hope this is the full list of barks that have no fallback version and need to be written.
 
 ```
 bark_act_out_rest_item_hate_block+envious
@@ -3516,7 +3564,7 @@ This also needs to account for situations when an enemy attacks a hero and gets 
 
 7. On enemy's turn end the X token removes all Y tokens and converts all X tokens to Combo tokens.
 
-There is much more to explore in CSV files. I haven't tried to understand Abomination's transformations, various DoT mechanics, edge cases of forced skills, obscure fields and values, Flagellant's Toxic state.
+There is much more to explore in CSV files. I haven't tried to understand Abomination's transformations, various DoT mechanics, edge cases of forced skills, obscure fields and values.
 
 ## Testing
 
@@ -3531,6 +3579,8 @@ This file often pointed me the IDs that I misspelled. Messages about missing IDs
 Sometimes when the save has an ongoing expedition, mod changes won't be registered by the game until this expedition is ended.
 
 Sometimes to make the game register mod changes it might be needed to turn the mod off, load the save, exit to main menu, and turn the mod back on.
+
+For some changes (like minor CSV changes) it is enough to exit to main menu and load the save.
 
 Turning game cheats on is very helpful. The [official guide](https://docs.google.com/document/d/1ga3FNrL3eGDRMFekLx9-RKhTDLMxPO603XzXcZa8O78/edit?usp=drive_link) explains how to do it. For unknown reasons cheat interface was glitching, and some options became inaccessible. But it allowed me to:
 - add candles
