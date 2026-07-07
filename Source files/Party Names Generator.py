@@ -20,11 +20,10 @@ def print_party_names(combinations):
         print(loc_line.format(*comb))
 
 
-print_party_combinations(["mmd","grave_robber"], ["plague_doctor", "man_at_arms", "highwayman"])
-# print_party_combinations(["mmd"], ["grave_robber", "plague_doctor", "man_at_arms", "highwayman"])
+print_party_combinations(["mmd"], ["grave_robber", "plague_doctor", "man_at_arms", "highwayman"])
 
-# print_party_combinations(["mmd", "omen_seeker"], ["grave_robber", "plague_doctor", "man_at_arms", "highwayman"])
+print_party_combinations(["mmd", "omen_seeker"], ["grave_robber", "plague_doctor", "man_at_arms", "highwayman"])
 
-# print_party_combinations(["mmd", "monk"], ["grave_robber", "plague_doctor", "man_at_arms", "highwayman"])
+print_party_combinations(["mmd", "monk"], ["grave_robber", "plague_doctor", "man_at_arms", "highwayman"])
 
-# print_party_combinations(["mmd", "omen_seeker", "monk"], ["grave_robber", "plague_doctor", "man_at_arms", "highwayman"])
+print_party_combinations(["mmd", "omen_seeker", "monk"], ["grave_robber", "plague_doctor", "man_at_arms", "highwayman"])
