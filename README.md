@@ -37,11 +37,10 @@
 - [Shrine of Reflection](#shrine-of-reflection)
 - [Run goals](#run-goals)
 - [Kingdoms](#kingdoms)
+- [Weapon Kits and Origin Skin](#weapon-kits-and-origin-skin)
 - [A summoning skill](#a-summoning-skill)
 - [CSV data III](#csv-data-iii)
 - [Testing](#testing)
-- [Cloning this mod](#cloning-this-mod)
-- [Afterword](#afterword)
 
 <!-- /TOC -->
 
@@ -71,8 +70,9 @@ Other mods for DD2 that add new hero classes:
 - [The Omen Seeker by \*mpregs you\*, Purple, Wallimod, Crisdroid](https://steamcommunity.com/sharedfiles/filedetails/?id=3646513756)
 - [The Gunslinger](https://steamcommunity.com/sharedfiles/filedetails/?id=3540263153), [The Cello](https://steamcommunity.com/sharedfiles/filedetails/?id=3483096926), [The Antiquarian](https://steamcommunity.com/sharedfiles/filedetails/?id=3352058826), and [The Houndmaster by THE COLLECTOR](https://steamcommunity.com/sharedfiles/filedetails/?id=3597158251)
 - [The Weaver by THE COLLECTOR, 大脏尾，我们走!](https://steamcommunity.com/sharedfiles/filedetails/?id=3633470434)
+- [The Servant by THE COLLECTOR, iTKrypton](https://steamcommunity.com/sharedfiles/filedetails/?id=3750745345)
 
-Most these mods are in early stages of development. The most finished one is the Omen Seeker. She was my inspiration. Often I had troubles that felt impossible to solve, but when I remembered her, I knew that my pursuits were not in vain.
+The Omen Seeker and the Servant are the more developed hero mods, and they were my inspiration. Often I had troubles that felt impossible to solve, but when I remembered them, I knew my pursuits were not in vain.
 
 Other resources:
 - [DD2 CSV Syntax VSCode extension](https://marketplace.visualstudio.com/items?itemName=PHombie.dd2-csv-syntax)
@@ -95,7 +95,7 @@ Creating a new hero requires:
 - Textures
 - About 20 short (1-3s) animations
 - About 20 static poses
-- A couple of long (about 10s) animations (battle idle and hero sheet)
+- A couple of long (about 10s) animations (battle idle and character sheet)
 - VFX for animations
 - Small UI portraits
 - Bigger portraits for the Shrine of Reflection and Story Choices
@@ -103,8 +103,9 @@ Creating a new hero requires:
 - Skill effects for different paths
 - Three hero trinkets and a signature item: icons (512x512 pixels) and effects
 - Hero story, barks
-- Custom battles for the Shrine of Reflection
 - Dealing with technical issues
+
+The Shrine of Reflection can increase these numbers.
 
 I believe the process can be somewhat parallelized. After a general idea of the hero is formed, the process can be branched into three areas that aren't very intersected:
 1. 3D modeling and animating
@@ -130,15 +131,17 @@ It is more difficult with animation files. Scale transforms are keyframed, even 
 ![Image: Animation transform](images/animation_transform.png)\
 *Crusader's animation after deleting scale keyframes*
 
-3D modeling required a lot more learning than I expected, but there are many tutorials. Out of many ways to create a character model, I wanted to try sculpting. I made a mistake by not making the sculpt detailed enough and by not making it in T-pose.
+Character design 3D modeling required a lot more learning than I expected, and tons of mistakes was made and I was trying to fix them throughout the whole mod creation process.
+
+<!-- There are many tutorials. Out of many ways to create a character model, I wanted to try sculpting. I made a mistake by not making the sculpt detailed enough and by not making it in T-pose. -->
 
 ![Image: Sculpting steps](images/concept14.png)\
 *Coming up with concept and creating 3D models*
 
-Models use Smooth Shading with Sharp seams.
+Models can use Smooth Shading with Sharp seams.
 
 ![Image: Smooth Shading difference](images/smooth.png)\
-*Model on the right doesn't use Smooth Shading, which makes polygons more visible*
+*Model on the right doesn't use Smooth Shading, which makes edges slightly more visible*
 
 In the game all animations are fixed: there are no ragdolls and no cloth simulation. I don't know how animations were created, but the resulting files use bones for hair and cloth animations.
 
@@ -154,29 +157,42 @@ I thought that all expressions are made with bones, but when I tried to replicat
 
 Turns out that this is done with Shape Keys. Dismas’ Shape Keys control his eyebrows. Audrey’s Shape Keys control her mouth.
 
-I tried to use Shape Keys too, but for me personally they brought more confusion and struggle than benefit. I bore my Shape Keys up to the point of exporting them to Unity, and they didn't work first try. Instead of trying to figure out how to fix it, I replaced them with bones. It should be possible to use Shape Keys, I just don't know how to do it properly.
+I tried to use Shape Keys too, but for me personally they brought more confusion and struggle than benefit. I bore my Shape Keys up to the point of exporting them to Unity, and they didn't work first try. Instead of trying to figure out how to fix it, I replaced them with bones. It should be possible to use Shape Keys to achieve better expressions, I just don't know how to do it properly.
 
-Heroes can have multiple weapon meshes. Some accessories are weapons in disguise so they can be changed separately from the main hero model.
+Heroes can have multiple weapon meshes. Some accessories are weapons in disguise so they can be changed depending on a weapon kit.
 
 ![Image: GR's weapons](images/gr_weapons.png)\
 *Grave Robber has four additional meshes: accessories, a bottle, a dagger, and a pickaxe*
 
 FBX file does not include everything that Blender can create, and Unity does not support everything that FBX file can store. When importing in Unity, some of information of uncommon type, for example modifiers, might be lost. Cloth simulations need to be somehow baked into bones before exporting.
 
-I tried to use Child Of and Copy Transforms constraints to attach weapons to hands. After exporting to Unity, animations worked, but something was off to them, but I can't identify what exactly.
-
 ![Image: HWM's weapons](images/hwm_weapon.png)\
 *HWM's weapons are attached to his armature*
 
-At first I tried to rig my model myself, but it turned out bad, so I used the Rigify add-on instead and it became much better. I also didn't know that rotation mode of bones should be set to Euler so I was stuck with quaternions.
+I believe it doesn't really matter how exactly weapons are animated. As long as there is a separate mesh for the hero, there should be no problem with weapon kits. A weapon kit is actually a completely separate model of a hero and their weapons, not just separate weapon meshes. Technically different weapon kits can even have different animations. Not all animations can be altered easily though.
 
-There are many ways of simulating clothes in Blender: Cloth physics modifier, complex bone constraints (PierrickPicaut's tutorials on YouTube), add-ons like WIGGLE2 or Jiggle Physics. But every tool was falling apart in my hands. I scrapped it all and decided to animate clothes manually.
+Jumping ahead: DD2 uses two separate systems to trigger animations. These are Animation Controller and Playable systems. Most of animations are triggered by the first system, and overriding them is straightforward, by just specifying a different animation file.
+
+Other animations that are triggered by Playable files are harder to replace. These animations are: skill execution pose, skill recovery animation, agressive act out execution/recovery, and riposte execution/recovery. Skill anticipation animations are handled by the first system.
+
+A bruteforce solution would be duplicating all bones within one armature and make one set of bones influence one kit/skin, and the other one influence the other kit/skin. So it is possible in theory, but this solution is not ideal. If there is another way, I don't know about it.
+
+Getting back in the swing of things, there are many ways of simulating clothes in Blender: Cloth physics modifier, complex bone constraints (PierrickPicaut's tutorials on YouTube), add-ons like WIGGLE2 or Jiggle Physics. But every tool was falling apart in my hands. I scrapped it all and decided to animate clothes manually.
+
+At first I tried to rig my model myself, but it turned out bad, so I used the Rigify add-on instead.
+
+I wasn't able to add custom palettes, but it sounds like they should just change the texture image of the material that is applied to the hero's mesh.
 
 One Blender file can store multiple animations as Actions. Actions can be added and edited in the Action Editor. Every Action need to be protected with Fake User check mark, otherwise it might get deleted on exiting Blender.
 
 With the default export settings the hero faces the right side in the game (Blender’s negative Y direction in the game will be directed to the right side in the game). In other words, Blender’s Suzanne Monkey will look to the enemies’ side in the game.
 
-This is true for the Crossroads, fights, resolute, meltdown. In some way this is also true for the victory pose. So to view how the character will look like in the Crossroads and fights, Ctrl+Numpad 3 will do. In camps and inns the model is rotated, the front of the chair matches Blender’s negative Y direction.
+This is true for the Crossroads, fights, resolute, meltdown. In some way this is also true for the victory pose. And the camera isn't static. Pressing Ctrl+Numpad 3 in Blender will show how the hero will look like on the first rank. On the fourth rank heroes get a bit distorted.
+
+![Image: Perspectives](images/perspective.png)\
+*First image: Ctrl+Numpad 3, second image: rotated view with linear projection, third image: in the game on the fourth rank, fourth image: in the game on the first rank*
+
+In camps and inns the model is rotated, the front of the chair matches Blender’s negative Y direction.
 
 This situation is opposite for enemies. The game inverts their models and animations. So for enemies Blender's negative Y direction is directed to the left in the game.
 
@@ -2401,11 +2417,11 @@ party_name_plague_doctor_grave_robber_runaway_hellion=Sisters of Battle
 party_name_hellion_plague_doctor_man_at_arms_highwayman=Highway to Hell
 ```
 
-The amount of all possible party names for a given number `n` of heroes can be calculated as number of permutations of `n` taken `4`. For example, for five heroes this would be:
+The amount of all possible party names for a given number `n` of heroes can be calculated as the number of permutations of `n` taken `4`. For example, for five heroes this would be:
 
 ```P(5,4) = 5! / (5 - 4)! = 120```
 
-If some heroes (`r`) out of selection should be present in all party combinations, number of parties can be calculated as:
+If some heroes (`r`) out of selection should be present in all party combinations, the number of parties can be calculated as:
 
 ```C(n-r, 4-r) × 4!```
 
@@ -2446,7 +2462,9 @@ print_party_combinations(required_heroes, nonfocus_heroes)
 ![Image: online python interpreter](images/party_names.png)\
 *An online interpreter*
 
-Most of hero barks have a fallback localization, but there are some that don't. I hope this is the full list of barks that have no fallback version and need to be written.
+It isn't required to write any party names at all, but I wanted to name all parties that include my hero and the Unusual Suspects, and was shocked by the number of combinations.
+
+Most of hero barks have a default fallback localization, but there are some that don't. I hope this is the full list of barks that have no fallback version and thus need to be written.
 
 ```
 bark_act_out_rest_item_hate_block+envious
@@ -2455,6 +2473,15 @@ bark_act_out_rest_item_hate_block+resentful
 bark_act_out_rest_item_hate_block+tumultuous
 bark_god_summon_failure
 bark_hero_failure_kill
+bark_item_experimental_remedy
+bark_item_guided_meditation
+bark_item_improvised_strategy
+bark_item_morbid_joke
+bark_item_oddly_tuned_lute
+bark_item_precious_collection
+bark_item_tar_filled_colambre
+bark_item_the_very_best
+bark_item_war_paint
 bark_node_exit_altarofhope
 bark_node_exit_bridge
 bark_node_exit_bridgegang
@@ -2476,6 +2503,7 @@ bark_node_exit_storyassist
 bark_node_exit_storyassistgang
 bark_node_exit_storycosmic
 bark_node_exit_success_creatureden
+bark_node_exit_success_dungeon
 bark_node_exit_success_gauntchirurgeon
 bark_node_exit_success_guardian
 bark_node_exit_success_storycultist
@@ -2534,6 +2562,89 @@ bark_hero_failure_kill+mmd=You'll fall like any other sick critter.
 ```
 
 All barks can be changed this way, not only the ones that have no fallbacks.
+
+A script that searches for barks that have no default value:
+```python
+source_dir = r"C:\Program Files (x86)\Steam\steamapps\common\Darkest Dungeon® II\Darkest Dungeon II_Data\StreamingAssets\Localization\Sources"
+
+# Examples:
+# 1.
+# bark_act_out_start_my_turn_stress_heal_partner=Steady those hands. We shall win this.
+# bark_act_out_start_my_turn_stress_heal_partner+highwayman=You're tougher than this. Breathe.
+
+# will output nothing.
+
+# 2.
+# bark_act_out_start_my_turn_buff_partner+highwayman=Shoot to kill.
+# bark_act_out_start_my_turn_buff_partner+man_at_arms=Show them what you're made of!
+
+# will output bark_act_out_start_my_turn_buff_partner
+
+# 3.
+# bark_act_out_rest_item_hate_block+envious+highwayman=You'd love that, I'm sure.
+# bark_act_out_rest_item_hate_block+envious+highwayman=Let me cut you off there - no.
+
+# will output bark_act_out_rest_item_hate_block+envious
+
+# 4.
+# bark_node_exit_gate+kingdominnsieged+highwayman+beastmen=Keep vigilant at choke points.
+# bark_node_exit_gate+kingdominnsieged+highwayman+beastmen=Air's so stagnant. Not a breath of wind.
+
+# will output bark_node_exit_gate+kingdominnsieged
+
+import os
+
+markers = {
+    "highwayman",
+    "man_at_arms",
+    "grave_robber",
+    "plague_doctor",
+    "occultist",
+    "jester",
+    "leper",
+    "hellion",
+    "runaway",
+    "vestal",
+    "flagellant",
+}
+
+generic_bases = set()
+special_bases = set()
+
+def parse_file(file_path):
+    encoding = "utf-8-sig" # to remove \ufeff at the beginning of each file
+    with open(file_path, encoding=encoding) as f:
+        for line in f:
+            key = line.strip().split("=", 1)[0]
+            parts = key.split("+")
+
+            # find a marker
+            special_idx = None
+            for i, part in enumerate(parts):
+                if part in markers:
+                    special_idx = i
+                    break
+
+            if special_idx is None:
+                # generic entry
+                generic_bases.add(key)
+            else:
+                # if additional +something are present before a marker, they count as part of the base.
+                # If they are present after a marker, they are ignored.
+                base = "+".join(parts[:special_idx])
+                special_bases.add(base)
+
+for root, dirs, files in os.walk(source_dir):
+    for filename in files:
+        file_path = os.path.join(root, filename)
+        parse_file(file_path)
+
+missing_generics = sorted(special_bases - generic_bases)
+for base in missing_generics:
+    print(base)
+```
+
+It also prints out lines that start with "bark_item_ccourtier_blood_default". It's probably a typo in the MAA's lines.
 
 ### Skills' tooltips
 
@@ -3310,6 +3421,143 @@ element_end
 ```
 
 Camp animations in Kingdoms use inn animations.
+
+## Weapon Kits and Origin Skin
+
+Weapon Kits and Skins are very similar. Turns out, they are basically the same. Adding a skin requires creating an additional art_prefab file that has hero model, weapons, armature. It can have its own animation controller, materials, VFX. Everything that is stored within an art_prefab file can be customized. Target-attached VFX I think can't be altered because they are not taken from art_prefab files.
+
+![Image: Bigby's skins comparison](images/origin_2.png)\
+*Bigby's origin version has different arm placement and more fluid hair animation*
+
+Weapon Kits require the same art_prefab files and the same parameters can be changed. Even though Kits don't usually alter anything but weapons, their art_prefab files still require a hero model with an armature, so Kits have the same power as skins.
+
+To create a Weapon Kit, use the Weapon Kit Creator Tool. There is no option for a non-vanilla hero, so select any class.
+
+![Image: Weapon Kit creation tool](images/origin_3.png)\
+*Weapon Kit Creator Tool*
+
+Then inspect the Resource Actor Weapon Kit file and configure all settings except the Actor Override.
+
+![Image: Resource Actor Weapon Kit Settings](images/origin_4.png)\
+*Settings of Resource Actor Weapon Kit*
+
+After other fields are set, open the Resource Actor Weapon Kit file using a text editor. Then locate the m_ActorOverride line and replace a vanilla ID to the ID of the custom hero. This step should be performed last, because if Resource Actor Weapon Kit's settings are changed afterwards, then the ID will fallback to bounty_hunter and it will be needed to edit the file again. The Actor Override field in the inspector will always show bounty_hunter, but it does not matter.
+
+![Image: Reading contents of a Resource Actor Weapon Kit file](images/origin_5.png)\
+*Editing Resource Actor Weapon Kit's content*
+
+An Origin Skin can be created the same way, using the Hero Skin Creator Tool. The Resource Actor Skin file has an additional field "Unlock Id". It can be used to lock a skin behind Shrine of Reflection by setting it to "herostory_[ID]_05".
+
+![Image: Locked origin skin in the game](images/origin_1.png)\
+*Origin skin's unlock localization is assigned automatically*
+
+Kits and skins can have animations that differ from the default kit. Replacing animations that are triggered by the Animation Controller is straightforward: it is enough to attach a different Animation Controller file in the kit's or skin's art_prefab file.
+
+Replacing animations for Playable files (skill execution pose, skill recovery animation, agressive act out pose/recovery, and riposte pose/recovery) is harder. Ideally kits and skins should be fully compatible with the main armature and animations so changing these animations won't be required.
+
+If a kit/skin has an additional detail, this detail can be animated just by adding an additional bone. But if a shared part of a kit/skin is incompatible with the default kit, alterating animations that are triggered by a Playable file can become problematic.
+
+Since kits/skins require separate art_prefab files, VFX and anchors need to be copied reattached. When I copied VFX from a prefab file to another they got displaced. Grouping them under an empty object and then copying the empty object instead copied vfx keeping them in the right position.
+
+![Image: reattaching vfx and anchors](images/origin_10.png)\
+*Existing VFX tracks shouldn't be deleted*
+
+I still don't understand how Playable files work. They store timelines for VFX, armature animations, camera movement. It is possible to alterate VFX for skins by creating another VFX prefab file and attaching it to a separate track in Playable files. I imagined that animations can be altered the same way, by adding another track with a different animation clip. But it didn't work, I couldn't make the second animation track work, hero always took animations from the first track.
+<!-- 
+![Image: different VFX](images/origin_9.png)\
+*One skill can have different VFX depending on hero's kit/skin, I didn't change the mod between taking these images* -->
+
+It is still possible to achieve completely different animations for skills even without touching Playables. A bruteforce solution would be creating two sets of bones within a single armature. Both sets are always active and moving, but since a skin/kit can have a completely separate set of vertices, only one set of bones produces visible animations. I used it for facial expressions.
+
+![Image: different facial expressions](images/origin_11.png)\
+*Different VFX and facial expressions depending on a skin, I didn't change the mod between taking these images, exaggerated on purpose*
+
+
+<!-- Unfortunately for me I created an origin skin and animated it not even knowing about this pitfall. I just forgot that Playable files exist. My hero's origin skill had different facial animations and I didn't want to fix weight paint and reanimate. -->
+
+
+<!-- What I had: two Blender files, one for the default skin, one for the origin skin. They shared the same armature by a link. One file had a skill animation with one facial expression, the other file had this animation with a different expression. Since I couldn't specify two different animations in Playables, I put both facial expressions in one animation.
+
+1. Duplicated the bones that need to act differently depending on kit/skin.
+2. Renamed them and moved them to a different Bone Collection so they are distinguishable.
+3. Since animations were already made, I moved skin's keyframes to the duplicated bones.
+4. Renamed skin's Vertex Groups to move bone weights to the duplicated bones.
+5. 
+
+I renamed duplicated bones by adding a sknOrigin_ prefix to them. This script moves animations from a bone X to the bone prefix+X.
+
+<!-- ![Image: ](images/origin_7.png)\
+** -->
+
+<!-- 1. Duplicated the armature, added a prefix to all bone names.
+2. Renamed Bone Collections to make duplicated bones separatable from the originals.
+3. Joined the two armatures and made them share one root bone.
+5. Added prefixes to the skin's vertex groups to attach them to the duplicated bones.
+4. Since I created animations for original bones, I needed to transfer them to the duplicated bones.
+6. Profit?
+
+Or, in more detail:
+1. make a backup because this is a questionable solution
+1. create a new blender file
+2. delete all objects
+3. File -> Append, open the file with the armature, go into the Object folder, select the armature
+4. select the armature, switch to the Pose Mode
+5. open the Batch Rename tool by pressing Ctrl+F2
+6. set these settings: All, Bones, Set Name, Prefix, specify this prefix. I added "~sknOrigin_" prefix
+7. rename/reorganize bone collections so duplicated bones can be easily separated
+7. save and close the file
+8. open the main file
+9. File -> Link, open the created file, select the renamed armature.
+10. in the outline, right click on the linked armature, Library Override, Make, Selected.
+11. switch to the Object Mode, select the linked armature, then the main armature, Ctrl+J
+12. switch to the Edit Mode, create a new bone that will work as a parent to the main and duplicated root bones. It will be the new root bone.
+13. select the old root bone, select the new root bone, Ctrl+P, Keep Offset
+14. select the duplicated root bone, select the new root bone, Ctrl+P, Keep Offset
+
+Now there are two sets of bones. Great.
+
+If animations were created for bones without the prefix, this script can transfer keyframes to the prefixed bones:
+
+```python
+PREFIX = "~sknOrigin_"
+
+import bpy
+from bpy_extras import anim_utils
+
+arm = next(obj for obj in bpy.data.objects if (obj.type == 'ARMATURE'))
+
+def redirect_animation(fcurve, prefix):
+    data_path = fcurve.data_path
+    bone_name = data_path.split('"')[1]
+    
+    is_a_bone_animation = data_path.startswith('pose.bones["')
+    its_a_prefixed_bone = data_path.startswith(f'pose.bones["{prefix}')
+    there_is_a_prefixed_bone = (prefix + bone_name) in arm.data.bones
+    
+    if is_a_bone_animation and (not its_a_prefixed_bone) and there_is_a_prefixed_bone:
+        fcurve.data_path = data_path.replace('pose.bones["', f'pose.bones["{prefix}')
+
+
+for action in bpy.data.actions:
+    for slot in action.slots:
+        channelbag = anim_utils.action_get_channelbag_for_slot(action, slot)
+        for fcurve in channelbag.fcurves:
+            redirect_animation(fcurve, PREFIX)
+```
+To transfer weights from original bones to the duplicated ones, rename the mesh's Vertex Groups by adding the prefix to them.
+
+If a kit/skin are stored in a separate file:
+1. File -> Link, select the file with the skin, go into the Object folder, select the mesh.
+2. in the Outliner right click on the linked object, Library Override, Make, Selected.
+3. select the mesh in the Object Mode, Alt+P, Clear Parent.
+4. select the mesh, select the armature, Ctrl+P -->
+
+I couldn't make palettes work. It is possible to change the colors of the default palette icon though.
+
+![Image: custom default palette icon colors](images/origin_6.png)\
+*Changing default palette icon's colors*
+
+The Mountain section of the Altar of Hope has buttons for each hero's palettes and kits. I don't know how to add a custom button, but kits' unlock can be assigned to other progressions, for example, to the Living City, if needed.
 
 ## A summoning skill
 
