@@ -1,0 +1,13 @@
+m_DisplayType
+m_type
+m_types
+m_ActorEffectType
+m_TypeStrings
+m_ConditionType
+m_DeliverableIcon
+m_occurrenceTypes
+m_Type
+m_Types
+m_LootReasonId
+repeatable_item
+m_SelectBiomeType
