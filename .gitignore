@@ -1,3 +1,8 @@
 *.kra~
 *.png~
 *.blend[0-9]
+*.code-workspace
+*.ods.bak
+*.ods#
+.venv
+.vscode
