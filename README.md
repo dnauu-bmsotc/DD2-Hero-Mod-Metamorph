@@ -6,7 +6,7 @@
     - [What to expect](#what-to-expect)
     - [What I couldn't do](#what-i-couldnt-do)
     - [Amount of work](#amount-of-work)
-- [3D modeling, animating](#3d-modeling-animating)
+- [Animating](#animating)
 - [Texturing](#texturing)
 - [Installing the Mod Kit](#installing-the-mod-kit)
 - [Creating a placeholder hero](#creating-a-placeholder-hero)
@@ -124,21 +124,26 @@ Some animations require knowledge of what the skill effects will be like, but ma
 
 Some of the work can be copied from the game (like VFX and SFX), and some things are reused even by vanilla heroes (many have about 8 unique skill animations, some skills share animations).
 
-## 3D modeling, animating
+## Animating
 
-A new hero requires new meshes, textures, and animations. Modding Tools provide examples of those, but when I tried to import one of the models to Blender, I saw a tiny figure near a big bone. Resetting armature's transforms in Pose Mode seemed to bring them back to normal size.
+A new hero requires new meshes, textures, and animations. The Darkside provides those an much more, but I wasn't able to import them into a Blender file correctly. Imported models were severely scaled down. Resetting armature's transforms in Pose Mode seemed to bring the model back to normal size.
 
 ![Image: HWM imported to Blender](images/fbx_maya.png)\
-*Armature gains weird scale in Blender*
+*Armature gains weird scale in Blender after importing*
 
-It is more difficult with animation files. Scale transforms are keyframed, even though they don't change. They can be deleted in the Graph Editor. Then resetting armature's transforms in Pose Mode holds models in right scale throughout the animation. These are destructive changes, but their results can be used as examples.
+For animations scale transforms can be deleted in the Graph Editor.
+
+<!-- Then resetting armature's transforms in Pose Mode holds models in right scale throughout the animation. -->
 
 ![Image: Animation transform](images/animation_transform.png)\
 *Crusader's animation after deleting scale keyframes*
 
+These are destructive changes, but the results can be used as examples at least.
+
+<!-- 
 Character design 3D modeling required a lot more learning than I expected, and tons of mistakes was made and I was trying to fix them throughout the whole mod creation process.
 
-<!-- There are many tutorials. Out of many ways to create a character model, I wanted to try sculpting. I made a mistake by not making the sculpt detailed enough and by not making it in T-pose. -->
+There are many tutorials. Out of many ways to create a character model, I wanted to try sculpting. I made a mistake by not making the sculpt detailed enough and by not making it in T-pose.
 
 ![Image: Sculpting steps](images/concept14.png)\
 *Coming up with concept and creating 3D models*
@@ -146,23 +151,21 @@ Character design 3D modeling required a lot more learning than I expected, and t
 Models can use Smooth Shading with Sharp seams.
 
 ![Image: Smooth Shading difference](images/smooth.png)\
-*Model on the right doesn't use Smooth Shading, which makes edges slightly more visible*
+*Model on the right doesn't use Smooth Shading, which makes edges slightly more visible* -->
 
 In the game all animations are fixed: there are no ragdolls and no cloth simulation. I don't know how animations were created, but the resulting files use bones for hair and cloth animations.
 
-Heroes can change their facial expressions. There is a bone that is attached to the mouth.
+Heroes can change their facial expressions. There is a bone that is attached to the mouth. I thought that all expressions are made with bones, but when I tried to replicate the GR's meltdown expression using this bone, textures looked different on the meltdown pose vs. what I could achieve with the armature.
 
 ![Image: GR's armature](images/gr_mouth_bone.png)\
 *GR's armature has a bone that moves the jaw*
 
-I thought that all expressions are made with bones, but when I tried to replicate the GR's meltdown expression using this bone, textures looked different on the meltdown pose vs. what I could achieve with the armature. The sides of the mouth during meltdown have more black contour.
-
-![Image: GR's shape keys](images/gr_shape_key.png)\
-*a: one of the skill poses, b: the effect of using a bone to change the expression, c: the meltdown pose*
-
 Turns out that this is done with Shape Keys. Dismas’ Shape Keys control his eyebrows. Audrey’s Shape Keys control her mouth.
 
-I tried to use Shape Keys too, but for me personally they brought more confusion and struggle than benefit. I bore my Shape Keys up to the point of exporting them to Unity, and they didn't work first try. Instead of trying to figure out how to fix it, I replaced them with bones. It should be possible to use Shape Keys to achieve better expressions, I just don't know how to do it properly.
+![Image: GR's shape keys](images/gr_shape_key.png)\
+*a: one of the skill poses, b: the effect of using a bone to change the expression, c: the meltdown pose that uses Shape Keys*
+
+I tried to use Shape Keys too, but I was still almost a complete beginner in 3D modeling and they brought a lot of confusion and frustration, so I used bones for everything instead.
 
 Heroes can have multiple weapon meshes. Some accessories are weapons in disguise so they can be changed depending on a weapon kit.
 
@@ -182,13 +185,9 @@ Other animations that are triggered by Playable files are harder to replace. The
 
 A bruteforce solution would be duplicating all bones within one armature and make one set of bones influence one kit/skin, and the other one influence the other kit/skin. So it is possible in theory, but this solution is not ideal. If there is another way, I don't know about it.
 
-Getting back in the swing of things, there are many ways of simulating clothes in Blender: Cloth physics modifier, complex bone constraints (PierrickPicaut's tutorials on YouTube), add-ons like WIGGLE2 or Jiggle Physics. But every tool was falling apart in my hands. I scrapped it all and decided to animate clothes manually.
+There are many ways of simulating clothes in Blender: Cloth physics modifier, complex bone constraints, add-ons. But every tool was falling apart in my hands. I scrapped it all and decided to animate clothes manually.
 
-At first I tried to rig my model myself, but it turned out bad, so I used the Rigify add-on instead.
-
-I wasn't able to add custom palettes, but it sounds like they should just change the texture image of the material that is applied to the hero's mesh.
-
-One Blender file can store multiple animations as Actions. Actions can be added and edited in the Action Editor. Every Action need to be protected with Fake User check mark, otherwise it might get deleted on exiting Blender.
+<!-- One Blender file can store multiple animations as Actions. Actions can be added and edited in the Action Editor. Every Action need to be protected with Fake User check mark, otherwise it might get deleted on exiting Blender. -->
 
 With the default export settings the hero faces the right side in the game (Blender’s negative Y direction in the game will be directed to the right side in the game). In other words, Blender’s Suzanne Monkey will look to the enemies’ side in the game.
 
@@ -235,22 +234,33 @@ Relationship poses should be offset to the left a bit.
 ![Image: Relationship respectful poses](images/relationship_pose.png)\
 *Ignore that the arrow on the second image is pointing to the left*
 
-Animations store frames at rate of 30 FPS, in the game they are interpolated to match the FPS.
+Animation files store frames at rate of 30 FPS.
 
 ## Texturing
 
-Hero and weapon models need two textures. One is for colors (col) and another is for all black details (ink). For heroes textures have 4096×4096 pixel size. Weapons have varied texture sizes: GR’s pickaxe textures are 1024×1024 pixels, and her dagger textures are 512×512 pixels. The ink textures are black & red instead of black & white for some reason. The red color is pure red (`rgb(255, 0, 0)`).
+Hero and weapon models need two textures. One is for colors (col) and another is for black details (ink). col textures have smaller pixel size compared to respective ink textures. For heroes ink textures have 4096×4096 pixel size, hero col textures have 2048x2048 pixel size. Weapons have varied texture sizes: GR’s pickaxe ink texture is 1024×1024 pixels, and her dagger ink texture is 512×512 pixels.
 
-I marked seams for UV unwrapping, didn't do the checkerboard testing even though I should have. The purpose of this testing is to ensure that every part of the model gets the appropriate texture resolution.
+The ink textures are black & red. The red color is pure red (`rgb(255, 0, 0)`). Black & white will also do.
 
-Model's material needs to be configured to be able to handle two texture images.
+I wasn't able to add palettes to my hero for technical reasons but I believe a palette is just a separate col texture.
 
-![Image: Shader settings](images/shader.png)\
-*The col image is pure green and the ink image is red with a face. This material can be imported to Blender with File -> Append*
+<!-- 
+I marked seams for UV unwrapping, didn't do the checkerboard testing even though I should have. The purpose of this testing is to ensure that every part of the model gets the appropriate texture resolution. -->
 
-The created material itself is not needed for the game, it's just a way to tell Blender how these two textures work together so it can show them in the right way.
+In Blender materials need to be configured to handle two textures. The col texture is combined with the ink texture by multiplying with ink's red channel values.
 
-This material did its work, but I noticed that changing the threshold in the Math node changed the size of black strokes a bit. They get bigger when increasing the threshold value from 0 to 0.2 and I can not figure out why it is happening. It looks like the game uses something in-between.
+![Image: Shader settings](images/shader2.png)\
+*Shader settings in Blender*
+
+The created material itself is not needed for the game, it uses its own materials.
+
+![Image: Ink transparency](images/shader3.png)\
+*Ink textures can use tones*
+
+<!-- ![Image: Ink transparency](images/shader4.png)\
+*Game's material applies additional shadows to the model's lower part* -->
+
+<!-- This material did its work, but I noticed that changing the threshold in the Math node changed the size of black strokes a bit. They get bigger when increasing the threshold value from 0 to 0.2 and I can not figure out why it is happening. It looks like the game uses something in-between.
 
 ![Image: Example of how black strokes change](images/threshold.png)\
 *The top image is screenshot from the game, lower images show how my material behaves on different settings*
@@ -260,14 +270,14 @@ Drawing textures in Blender can be done in Texture Paint Mode. It has some brush
 Shadows can be turned off by using the Diffuse Color rendering mode.
 
 ![Image: Texturing steps](images/texturing.png)\
-*Texturing*
+*Texturing* -->
 
-DD2 mixes smooth gradients, harsh black lines and some textures. Fine textures are subtle, but noticeable, for example, on the MAA’s shield. Heroes have some parts shadowed by black strokes (arm under shoulder plates) and some parts are shadowed softly (under the red strip).
+<!-- DD2 mixes smooth gradients, harsh black lines and some textures. Fine textures are subtle, but noticeable, for example, on the MAA’s shield. Heroes have some parts shadowed by black strokes (arm under shoulder plates) and some parts are shadowed softly (under the red strip).
 
 ![Image: MAA's shield and ](images/maa_shield.png)\
-*Different shadows*
+*Different shadows* -->
 
-The same texturing process is applicable for weapons.
+The same is applicable for weapon textures.
 
 ## Installing the Mod Kit
 
@@ -365,7 +375,12 @@ Clicking on the egg_exported element in the Hierarchy window showed its properti
 
 ### Adding textures
 
-To add textures to this model, I went to the `F/materials` folder, deleted everything inside except the mat_egg file, added my texture images, then clicked on the mat_egg file, which opened its properties in the Inspector window. Textures can be dragged into the Base and Ink slots.
+To add textures to this model, I went to the `F/materials` folder, deleted everything inside except the mat_egg file, added my texture images. Clicking on a texture file in the project opens import settings in the Inspector window. col and ink textures have different import settings.
+
+![Image: Texture import settings](images/egg_40.png)\
+*Import settings for col and ink textures*
+
+Then I clicked on the mat_egg file, which opened its properties in the Inspector window. Textures can be dragged into the Base and Ink slots.
 
 ![Image: Adding textures](images/egg_8.png)\
 *My textures are called mmd here but a texture's name does not matter I believe*
