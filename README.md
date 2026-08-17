@@ -45,7 +45,6 @@
 - [CSV Data IV](#csv-data-iv)
 - [Afterword](#afterword)
 - [Locations of files and folders](#locations-of-files-and-folders)
-- [List of element types](#list-of-element-types)
 
 <!-- /TOC -->
 
@@ -4177,6 +4176,3 @@ Darkside UserMods folder:
 ```
 C:\Program Files (x86)\Steam\steamapps\common\Darkest Dungeon® II Mod Tools\darkside\Assets\UserMods\
 ```
-
-## List of element types
-
