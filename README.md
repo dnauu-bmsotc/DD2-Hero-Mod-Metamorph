@@ -852,7 +852,20 @@ element_end
 
 Here **add_1_dodge** is the ID of this element. It should be unique enough so it doesn't conflict with vanilla data or with other mods (common way is to add hero's ID as a prefix). *Effect* is the type of this element.
 
-CSV data is case-sensitive.
+CSV data is generally case-sensitive but some specific values can be written in any case. For example, this works fine:
+```csv
+element_start,mmd,ActorDataStats
+sub_stat,RESISTANCE,stun,0.2,
+sub_stat,rEsiStancE,blight,0.5,
+sub_stat,resistance,bleed,0.3,
+element_end
+```
+But this will cause errors:
+```csv
+element_start,mmd,ActorDataStats
+sub_stat,resistance,sTun,0.2,
+element_end
+```
 
 The order of elements does not matter. For example, this
 
