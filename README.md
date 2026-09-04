@@ -42,7 +42,6 @@
 - [CSV data III](#csv-data-iii)
 - [Testing](#testing)
 - [Cloning this mod](#cloning-this-mod)
-- [CSV Data IV](#csv-data-iv)
 - [Afterword](#afterword)
 - [Locations of files and folders](#locations-of-files-and-folders)
 
@@ -837,7 +836,7 @@ I don't know how to listen to audio outside the game.
 
 CSV files store a lot of things: numbers, DOT effects, buffs, loot tables, etc. I will try to explain how these files work, but everything here comes from personal experience.
 
-CSV data can be separated into multiple files, but it isn't necessary, I use one file for all my CSV data. It might be necessary for overriding the vanilla data, but it isn't required for creating a new hero.
+CSV data can be separated into multiple files, but it is not necessary. They should be placed on the top level of the mod folder or in the Overrides folder. CSV files in custom folders are not parsed. Filenames should end with `.Group.csv`. Other CSV files with name like `test.csv` won't be registered.
 
 CSV data consists of blocks called elements. Every element has an ID, a type, a beginning, and an end. Everything between element_start and element_end is data attached to this element. This data content varies depending on element's type.
 
@@ -921,6 +920,53 @@ element_start, effect,Effect
 m_Chance,1,
 element_end
 ```
+
+Element IDs are not necessarily unique, and even a repeated combination of ID+Type can be valid data in some cases. Elements with repeating ID+Type signature are only allowed if:
+- These elements are "Addable" elements like `LootTable`, `ActorDataExternalBuffs`, `InnTable`, `BattleConfigurationTable` elements, and maybe some more.
+- Or, if these elements are supposed to override previously defined elements. I'd guess that Addable elements can't be overridden, but I did not test it.
+
+The game's folder with vanilla and DLC data has this structure:
+```
+Excel
+├───dlc_catacombs
+├───dlc_dul_cru
+├───dlc_origin_skins
+├───dlc_supporter
+├───expedition
+└───kingdom
+```
+
+Mod folders look more or less like this:
+
+```
+Mod folder
+├───Assets
+├───dlc_catacombs
+├───dlc_dul_cru
+├───dlc_origin_skins
+├───dlc_supporter
+├───expedition
+├───kingdom
+├───Localization
+└───Overrides
+    ├───dlc_catacombs
+    ├───dlc_dul_cru
+    ├───dlc_origin_skins
+    └───dlc_supporter
+```
+
+When a save file is being loaded the game loads CSV files in this order (probably):
+1. Base game CSV files from the top level of the Excel folder.
+2. DLC files (IB, TBB, HOP, ISP).
+3. Then the game checks if this is a Kingdoms or an Expedition save. If this is an Expedition save, files from the `expedition` folder are loaded, and the `kingdom` folder is ignored. If this is a Kingdoms save, its the other way around. Data from these two folders can override previously gathered data. 
+4. Then mods are loaded. For each mod folder:
+	1. Data from the top folder of the mod is gathered, this data does not override previously gathered data.
+	2. Data from DLC-related folders. This data does not override previously gathered data.
+	3. Depending on the game type, files either from `expedition` or `kingdom` folder are gathered. Data from this folder does not override previously gathered data.
+	4. The `Overrides` folder is checked:
+		1. Files on the top level of this folder are gathered, they override previously gathered data.
+		2. Game type folder is gathered. Overrides previously gathered data.
+		3. Data from DLC-related folders, overrides previously gathered data.
 
 Editing CSV data doesn't require rebuilding the mod with the Steamworks tool. CSV files can be edited in the `exports` folder and then copied into DD2 mods folder. Editing CSV files in DD2 mods folder directly is a bit risky because they can be accidentally replaced.
 
@@ -4104,21 +4150,6 @@ I don't know reliable this ID changing is, but I'm inclined to believe that ther
 
 -->
 
-## CSV Data IV
-
-For a long time I've had this obtrusive idea of creating some kind of helper that would be useful when writing CSV data.
-
-- Element IDs are not unique. Sometimes it is unclear what an element ID refers to. For example, all Buff elements share their IDs with their ActorDataStatsElements.
-- Neither unique are combinations of element types with element IDs. For example, LootTables and ActorDataEffects elements are additive, there can be multiple LootTables with the same ID.
-- Fields in elements can repeat. For example, sub_stat.
-- Some fields are position-sensitive. For example, key_map and add_stats.
-- Some fields accept data of various nature. For example, sub_stat field reads resistance id (?) and numbers in a fixed order.
-- Some IDs are missing in CSV data. For example, quest_courtier_creature_blood loot. This loot is referenced by a add_quest_courtier_creature_blood effect which is not used.
-- Some IDs are missing in CSV data but are still valid, for example, "hero_upgrade_points" or "nothing".
-- KingdomMap elements don't have named fields.
-- Some fields accept different types of values depending on other fields, for example, *m_ConditionString* can accept a tag or an Item ID depending on the *m_ConditionType*.
-- Some fields accept localization IDs wich aren't defined in CSV files.
-
 ## Afterword
 
 This process was a lot of fun. I remember how happy I was when my 3D model appeared the game for the first time, even though it was just a T-pose. I felt so smart when I created skills that I didn’t even know were possible, and when I made the Shrine of Reflection work, even if some workarounds were needed.
@@ -4160,16 +4191,29 @@ I loved the process of 3D modeling, texturing, drawing, animating, editing CSV d
 
 ## Locations of files and folders
 
-Streaming Assets folder:
+Streaming Assets folder (Steam):
 
 ```
 C:\Program Files (x86)\Steam\steamapps\common\Darkest Dungeon® II\Darkest Dungeon II_Data\StreamingAssets\
 ```
 
-Local mods folder:
+Streaming Assets folder (Epic Games):
+
+```
+C:\Programs\EPIC\Epic Games\DarkestDungeonII\Darkest Dungeon II_Data\StreamingAssets\
+```
+
+
+Local mods folder (Steam):
 
 ```
 C:\Program Files (x86)\Steam\steamapps\common\Darkest Dungeon® II\Darkest Dungeon II_Data\StreamingAssets\mods
+```
+
+Local mods folder (Epic Games):
+
+```
+C:\Programs\EPIC\Epic Games\DarkestDungeonII\Darkest Dungeon II_Data\StreamingAssets\mods
 ```
 
 Log file:
@@ -4184,8 +4228,14 @@ Save files:
 %USERPROFILE%\AppData\LocalLow\RedHook\Darkest Dungeon II\SaveFiles\
 ```
 
-Darkside UserMods folder:
+Darkside UserMods folder (if Darkside is installed via Steam):
 
 ```
 C:\Program Files (x86)\Steam\steamapps\common\Darkest Dungeon® II Mod Tools\darkside\Assets\UserMods\
+```
+
+Steam Workshop Folder:
+
+```
+C:\Program Files (x86)\Steam\steamapps\workshop\content\1940340\
 ```
