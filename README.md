@@ -851,6 +851,8 @@ element_end
 
 Here **add_1_dodge** is the ID of this element. It should be unique enough so it doesn't conflict with vanilla data or with other mods (common way is to add hero's ID as a prefix). *Effect* is the type of this element.
 
+IDs are mostly arbitrary (with except of IDs of upgraded skills and maybe some other cases), element types are predefined, there are more than 100 types.
+
 CSV data is generally case-sensitive but some specific values can be written in any case. For example, this works fine:
 ```csv
 element_start,mmd,ActorDataStats
@@ -904,11 +906,15 @@ key_map,health_max,speed,speed_number_of_turns,
 element_end
 ```
 
-I believe there is no way to add comments in CSV files. I used `//` to add some comments, and it worked until I tried to comment out entire elements. When I did that, the game began glitching. It looks like the game treats these `//` symbols the same as other letters, so when an entire element is commented out, the game just sees comma-separated values instead of comments and tries to parse them.
+The game does not support comments in CSV files. Some mods (and me too) use `//` to add comments but the game does not actually filter them out. It might be fine for short comments but if entire elements are commented out it might cause unexpected behavior.
 
 ```csv
 // fake comment
 ```
+
+![Image: comment](images/comments.png)\
+*Adding a commented out highwayman ActorDataClass definition before the actual definition resulted in the hero missing at the Crossroads.*
+
 
 The game treats spaces as self-sufficient characters. The data below will produce two independent effects with IDs `effect` and ` effect` (with space in the beginning).
 ```csv
@@ -923,7 +929,7 @@ element_end
 
 Element IDs are not necessarily unique, and even a repeated combination of ID+Type can be valid data in some cases. Elements with repeating ID+Type signature are only allowed if:
 - These elements are "Addable" elements like `LootTable`, `ActorDataExternalBuffs`, `InnTable`, `BattleConfigurationTable` elements, and maybe some more.
-- Or, if these elements are supposed to override previously defined elements. I'd guess that Addable elements can't be overridden, but I did not test it.
+- Or, these elements are supposed to override previously defined elements.
 
 The game's folder with vanilla and DLC data has this structure:
 ```
@@ -967,6 +973,26 @@ When a save file is being loaded the game loads CSV files in this order (probabl
 		1. Files on the top level of this folder are gathered, they override previously gathered data.
 		2. Game type folder is gathered. Overrides previously gathered data.
 		3. Data from DLC-related folders, overrides previously gathered data.
+
+Addable types (not confident):
+- ActorDataActOut
+- ActorDataEffects
+- ActorDataExternalBuffs
+- ActorDataRunGoals
+- ActorDataSkillReplacement
+- BattleConfigurationTable
+- DataAffinityTickTriggers
+- DataExternalBuffs
+- DataNodeReplacements
+- DataStoryChoiceReplacements
+- InnDataStats
+- InnTable
+- LootTable
+- RunDataStats
+- StoryDataEffects
+- UnlockTable
+
+Addable elements can be overridden too. In this case all previously defined addables with the same type and ID are removed.
 
 Editing CSV data doesn't require rebuilding the mod with the Steamworks tool. CSV files can be edited in the `exports` folder and then copied into DD2 mods folder. Editing CSV files in DD2 mods folder directly is a bit risky because they can be accidentally replaced.
 
@@ -1410,11 +1436,11 @@ add_stats,-2,
 element_end
 ```
 
-Here the *Item* element connects to two buffs through an *ActorDataExternalBuffs* element. Both these buffs say that they last an infinite amount of time. For trinkets (and memories) it means that these buffs work for any amount of time as long as trinkets are equipped.
+Here the *Item* element connects to two buffs through an *ActorDataExternalBuffs* element. Both these buffs say that they last an infinite amount of time. For trinkets (and memories) it means that these buffs work for any amount of time as long as trinkets (memories) are equipped.
 
-If a non-trinket buff says that it has infinite duration, it will be lost when a run ends (in an inn or not).
+If buff caused by a skill has infinite duration, it will be lost when a run ends (in an inn or not).
 
-The exceptions are buffs that are connected to a hero through their *ActorDataExternalBuffs* (not trinket's). For example, Altar of Hope unlocks.
+The exceptions are buffs that are connected to a hero directly through their *ActorDataExternalBuffs* (not as a result of a skill or equipment effects). For example, Altar of Hope unlocks.
 ```csv
 element_start,highwayman,ActorDataClass
 ⋮
