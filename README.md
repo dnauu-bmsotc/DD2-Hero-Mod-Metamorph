@@ -2697,6 +2697,7 @@ And some specific colors:
 Parts of text can be emphasized, for example:
 ```
 bark_act_out_start_my_turn_stress_dmg_partner+resentful=And we're supposed to trust <i>your</i> genius?
+hero_path_flavour_occ_warlock=\n"Those beyond the veil hear my calls <b>and obey!</b>"\n
 ```
 
 Some localizations can have fallbacks:
@@ -3580,6 +3581,59 @@ element_end
 Other goals are not tied to paths.
 
 Before the Altar of Hope is completed, all goals reward candles only. Some of these goals are applied to all heroes, these goals are assigned to custom heroes automatically.
+
+Heroes have goals related to skills. Goals that require unlockable skills need to use the same Unlock.
+
+![Image: Use skill goals](images/goal_3.png)\
+*Use skill goals*
+
+Flagellant's skill goals:
+```csv
+element_start,e_skill_hist_flg_punish,RunGoal
+m_Chance,1,
+m_RunGoalCategoryId,easy,
+m_ActorClassIds,flagellant,
+m_CompletionLimit,-1,
+any_conditions,performer_skill_hist_flg_punish,
+generation_all_conditions,profile_has_under_100pct_base_altar,
+m_Score,1,
+m_GoalIconOverride,candle_item,
+m_GoalTooltipLocKeyOverride,goal_candle_reward_1_tooltip,
+element_end
+
+...
+
+element_start,m_skill_hist_flg_fester,RunGoal
+m_Chance,1,
+m_RunGoalCategoryId,medium,
+m_ActorClassIds,flagellant,
+m_CompletionLimit,-1,
+any_conditions,performer_skill_hist_flg_fester,
+generation_all_conditions,profile_has_under_100pct_base_altar,
+m_Score,2,
+m_GoalIconOverride,candle_item,
+m_GoalTooltipLocKeyOverride,goal_candle_reward_2_tooltip,
+element_end
+
+...
+
+element_start,h_skill_hist_flg_necrosis,RunGoal
+m_Chance,1,
+m_RunGoalCategoryId,hard,
+m_ActorClassIds,flagellant,
+m_CompletionLimit,-1,
+any_conditions,performer_skill_hist_flg_necrosis,
+generation_all_conditions,herostory_FLG_05,profile_has_under_100pct_base_altar,
+m_Score,4,
+m_GoalIconOverride,candle_item,
+m_GoalTooltipLocKeyOverride,goal_candle_reward_4_tooltip,
+element_end
+```
+
+Skill goals need to be localized:
+```
+effect_condition_performer_skill_hist_flg_necrosis_override=Use <color=#{notable}>Necrosis</color> 2+ times in a single fight
+```
 
 After the Altar of Hope is completed, new goals appear. These goals reward signature items or hero trinkets. Killing 8 Cosmic beings rewards with a signature inn item. Killing a lair boss rewards with a random hero trinket.
 
