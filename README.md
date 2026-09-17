@@ -2672,7 +2672,7 @@ Text can be colored by using this syntax:
 actor_class_mmd_corpse=<color=#{deathdoor}>Parasitic Form</color>
 ```
 
-Some common colors:
+Some colors:
 - `<color=#{deathdoor}></color>`
 - `<color=#{notable}></color>`
 - `<color=#{buff}></color>`
@@ -2684,15 +2684,26 @@ Some common colors:
 - `<color=#{blight}></color>`
 - `<color=#{stress}></color>`
 - `<color=#{disease_quirk}></color>`
+- etc.
 
-And some specific colors:
+<!-- And some specific colors:
 - `<color=#{stat_reg}></color>`
 - `<color=#{item_nameline}></color>`
 - `<color=#{item_coach}></color>`
 - `<color=#{item_pet}></color>`
 - `<color=#{item_radiant}></color>`
 - `<color=#{item_infernal}></color>`
-- etc.
+- etc. -->
+
+Colors can be custom, for example:
+
+```
+<color=#9e75e6>Custom Color</color>
+```
+
+![Image: Custom localization color](images/loc_13.png)\
+*Custom localization color*
+
 
 Parts of text can be emphasized, for example:
 ```
