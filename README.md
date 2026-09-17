@@ -2784,9 +2784,7 @@ party_name_plague_doctor_grave_robber_runaway_hellion=Sisters of Battle
 party_name_hellion_plague_doctor_man_at_arms_highwayman=Highway to Hell
 ```
 
-The amount of all possible party names for a given number $n$ of heroes can be calculated as the number of permutations of $n$ taken $4$. For example, for five heroes this would be:
-
-$P(5,4) = 5! / (5 - 4)! = 120$
+The amount of all possible party names for a given number $n$ of heroes can be calculated as the number of permutations of $n$ taken $4$. For example, for five heroes this would be: $P(5,4) = 5! / (5 - 4)! = 120$
 
 If some heroes ($r$) out of selection should be present in all party combinations of $n$ heroes, the number of parties can be calculated as:
 
@@ -2796,7 +2794,13 @@ $$
 
 If one hero out of five should be present in all parties, then this number can be calculated as $C(5-1, 4-1) × 4! = 96$. If two heroes out of five should be present in all parties, then it would be further reduced to $C(5-2, 4-2) × 4! = 72$.
 
-This code prints all party combinations for a given number of heroes with some of them being required. It can be run using any online Python interpreter.
+Party names can be generated on [this page](https://dnauu-bmsotc.github.io/DD2-Hero-Mod-Metamorph/Source%20files/scripts/party_names_generator.html).
+
+
+![Image: Fixed localization](images/party_names_mmd.png)\
+*Party names generator*
+
+<!-- This code prints all party combinations for a given number of heroes with some of them being required. It can be run using any online Python interpreter.
 
 ```python
 import itertools
@@ -2829,7 +2833,7 @@ print_party_combinations(required_heroes, nonfocus_heroes)
 `required_heroes` is a list with heroes that should be present in all parties, `nonfocus_heroes` is a list of heroes that will be included in party names but not in all of them.
 
 ![Image: online python interpreter](images/party_names.png)\
-*An online interpreter*
+*An online interpreter* -->
 
 Most of hero barks have a default fallback localization, but there are some that don't. I hope this is the full list of barks that have no fallback version and thus need to be written.
 

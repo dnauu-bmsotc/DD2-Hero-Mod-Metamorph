@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Party Combinations</title>
+        <script src="https://cdn.jsdelivr.net/npm/js-combinatorics@2.1.4/umd/combinatorics.min.js"></script>
+    </head>
+    <body>
+
+    <h1>Party Combinations</h1>
+
+    <label>Required heroes (heroes that should be present in all parties):</label>
+    <div><textarea id="required" rows="5" cols="30">mmd</textarea></div>
+
+    <label>Non-focus heroes (heroes that will fill remaining slots):</label>
+    <div><textarea id="nonfocus" rows="5" cols="30">grave_robber,plague_doctor,man_at_arms,highwayman</textarea></div>
+
+    <button onclick="generate()">Generate</button>
+
+    <pre id="output"></pre> 
+
+    <script>
+        function generate() {
+            const required = document.getElementById("required").value.split(",").filter(x => !!x);
+            const nonfocus = document.getElementById("nonfocus").value.split(",").filter(x => !!x);
+            const slots = 4 - required.length;
+
+            const combinations = new Combinatorics.Combination(nonfocus, slots).toArray()
+                .map(c => new Combinatorics.Permutation([...required, ...c]).toArray()).flat();
+
+            function sortHelper(a, b) {
+                for (const hero of required) {
+                    const aPos = a.indexOf(hero);
+                    const bPos = b.indexOf(hero);
+                    if (aPos !== bPos) {
+                        return aPos - bPos;
+                    }
+                }
+                return 0;
+            }
+
+            document.getElementById("output").textContent =
+                combinations.sort(sortHelper).map(p => `party_name_${p.join("_")}=`).join("\n");
+        }
+    </script>
+
+    </body>
+</html>
