@@ -32,6 +32,7 @@
     - [Syntax](#syntax)
     - [Names and barks](#names-and-barks)
     - [Skill tooltips](#skill-tooltips)
+    - [Other languages](#other-languages)
 - [Altar of Hope](#altar-of-hope)
 - [Act 5 boss](#act-5-boss)
 - [Shrine of Reflection](#shrine-of-reflection)
@@ -61,6 +62,8 @@ Some guides about modding Darkest Dungeon 2:
 - [Creating new path skills](https://docs.google.com/document/d/1glkTgWv5mXvleihcnBeC4FIDgf88fz8Qwjz46es6oFA/edit?tab=t.0#heading=h.1xklr55423w9)
 - [How to create a mod on Darkest Dungeon 2 that contains multiple tokens](https://docs.google.com/document/d/1FcWUTaz4nRhRtgW_haOZUEuLNB1u41Lqi03kav63f8Y/edit?tab=t.0#heading=h.c976l88xa9o)
 - [How to package a mod not for Steam Workshop](https://docs.google.com/document/d/1RYOe7yJqThgUv3s-1MlVGdBEv0dwof8zc2PVu57C-dE/edit?usp=sharing)
+- [Translating Darkside Mods
+](https://docs.google.com/document/d/1F0r694OcDRPumt9oOAZ4sFHd0iGJTBF5KlbC7eNfZsE/edit?tab=t.0)
 
 <!-- Other mods for DD2 that add new hero classes:
 - [The Omen Seeker by \*mpregs you\*, Purple, Wallimod, Crisdroid](https://steamcommunity.com/sharedfiles/filedetails/?id=3646513756)
@@ -3127,6 +3130,91 @@ Now the tooltip has a new note.
 ![Image: Skill 2 fixed](images/loc_7.png)\
 *Note above effect lists*
 
+### Other languages
+
+TXT files in the `exports/Localization` folder add English text only. If the game's language is switched and there are no files for that specific language, all text turns back to blue placeholders.
+
+Translations are stored in PO files. They can be placed in the same `exports/Localization` folder along with TXT files.
+
+There is a tool for building PO files located at `StreamingAssets/Localization/BuildPotFile`.
+
+To use this tool on mod files:
+1. Create a temporary folder outside the mod folder (`temporary`).
+2. Inside, create `Poedit` and `Sources` folders.
+3. Copy the `StreamingAssets/Localization/BuildPotFile` folder and paste it into the temporary folder.
+4. Add TXT localization files in the `Sources` folder.
+4. Folder structure should look like this:
+    ```
+    temporary
+    ├───BuildPotFile
+    │       BuildPotFile.dll
+    │       BuildPotFile.exe
+    │       BuildPotFile.runtimeconfig.json
+    │       GenerateMO.bat
+    │       msgfmt.exe
+    │       Readme.txt
+    │
+    ├───Poedit
+    └───Sources
+            dd2_loc_strings.txt
+    ```
+5. Install [.NET 5.0 Runtime](https://aka.ms/dotnet-core-applaunch?missing_runtime=true&arch=x64&rid=win10-x64&apphost_version=5.0.10+)
+6. Execute `temporary/BuildPotFile/BuildPotFile.exe`. This should create a new file in the `temporary/Poedit` folder.
+7. Download a PO Editor
+8. Using this editor, translate `temporary/Poedit/iron_crown.pot`
+9. Save translated file into the `exports/Localization` folder
+
+After that translated text should appear in the game.
+
+![Image: localization](images/loc_14.png)\
+*In other languages*
+
+If translations are not specified in a PO file, text will still be blue.
+
+To create PO files for other languages but with the same English text (I think it's better than blue text), run this Python script in the folder where the `iron_crown.pot` file is located.
+```python
+import os
+import datetime
+
+langs = ['cs','de_DE','es','es_LAT','fr','it','ja','ko','pl','pt_BR','ru','tw_CN','uk','zh_CN']
+timestamp = datetime.datetime.now().strftime('%Y-%m-%d_%H-%M-%S')
+output_folder = f'{timestamp}'
+
+os.makedirs(output_folder)
+
+with open('iron_crown.pot', 'r', encoding='utf-8') as f:
+    lines = f.readlines()
+
+for lang in langs:
+    output = []
+    current_msgid = []
+    in_msgid = False
+
+    for line in lines:
+        if 'Language: \\n' in line:
+            line = r'\"Language: ' + lang + r'\n\"' + '\n'
+        if line.startswith('msgid '):
+            current_msgid = [line.replace('msgid ', '')]
+            in_msgid = True
+            output.append(line)
+        elif line.startswith('msgstr '):
+            in_msgid = False
+            output.append('msgstr ' + ''.join(current_msgid))
+        elif in_msgid and line.startswith('\"'):
+            current_msgid.append(line)
+            output.append(line)
+        else:
+            in_msgid = False
+            output.append(line)
+
+    file_path = os.path.join(output_folder, f'{lang}.po')
+    with open(file_path, 'w', encoding='utf-8') as f:
+        f.writelines(output)
+```
+
+Editing PO files, same as TXT files, does not require restarting the game (reloading a save is enough for changes to be applied).
+
+
 ## Altar of Hope
 
 Most heroes have these upgrades in the Altar of Hope:
@@ -3328,7 +3416,7 @@ I don't know why but I couldn't make the ghost use SFX other than the example SF
 ![Image: Ghost of the past sounds](images/ghost_2.png)\
 *Audio settings in Resource Actor and RZIS example files*
 
-Now the boss will summon a new ghost.
+Now the boss will summon a customized ghost.
 
 ![Image: Ghost of the past](images/ghost_1.png)\
 *I forgot that Ghosts have a VFX under them when I switched the model*
@@ -4166,7 +4254,7 @@ element_end
 <!-- Many restrictions of this skill can be removed. This allows, for example, to select an enemy target and a friendly target in one skill. Not simultaneously, but still. -->
 
 ![Video: Tribecaller](images/hp_transfer.webp)\
-*Damaging an enemy and healing an ally in "one turn". It takes much time though*
+*Damaging an enemy and healing an ally in "one turn"
 
 The Tribecaller enemy from K1 has a passive: when an adjacent ally is hit, the Tribecaller gets one Berserk token.
 
