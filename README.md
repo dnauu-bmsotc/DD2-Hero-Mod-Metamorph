@@ -10,13 +10,13 @@
 - [Texturing](#texturing)
 - [Installing the Mod Kit](#installing-the-mod-kit)
 - [Creating a placeholder hero](#creating-a-placeholder-hero)
-- [Exporting models to Darkside](#exporting-models-to-darkside)
+- [Importing models to Darkside](#importing-models-to-darkside)
     - [Adding meshes](#adding-meshes)
     - [Adding textures](#adding-textures)
     - [Fixing the outline](#fixing-the-outline)
     - [Adding effect anchors](#adding-effect-anchors)
     - [Fixing the inn light](#fixing-the-inn-light)
-- [Exporting animations to Darkside](#exporting-animations-to-darkside)
+- [Importing animations to Darkside](#importing-animations-to-darkside)
 - [Skill icons and portraits](#skill-icons-and-portraits)
 - [Adding VFX](#adding-vfx)
 - [Adding SFX](#adding-sfx)
@@ -39,10 +39,6 @@
 - [Kingdoms](#kingdoms)
 - [Weapon Kits and Origin Skin](#weapon-kits-and-origin-skin)
 - [A summoning skill](#a-summoning-skill)
-- [CSV data III](#csv-data-iii)
-- [Testing](#testing)
-- [Cloning this mod](#cloning-this-mod)
-- [Locations of files and folders](#locations-of-files-and-folders)
 
 <!-- /TOC -->
 
@@ -356,7 +352,7 @@ After that enable the mod in the game and a new hero will be available at the Cr
 
 This placeholder hero works and doesn't break anything. Almost anything. There is one issue that about this placeholder hero: when the mod is active, passing a turn triggers a zoom as if it was a regular skill. I will write about this later.
 
-## Exporting models to Darkside
+## Importing models to Darkside
 
 This is the part I'm least comfortable with. I encountered a lot of issues, and not all of them I could fix.
 
@@ -529,7 +525,7 @@ Moreover, this is not a complete fix. Hovering over the icon in the turn order h
 
 I don't know how to fix this.
 
-## Exporting animations to Darkside
+## Importing animations to Darkside
 
 `F/animations` folder stores animation files. File names in this folder do not have strict rules. One FBX file can store multiple animation clips.
 
@@ -3436,7 +3432,7 @@ To add text to a prefab file, I:
 ![Image: Custom enemy](images/shrine_2.png)\
 *Setting a font*
 
-With this approach each text plate is a different actor, I don't know how to optimize it.
+With this approach each text plate is a different actor, I don't know how to optimize it. And I don't know if it is possible to add translations to other languages.
 
 ![Image: First reflection](images/shrine_3.png)\
 *Text block in the game*
