@@ -40,6 +40,10 @@
 - [Kingdoms](#kingdoms)
 - [Weapon Kits and Origin Skin](#weapon-kits-and-origin-skin)
 - [A summoning skill](#a-summoning-skill)
+- [CSV data III](#csv-data-iii)
+- [Testing](#testing)
+- [Cloning this mod](#cloning-this-mod)
+- [Locations of files and folders](#locations-of-files-and-folders)
 
 <!-- /TOC -->
 
@@ -1758,15 +1762,15 @@ In more details:
     - *on_resist*: effects are activated on bleed/burn/blight/debuff resist. Didn't test it.
     - *on_[hit / crit / kill / miss]_as_target_to_target*: activates effects when the hero is attacked.
     - *on_[hit / crit / kill / miss]_as_performer_to_performer*: activates effects when the hero attacks.
-- *m_ActorEffectTriggerSourceType* can be either *target*, *performer*, or not specified. This field tells from whom the listed effects should originate. It has meaning for two-sided effects like copying or stealing tokens. It also matters for skills like Fester, where effects should account for Flagellant's Blight RES Piercing, not corpse's.
-- *m_ActorEffectTriggerTargetType* tells to whom the effects should be applied.
+- *m_ActorEffectTriggerSourceType* can be either *target*, *performer*, or not specified. This field tells from whom effects should originate. It has meaning for two-sided effects like copying or stealing tokens. It also matters for skills like Fester, where effects should account for Flagellant's Blight RES Piercing, not corpse's.
+- *m_ActorEffectTriggerTargetType* tells to whom effects should be applied.
     - *friendly_team*, *enemy_team*
     - *performer*, *target*
     - *neighbor*: if this value is set, then additional fields are available:
         - *m_NeighborActorEffectTriggerSourceType* is either *performer* or *target*. It tells whose neighbors will be affected.
-        - *m_NeighborFrontCount*: number of neighbors in front of the target or the performer.
-        - *m_NeighborBackCount*: number of neighbors behind the target or the performer.
-- *m_IncludeSourceActor* tells if the target or the performer should get effects too.
+        - *m_NeighborFrontCount*: number of neighbors in front.
+        - *m_NeighborBackCount*: number of neighbors behind.
+- *m_IncludeSourceActor*.
 - *m_ActorCount*: number of heroes/monsters to be affected. If this number is less than the number of heroes/monsters that previous fields stated, then effects are applied randomly to no more than to *m_ActorCount* heroes/monsters.
 - *m_UseActorDataEffectsConditionCalculationInput*. No idea what this does.
 
@@ -4043,7 +4047,8 @@ Since my summon was technically a corpse of my hero, the *m_ClearContainerTypes*
 
 <!-- I believe *m_IgnoredSkillAttributeTypes* blocks some effects from being applied. Corpses ignore tokens, quirks, and buffs. I allowed my summon to get tokens and buffs. -->
 
-<!-- ```csv
+<!--
+```csv
 element_start,mmd_corpse,ActorDataClass
 m_Tags,meat,
 m_IsBattleComplete,True,
@@ -4056,7 +4061,8 @@ m_ClearContainerTypes,BuffContainer,TokenContainer,DotContainer,
 m_IgnoredSkillAttributeTypes,QUIRK_ADD,
 m_ActorControllerType,RANDOM,
 element_end
-``` -->
+```
+-->
 
 Creating multiple summons is also possible. It is enough to duplicate the Resource Actor file, rename it, duplicate CSV data and change IDs.
 
@@ -4305,6 +4311,13 @@ The challenge here is that I don't know who hits a cursed target. In the previou
 This also needs to account for situations when an enemy attacks a hero and gets riposted. Both sides get tokens, but turn end effects aren't triggered until it's the end of hero's turn, even though tokens were applied during enemy's turn. To fix this, X token should also get a turn end effect:
 
 7. On enemy's turn end the X token removes all Y tokens and converts all X tokens to Combo tokens. -->
+
+When I was creating an extension for VS Code, I created a list of all elements, fields, and what values each field expects. It does not include everything that the game supports, only what is present in CSV files.
+
+This list is located on [this page](https://github.com/dnauu-bmsotc/VSC-DD2-CSV-MMD#csv-data-description).
+
+![Image: csv description](images/csv_4.png)\
+*Desription of elements*
 
 There is much more to explore in CSV files. I haven't tried to understand Abomination's transformations, various DOT mechanics, edge cases of forced skills, obscure fields and values.
 
