@@ -82,15 +82,9 @@ Other resources:
 
 Imported models have lighting artifacts in some cases and I couldn't fix them.
 
-I couldn't make hero palettes work on new heroes.
+I couldn't make hero palettes work on custom heroes.
 
-There also seem to be issues with custom audio. Options provided by Darkside tools are limited.
-
-Since control over audio is limited, custom narration subtitles can't be shown on screen. This was a problem for the Shrine of Reflection.
-
-VFX are customizable but I did not really want to figure them out.
-
-It looks like overstress states are not very customizable.
+There also seem to be issues with custom audio and narrations. Options provided by Darkside tools are limited. This was a problem for the Shrine of Reflection.
 
 ### Amount of work
 
@@ -3171,46 +3165,10 @@ After that translated text should appear in the game.
 
 If translations are not specified in a PO file, text will still be blue.
 
-To create PO files for other languages but with the same English text (I think it's better than blue text), run this Python script in the folder where the `iron_crown.pot` file is located.
-```python
-import os
-import datetime
+To create PO files for other languages but with the same English text (I think it's better than blue text), use [this page](https://dnauu-bmsotc.github.io/DD2-Hero-Mod-Metamorph/Source%20files/scripts/party_names_generator.html). Select the `iron_crown.pot` file, and it will generate and download an archive with placeholder files.
 
-langs = ['cs','de_DE','es','es_LAT','fr','it','ja','ko','pl','pt_BR','ru','tw_CN','uk','zh_CN']
-timestamp = datetime.datetime.now().strftime('%Y-%m-%d_%H-%M-%S')
-output_folder = f'{timestamp}'
-
-os.makedirs(output_folder)
-
-with open('iron_crown.pot', 'r', encoding='utf-8') as f:
-    lines = f.readlines()
-
-for lang in langs:
-    output = []
-    current_msgid = []
-    in_msgid = False
-
-    for line in lines:
-        if 'Language: \\n' in line:
-            line = r'\"Language: ' + lang + r'\n\"' + '\n'
-        if line.startswith('msgid '):
-            current_msgid = [line.replace('msgid ', '')]
-            in_msgid = True
-            output.append(line)
-        elif line.startswith('msgstr '):
-            in_msgid = False
-            output.append('msgstr ' + ''.join(current_msgid))
-        elif in_msgid and line.startswith('\"'):
-            current_msgid.append(line)
-            output.append(line)
-        else:
-            in_msgid = False
-            output.append(line)
-
-    file_path = os.path.join(output_folder, f'{lang}.po')
-    with open(file_path, 'w', encoding='utf-8') as f:
-        f.writelines(output)
-```
+![Image: po generator](images/po_generator.png)\
+*Generating placeholders for other languages*
 
 Editing PO files, same as TXT files, does not require restarting the game (reloading a save is enough for changes to be applied).
 

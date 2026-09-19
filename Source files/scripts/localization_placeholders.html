@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>PO placeholders</title>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+	</head>
+	<body>
+
+		<h1>PO placeholders</h1>
+		<input type="file" id="potFile" accept=".pot">
+
+		<div>
+			<label>Languages:</label>
+			<input
+				id="langs"
+				type="text"
+				value="cs,de_DE,es,es_LAT,fr,it,ja,ko,pl,pt_BR,ru,tw_CN,uk,zh_CN"
+				style="width:500px"
+			>
+		</div>
+
+		<button onclick="generate()">Generate and download</button>
+
+		<script>
+			async function generate() {
+				const file = document.getElementById("potFile").files[0];
+				if (!file) {
+					return;
+				}
+
+				const langs = document.getElementById("langs").value.split(",");
+
+				const zip = new JSZip();
+
+				const text = await file.text();
+				const lines = text.split(/\r?\n/);
+
+				for (const lang of langs) {
+					const output = [];
+					let currentMsgid = [];
+					let inMsgid = false;
+
+					for (let line of lines) {
+						if (line.includes('Language: \\n')) {
+							line = '"Language: ' + lang + '\\n"';
+						}
+						if (line.startsWith("msgid ")) {
+							currentMsgid = [line.replace("msgid ", "")];
+							inMsgid = true;
+							output.push(line);
+						}
+						else if (line.startsWith("msgstr ")) {
+							inMsgid = false;
+							output.push("msgstr " + currentMsgid.join(""));
+						}
+						else if (inMsgid && line.startsWith('"')) {
+							currentMsgid.push(line);
+							output.push(line);
+						}
+						else {
+							inMsgid = false;
+							output.push(line);
+						}
+					}
+
+					zip.file(lang + ".po", output.join("\n"));
+				}
+
+				const blob = await zip.generateAsync({ type: "blob" });
+
+				const a = document.createElement("a");
+				a.href = URL.createObjectURL(blob);
+				a.download = new Date().toISOString() + ".zip";
+				a.click();
+			}
+		</script>
+
+	</body>
+</html>
+
+
