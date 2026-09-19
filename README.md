@@ -3,9 +3,6 @@
 <!-- TOC tocDepth:2..3 chapterDepth:2..6 -->
 
 - [Intro](#intro)
-    - [What to expect](#what-to-expect)
-    - [What I couldn't do](#what-i-couldnt-do)
-    - [Amount of work](#amount-of-work)
 - [Animating](#animating)
 - [Texturing](#texturing)
 - [Installing the Mod Kit](#installing-the-mod-kit)
@@ -49,20 +46,21 @@
 
 ## Intro
 
-### What to expect
-
 This isn't exactly a guide, rather a document about everything I experienced while creating a new hero. Before this mod, I had never created any mods for any game, and I didn't consult with anyone experienced in this while creating it. I don't know how much of the following text is correct, but I hope this provides at least some answers to some questions. Also English is not my first language.
 
 <!-- I will try to write as much as possible about what I was trying to do, what solutions tried, what issues encountered, what worked, what did not, what are other potential solutions that came to mind. Not all ideas were successful, but I never mean that something is not supposed to work. -->
 
-While I was able to transfer 3D models and animations from Blender to Darkside, this process produced a lot of issues. If any other guide on this topic is available, it would probably be better than what is offered here. The developers used Maya and it might be a better option if available.
+<!-- The strongest part of this document is probably description of CSV data. There was a lot of work done. Half of this whole document is about it. -->
 
-There is an official tool that can makes creating trinkets, combat items, inn items, etc. a bit easier. This is a Microsoft Excel sheet and it requires specifically Microsoft Excel because it uses some of its exclusive features. But I did not really used it, and edited CSV data directly.
+What I couldn't achieve:
+- While I was able to transfer 3D models and animations from Blender to Darkside, this process produced a lot of issues. If any other guide on this topic is available, it would probably be better than what is offered here. <!-- The developers used Maya and it might be a better option if available. -->
+- I couldn't make palettes work on custom heroes.
+- There also seem to be issues with custom audio and narrations. Options provided by Darkside tools are limited. This was a problem for the Shrine of Reflection.
 
-The strongest part of this document is probably description of CSV data. There was a lot of work done. Half of this whole narration is about it.
+<!-- There is an official tool that can makes creating trinkets, combat items, inn items, etc. a bit easier. This is a Microsoft Excel sheet and it requires specifically Microsoft Excel because it uses some of its exclusive features. But I did not really used it, and edited CSV data directly. -->
 
 Some guides about modding Darkest Dungeon 2:
-- [A more fundamental DD2 modding guide](https://docs.google.com/document/d/1ga3FNrL3eGDRMFekLx9-RKhTDLMxPO603XzXcZa8O78/edit?usp=drive_link)
+- [Darkside guide](https://docs.google.com/document/d/1ga3FNrL3eGDRMFekLx9-RKhTDLMxPO603XzXcZa8O78/edit?usp=drive_link)
 - [Creating new path skills](https://docs.google.com/document/d/1glkTgWv5mXvleihcnBeC4FIDgf88fz8Qwjz46es6oFA/edit?tab=t.0#heading=h.1xklr55423w9)
 - [How to create a mod on Darkest Dungeon 2 that contains multiple tokens](https://docs.google.com/document/d/1FcWUTaz4nRhRtgW_haOZUEuLNB1u41Lqi03kav63f8Y/edit?tab=t.0#heading=h.c976l88xa9o)
 - [How to package a mod not for Steam Workshop](https://docs.google.com/document/d/1RYOe7yJqThgUv3s-1MlVGdBEv0dwof8zc2PVu57C-dE/edit?usp=sharing)
@@ -81,16 +79,6 @@ There are some other hero mods for Darkest Dungeon 2. [The Omen Seeker](https://
 
 Other resources:
 - [DD2 CSV Syntax Highilight extension](https://marketplace.visualstudio.com/items?itemName=PHombie.dd2-csv-syntax)
-
-### What I couldn't do
-
-Imported models have lighting artifacts in some cases and I couldn't fix them.
-
-I couldn't make hero palettes work on custom heroes.
-
-There also seem to be issues with custom audio and narrations. Options provided by Darkside tools are limited. This was a problem for the Shrine of Reflection.
-
-### Amount of work
 
 Creating a new hero required:
 - 3D models for the hero and the weapon, preparing them for animations
@@ -116,9 +104,9 @@ The Shrine of Reflection can increase these numbers.
 ![Image: Process of creating a hero](images/hero_workflow.png)\
 *Don't take this image seriously I don't know how business processes are done* -->
 
-Some animations require knowledge of what the skill effects will be like, but many animations are quite abstract. For example, healing animations don't need to know the amount of targets to look good.
+<!-- Some animations require knowledge of what the skill effects will be like, but many animations are quite abstract. For example, healing animations don't need to know the amount of targets to look good. -->
 
-Some of the work can be copied from the game (like VFX and SFX), and some things are reused even by vanilla heroes (many have about 8 unique skill animations, some skills share animations).
+<!-- Some of the work can be copied from the game (like VFX and SFX), and some things are reused even by vanilla heroes (many have about 8 unique skill animations, some skills share animations). -->
 
 ## Animating
 
@@ -1507,7 +1495,7 @@ For a *Buff* element to do something it requires additional elements: *ActorData
 An example of a trinket that only uses *ActorDataStats* elements for buffs is the Sharpness Charm trinket.
 
 ![Image: Sharpness Charm trinket description](images/trinket_3.png)\
-*Vague Sharpness Charm trinket*
+*[Vague Sharpness Charm trinket](https://darkestdungeon.wiki.gg/wiki/Trinkets_(Darkest_Dungeon_II)#Sharpness_Charm)*
 
 Here is its definition in CSV files, without the cost elements.
 
@@ -1571,7 +1559,7 @@ The HWM has seven buffs in his *ActorDataExternalBuffs* element. They all have d
 Many trinkets apply effects on turn start, on battle start, on round end, on being hit, etc. For these effects an *ActorDataEffects* element is required. For example, the Sacred Scribblings trinket can apply a vulnerability token on turn start.
 
 ![Image: Sacred Scribblings trinket description](images/trinket_2.png)\
-*Sacred Scribblings trinket*
+*[Sacred Scribblings trinket](https://darkestdungeon.wiki.gg/wiki/Trinkets_(Darkest_Dungeon_II)#Sacred_Scribblings)*
 
 Here is its definition in CSV files, without the cost elements.
 
@@ -1669,7 +1657,7 @@ Sometimes even these are not enough. *ActorEffectTrigger* elements provide even 
 An example of a trinket that targets neighboring allies is the Hastening History trinket.
 
 ![Image: Hastening History trinket description](images/trinket_4.png)\
-*Hastening History trinket*
+*[Hastening History trinket](https://darkestdungeon.wiki.gg/wiki/Trinkets_(Darkest_Dungeon_II)#Hastening_History)*
 
 Here is its definition in CSV files, without the cost elements.
 
@@ -1855,7 +1843,7 @@ I can't figure out a general rule for this data. Guess it's better to just copy 
 Some trinkets (like Cursed Coin or Hag's Hoard) have some kind of scaling of their effects. The Cursed Coin trinket increases damage per positive token. The Hag's Hoard trinket increases healing received per positive token.
 
 ![Image: Cursed Coin trinket description](images/trinket_7.png)\
-*Cursed Coin trinket*
+*[Cursed Coin trinket](https://darkestdungeon.wiki.gg/wiki/Trinkets_(Darkest_Dungeon_II)#Cursed_Coin)*
 
 ```csv
 element_start,trinket_hwy_cursed_coin_01,Buff
@@ -1908,7 +1896,7 @@ Hero trinkets have some effects that general trinkets usually don't. They trinke
 There are two ways to make a trinket affect specific skills. GR's His Rings trinket uses both of them.
 
 ![Image: His Rings trinket description](images/trinket_6.png)\
-*His Rings trinket*
+*[His Rings trinket](https://darkestdungeon.wiki.gg/wiki/Trinkets_(Darkest_Dungeon_II)#His_Rings)*
 
 Here is a shortened definition of this trinket:
 
@@ -2231,7 +2219,7 @@ Some buffs can be applied directly to the skill. Usually these are one-time buff
 Hatchetman's Finishing Blow skill deals double damage if the target has a Combo token.
 
 ![Image: Hatchetman's skill description](images/path_5.png)\
-*Hatchetman's skill*
+*[Hatchetman's skill](https://darkestdungeon.wiki.gg/wiki/Pillager_Hatchetman)*
 
 Here's the CSV definition of this skill.
 
@@ -3646,7 +3634,7 @@ Before the Altar of Hope is completed, all goals reward candles only. Some of th
 Heroes have goals related to skills. Goals that require unlockable skills need to use the same Unlock.
 
 ![Image: Use skill goals](images/goal_3.png)\
-*Use skill goals*
+*[Use skill goals](https://darkestdungeon.wiki.gg/wiki/Hero_Goals)*
 
 Flagellant's skill goals:
 ```csv
