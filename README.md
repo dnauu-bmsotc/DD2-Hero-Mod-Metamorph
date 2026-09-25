@@ -3160,7 +3160,7 @@ After that translated text should appear in the game.
 
 If translations are not specified in a PO file, text will still be blue.
 
-To create PO files for other languages but with the same English text (I think it's better than blue text), use [this page](https://dnauu-bmsotc.github.io/DD2-Hero-Mod-Metamorph/Source%20files/scripts/party_names_generator.html). Select the `iron_crown.pot` file, and it will generate and download an archive with placeholder files.
+To create PO files for other languages but with the same English text (I think it's better than blue text), use [this page](https://dnauu-bmsotc.github.io/DD2-Hero-Mod-Metamorph/Source%20files/scripts/localization_placeholders.html). Select the `iron_crown.pot` file, and it will generate and download an archive with placeholder files.
 
 ![Image: po generator](images/po_generator.png)\
 *Generating placeholders for other languages*
