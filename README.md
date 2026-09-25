@@ -46,7 +46,7 @@
 
 ## Intro
 
-This isn't exactly a guide, rather a document about everything I experienced while creating a new hero. Before this mod, I had never created any mods for any game, and I didn't consult with anyone experienced in this while creating it. I don't know how much of the following text is correct, but I hope this provides at least some answers to some questions. Also English is not my first language.
+This isn't exactly a guide, rather a document about everything I experienced while creating a new hero. Before this mod, I had never created any mods for any game, and I didn't consult with anyone experienced in this while creating it. Also English is not my first language.
 
 <!-- I will try to write as much as possible about what I was trying to do, what solutions tried, what issues encountered, what worked, what did not, what are other potential solutions that came to mind. Not all ideas were successful, but I never mean that something is not supposed to work. -->
 
@@ -55,11 +55,11 @@ This isn't exactly a guide, rather a document about everything I experienced whi
 What I couldn't achieve:
 - While I was able to transfer 3D models and animations from Blender to Darkside, this process produced a lot of issues. If any other guide on this topic is available, it would probably be better than what is offered here. <!-- The developers used Maya and it might be a better option if available. -->
 - I couldn't make palettes work on custom heroes.
-- There also seem to be issues with custom audio and narrations. Options provided by Darkside tools are limited. This was a problem for the Shrine of Reflection.
+- There also seem to be limitations with custom audio.
 
 <!-- There is an official tool that can makes creating trinkets, combat items, inn items, etc. a bit easier. This is a Microsoft Excel sheet and it requires specifically Microsoft Excel because it uses some of its exclusive features. But I did not really used it, and edited CSV data directly. -->
 
-Some guides about modding Darkest Dungeon 2:
+Other guides about modding Darkest Dungeon 2:
 - [Darkside guide](https://docs.google.com/document/d/1ga3FNrL3eGDRMFekLx9-RKhTDLMxPO603XzXcZa8O78/edit?usp=drive_link)
 - [Creating new path skills](https://docs.google.com/document/d/1glkTgWv5mXvleihcnBeC4FIDgf88fz8Qwjz46es6oFA/edit?tab=t.0#heading=h.1xklr55423w9)
 - [How to create a mod on Darkest Dungeon 2 that contains multiple tokens](https://docs.google.com/document/d/1FcWUTaz4nRhRtgW_haOZUEuLNB1u41Lqi03kav63f8Y/edit?tab=t.0#heading=h.c976l88xa9o)
@@ -78,6 +78,7 @@ There are some other hero mods for Darkest Dungeon 2. [The Omen Seeker](https://
 <!-- Often I had troubles that felt impossible to solve, but when I remembered them, I knew my pursuits were not in vain. -->
 
 Other resources:
+- [DD2 CSV Language Support extension](https://marketplace.visualstudio.com/items?itemName=dnauu.DD2CSVMMD)
 - [DD2 CSV Syntax Highilight extension](https://marketplace.visualstudio.com/items?itemName=PHombie.dd2-csv-syntax)
 
 Creating a new hero required:
@@ -94,7 +95,7 @@ Creating a new hero required:
 - Hero trinkets and a signature item: icons and gameplay effects
 - Hero story, barks
 
-The Shrine of Reflection can increase these numbers.
+The Shrine of Reflection increases these numbers.
 
 <!-- I believe the process can be somewhat parallelized. After a general idea of the hero is formed, the process can be branched into three areas that aren't very intersected:
 1. 3D modeling and animating
@@ -354,7 +355,7 @@ First, I exported my model from Blender to an FBX file. This file requires meshe
 
 In Unity files can have links to each other. If files are moved in the Unity File Explorer, links remain valid. If a file is deleted and then another file is created with the same name, links are lost.
 
-A file can be secretly replaced through Windows File Explorer (replacing it without prior deletion) and Unity will not track this change and the links will not be lost. But I will try to not use this method.
+A file can be secretly replaced through Windows File Explorer (replacing it without prior deletion) and Unity will not track this change and the links will not be lost.
 
 ![Image: FBX file for the mesh](images/egg_5.png)\
 *FBX file with meshes and an armature*
@@ -447,7 +448,7 @@ Two solutions that I found:
 - Scaling the model up 10 times in Object Mode, applying Transforms, and exporting it.
 - Or, unchecking the Convert Units field in import settings in the Unity Inspector.
 
-I did the second one (unchecking the Convert Units field). It doesn't require applying Transforms, which might break animations.
+I did the second one (unchecking the Convert Units field).
 
 ![Image: Disabling units conversion](images/egg_15.png)\
 *Disabling units conversion*
@@ -457,9 +458,9 @@ This made the model too big. To fix this, I clicked on egg_exported in the Hiera
 ![Image: Scaling back](images/egg_16.png)\
 *Scaling back to normal*
 
-Just a note. My model in Blender has adequate dimensions. The scale is close to 1, and his height is 1.96 m.
+<!-- Just a note. My model in Blender has adequate dimensions. The scale is close to 1, and his height is 1.96 m. -->
 
-I believe all my importing problems come from my armature. I probably created it in some wrong way but I have no idea how to test it.
+I believe all my importing problems come from the armature. I probably created it in some wrong way.
 
 ### Adding effect anchors
 
@@ -477,7 +478,7 @@ Then I built the mod using the Steamworks file and copied the `exports` folder i
 ![Image: Textured model in the game](images/egg_20.png)\
 *Textured model in the game*
 
-Unfortunately there was one issue.
+Unfortunately there was another issue.
 
 ### Fixing the inn light
 
@@ -507,7 +508,7 @@ Since the model was rotated, the anchors in the armature became displaced. Inver
 
 This is a very weird solution, and I most certainly did something wrong during model export or even armature creation.
 
-Moreover, this is not a complete fix. Hovering over the icon in the turn order highlighted my hero stronger than other heroes.
+Moreover, this is not a perfect fix. Hovering over the icon in the turn order highlights my hero stronger it does for other heroes.
 
 ![Image: Strong highlight in battles](images/egg_25.png)\
 *Strong highlight in battles*
@@ -536,7 +537,7 @@ Exporting a single animation can be done by unchecking the NLA Strips and All Ac
 ![Image: Animation export settings](images/egg_29.png)\
 *Animation export settings*
 
-Alternatively it can be automated by using this script in Blender. It creates a folder and exports Actions into separate FBX files.
+It can be automated by using this script. It creates a folder and exports Actions into separate FBX files.
 
 ```python
 HERO_ID = "egg"
@@ -1203,12 +1204,12 @@ To convert an inn item into a signature item, its CSV data needs to be edited.
 
 I will edit CSV files without the Excel tool. It is easier to do so with an app that allows to search words in all text files in a folder. One of them is Visual Studio Code.
 
-Actually I even created my own VS Code extension to make editing CSV data easier. It can catch some errors but not all of them. It is better suited for exploring DD2 CSV files rather than validation.
+Actually I even created my own [VS Code extension](https://marketplace.visualstudio.com/items?itemName=dnauu.DD2CSVMMD) to make editing CSV data easier. It can catch some errors but not all of them. It is better suited for exploring DD2 CSV files rather than for validation.
 
 ![Image: my extension](images/extension_1.png)\
 *My extension*
 
-If my extension stops working for some reason there is another [VSCode extension](https://marketplace.visualstudio.com/items?itemName=PHombie.dd2-csv-syntax) that only highlights syntax.
+If my extension does not for some reason there is another [VSCode extension](https://marketplace.visualstudio.com/items?itemName=PHombie.dd2-csv-syntax) that highlights syntax.
 
 ![Image: DD2 CSV Data extension](images/dd2csv.png)\
 *Syntax highlight by PHombie*
@@ -2209,10 +2210,12 @@ Since it is a path skill, it has *m_ConditionIdOverride* and *m_SkillHistoryIdOv
 
 **target_has_blight_dot_hidden** condition is not visible in the tooltip (emphasized by the _hidden suffix). To make a requirement invisible in tooltips the *m_IsVisible* field should be set to *False*.
 
-*m_Tags* field in *Buff* elementscan be used to add visual indicators to the sides of a healthbar. If a buff is tagged as *buff*, then it will add an indicator to the left to a healthbar. If a buff is tagged as *debuff*, then it will add an indicator to the right to a healthbar. I guess tagging a negative buff as *debuff* will also allow targets to resist this buff.
+*m_Tags* field in *Buff* elementscan be used to add visual indicators to the sides of a healthbar. If a buff is tagged as *buff*, then it will add an indicator to the left to a healthbar. If a buff is tagged as *debuff*, then it will add an indicator to the right to a healthbar. Tagging a negative buff as *debuff* will also allow targets to resist this buff.
 
 ![Image: Debuff tag](images/debuff_tag.png)\
 *A buff tagged as debuff*
+
+Adding *debuff_pop_text* or *buff_pop_text* will show "Debuff!" or "Buff!" text above targeted hero upon applying this buff.
 
 Some buffs can be applied directly to the skill. Usually these are one-time buffs that expire right after the skill is used. For example, increasing crit chance if the target has a Combo token, or increasing Blight RES Piercing if the target has Bleeding.
 
@@ -3382,6 +3385,9 @@ After a hero defeats their ghost from the past, they use their Exultation skill.
 
 <!-- Its antic animation can be changed by using the "Select Skill Id Override" field. Its recovery animation can be set by specifying a Timeline file. -->
 
+<!-- If a hero dies while facing their failures, the boss despawns their failure. The boss tracks if the hero is still alive by assigning a hidden token (`failure_facing`) to this hero, and then checks if the party has any actor with this token. If for some reason this token is not removed (for example if the corpse's data is changed), the boss will not despawn failures. -->
+
+
 ## Shrine of Reflection
 
 <!-- It looks like since it’s not possible to add audio to the game, the regular narrations for the stories are not possible either. I tried to do the narration with subtitles only, but in the game reflection sessions didn't show any subtitles and it skipped to the result screen. -->
@@ -3950,7 +3956,17 @@ The Mountain section of the Altar of Hope has buttons for each hero's palettes a
 
 ## A summoning skill
 
-There are at least two ways to create a summon:
+There are many difficulties with adding custom actors to heroes' or enemies' team. For example, Act 5 boss relies on hidden tokens to function. If a new actor spawns, it might break the logic of tokens.
+
+When the third phase begins, the boss applies a hidden token `failure_incomplete`. If a summon is in heroes' party, it will get this token and will be eligible for the Face Your Failure action that should summon a failure. If an actor is selecting for facing their failure, they will get a hidden token `failure_facing`. If a summon is selected but it does not provide a failure class, the boss will not summon any failure, but will still apply a hidden token. And the boss will not summon Cherubs until selected summon dies. Adding summons to the enemy party can also break the battle.
+
+So either the summon shouldn't be acessible in boss batles, or it should be tested on different bosses. I don't know if any other boss is as dependent on hidden mechanics as the Act 5 boss though.
+
+It is definetly possible to create a summon that can act randomly on its own, The Metamorph was able to summon those Creatures from his Shrine of Reflection, and it worked perfectly in regular battles. But I had no idea what to do with the last boss, so instead my hero can only summon corpses that don't do anything.
+
+<!-- Only a hero that is facing the failure should be able to damage it. But I don't know how it is implemented. The Runaway can damage other hero's failure. And my summons were able to damage my hero's failure, but only those summons that were spawned while my hero was facing his failure. Unfortunately I noticed it too late, I have no idea how to make it more consistent. -->
+
+<!-- There are at least two ways to create a summon:
 1. Base it on a hero
 2. Base it on a corpse 
 
@@ -3958,25 +3974,29 @@ Both ways have difficulties. If a summon is created as a separate hero, then it 
 
 A summon based on a corpse sounds easier to create, because it is already on heroes' side, doesn't prolong a battle when other heroes are dead, disappears after a fight, has no relationships, etc.
 
-Every hero has a separate corpse even though all corpses look the same. So modifying one does't affect the others.
+I think I made a mistake by modifying my hero's corpse file into a summon instead of copying it and making it a completely separate class. Its combat bar portrait is hero's, it is not changed to the summon's image. And during the Act 5 battle, if a summon is spawned while hero is facing their failure, this summon will damage the failure, but not the ones that were summonned before. But I noticed it too late.
 
-Signal Flare and Thrilling Tablet count number of actors with an "ally" tag in the party to adjust their effects. So if a summon does not have this tag, Signal Flare will be usable even if all ranks without heroes are occupied with summons. And if it does have this tag, Thrilling Tablet will not increase stats when ranks are occupied with summons.
+If a summon kills a failure during act 5, the Exultation skill still applies to the appropriate hero. -->
 
-So I modified my hero's corpse file (or I could've copied it, but I wanted a summon to spawn if my hero dies). Attached a new model to the prefab file, added materials and animation components.
+<!-- Every hero has a separate corpse even though all corpses look the same. So modifying one does't affect the others. -->
+
+<!-- Signal Flare and Thrilling Tablet count number of actors with an "ally" tag in the party to adjust their effects. So if a summon does not have this tag, Signal Flare will be usable even if all ranks without heroes are occupied with summons. And if it does have this tag, Thrilling Tablet will not increase stats when ranks are occupied with summons.
+
+So I modified my hero's corpse file (or I could've copied it, but I wanted a summon to spawn if my hero dies). Attached a new model to the prefab file, added materials and animation components. -->
 
 <!-- Since I didn’t use any scale references in Blender the model was too big. Fortunately changing scaling models using the Inspector window doesn't break anything. -->
 
-![Image: Summon prefab](images/summon_2.png)\
-*Summon's prefab*
+<!-- ![Image: Summon prefab](images/summon_2.png)\
+*Summon's prefab* -->
 
-Then added animations to its Animation Controller.
+<!-- Then added animations to its Animation Controller.
 
 ![Image: Summon animation controller](images/summon_4.png)\
-*There are two attacks I had two versions of a summon*
+*There are two attacks I had two versions of a summon* -->
 
 <!-- In the `nested_classes` folder there was a Resource Actor for my hero’s corpse. I switched the prefab reference to my new prefab file. So when my hero dies this new creature appears instead of a grave. -->
 
-To give it a skill I copied an existing RZIS file, renamed and reconfigured it. Then I attached it to the summon's Resource Actor file.
+<!-- To give it a skill I copied an existing RZIS file, renamed and reconfigured it. Then I attached it to the summon's Resource Actor file.
 
 To add it a spawn animation, I created a Playable file, and attached it to the summon's Resource Actor file.
 
@@ -3989,7 +4009,8 @@ But when I summoned it, it played a summon animation and froze. It can be fixed 
 *Fixing a spawn animation*
 
 A summoning skill can be defined this way:
-```csv
+
+
 element_start,mmd_parasitic_forms,ActorDataSkill
 ⁝
 m_AllConditionIds,hero_party_has_less_than_4_allies_hidden,
@@ -4007,7 +4028,7 @@ m_SummonClassActorId,mmd_corpse,
 m_SummonLocationType,BACK,
 m_SummonIfRoom,True,
 element_end
-```
+
 
 Opening character sheet while it's the summon's turn shows a very broken sheet.
 
@@ -4019,19 +4040,19 @@ I guess that since this summon is not a hero, this sheet can't be fixed. I see s
 2. Remove its turns entirely so there will be no time to open the sheet. But it needs to do something.
     - The summon gains taunt and riposte tokens periodically. Even though it doesn't have any turns, Round Start effects can still be used to apply tokens.
     - The summon uses Act Out system. Technically banters are Act Outs, so it can be triggered without relationships. I tried to trigger it by giving my hero a quirk that causes them to Act Out (like the Crimson Curse does). It worked. Unfortunately, I don't know how to add quirks to a non-hero actor.
-3. Make it act randomly. It can be achieved by adding a "m_ActorControllerType,RANDOM," line to the summon's *ActorDataClass* element. If it has turn pass or move skills then it will choose randomly between common skills and these. Common skills can be made into forced skills though. But the pass turn skill can be removed entirely from the summon, then, if all skills are blocked (e.g. by the Shackles of Denial), it will skip a turn the same way enemies do when all heroes are in stealth. I didn't know that making something act randomly was possible until I saw the mod that [makes enemies controllable](https://steamcommunity.com/sharedfiles/filedetails/?id=3319111967).
+3. Make it act randomly. It can be achieved by adding a "m_ActorControllerType,RANDOM," line to the summon's *ActorDataClass* element. If it has turn pass or move skills then it will choose randomly between common skills and these. Common skills can be made into forced skills though. But the pass turn skill can be removed entirely from the summon, then, if all skills are blocked (e.g. by the Shackles of Denial), it will skip a turn the same way enemies do when all heroes are in stealth. I didn't know that making something act randomly was possible until I saw the mod that [makes enemies controllable](https://steamcommunity.com/sharedfiles/filedetails/?id=3319111967). -->
 
 <!-- I will describe *ActorDataClass* of my summon. First I removed the corpse tag because it was breaking the game. I put a *meat* tag instead. Thrilling Tablet counts the amount of *ally* tags in hero party so I didn't add it.
 
 I deleted the *m_SkillBlockId* field and set *m_IsTickTriggerValid* field to true but I don't know what these fields do. -->
 
-Corpses have zero turns each round. It can be changed by changing the value of *speed_number_of_turns* to 1 in its *ActorDataStats* element.
+<!-- Corpses have zero turns each round. It can be changed by changing the value of *speed_number_of_turns* to 1 in its *ActorDataStats* element.
 
 There was a glitch. When the summon killed an enemy, this enemy turned into a corpse, but only visually. This enemy corpse was still attacking. Removing the *corpse* tag in *ActorDataClass* seems to fix it.
 
 Removing the *m_DeathRound* field didn't have any effect for some reason. Summons still disappeared after three turns. So I just set it to a big number.
 
-Since my summon was technically a corpse of my hero, the *m_ClearContainerTypes* has to stay. When I tested the final boss, my hero's spectre didn't disappear after hero's death. Turned out the boss applies hidden tokens to heroes to track if they are still alive or the boss needs to summon another spectre. Removing this field will not remove those tokens and the fight will break.
+Since my summon was technically a corpse of my hero, the *m_ClearContainerTypes* has to stay. When I tested the final boss, my hero's spectre didn't disappear after hero's death. Turned out the boss applies hidden tokens to heroes to track if they are still alive or the boss needs to summon another spectre. Removing this field will not remove those tokens and the fight will break. -->
 
 <!-- I believe *m_IgnoredSkillAttributeTypes* blocks some effects from being applied. Corpses ignore tokens, quirks, and buffs. I allowed my summon to get tokens and buffs. -->
 
@@ -4052,12 +4073,12 @@ element_end
 ```
 -->
 
-Creating multiple summons is also possible. It is enough to duplicate the Resource Actor file, rename it, duplicate CSV data and change IDs.
+<!-- Creating multiple summons is also possible. It is enough to duplicate the Resource Actor file, rename it, duplicate CSV data and change IDs. -->
 
 <!-- ![Image: Summon variation](images/summon_6.png)\
 *I summoned both versions. One version has higher HP. I added the ability to generate block to one version and the ability to generate Death’s Door Armor to the other one. They both worked as expected.* -->
 
-VFX and SFX can be added the same way as for heroes. But for some reason this summon didn't have any SFX when it was on enemies' side (Act 5, Shrine of Reflection), unless it was SFX from enemies from HWM's first Shrine fight. I probably did something wrong though.
+<!-- VFX and SFX can be added the same way as for heroes. But for some reason this summon didn't have any SFX when it was on enemies' side (Act 5, Shrine of Reflection), unless it was SFX from enemies from HWM's first Shrine fight. I probably did something wrong though. -->
 
 ## CSV data III
 
@@ -4206,12 +4227,12 @@ element_end
 <!-- Many restrictions of this skill can be removed. This allows, for example, to select an enemy target and a friendly target in one skill. Not simultaneously, but still. -->
 
 ![Video: Tribecaller](images/hp_transfer.webp)\
-*Damaging an enemy and healing an ally in "one turn"
+*Damaging an enemy and healing an ally in "one turn"*
 
 The Tribecaller enemy from K1 has a passive: when an adjacent ally is hit, the Tribecaller gets one Berserk token.
 
 ![Image: Tribecaller](images/tribecaller.png)\
-*Tribecaller's passive*
+*[Tribecaller's passive](https://darkestdungeon.wiki.gg/wiki/Tribecaller)*
 
 The challenging part is that there is no direct mechanic that watches when allies are hit. But it is possible to affect allies when the actor is hit.
 
@@ -4364,24 +4385,26 @@ Some issues that might appear with modded heroes:
 
 ## Cloning this mod
 
-It is better to create a new hero from scratch, using the official EmptyCharacterCreator tool. It can create a working copy of HWM in a couple of clicks.
+It is better to create a new hero from scratch, using the EmptyCharacterCreator tool. But if the goal is to base a mod on this particular one or to use it as an example, then, to add this mod to a Darkside project:
+1. Download and install Darkside from official resources.
+2. Download the `.unitypackage` file from [here](https://drive.google.com/drive/folders/1KUBoXx9fL7DmxBuwkBUyXPfV348Qtks1?usp=drive_link)
+3. In the Darkside project, open the `Assets` folder.
+4. In this folder click RMB, select Import package, Custom package.
+5. Select the downloaded package file, click Import.
+6. Build the mod using the `Steamworks` file in the `UserMods/mmd` folder.
+6. Open the `mmd/mmd_tokens` folder.
+7. Click on the `Sprite Assets` folder, check the Addressable field on.
+8. Write `Sprite Assets` in the Addressable field instead of a path.
+9. Change the group to `mmd`.
+10. Build the mod using the `Steamworks` file again.
+11. Copy the `mmd/mmd_exports` folder to the local DD2 mods folder.
 
-But if the goal is to base a mod on this particular one or to use it as an example, then, to add this mod to a Darkside project:
-1. Download and install Darkside from official resources
-2. Download the `mmd_with_dependencies.unitypackage` file from the `Darkside package` folder on this page
-3. In the Darkside project, open the `Assets` folder
-4. In this folder click RMB, select Import package, Custom package
-5. Select the downloaded package file, click Import
-6. Open the `mmd/mmd_tokens` folder
-7. Click on the `Sprite Assets` folder, check the Addressable field on
-8. Write `Sprite Assets` in the Addressable field instead of a path
-9. Change the group to `mmd`
-10. Build the mod using the `Steamworks` file in the `UserMods/mmd` folder, copy the Exports folder to the DD2 mods folder
-
-DD2 mods folder (Steam version):
+Local mods folder (Steam version):
 ```
 C:\Program Files (x86)\Steam\steamapps\common\Darkest Dungeon® II\Darkest Dungeon II_Data\StreamingAssets\mods\
 ```
+
+Now it should appear in the game
 
 Since mods must have unique IDs, a clone of this mod will not be compatible with the original one (the game will be stuck in an endless loading screen if both mods are activated).
 
@@ -4490,7 +4513,7 @@ I loved the process of 3D modeling, texturing, drawing, animating, editing CSV d
 
 ## Locations of files and folders
 
-Streaming Assets folder:
+Streaming Assets folder (contains CSV data, localization data, local mod folder):
 
 - Steam:
 
@@ -4508,20 +4531,6 @@ Streaming Assets folder:
 
     ```
     C:\GOG Games\Darkest Dungeon II\Darkest Dungeon II_Data\StreamingAssets\
-    ```
-
-Local mods folder:
-
-- Steam:
-
-    ```
-    C:\Program Files (x86)\Steam\steamapps\common\Darkest Dungeon® II\Darkest Dungeon II_Data\StreamingAssets\mods
-    ```
-
-- Epic Games:
-
-    ```
-    C:\Programs\EPIC\Epic Games\DarkestDungeonII\Darkest Dungeon II_Data\StreamingAssets\mods
     ```
 
 Log file:
