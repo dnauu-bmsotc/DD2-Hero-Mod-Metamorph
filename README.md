@@ -48,34 +48,19 @@
 
 This isn't exactly a guide, rather a document about everything I experienced while creating a new hero. Before this mod, I had never created any mods for any game, and I didn't consult with anyone experienced in this while creating it. Also English is not my first language.
 
-<!-- I will try to write as much as possible about what I was trying to do, what solutions tried, what issues encountered, what worked, what did not, what are other potential solutions that came to mind. Not all ideas were successful, but I never mean that something is not supposed to work. -->
-
-<!-- The strongest part of this document is probably description of CSV data. There was a lot of work done. Half of this whole document is about it. -->
+If you find something incorrect in this document, please open an issue post on this page explaining what needs to be changed, and I'll edit this document.
 
 What I couldn't achieve:
-- While I was able to transfer 3D models and animations from Blender to Darkside, this process produced a lot of issues. If any other guide on this topic is available, it would probably be better than what is offered here. <!-- The developers used Maya and it might be a better option if available. -->
+- While I was able to transfer 3D models and animations from Blender to Darkside, this process produced a lot of issues. If any other guide on this topic is available, it would probably be better than what is offered here.
 - I couldn't make palettes work on custom heroes.
-- There also seem to be limitations with custom audio.
-
-<!-- There is an official tool that can makes creating trinkets, combat items, inn items, etc. a bit easier. This is a Microsoft Excel sheet and it requires specifically Microsoft Excel because it uses some of its exclusive features. But I did not really used it, and edited CSV data directly. -->
+- Audio customization seems to be limited.
 
 Other guides about modding Darkest Dungeon 2:
 - [Darkside guide](https://docs.google.com/document/d/1ga3FNrL3eGDRMFekLx9-RKhTDLMxPO603XzXcZa8O78/edit?usp=drive_link)
 - [Creating new path skills](https://docs.google.com/document/d/1glkTgWv5mXvleihcnBeC4FIDgf88fz8Qwjz46es6oFA/edit?tab=t.0#heading=h.1xklr55423w9)
 - [How to create a mod on Darkest Dungeon 2 that contains multiple tokens](https://docs.google.com/document/d/1FcWUTaz4nRhRtgW_haOZUEuLNB1u41Lqi03kav63f8Y/edit?tab=t.0#heading=h.c976l88xa9o)
 - [How to package a mod not for Steam Workshop](https://docs.google.com/document/d/1RYOe7yJqThgUv3s-1MlVGdBEv0dwof8zc2PVu57C-dE/edit?usp=sharing)
-- [Translating Darkside Mods
-](https://docs.google.com/document/d/1F0r694OcDRPumt9oOAZ4sFHd0iGJTBF5KlbC7eNfZsE/edit?tab=t.0)
-
-<!-- Other mods for DD2 that add new hero classes:
-- [The Omen Seeker by \*mpregs you\*, Purple, Wallimod, Crisdroid](https://steamcommunity.com/sharedfiles/filedetails/?id=3646513756)
-- [The Gunslinger](https://steamcommunity.com/sharedfiles/filedetails/?id=3540263153), [The Cello](https://steamcommunity.com/sharedfiles/filedetails/?id=3483096926), [The Antiquarian](https://steamcommunity.com/sharedfiles/filedetails/?id=3352058826), and [The Houndmaster by THE COLLECTOR](https://steamcommunity.com/sharedfiles/filedetails/?id=3597158251)
-- [The Weaver by THE COLLECTOR, 大脏尾，我们走!](https://steamcommunity.com/sharedfiles/filedetails/?id=3633470434)
-- [The Servant by THE COLLECTOR, iTKrypton](https://steamcommunity.com/sharedfiles/filedetails/?id=3750745345) -->
-
-There are some other hero mods for Darkest Dungeon 2. [The Omen Seeker](https://steamcommunity.com/sharedfiles/filedetails/?id=3646513756) and [The Servant](https://steamcommunity.com/sharedfiles/filedetails/?id=3750745345) were two the most developed hero mods when I was creating mine, and they were my inspiration.
-
-<!-- Often I had troubles that felt impossible to solve, but when I remembered them, I knew my pursuits were not in vain. -->
+- More guides can be found on Darkest Dungeon's Discord server.
 
 Other resources:
 - [DD2 CSV Language Support extension](https://marketplace.visualstudio.com/items?itemName=dnauu.DD2CSVMMD)
@@ -97,62 +82,11 @@ Creating a new hero required:
 
 The Shrine of Reflection increases these numbers.
 
-<!-- I believe the process can be somewhat parallelized. After a general idea of the hero is formed, the process can be branched into three areas that aren't very intersected:
-1. 3D modeling and animating
-2. Creating and balancing effects of skills and items
-3. Writing story, barks, party names
-
-![Image: Process of creating a hero](images/hero_workflow.png)\
-*Don't take this image seriously I don't know how business processes are done* -->
-
-<!-- Some animations require knowledge of what the skill effects will be like, but many animations are quite abstract. For example, healing animations don't need to know the amount of targets to look good. -->
-
-<!-- Some of the work can be copied from the game (like VFX and SFX), and some things are reused even by vanilla heroes (many have about 8 unique skill animations, some skills share animations). -->
-
 ## Animating
-
-<!-- The Darkside provides 3D models, but I wasn't able to import them into a Blender file correctly. Imported models were severely scaled down. Resetting armature's transforms in Pose Mode seemed to bring the model back to normal size.
-
-![Image: HWM imported to Blender](images/fbx_maya.png)\
-*Armature gains weird scale in Blender after importing from Darkside*
-
-For animations scale transforms can be deleted in the Graph Editor. -->
-
-<!-- Then resetting armature's transforms in Pose Mode holds models in right scale throughout the animation. -->
-
-<!-- ![Image: Animation transform](images/animation_transform.png)\
-*Crusader's animation after deleting scale keyframes*
-
-These are destructive changes, but the results can be used as examples at least. -->
-
-<!-- 
-Character design 3D modeling required a lot more learning than I expected, and tons of mistakes was made and I was trying to fix them throughout the whole mod creation process.
-
-There are many tutorials. Out of many ways to create a character model, I wanted to try sculpting. I made a mistake by not making the sculpt detailed enough and by not making it in T-pose.
-
-![Image: Sculpting steps](images/concept14.png)\
-*Coming up with concept and creating 3D models*
-
-Models can use Smooth Shading with Sharp seams.
-
-![Image: Smooth Shading difference](images/smooth.png)\
-*Model on the right doesn't use Smooth Shading, which makes edges slightly more visible* -->
 
 In DD2 animations are fixed: there are no ragdolls or simulations. Cloth or hair might have been simulated when animations were created, but the resulting files only use bones for cloth/hair.
 
 Facial expressions are animated with Shape Keys.
-<!-- 
-There is a bone that is attached to the mouth. I thought that all expressions are made with bones, but when I tried to replicate the GR's meltdown expression using this bone, textures looked different on the meltdown pose vs. what I could achieve with the armature.
-
-![Image: GR's armature](images/gr_mouth_bone.png)\
-*GR's armature has a bone that moves the jaw*
-
-Turns out that this is done with Shape Keys. Dismas’ Shape Keys control his eyebrows. Audrey’s Shape Keys control her mouth.
-
-![Image: GR's shape keys](images/gr_shape_key.png)\
-*a: one of the skill poses, b: the effect of using a bone to change the expression, c: the meltdown pose that uses Shape Keys* -->
-
-<!-- I tried to use Shape Keys too, but they brought a lot of confusion and frustration, so I used bones for everything. -->
 
 Heroes can have multiple weapon meshes. Some accessories work as weapons so they can be changed depending on a Weapon Kit.
 
@@ -161,26 +95,20 @@ Heroes can have multiple weapon meshes. Some accessories work as weapons so they
 
 FBX file does not include everything that Blender can create, and Unity does not support everything an FBX file can store. When importing in Unity, some of information of uncommon type might be lost. So complex modifiers need to be baked before exporting.
 
-<!-- There are ways of simulating cloth in Blender, but every tool was falling apart in my hands. I scrapped it and animated cloth manually. -->
+The game stores models in prefab files. A hero's prefab file contains hero's model and their weapon models. When a Weapon Kit/Skin is changed, I believe the game switches the whole prefab file of the hero with another prefab file.
 
-The game stores models in prefab files, and when a Weapon Kit/Skin is changed, I believe the game switches the whole prefab file of the hero. But I couldn't find a way to make WK/Skins use different armatures. It might be possible, but at least I can say that there should be no problem with WK/Skins as long as they use the same armature.
-
-<!-- > Jumping ahead: Technically different weapon kits can even have different animations. But not all animations can be altered easily. DD2 uses two separate systems to trigger animations (Animation Controller and Playable files). Most of animations are triggered by the first system, and overriding them is straightforward, just specifying a different animation file is enough.
-
-> Other animations that are triggered by Playable files are harder to replace. These animations are: skill execution pose, skill recovery animation, agressive act out execution/recovery, and riposte execution/recovery. Skill anticipation animations are handled by the first system though.
-
-> A bruteforce solution would be duplicating all bones within one armature and make one set of bones influence one kit/skin, and the other one influence the other kit/skin. But it does not seem right to do so. -->
+But I couldn't find a way to make WK/Skins use different armatures. It might be possible, but at least I can say that there should be no problem with WK/Skins as long as they use the same armature.
 
 ![Image: HWM's weapons](images/hwm_weapon.png)\
 *HWM's weapon bones are part of the main armature*
-
-<!-- One Blender file can store multiple animations as Actions. Actions can be added and edited in the Action Editor. Every Action need to be protected with Fake User check mark, otherwise it might get deleted on exiting Blender. -->
 
 With the default Blender export settings (and default Darkside import settings) the hero faces the right side in the game (Blender’s negative Y direction in the game will be directed to the right side in the game). Pressing Ctrl+Numpad 3 in Blender will show how the hero will look like on the first rank. On the fourth rank heroes get a bit distorted.
 
 This is true for the Crossroads, fights, resolute, meltdown. The victory pose and inn animations are rotated or mirrored. On the victory screen Blender's negative Y direction will be faced to the camera.
 
-In camps and inns models are rotated, the front of the chair matches Blender’s negative Y direction. If the hero is on the first or the second rank, this hero will be mirrored. If the hero is on the right side of the relationship reveal screen, this hero will also be mirrored.
+In camps and inns models are rotated, the front of the chair matches Blender’s negative Y direction. If the hero is on the first or the second rank, this hero will be mirrored in inns.
+
+If the hero is on the right side of the relationship reveal screen, this hero will also be mirrored.
 
 In battles hero's model can appear a bit distorted if they are on the fourth rank.
 
@@ -230,10 +158,6 @@ Hero and weapon models need two textures. One is for colors (col) and another on
 
 The ink textures are black & red. The red color is pure red (`rgb(255, 0, 0)`). Black & white will also do.
 
-I wasn't able to add palettes to my hero but I believe a palette is just a separate col texture.
-
-<!-- 
-I marked seams for UV unwrapping, didn't do the checkerboard testing even though I should have. The purpose of this testing is to ensure that every part of the model gets the appropriate texture resolution. -->
 
 In Blender materials need to be configured to handle two textures. The col texture is combined with the ink texture by multiplying with the ink's red channel values.
 
@@ -247,23 +171,6 @@ Blender's materials are only needed for Blender, the game uses its own materials
 
 ![Image: Ink transparency](images/shader4.png)\
 *The game's material applies additional effects. For example it adds shadows to the model's lower part*
-
-<!-- This material did its work, but I noticed that changing the threshold in the Math node changed the size of black strokes a bit. They get bigger when increasing the threshold value from 0 to 0.2 and I can not figure out why it is happening. It looks like the game uses something in-between.
-
-![Image: Example of how black strokes change](images/threshold.png)\
-*The top image is screenshot from the game, lower images show how my material behaves on different settings*
-
-Drawing textures in Blender can be done in Texture Paint Mode. It has some brushes, allows to mask parts of the model. Separated UV islands can be selected by hovering over an island in the UV editor and pressing L. Clicking on an Image node in the Node Editor allows to switch between col and ink images to paint on. When a Blender session is done, all changed textures must be saved manually, otherwise texture changes might be lost.
-
-Shadows can be turned off by using the Diffuse Color rendering mode.
-
-![Image: Texturing steps](images/texturing.png)\
-*Texturing* -->
-
-<!-- DD2 mixes smooth gradients, harsh black lines and some textures. Fine textures are subtle, but noticeable, for example, on the MAA’s shield. Heroes have some parts shadowed by black strokes (arm under shoulder plates) and some parts are shadowed softly (under the red strip).
-
-![Image: MAA's shield and ](images/maa_shield.png)\
-*Different shadows* -->
 
 The same is applicable for weapon textures.
 
@@ -413,42 +320,11 @@ My model did not have any outline. The issue was related to tangents. For some r
 ![Image: Tangents](images/egg_39.png)\
 *Tangents data is missing*
 
-<!-- 
-<details>
-
-<summary>Click to see how I tried to locate the source of the problem</summary>
-
-I knew the problem was with my model, because when I imported a cube, the shader worked.
-
-For some reason my meshes didn’t have tangents data. I don’t know what that is but that was missing. The normals looked fine but the tangents display was black.
-
-![Image: Comparing Tangents data](images/egg_12.png)\
-*Top left: HWM has an outline and my model doesn't even though they have the same material settings. Right side: HWM's model has Normals and Tangents data, but my model only has Normals*
-
-I made some more tests and found that with UV Spheres, the more segments there are the worse is the tangent situation. The tangent situation exactly matched the outline situation. So I knew that the outline was connected to the tangents.
-
-![Image: Tangents on UV spheres](images/egg_13.png)\
-*The more segments a UV sphere had, the worse was the outline*
-
-So my mesh was the problem. It looks like polygon size matters. There is logic behind this but without foundational knowledge, this behavior causes confusion. I reduced my model to a single cuboid, added a couple of other cubes, deformed one, and imported all three into Unity. To my surprise, tangents for my reduced model still weren't calculated.
-
-![Image: Simple shapes and tangents](images/egg_14.png)\
-*The only thing that differs between these is Scale*
-
-So now I new that the issue was with the scale of my mesh.
-
-</details>
--->
-
-What did not work:
+<!-- What did not work:
 - Scaling the model up 10 times in Object Mode in Blender and exporting it.
-- Increasing the scale parameter in Blender's export settings.
+- Increasing the scale parameter in Blender's export settings. -->
 
-Two solutions that I found:
-- Scaling the model up 10 times in Object Mode, applying Transforms, and exporting it.
-- Or, unchecking the Convert Units field in import settings in the Unity Inspector.
-
-I did the second one (unchecking the Convert Units field).
+I was able to fix it by unchecking the Convert Units field in import settings in the Unity Inspector.
 
 ![Image: Disabling units conversion](images/egg_15.png)\
 *Disabling units conversion*
@@ -457,10 +333,6 @@ This made the model too big. To fix this, I clicked on egg_exported in the Hiera
 
 ![Image: Scaling back](images/egg_16.png)\
 *Scaling back to normal*
-
-<!-- Just a note. My model in Blender has adequate dimensions. The scale is close to 1, and his height is 1.96 m. -->
-
-I believe all my importing problems come from the armature. I probably created it in some wrong way.
 
 ### Adding effect anchors
 
@@ -518,10 +390,6 @@ I don't know how to fix this.
 ## Importing animations to Darkside
 
 `F/animations` folder stores animation files. File names in this folder do not have strict rules. One FBX file can store multiple animation clips.
-
-<!-- I believe there is only one way in Unity to rename an Animation Clip, and it doesn't work if an FBX file contains multiple clips. If a file has multiple clips, their names should be set before creating FBX files. -->
-
-<!-- If an FBX file contains only one clip, this file can be named ID@ID_name, and Unity will rename the clip to ID_name. At least it will make an illusion of renaming. -->
 
 When Blender exports animations to an FBX file, each Action becomes an Animation Clip.
 
@@ -724,11 +592,6 @@ Some error displays:
 - White skill icons and glitched text. This was happening when I was making errors in CSV files. Though now I don't remember what exactly I did to get this.
 - Invisible skill icons. This was fixed after turning the mod off, loading the save, quitting, turning the mod back on.
 
-<!-- 
-![Image: The main object name should match the asset filename](images/egg_34.png)\
-*There once was a warning about mismatching names. I think this happened because I copied and renamed the files in the Windows explorer instead of doing it in Unity. Letting it fix it did not cause problems*
--->
-
 There was one issue. If the mod is enabled, any character who passes a turn gets zoomed in as if they are performing a skill.
 
 ![Image: Pass skill](images/pass_zoom.png)\
@@ -749,16 +612,6 @@ Game's skill icons have a lot of transparent parts and a soft semi-transparent b
 ![Image: Skill blessings and curses](images/skill_relationships.png)\
 *Relationship effects on skill icons*
 
-<!-- 
-![Image: Skill icon drawing](images/skill_icon.png)\
-*I wanted the icons to stand out by the colors, but I couldn't balance the details right so the icons stand out more than I wanted*
--->
-
-<!-- If the icon is big enough to overlap the frame, transparency might look weird.
-
-![Image: My skill icon](images/skill_icon_transparency_2.png)\
-*The frame is visible under the mushroom* -->
-
 In Darkside skill icons are stored in the `F/icons` folder. Imported images of icons need their "Image Type" to be changed to Sprite in the Inspector.
 
 ![Image: Skill icon slot](images/skill_icon_sprite.png)\
@@ -775,13 +628,6 @@ Portraits need to be connected to the Resource Actor file in the `F/data` folder
 
 ![Image: Adding portraits](images/portraits.png)\
 *Assigning custom portraits*
-
-<!-- For Story portraits I believe it's better to expand the file in the Unity Explorer and assign the purple square instead.
-
-![Image: Adding portraits](images/portraits_atlas.png)\
-*Assigning custom portraits* -->
-
-<!-- Portraits for Story Choices (and Hospitals) consist of three parts. "Reference Sprite" is the base image, "Glow Reference" Sprite is the misty aura around the hero (the aura animation is handled by the game, the image by itself is static). "Highlight Reference" is the image with harsh rim light. -->
 
 There are also Sprite Atlases but I don't know how they work.
 
@@ -1103,10 +949,6 @@ Gameplay effects are generally stored in either *Effect* or *Buff* elements. *Ef
 
 *Buff* elements last a certain amount of time (rounds, turns, regions, etc.), and a buff's inner conditions are met, it tries to apply effects to specified targets.
 
-<!-- Inn items can only have links to *Effect* elements, they apply effects when consumed.
-
-Trinkets, on the contrary, operate in buffs, that constantly check for suitable conditions. -->
-
 In this example the *m_effectIds* field links this element to two more elements: **rh_example_effect_add_buff_rest** and **rh_example_buff_substat_resistance_inn_start**. Both of them have the *Effect* type. Upon consumption this item will apply these effects.
 
 The **rh_example_effect_add_buff_rest** effect applies the **rh_example_buff_substat_resistance_inn_start** buff with 100% chance. This buff lasts one region.
@@ -1214,10 +1056,6 @@ If my extension does not for some reason there is another [VSCode extension](htt
 ![Image: DD2 CSV Data extension](images/dd2csv.png)\
 *Syntax highlight by PHombie*
 
-
-<!-- 
-Gameplay-wise there is more single target (6) signature items than the ones that have two targets (5) or the ones that target the whole party (4). Most of them have only positive effects, with the exception of four signature items that belong to Runaway, Hellion, HWM, and Flagellant. Almost all of them have one or two effects. The ones that have three effects might not apply all three. The PD’s Remedy always applies two effects out of three (might be wrong), and the Flagellant’s Pain Box has a chance of applying only the two guaranteed effects out of four total.
--->
 
 Besides making my item a signature item, I also wanted to add these effects:
 - A chance of removing a disease.
@@ -1733,10 +1571,6 @@ m_ConditionNumberType,LESS_THAN_OR_EQUAL,
 element_end
 ```
 
-<!-- Here the *ActorEffectTrigger* applies an effect to one neighbor in front of the hero.
-
-*ActorEffectTrigger* elements are connected to *ActorDataEffects* through the *actor_effect_triggers* field. -->
-
 I am quite confused about *ActorEffectTrigger* elements. I will write how I understand them but I have no certainty. The general idea of an element of this type is this:
 - *m_ActorEffectType* field tells when effects are going to be applied.
 - *m_ActorEffectTriggerSourceType* field tells from whom these effects should originate.
@@ -1778,40 +1612,6 @@ element_end
 ```
 The source (performer) became the target and the target became the source (performer). For the regular copying from target to performer this is unnecessary as it can be achieved with a regular *Effect* element directly.
 
-<!-- It looks like when *on_[hit / crit / kill / miss]_as_target_to_target* or *on_[hit / crit / kill / miss]_as_performer_to_performer* is used, the hero takes both the target and the performer roles. For example here is a part from the Virtuoso's Finale data.
-```csv
-element_start,jes_virtuoso_finale_kill_aet,ActorEffectTrigger
-m_ActorEffectType,on_kill_as_performer_to_performer,
-m_ActorEffectTriggerSourceType,performer,
-m_ActorEffectTriggerTargetType,friendly_team,
-m_IncludeSourceActor,False,
-m_UseActorDataEffectsConditionCalculationInput,True,
-m_ActorCount,4,
-effects,stress_heal_1_50pct,
-element_end
-```
-And here is a part of the Killer's Glow Infernal Flame data:
-```csv
-element_start,infernal_killing_blow_allies_aet,ActorEffectTrigger
-m_ActorEffectType,On_Kill_As_Performer_To_Performer,
-m_ActorEffectTriggerSourceType,target,
-m_ActorEffectTriggerTargetType,friendly_team,
-m_IncludeSourceActor,False,
-m_ActorCount,4,
-effects,stress_damage_1_infernal_killing_Blow,
-element_end
-```
-
-The Virtuoso's Finale removes 1 Stress from allies when an enemy is killed. The Killer's Glow adds 1 Stress to allies when an enemy is killed. Their *ActorEffectTrigger* elements are very similar except for one line: the Finale has *m_ActorEffectTriggerSourceType* set to *performer*, and The Killer's Glow has it set to *target*. -->
-
-<!-- This is because i'm stupid -->
-
-<!-- jester's source type tells that stress heal comes from the jester. -->
-
-<!-- flame's source type tells that stress damage comes from the enemy -->
-
-<!-- it can matter if some other effect retaliates stress heal/damage -->
-
 The Flagellant's Fester skill clears a corpse and applies blight to its neighbors. Here is the definition of the corresponding *ActorEffectTrigger*:
 ```csv
 element_start,flg_fester_neighbor_blight,ActorEffectTrigger
@@ -1826,8 +1626,6 @@ m_ActorCount,2,
 effects,skill_dot_medium_blight,
 element_end
 ```
-
-<!-- At first I was confused because seemingly the same effect can be achieved by setting *m_ActorEffectTriggerSourceType* to *target*. This way it wouldn't be necessary to use the *m_NeighborActorEffectTriggerSourceType* field to override whose neighbors will be affected. -->
 
 The application of blight needs to account the blight RES Piercing stat. If the *m_ActorEffectTriggerSourceType* was set to *target*, then the Piercing stat would be taken from the targeted corpse. To make it use Flagellant's Piercing stat this field should be set to *performer*.
 
@@ -1872,15 +1670,6 @@ It looks like it is achieved through *Condition* elements by setting *m_Conditio
 
 Trinkets can be created the same way as inn items in Darkside.
 
-<!-- Since I already had a signature inn item, I duplicated the Prefab file and the Resource Item file three times and renamed them.
-
-![Image: Hero trinkets](images/trinket_5.png)\
-*Inn items and trinkets can be placed inside the main mod folder without any issues*
-
-I added my images in the `Art` folder, changed their type to Sprite, then connected each Resource Item file to its according Prefab file.
-
-All my CSV data is stored in one file so the trinket CSV data also went in that file. -->
-
 A trinket can be limited to a class this way:
 ```csv
 element_start,trinket_hero_hwy_cursed_coin,Item
@@ -1889,8 +1678,6 @@ m_type,trinket,
 m_conditionIds,performer_is_highwayman,
 element_end
 ```
-
-<!-- Each hero has three associated trinkets and one signature inn item. Hero trinkets usually resemble something from the past. Signature items are more tied to the present. -->
 
 Hero trinkets have some effects that general trinkets usually don't. They trinkets can affect specific skills or require specific ranks (general trinkets only use relative rank referencing).
 
@@ -2202,8 +1989,6 @@ This skill doesn't use *target_ranks* because it only targets the performer. Ski
 
 *m_Limit* tells how many times the skill can be used. Some other skill modifiers: *m_Cooldown* (adds a cooldown), *m_IsFreeAction* (doesn't use a turn if it's set to *True*).
 
-<!-- This skill has *gr_artemisia* tag, probably because it was its previous name. It also uses *performer_apply_limit_effects* to link to the healing effect. This field is usually used when only one effect from a list of effects should be applied. But here the list consists from one effect only. I guess this skill was supposed to give random effects before. -->
-
 Since it is a path skill, it has *m_ConditionIdOverride* and *m_SkillHistoryIdOverride* fields. Path skills need these fields in both upgraded and unupgraded versions
 
 *m_CritMultiplier* here tells that crit will add 50% to the healed value.
@@ -2292,8 +2077,6 @@ Combo tokens need to be removed manually.
 
 *m_IsForced* makes other skills unavailable if this skill can be used. Examples of forced skills: Sharpshoot's Double Tap (second shot), **pyro_bomb**, **medic_salve**, **harvest_hunger**, etc.
 
-<!-- I don't know what *m_IsBlockPass* is but it is always used when a skill is forced and it is always set to *True*. -->
-
 Warlock's Chaotic Offering grants one Unchecked Power on Round Start if this skill is equipped.
 
 ![Image: Chaotic Offering](images/chaotic_offering.png)\
@@ -2342,33 +2125,6 @@ element_start,occ_chaotic_offering_p2_buff,ActorDataEffects
 round_start_effects,add_1_unchecked_power_p2_chaotic_chance,
 element_end
 ```
-
-<!-- Some CSV words that can be helpful when creating skills:
-- adding tokens: *m_TokenAddId*, *m_TokenAddTag*
-- removing tokens: *m_TokenRemoveId*, *m_TokenRemoveTag*
-- ignoring resistances: *m_IgnoreResist*
-- positional tokens: *m_IsRankToken*, *m_IsLockedTeamPosition*
-- summoning: *m_SummonClassActorId*
-- changing class id (carion eater evolving, fanatics igniting, bishop’s reviving): *m_ChangeClassActorId*
-- targets of effects: *performer_effects*, *target_effects*
-- effects when spawning: *spawn_effects*
-- additional effects to all enemies/allies: *enemy_team_effects*, *friendly_team_effects*, *target_team_effects*
-- additional effects to some enemies/allies: *m_ActorEffectTriggerSourceType*, *m_ActorEffectTriggerTargetType*
-- targeting neighbors: *m_NeighborFrontCount*, *m_NeighborBackCount*
-- Adding conditions (disjunction): *any_conditions*, *m_AnyConditionIds*
-- Adding conditions (conjunction): *all_conditions*, *m_AllConditionIds*
-- inflicting diseases: *m_QuirkAddTag*
-- guaranteed Crossroads quirks: *m_IdGuaranteeGenerationLimits*
-- rank conditions: **target_is_in_rank_**..., **performer_is_in_rank_**...
-- skill cooldown: *m_Cooldown*
-- skill max use amount: *m_Limit*
-- skill that doesn’t end a turn: *m_IsFreeAction*
-- add extra turn: **extra_action**
-- token conversion: *m_TokenConvertFromTokenIds*, *m_TokenConvertToId*, *m_TokenConvertFromDotTags*
-- stress damage/heal: *m_StressHeal*, *m_StressDamage*
-- turn-based effects: *combat_start*, *combat_end*, *round_start*, *round_end*, *turn_start*, *turn_end*
-- applying one effect from selection: ...*_apply_limit_effects*
-- increasing DOT duration dealt: *dot_extra_duration_dealt* -->
 
 Some fields look the same but they are not. For example *all_conditions* is used in *Effect* elements, *m_AllConditionIds* is used in *Buff* elements. They are not interchangeable.
 
@@ -2674,15 +2430,6 @@ Some colors:
 - `<color=#{disease_quirk}></color>`
 - etc.
 
-<!-- And some specific colors:
-- `<color=#{stat_reg}></color>`
-- `<color=#{item_nameline}></color>`
-- `<color=#{item_coach}></color>`
-- `<color=#{item_pet}></color>`
-- `<color=#{item_radiant}></color>`
-- `<color=#{item_infernal}></color>`
-- etc. -->
-
 Colors can be custom, for example:
 
 ```
@@ -2788,41 +2535,6 @@ Party names can be generated on [this page](https://dnauu-bmsotc.github.io/DD2-H
 ![Image: Fixed localization](images/party_names_mmd.png)\
 *Party names generator*
 
-<!-- This code prints all party combinations for a given number of heroes with some of them being required. It can be run using any online Python interpreter.
-
-```python
-import itertools
-
-def print_party_combinations(required_heroes, nonfocus_heroes):
-    names = list(generate_party_combinations(required_heroes, nonfocus_heroes))
-    names.sort(key=lambda x: tuple(x.index(kw) for kw in required_heroes))
-    print_party_names(names)
-
-def generate_party_combinations(required_heroes, nonfocus_heroes):
-    n_free_slots = 4 - len(required_heroes)
-    secondary_combinations = list(itertools.combinations(nonfocus_heroes, n_free_slots))
-    for comb in secondary_combinations:
-        four_heroes = required_heroes + list(comb)
-        permutations = list(itertools.permutations(four_heroes))
-        for perm in permutations:
-            yield list(perm)
-
-def print_party_names(combinations):
-    loc_line = "party_name_{}_{}_{}_{}="
-    for comb in combinations:
-        print(loc_line.format(*comb))
-
-required_heroes=["mmd"]
-nonfocus_heroes=["grave_robber", "plague_doctor", "man_at_arms", "highwayman"]
-
-print_party_combinations(required_heroes, nonfocus_heroes)
-```
-
-`required_heroes` is a list with heroes that should be present in all parties, `nonfocus_heroes` is a list of heroes that will be included in party names but not in all of them.
-
-![Image: online python interpreter](images/party_names.png)\
-*An online interpreter* -->
-
 Most of hero barks have a default fallback localization, but there are some that don't. I hope this is the full list of barks that have no fallback version and thus need to be written.
 
 ```
@@ -2922,89 +2634,6 @@ bark_hero_failure_kill+mmd=You'll fall like any other sick critter.
 
 All barks can be changed this way, not only the ones that have no fallbacks.
 
-<!-- A script that searches for barks that have no default value:
-```python
-source_dir = r"C:\Program Files (x86)\Steam\steamapps\common\Darkest Dungeon® II\Darkest Dungeon II_Data\StreamingAssets\Localization\Sources"
-
-# Examples:
-# 1.
-# bark_act_out_start_my_turn_stress_heal_partner=Steady those hands. We shall win this.
-# bark_act_out_start_my_turn_stress_heal_partner+highwayman=You're tougher than this. Breathe.
-
-# will output nothing.
-
-# 2.
-# bark_act_out_start_my_turn_buff_partner+highwayman=Shoot to kill.
-# bark_act_out_start_my_turn_buff_partner+man_at_arms=Show them what you're made of!
-
-# will output bark_act_out_start_my_turn_buff_partner
-
-# 3.
-# bark_act_out_rest_item_hate_block+envious+highwayman=You'd love that, I'm sure.
-# bark_act_out_rest_item_hate_block+envious+highwayman=Let me cut you off there - no.
-
-# will output bark_act_out_rest_item_hate_block+envious
-
-# 4.
-# bark_node_exit_gate+kingdominnsieged+highwayman+beastmen=Keep vigilant at choke points.
-# bark_node_exit_gate+kingdominnsieged+highwayman+beastmen=Air's so stagnant. Not a breath of wind.
-
-# will output bark_node_exit_gate+kingdominnsieged
-
-import os
-
-markers = {
-    "highwayman",
-    "man_at_arms",
-    "grave_robber",
-    "plague_doctor",
-    "occultist",
-    "jester",
-    "leper",
-    "hellion",
-    "runaway",
-    "vestal",
-    "flagellant",
-}
-
-generic_bases = set()
-special_bases = set()
-
-def parse_file(file_path):
-    encoding = "utf-8-sig" # to remove \ufeff at the beginning of each file
-    with open(file_path, encoding=encoding) as f:
-        for line in f:
-            key = line.strip().split("=", 1)[0]
-            parts = key.split("+")
-
-            # find a marker
-            special_idx = None
-            for i, part in enumerate(parts):
-                if part in markers:
-                    special_idx = i
-                    break
-
-            if special_idx is None:
-                # generic entry
-                generic_bases.add(key)
-            else:
-                # if additional +something are present before a marker, they count as part of the base.
-                # If they are present after a marker, they are ignored.
-                base = "+".join(parts[:special_idx])
-                special_bases.add(base)
-
-for root, dirs, files in os.walk(source_dir):
-    for filename in files:
-        file_path = os.path.join(root, filename)
-        parse_file(file_path)
-
-missing_generics = sorted(special_bases - generic_bases)
-for base in missing_generics:
-    print(base)
-```
-
-It also prints out lines that start with "bark_item_ccourtier_blood_default". It's probably a typo in the MAA's lines. -->
-
 ### Skill tooltips
 
 Skill names are localized in this way:
@@ -3084,16 +2713,8 @@ Custom description can also be added to the section of the tooltip where DMG, CR
 
 This can be achieved by adding a fake buff.
 
-<!-- The next weird skill that I had was the Slowdown skill. Here the problem was the opposite. I made it so the skill ignores stun resistance, but the tooltip wasn’t showing it. -->
-
 ![Image: Skill 2 tooltip](images/loc_6.png)\
 *Some details aren't generated by the tooltip engine*
-
-<!-- The unrelenting application of deduction yielded me the conclusion that additional information is supplemented via fake buffs and effects. For example there is a buff called **execution_1_tooltip**, and it has a condition **always_return_false_hidden**, which means this buff is never active. One of the localization files says:
-```
-#Performer Buff - execution_1_tooltip (fake buff to carry a tool tip)
-performer_buff_desc_execution_1_tooltip_override=<color=#{buff}>Execution 1\n
-``` -->
 
 I created a fake buff and attached it to the *ActorDataSkill* via *performer_buffs*.
 ```csv
@@ -3323,39 +2944,6 @@ upgrade_track_highwayman_13_title=Trademark Item
 
 If paths, items, or buffs aren't locked behind the Altar of Hope (if they don't use the *m_UnlockId* field) then they behave in the same way as if they were unlocked.
 
-<!-- ## Loot tables
-
-It is possible to create custom loot tables. For example, my Forager path (that I had to cut) loots an inn item when a combat starts. For this I created a loot table with limited assortment.
-
-```csv
-element_start,mmd_forager_loot,LootTable
-m_chances,1,1,1,1,
-m_qtys,1,1,1,1,
-m_ids,pipeweed,speed_bag,wild_tea,restorative_herbs,
-m_types,item,item,item,item,
-element_end
-
-element_start,mmd_forager_loot,LootTable
-m_chances,1,1,1,1,1,
-m_qtys,1,1,1,1,1,
-m_ids,clarifying_poultice,clotting_poultice,impermeable_poultice,soothing_poultice,stimulating_poultice,
-m_types,item,item,item,item,item,
-element_end
-```
-
-Custom tables with same ID are merged as all other tables: looting from a **mmd_forager_loot** table gives an item from any of these tables.
-
-Getting an item from a loot table is possible in an *Effect* element.
-
-```csv
-element_start,mmd_forager_combat_start_effect,Effect
-m_Chance,0.5,
-m_LootIds,mmd_forager_loot,
-element_end
-```
-
-*m_LootIds* field tells from what table loot is going to be pulled. -->
-
 ## Act 5 boss
 
 The Ghost of the Past in the final fight can be configured in the settings of the Resource Actor file in the `F/boss_body_spectre/data` folder:
@@ -3383,14 +2971,8 @@ skill_name_failure_ult_[id]=Exultation
 
 After a hero defeats their ghost from the past, they use their Exultation skill. The RZIS file of this skill is located in the `F/data` folder.
 
-<!-- Its antic animation can be changed by using the "Select Skill Id Override" field. Its recovery animation can be set by specifying a Timeline file. -->
-
-<!-- If a hero dies while facing their failures, the boss despawns their failure. The boss tracks if the hero is still alive by assigning a hidden token (`failure_facing`) to this hero, and then checks if the party has any actor with this token. If for some reason this token is not removed (for example if the corpse's data is changed), the boss will not despawn failures. -->
-
 
 ## Shrine of Reflection
-
-<!-- It looks like since it’s not possible to add audio to the game, the regular narrations for the stories are not possible either. I tried to do the narration with subtitles only, but in the game reflection sessions didn't show any subtitles and it skipped to the result screen. -->
 
 I don't know if it's possible to add custom narration subtitles for the Shrine of Reflection. But these aren't the only way to display text. It is possible to create custom enemies that have text instead of 3D models. With this approach every reflection session is technically a fight. I will explain the first two fights (one with narration only and one with narration and a battle).
 
@@ -3848,104 +3430,10 @@ Since Animation Controller is assigned inside the main prefab file, it is possib
 
 But I don't know how to change animations that are triggered by Playable files (skill execution pose, skill recovery animation, agressive act out execution/recovery, and riposte execution/recovery).
 
-<!-- If a kit/skin has an additional detail, this detail can be animated just by adding an additional bone. But if a shared part of a kit/skin is incompatible with the default kit, alterating animations that are triggered by a Playable file can become problematic. -->
-
-<!-- 
-Since kits/skins require separate art_prefab files, VFX and anchors need to be copied reattached. When I copied VFX from a prefab file to another they got displaced. Grouping them under an empty object and then copying the empty object instead copied vfx keeping them in the right position.
-
-![Image: reattaching vfx and anchors](images/origin_10.png)\
-*Existing VFX tracks shouldn't be deleted* -->
-
-<!-- I still don't understand how Playable files work. They store timelines for VFX, armature animations, camera movement. It is possible to alterate VFX for skins by creating another VFX prefab file and attaching it to a separate track in Playable files. I imagined that animations can be altered the same way, by adding another track with a different animation clip. But it didn't work, I couldn't make the second animation track work, hero always took animations from the first track. -->
-
-<!-- 
-![Image: different VFX](images/origin_9.png)\
-*One skill can have different VFX depending on hero's kit/skin, I didn't change the mod between taking these images* -->
-
 A bruteforce solution would be creating two sets of bones within a single armature. Both sets are always active, but each of them controls a different set of meshes. Or, it can be used locally. I used it for facial expressions.
 
 ![Image: different facial expressions](images/origin_11.png)\
 *Different VFX and facial expressions depending on a skin, exaggerated on purpose*
-
-
-<!-- Unfortunately for me I created an origin skin and animated it not even knowing about this pitfall. I just forgot that Playable files exist. My hero's origin skill had different facial animations and I didn't want to fix weight paint and reanimate. -->
-
-
-<!-- What I had: two Blender files, one for the default skin, one for the origin skin. They shared the same armature by a link. One file had a skill animation with one facial expression, the other file had this animation with a different expression. Since I couldn't specify two different animations in Playables, I put both facial expressions in one animation.
-
-1. Duplicated the bones that need to act differently depending on kit/skin.
-2. Renamed them and moved them to a different Bone Collection so they are distinguishable.
-3. Since animations were already made, I moved skin's keyframes to the duplicated bones.
-4. Renamed skin's Vertex Groups to move bone weights to the duplicated bones.
-5. 
-
-I renamed duplicated bones by adding a sknOrigin_ prefix to them. This script moves animations from a bone X to the bone prefix+X.
-
-<!-- ![Image: ](images/origin_7.png)\
-** -->
-
-<!-- 1. Duplicated the armature, added a prefix to all bone names.
-2. Renamed Bone Collections to make duplicated bones separatable from the originals.
-3. Joined the two armatures and made them share one root bone.
-5. Added prefixes to the skin's vertex groups to attach them to the duplicated bones.
-4. Since I created animations for original bones, I needed to transfer them to the duplicated bones.
-6. Profit?
-
-Or, in more detail:
-1. make a backup because this is a questionable solution
-1. create a new blender file
-2. delete all objects
-3. File -> Append, open the file with the armature, go into the Object folder, select the armature
-4. select the armature, switch to the Pose Mode
-5. open the Batch Rename tool by pressing Ctrl+F2
-6. set these settings: All, Bones, Set Name, Prefix, specify this prefix. I added "~sknOrigin_" prefix
-7. rename/reorganize bone collections so duplicated bones can be easily separated
-7. save and close the file
-8. open the main file
-9. File -> Link, open the created file, select the renamed armature.
-10. in the outline, right click on the linked armature, Library Override, Make, Selected.
-11. switch to the Object Mode, select the linked armature, then the main armature, Ctrl+J
-12. switch to the Edit Mode, create a new bone that will work as a parent to the main and duplicated root bones. It will be the new root bone.
-13. select the old root bone, select the new root bone, Ctrl+P, Keep Offset
-14. select the duplicated root bone, select the new root bone, Ctrl+P, Keep Offset
-
-Now there are two sets of bones. Great.
-
-If animations were created for bones without the prefix, this script can transfer keyframes to the prefixed bones:
-
-```python
-PREFIX = "~sknOrigin_"
-
-import bpy
-from bpy_extras import anim_utils
-
-arm = next(obj for obj in bpy.data.objects if (obj.type == 'ARMATURE'))
-
-def redirect_animation(fcurve, prefix):
-    data_path = fcurve.data_path
-    bone_name = data_path.split('"')[1]
-    
-    is_a_bone_animation = data_path.startswith('pose.bones["')
-    its_a_prefixed_bone = data_path.startswith(f'pose.bones["{prefix}')
-    there_is_a_prefixed_bone = (prefix + bone_name) in arm.data.bones
-    
-    if is_a_bone_animation and (not its_a_prefixed_bone) and there_is_a_prefixed_bone:
-        fcurve.data_path = data_path.replace('pose.bones["', f'pose.bones["{prefix}')
-
-
-for action in bpy.data.actions:
-    for slot in action.slots:
-        channelbag = anim_utils.action_get_channelbag_for_slot(action, slot)
-        for fcurve in channelbag.fcurves:
-            redirect_animation(fcurve, PREFIX)
-```
-To transfer weights from original bones to the duplicated ones, rename the mesh's Vertex Groups by adding the prefix to them.
-
-If a kit/skin are stored in a separate file:
-1. File -> Link, select the file with the skin, go into the Object folder, select the mesh.
-2. in the Outliner right click on the linked object, Library Override, Make, Selected.
-3. select the mesh in the Object Mode, Alt+P, Clear Parent.
-4. select the mesh, select the armature, Ctrl+P -->
 
 I couldn't make palettes work. It is possible to change the colors of the default palette icon though.
 
@@ -4220,14 +3708,10 @@ m_TokenRemoveId,hwy_double_tap_target,
 element_end
 ```
 
-<!-- Tokens that shouldn't be displayed need to have the *bottom* tag. When I was making something similar I didn't add this tag and the game stopped working. -->
-
 *ActorDataClass* element of the second skill is connected to its *ActorDataEffects* through a *m_ActorDataEffectsId* field, not by using the same ID. I guess it's because if *ActorDataEffects* had the same ID, the game would not be able to resolve to what this element is connected: to a token, or to a skill.
 
-<!-- Many restrictions of this skill can be removed. This allows, for example, to select an enemy target and a friendly target in one skill. Not simultaneously, but still. -->
-
-![Video: Tribecaller](images/hp_transfer.webp)\
-*Damaging an enemy and healing an ally in "one turn"*
+<!-- ![Video: second action](images/hp_transfer.webp)\
+*Damaging an enemy and healing an ally in "one turn"* -->
 
 The Tribecaller enemy from K1 has a passive: when an adjacent ally is hit, the Tribecaller gets one Berserk token.
 
@@ -4281,46 +3765,6 @@ effects,add_1_enrage_33pct_tribecaller,
 element_end
 ```
 
-<!-- Now about my skills and tokens. There is a problem with positional tokens. They aren’t applied if the enemy dies from the skill. They also aren’t applied if the target is already a corpse. Strangely, killing an enemy while they have a positional token doesn’t remove the token. If an enemy dies the token also disappears.
-
-Rank-locked token behaviour is also not very clear when an enemy takes more than one rank. I guess in situations where there is one size 2 enemy, the game treats rank-locked tokens as if there were three ranks total. So if this big enemy moves to any side, the rank token will be transferred to another enemy, even if the big enemy moved only by one rank. When a big enemy dies (a big corpse disappears), the game assigns the token to the rank closest to the front. But I didn't test it enough.
-
-This is why my Hyphae Rock skill has its limitation. When I tried to bypass it, my first idea was to replace the corpses with something else. Like one of the infernal torches transforms corpses into Carion Eaters. Unfortunately I couldn’t implement it. I think it is because when an enemy dies they kind of disappear and a corpse appears on their place and the link between them is lost and it's not possible to know what corpse to transform.
-
-![Image: Heavy Cage skill description](images/metatoken_2.png)\
-*I had a choice between adding this limitation and removing all corpses behind the enemy*
-
-For my Disturbing Spores skill I wanted to assign positional tokens to the first ranks no matter what. So I decided that the skill should clear corpses.
-
-![Image: Disturbing Spores skill description](images/metatoken_3.png)\
-*Disturbing Spores skill*
-
-The problem: when I tried to clear corpses and apply a positional token at the same time, the corpses were cleared but if the first rank was occupied with a corpse, then the token wouldn't be applied. It often lead to asymmetric situations where only hero's team gained a positional token. Order of effects didn't make anything different.
-
-The solution was to clear corpses as a skill action and add an intermediary token that handles the application of positional tokens:
-1. Skill clears corpses.
-2. Skill applies a temporary token to the Metamorph.
-3. On turn end this temporary token applies positional tokens and removes itself.
-
-There is actually a something that is supposed to achieve this without intermediary tokens: *turn_end_friendly_team_effects* and *turn_end_enemy_team_effects* but for some unknown to me reason when I tried to apply those with *enemy_team_effects* and *friendly_team_effects* they didn't work. It might be that I did something wrong. But there is only two examples of those fields in the game, and they are literally two simple examples which aren’t actually used in the game.
-
-The Cursed Spores token is applies a Combo token to a target when this target is hit. The problem was that if a skill removes a Combo token then my effect doesn't reapply it. I guess when the game gets instructions to both add and remove a certain token then this token won't be applied. Or with a block token: if the game gets instructions to remove block tokens, add block tokens, and add vulnerability token at the same time, then the result would be a vulnerability token. But it's just a guess, I didn't test it.
-
-![Image: Cursed Spores token description](images/metatoken_6.png)\
-*Cursed Spores token*
-
-The challenge here is that I don't know who hits a cursed target. In the previous case I knew that the performer was the Metamorph and his turn is going to end right now. With this token I can't just wait until the Metamorph's turn. I had to change the tactic a bit:
-1. The Metamorph applies the Cursed Spores token to an enemy.
-2. An ally hits the enemy and tries to remove a Combo token.
-3. If the enemy had a Combo token, it gets removed.
-4. On hit the Cursed Spores token applies an X token to the enemy.
-5. On hit the Cursed Spores token applies a Y token to the ally.
-6. On hero's turn end the Y token converts all X tokens to Combo tokens and removes itself.
-
-This also needs to account for situations when an enemy attacks a hero and gets riposted. Both sides get tokens, but turn end effects aren't triggered until it's the end of hero's turn, even though tokens were applied during enemy's turn. To fix this, X token should also get a turn end effect:
-
-7. On enemy's turn end the X token removes all Y tokens and converts all X tokens to Combo tokens. -->
-
 When I was creating an extension for VS Code, I created a list of all elements, fields, and what values each field expects. It does not include everything that the game supports, only what is present in CSV files.
 
 This list is located on [this page](https://github.com/dnauu-bmsotc/VSC-DD2-CSV-MMD#csv-data-description).
@@ -4358,8 +3802,6 @@ Turning game cheats on is very helpful. The [official guide](https://docs.google
 There is a mod that allows to skip Cultist fights before bosses:
 [Skip Mountain Cultist](https://steamcommunity.com/sharedfiles/filedetails/?id=3740321028)
 
-<!-- I haven't encountered any differences between local and Workshop versions of my mod. Uploading a mod to Workshop worked without issues. -->
-
 Some other mods can serve as example. Downloaded mods are stored in this folder:
 
 ```
@@ -4367,21 +3809,6 @@ C:\Program Files (x86)\Steam\steamapps\workshop\content
 ```
 
 This folder only has files from `exports` folders. Source assets are not easily accessable, but CSV and localization data is open.
-
-<!-- 
-Some issues that might appear with modded heroes:
-- passing a turn zooms in a hero as if it is a normal skill
-- meltdown and resolute poses aren't held long enough
-- overly strong inn highlight
-- overly strong turn order highlight
-- ?winning against the ghost of the past
-- ?losing against the ghost of the past
-- ?shrine of reflection
-- ?kingdoms skillsets and hero upgrades
-- ?shackles blocks
-- ?getting stunned on extra action
-- ?getting riposted, moving, passing a turn, using a combat item
--->
 
 ## Cloning this mod
 
@@ -4471,44 +3898,6 @@ After that Duncan's doppelganger should appear in the game.
 I don't know reliable this ID changing is, but I'm inclined to believe that there shouldn't be any big problems.
 
 -->
-
-<!-- ## Afterword
-
-This process was a lot of fun. I remember how happy I was when my 3D model appeared the game for the first time, even though it was just a T-pose. I felt so smart when I created skills that I didn’t even know were possible, or when I made the Shrine of Reflection work, even if with some workarounds. -->
-
-<!-- 
-I loved the process of 3D modeling, texturing, drawing, animating, editing CSV data, figuring out how the game works, polishing things.
-
-- Day 1: trying to come up with the idea.
-- Day 2: drew a concept art.
-- Day 3: drew a signature item and trinkets, installed modding tools.
-- Day 4: watched some tutorials, created my first inn item.
-- Day 5: transformed the inn item into a signature item, started 3D modeling.
-- Day 6: finished a mesh for the hero.
-- Day 7: created a mesh for the weapon.
-- Day 8: textured the meshes.
-- Day 9: fixed the mesh and the rig, created a couple of animations.
-- Day 10: created all generic animations.
-- Day 11: drew skill icons, made six skill animations.
-- Day 12: figured out how to import animations in Darkside.
-- Day 13: imported skill icons in Darkside.
-- Day 14: created the summon’s model and animations.
-- Day 15: was trying to figure out how to implement a summon.
-- Day 16: finally implemented a summon.
-- Day 17: fixed the outline issue, fixed the inn light issue, drew portraits.
-- Day 18: added vfx to some animations, drew token icons, imported token icons in Darkside.
-- Day 19: fixed token tooltips, implemented token effects.
-- Day 20: redrew token icons, defined some skills, adjusted some tooltips.
-- Day 21: finished wanderer skills, added vfx to all skills.
-- Day 22: discovered issues with positional tokens, changed some skills, drew path seals.
-- Day 23: tried to create palettes and skins, added sfx.
-- Day 24: redrew trinkets and the signature item, added altar progression, finished a new path.
-- Day 25: finished all paths.
-- Day 26: added trinket effects, set loot tables up.
-- Day 27: learned how the Shrine of Reflection works, added barks.
-- Day 28: implemented the Shrine of Reflection story.
-- Days 29-36: preparing everything for publication.
- -->
 
 
 ## Locations of files and folders
