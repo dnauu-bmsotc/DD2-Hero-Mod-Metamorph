@@ -3500,6 +3500,12 @@ So either the summon shouldn't be acessible in boss batles, or it should be test
 
 It is definetly possible to create a summon that can act randomly on its own, The Metamorph was able to summon those Creatures from his Shrine of Reflection, and it worked perfectly in regular battles. But I had no idea what to do with the last boss, so I instead my hero can only summon corpses that don't do anything.
 
+I believe summonning corpses instead of acting creatures has a lesser chance of breaking the game. Corpses can not gain tokens or buffs. The Act 5 boss filters out corpses so their peculiar skills work fine.
+
+The game differentiates corpses from other actors by checking if the given actor has the `corpse` tag.
+
+Technically it is possible to give turns each round to a corpse actor. But it is quite glitchy. If a corpse somehow manages to kill an enemy, a glitch will happen: the enemie's model will turn into a grave, but they will still be alive and will attack heroes.
+
 <!-- Only a hero that is facing the failure should be able to damage it. But I don't know how it is implemented. The Runaway can damage other hero's failure. And my summons were able to damage my hero's failure, but only those summons that were spawned while my hero was facing his failure. Unfortunately I noticed it too late, I have no idea how to make it more consistent. -->
 
 <!-- There are at least two ways to create a summon:
