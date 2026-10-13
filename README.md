@@ -48,7 +48,7 @@
 
 This isn't exactly a guide, rather a document about everything I experienced while creating a new hero. Before this mod, I had never created any mods for any game, and I didn't consult with anyone experienced in this while creating it. Also English is not my first language.
 
-If you find something incorrect in this document, please open an issue post on this page explaining what needs to be changed, and I'll edit this document.
+<!-- If you find something incorrect in this document, please open an issue post on this page explaining what needs to be changed, and I'll edit this document. -->
 
 What I couldn't achieve:
 - While I was able to transfer 3D models and animations from Blender to Darkside, this process produced a lot of issues. If any other guide on this topic is available, it would probably be better than what is offered here.
@@ -307,6 +307,13 @@ Then I added the black outline by going in the mesh's properties and clicking th
 *Adding the outline shader*
 
 It should have added an outline to the model. But for me it didn't.
+
+green715 adds:
+> After importing a mesh into Blender, most hero meshes have an attribute to control which parts of the hero have thicker/thinner outlines. In Blender, you can convert that attribute into a vertex group, and weight paint to see the thick/thin parts. Areas around the nose and mouth are typically thinner, for example.
+>
+> If you look into something called Inverse Hull using the solidify modifier and an outline material, you can use that vertex group as influence, to make the outlines appear in Blender as they do in-game.
+>
+> Presumably there would be a way to do the opposite, painting a Vertex Group in Blender and converting to an attribute to use in Unity, but I'm not familiar with using Unity.
 
 ### Fixing the outline
 
@@ -2634,6 +2641,24 @@ bark_hero_failure_kill+mmd=You'll fall like any other sick critter.
 
 All barks can be changed this way, not only the ones that have no fallbacks.
 
+Reactions of other heroes to a new signature item, if it can target them, are defined this way (`mmd_penicillin` here is the ID of the item):
+```
+bark_item_mmd_penicillin=...
+bark_item_mmd_penicillin+mmd=...
+bark_item_mmd_penicillin+plague_doctor=...
+bark_item_mmd_penicillin+occultist=...
+bark_item_mmd_penicillin+man_at_arms=...
+bark_item_mmd_penicillin+grave_robber=...
+bark_item_mmd_penicillin+highwayman=...
+bark_item_mmd_penicillin+jester=...
+bark_item_mmd_penicillin+bounty_hunter=...
+bark_item_mmd_penicillin+hellion=...
+bark_item_mmd_penicillin+runaway=...
+bark_item_mmd_penicillin+leper=...
+bark_item_mmd_penicillin+flagellant=...
+bark_item_mmd_penicillin+vestal=...
+```
+
 ### Skill tooltips
 
 Skill names are localized in this way:
@@ -3450,7 +3475,7 @@ When the third phase begins, the boss applies a hidden token `failure_incomplete
 
 So either the summon shouldn't be acessible in boss batles, or it should be tested on different bosses. I don't know if any other boss is as dependent on hidden mechanics as the Act 5 boss though.
 
-It is definetly possible to create a summon that can act randomly on its own, The Metamorph was able to summon those Creatures from his Shrine of Reflection, and it worked perfectly in regular battles. But I had no idea what to do with the last boss, so instead my hero can only summon corpses that don't do anything.
+It is definetly possible to create a summon that can act randomly on its own, The Metamorph was able to summon those Creatures from his Shrine of Reflection, and it worked perfectly in regular battles. But I had no idea what to do with the last boss, so I instead my hero can only summon corpses that don't do anything.
 
 <!-- Only a hero that is facing the failure should be able to damage it. But I don't know how it is implemented. The Runaway can damage other hero's failure. And my summons were able to damage my hero's failure, but only those summons that were spawned while my hero was facing his failure. Unfortunately I noticed it too late, I have no idea how to make it more consistent. -->
 
