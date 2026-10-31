@@ -60,6 +60,7 @@ Other guides about modding Darkest Dungeon 2:
 - [Creating new path skills](https://docs.google.com/document/d/1glkTgWv5mXvleihcnBeC4FIDgf88fz8Qwjz46es6oFA/edit?tab=t.0#heading=h.1xklr55423w9)
 - [How to create a mod on Darkest Dungeon 2 that contains multiple tokens](https://docs.google.com/document/d/1FcWUTaz4nRhRtgW_haOZUEuLNB1u41Lqi03kav63f8Y/edit?tab=t.0#heading=h.c976l88xa9o)
 - [How to package a mod not for Steam Workshop](https://docs.google.com/document/d/1RYOe7yJqThgUv3s-1MlVGdBEv0dwof8zc2PVu57C-dE/edit?usp=sharing)
+- [Replacing Game Textures, Sprites & Adding Custom Audio](https://docs.google.com/document/d/14v-kqFx_YLvjys1UT0_p9t1I3-QGskDg/edit)
 - More guides can be found on Darkest Dungeon's Discord server.
 
 Other resources:
@@ -700,9 +701,15 @@ One time I renamed my VFX files and they suddenly disappeared from the game. Rea
 
 ## Adding SFX
 
-There were some discussions about SFX, but I tuned out and decided that custom audio is not possible. So all SFX were copied from existing audio.
+There is a guide that covers SFX in mods (even custom sounds):
 
-Skill SFX can be specified in RZIS files. I think that all SFX need to come from one single hero (my hero uses the MAA's SFX).
+[Replacing Game Textures, Sprites & Adding Custom Audio](https://docs.google.com/document/d/14v-kqFx_YLvjys1UT0_p9t1I3-QGskDg/edit)
+
+I didn't know that adding custom audio is possible, so I used SFX of an existing hero.
+
+For some reason I couldn't reuse SFX from multiple heroes, so my hero only uses MAA's SFX.
+
+A skill's SFX can be specified in the according RZIS file.
 
 After selecting a RZIS, the Inspector window will show the "Override Sfx Skill" field. It needs to be filled with the RZIS file of the skill that has suitable SFX.
 
