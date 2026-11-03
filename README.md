@@ -53,14 +53,14 @@ This isn't exactly a guide, rather a document about everything I experienced whi
 What I couldn't achieve:
 - While I was able to transfer 3D models and animations from Blender to Darkside, this process produced a lot of issues. If any other guide on this topic is available, it would probably be better than what is offered here.
 - I couldn't make palettes work on custom heroes.
-- Audio customization seems to be limited.
 
 Other guides about modding Darkest Dungeon 2:
 - [Darkside guide](https://docs.google.com/document/d/1ga3FNrL3eGDRMFekLx9-RKhTDLMxPO603XzXcZa8O78/edit?usp=drive_link)
 - [Creating new path skills](https://docs.google.com/document/d/1glkTgWv5mXvleihcnBeC4FIDgf88fz8Qwjz46es6oFA/edit?tab=t.0#heading=h.1xklr55423w9)
 - [How to create a mod on Darkest Dungeon 2 that contains multiple tokens](https://docs.google.com/document/d/1FcWUTaz4nRhRtgW_haOZUEuLNB1u41Lqi03kav63f8Y/edit?tab=t.0#heading=h.c976l88xa9o)
 - [How to package a mod not for Steam Workshop](https://docs.google.com/document/d/1RYOe7yJqThgUv3s-1MlVGdBEv0dwof8zc2PVu57C-dE/edit?usp=sharing)
-- [Replacing Game Textures, Sprites & Adding Custom Audio](https://docs.google.com/document/d/14v-kqFx_YLvjys1UT0_p9t1I3-QGskDg/edit)
+- [Tbonex28b: Replacing Game Textures, Sprites &
+Adding Custom Audio](https://drive.google.com/file/d/1EGjvDGeQ5N9sYO9X68KgkXcB3PyU6AGx/view)
 - More guides can be found on Darkest Dungeon's Discord server.
 
 Other resources:
@@ -703,7 +703,8 @@ One time I renamed my VFX files and they suddenly disappeared from the game. Rea
 
 There is a guide that covers SFX in mods (even custom sounds):
 
-[Replacing Game Textures, Sprites & Adding Custom Audio](https://docs.google.com/document/d/14v-kqFx_YLvjys1UT0_p9t1I3-QGskDg/edit)
+[Tbonex28b: Replacing Game Textures, Sprites &
+Adding Custom Audio](https://drive.google.com/file/d/1EGjvDGeQ5N9sYO9X68KgkXcB3PyU6AGx/view)
 
 I didn't know that adding custom audio is possible, so I used SFX of an existing hero.
 
