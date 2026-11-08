@@ -1,0 +1,1813 @@
+"Project-Id-Version:"
+"POT-Creation-Date:"
+"PO-Revision-Date:"
+"Last-Translator: Red Hook Studios"
+"Language-Team:"
+"MIME-Version: 1.0"
+"Content-Type: text/plain; charset=UTF-8"
+"Content-Transfer-Encoding: 8bit"
+"X-Generator: Poedit 2.4"
+msgctxt "actor_class_mmd_corpse"
+msgid "<color=#cf795d>Parasitic Form</color>"
+msgstr "<color=#cf795d>기생체</color>"
+
+msgctxt "actor_class_mmd_corpse_dead"
+msgid "<color=#cf795d>Corpse</color>"
+msgstr "<color=#cf795d>시체</color>"
+
+msgctxt "actor_class_mmd_corpse_dead_u"
+msgid "<color=#cf795d>Corpse</color><sprite name={q}icon_upgraded_skill{q}>"
+msgstr "<color=#cf795d>시체</color><sprite name={q}icon_upgraded_skill{q}>"
+
+msgctxt "actor_class_mmd_corpse_u"
+msgid "<color=#cf795d>Parasitic Form</color><sprite name={q}icon_upgraded_skill{q}>"
+msgstr "<color=#cf795d>기생체</color><sprite name={q}icon_upgraded_skill{q}>"
+
+msgctxt "actor_descriptors_mmd"
+msgid "+ Back Rank\n+ Positional Tokens\n+ Support\n+ Summoner"
+msgstr "+ 후방\n+ 위치 토큰\n+ 지원\n+ 소환사"
+
+msgctxt "actor_verbose_description_mmd"
+msgid "“Defences crumble as the spores\nfill the air.”"
+msgstr "“포자가 공기를 채우면\n방어는 무너진다.”"
+
+msgctxt "bark_act_out_rest_item_hate_block+envious+mmd"
+msgid "You clearly do not require my assistance."
+msgstr "내 도움은 필요 없어 보이는군."
+
+msgctxt "bark_act_out_rest_item_hate_block+hateful+mmd"
+msgid "Bother someone else."
+msgstr "딴 데 가서 귀찮게 해."
+
+msgctxt "bark_act_out_rest_item_hate_block+resentful+mmd"
+msgid "I don't need you."
+msgstr "너 따윈 필요 없다."
+
+msgctxt "bark_act_out_rest_item_hate_block+tumultuous+mmd"
+msgid "The fiends outside are better company."
+msgstr "차라리 밖에 있는 괴물들이 낫겠군."
+
+msgctxt "bark_god_summon_failure+mmd"
+msgid "I've seen such tricks before..."
+msgstr "그런 수작은 전에도 봤다..."
+
+msgctxt "bark_hero_failure_kill+mmd"
+msgid "You'll fall like any other sick critter."
+msgstr "너도 병든 짐승들처럼 쓰러질 거다."
+
+msgctxt "bark_item_experimental_remedy+mmd"
+msgid "Let's see..."
+msgstr "어디 보자..."
+
+msgctxt "bark_item_guided_meditation+mmd"
+msgid "Let's see..."
+msgstr "어디 보자..."
+
+msgctxt "bark_item_improvised_strategy+mmd"
+msgid "Let's see..."
+msgstr "어디 보자..."
+
+msgctxt "bark_item_mmd_penicillin"
+msgid "I'll trust you, for now."
+msgstr "일단은 믿어 보지."
+
+msgctxt "bark_item_mmd_penicillin+bounty_hunter"
+msgid "Long as it works..."
+msgstr "일단 약효만 든다면야..."
+
+msgctxt "bark_item_mmd_penicillin+flagellant"
+msgid "Your medicine profanes my flesh."
+msgstr "그대의 약은 내 육신을 모독하는군."
+
+msgctxt "bark_item_mmd_penicillin+grave_robber"
+msgid "I'd swear he enjoys subjecting us to this."
+msgstr "저 녀석, 우리한테 이런 걸 먹이는 걸 즐기는 게 분명해."
+
+msgctxt "bark_item_mmd_penicillin+hellion"
+msgid "What foul spirits!"
+msgstr "고약한 기운이로군!"
+
+msgctxt "bark_item_mmd_penicillin+highwayman"
+msgid "Pass it here. This journey's wearin' me down."
+msgstr "이리 넘겨. 이 여정 때문에 몸이 남아나질 않아."
+
+msgctxt "bark_item_mmd_penicillin+jester"
+msgid "You're <i>hilarious</i>."
+msgstr "이거 <i>진짜 웃기다</i>."
+
+msgctxt "bark_item_mmd_penicillin+leper"
+msgid "Perhaps wasted on one such as I..."
+msgstr "나와 같은 자에게는 낭비가 아닐까 싶네만..."
+
+msgctxt "bark_item_mmd_penicillin+man_at_arms"
+msgid "Can't be choosy with field medicine."
+msgstr "응급처치용인데 까탈스러울 필요는 없지."
+
+msgctxt "bark_item_mmd_penicillin+mmd"
+msgid "Take it or not. Your choice."
+msgstr "먹든 말든 알아서 해."
+
+msgctxt "bark_item_mmd_penicillin+occultist"
+msgid "I dearly hope my sense of smell recovers."
+msgstr "내 후각이 되돌아오기만을 바랄 뿐."
+
+msgctxt "bark_item_mmd_penicillin+plague_doctor"
+msgid "No, it hasn't gone off."
+msgstr "아니, 상한 거 아니야."
+
+msgctxt "bark_item_mmd_penicillin+runaway"
+msgid "<i>Ugggghhh.</i>"
+msgstr "<i>으우우웩.</i>"
+
+msgctxt "bark_item_mmd_penicillin+vestal"
+msgid "At least I can render my own aid if this backfires..."
+msgstr "뭐, 이게 부작용이 나거든 내가 도울 수는 있겠지..."
+
+msgctxt "bark_item_morbid_joke+mmd"
+msgid "Let's see..."
+msgstr "어디 보자..."
+
+msgctxt "bark_item_oddly_tuned_lute+mmd"
+msgid "Let's see..."
+msgstr "어디 보자..."
+
+msgctxt "bark_item_precious_collection+mmd"
+msgid "Let's see..."
+msgstr "어디 보자..."
+
+msgctxt "bark_item_tar_filled_colambre+mmd"
+msgid "Let's see..."
+msgstr "어디 보자..."
+
+msgctxt "bark_item_the_very_best+mmd"
+msgid "Let's see..."
+msgstr "어디 보자..."
+
+msgctxt "bark_item_war_paint+mmd"
+msgid "Let's see..."
+msgstr "어디 보자..."
+
+msgctxt "bark_node_exit_altarofhope+mmd"
+msgid "..."
+msgstr "..."
+
+msgctxt "bark_node_exit_bridge+mmd"
+msgid "We are on the right path."
+msgstr "제대로 가고 있군."
+
+msgctxt "bark_node_exit_bridgegang+mmd"
+msgid "They're coming. Can feel it."
+msgstr "놈들이 온다. 느껴져."
+
+msgctxt "bark_node_exit_cache+mmd"
+msgid "Grab the loot and let's go!"
+msgstr "전리품 챙기고 가자!"
+
+msgctxt "bark_node_exit_cachegang+mmd"
+msgid "Can't remember the time I last slept a full night..."
+msgstr "하룻밤 푹 잔 게 언제였는지 기억도 안 나네..."
+
+msgctxt "bark_node_exit_failure_creatureden+mmd"
+msgid "Stupid beasts!"
+msgstr "멍청한 짐승들!"
+
+msgctxt "bark_node_exit_failure_dungeon+mmd"
+msgid "Retreat!"
+msgstr "후퇴!"
+
+msgctxt "bark_node_exit_failure_gauntchirurgeon+mmd"
+msgid "Close one."
+msgstr "아슬아슬했군."
+
+msgctxt "bark_node_exit_failure_guardian+mmd"
+msgid "No more!"
+msgstr "이제 그만!"
+
+msgctxt "bark_node_exit_failure_storycultist+mmd"
+msgid "What's that ringing in my ears?!"
+msgstr "귀에서 울리는 이 소리는 뭐지?!"
+
+msgctxt "bark_node_exit_failure_storyhero+herostory_MMD_02"
+msgid "I did naething wrong!"
+msgstr "난 아무 짓도 안 했다고!"
+
+msgctxt "bark_node_exit_failure_storyresist+mmd"
+msgid "Retreat! "
+msgstr "후퇴!"
+
+msgctxt "bark_node_exit_gate+kingdominnsieged+mmd"
+msgid "The kingdom is falling. Pathetic!"
+msgstr "왕국이 무너지고 있군. 한심하다!"
+
+msgctxt "bark_node_exit_gate+mmd"
+msgid "We are on the right path."
+msgstr "제대로 가고 있군."
+
+msgctxt "bark_node_exit_heroselect+mmd"
+msgid "..."
+msgstr "..."
+
+msgctxt "bark_node_exit_hospital+mmd"
+msgid "Hurry up."
+msgstr "서둘러."
+
+msgctxt "bark_node_exit_oasis+mmd"
+msgid "We don't have time to lounge around."
+msgstr "늘어져 있을 시간 없다."
+
+msgctxt "bark_node_exit_store+mmd"
+msgid "We are ready."
+msgstr "준비됐다."
+
+msgctxt "bark_node_exit_storyassist+mmd"
+msgid "On to the next!"
+msgstr "계속 가자!"
+
+msgctxt "bark_node_exit_storyassistgang+mmd"
+msgid "We leave them and journey to the source of their pain..."
+msgstr "저들을 남겨 두고, 고통의 근원을 향해 간다..."
+
+msgctxt "bark_node_exit_storycosmic+mmd"
+msgid "Let's get away from this place."
+msgstr "이곳을 벗어나자."
+
+msgctxt "bark_node_exit_success_creatureden+mmd"
+msgid "Good riddance."
+msgstr "꼴 좋다."
+
+msgctxt "bark_node_exit_success_gauntchirurgeon+mmd"
+msgid "Damn his tricks!"
+msgstr "빌어먹을 놈의 수작!"
+
+msgctxt "bark_node_exit_success_guardian+mmd"
+msgid "We did it..."
+msgstr "해냈군..."
+
+msgctxt "bark_node_exit_success_storycultist+mmd"
+msgid "That'll buy us a little time."
+msgstr "이걸로 시간은 좀 벌었군."
+
+msgctxt "bark_node_exit_success_storyhero+herostory_MMD_01"
+msgid "Had no time and no desire to listen."
+msgstr "들을 시간도, 들을 마음도 없었다."
+
+msgctxt "bark_node_exit_success_storyhero+herostory_MMD_02"
+msgid "My impatience almost killed me."
+msgstr "조급함 때문에 죽을 뻔했지."
+
+msgctxt "bark_node_exit_success_storyhero+herostory_MMD_03"
+msgid "I thought I’d won just by surviving."
+msgstr "살아남은 것만으로 이긴 줄 알았다."
+
+msgctxt "bark_node_exit_success_storyhero+herostory_MMD_04"
+msgid "I didn't want this. This shouldnae have happened!"
+msgstr "이런 걸 원한 게 아니야. 이런 일은 일어나선 안 됐다고!"
+
+msgctxt "bark_node_exit_success_storyhero+herostory_MMD_05"
+msgid "What I’ve become..."
+msgstr "내가 이런 게 되다니..."
+
+msgctxt "bark_node_exit_success_storyhero+herostory_MMD_06"
+msgid "I am changing."
+msgstr "나는 변하고 있다."
+
+msgctxt "bark_node_exit_success_storyresist+mmd"
+msgid "Well fought."
+msgstr "잘 싸웠다."
+
+msgctxt "bark_node_exit_watchtower+mmd"
+msgid "Least we know what's coming."
+msgstr "적어도 뭐가 오는지는 알겠군."
+
+msgctxt "bark_route_combat+mmd"
+msgid "There it is."
+msgstr "저기 있군."
+
+msgctxt "bark_route_hazard+mmd"
+msgid "Get to cover!"
+msgstr "엄폐해!"
+
+msgctxt "bark_route_oblivion_tear+mmd"
+msgid "GET OUT OF MY HEAD!"
+msgstr "내 머리에서 나가!"
+
+msgctxt "bark_route_rough_patch+mmd"
+msgid "Hang tight!"
+msgstr "꽉 잡아!"
+
+msgctxt "bark_route_safe+mmd"
+msgid "A moment of peace."
+msgstr "잠깐의 평화로군."
+
+msgctxt "boss_body_failure_mmd"
+msgid "Spectre"
+msgstr "망령"
+
+msgctxt "buff_desc_mmd_move_buff_override"
+msgid "On Move Skill: Extra action if hero party contains a <color=#{deathdoor}>Corpse</color> (once per round)"
+msgstr "이동 기술 사용 시: 원정대에 <color=#{deathdoor}>시체</color>가 있으면 추가 행동 (라운드당 1회)"
+
+msgctxt "buff_desc_path_descriptor_mmd_forager_override"
+msgid "Front rank role."
+msgstr "전방 역할입니다."
+
+msgctxt "buff_desc_path_descriptor_mmd_mycologist_override"
+msgid "Reliable buffs for allies."
+msgstr "아군에게 안정적인 강화를 부여합니다."
+
+msgctxt "buff_desc_path_descriptor_mmd_sporebound_override"
+msgid "Mutated spores bring perilous situations."
+msgstr "변이된 포자가 위태로운 상황을 불러옵니다."
+
+msgctxt "effect_condition_mmd_hero_party_contains_a_corpse_override"
+msgid "{0} if hero party contains a <color=#{deathdoor}>Corpse</color>"
+msgstr "원정대에 <color=#{deathdoor}>시체</color>가 있으면 {0}"
+
+msgctxt "effect_condition_mmd_parasitic_forms_hero_party_has_less_than_4_allies_override"
+msgid "{0} if less than 4 allies"
+msgstr "아군이 4명 미만이면 {0}"
+
+msgctxt "effect_condition_performer_skill_hist_mmd_assortment_override"
+msgid "Use <color=#{notable}>Weird Assortment</color> 2+ times in a single fight"
+msgstr "한 번의 전투에서 <color=#{notable}>기묘한 조합</color> 2회 이상 사용"
+
+msgctxt "effect_condition_performer_skill_hist_mmd_concealing_mist_override"
+msgid "Use <color=#{notable}>Consealing Mist</color> 2+ times in a single fight"
+msgstr "한 번의 전투에서 <color=#{notable}>은폐의 안개</color> 2회 이상 사용"
+
+msgctxt "effect_condition_performer_skill_hist_mmd_disturbing_spores_override"
+msgid "Use <color=#{notable}>Disturbing Spores</color> 2+ times in a single fight"
+msgstr "한 번의 전투에서 <color=#{notable}>교란 포자</color> 2회 이상 사용"
+
+msgctxt "effect_condition_performer_skill_hist_mmd_healing_spores_override"
+msgid "Use <color=#{notable}>Healing Spores</color> 2+ times in a single fight"
+msgstr "한 번의 전투에서 <color=#{notable}>치유 포자</color> 2회 이상 사용"
+
+msgctxt "effect_condition_performer_skill_hist_mmd_heavy_cage_override"
+msgid "Use <color=#{notable}>Heavy Cage</color> 2+ times in a single fight"
+msgstr "한 번의 전투에서 <color=#{notable}>무거운 우리</color> 2회 이상 사용"
+
+msgctxt "effect_condition_performer_skill_hist_mmd_hyphae_rock_override"
+msgid "Use <color=#{notable}>Hyphae Rock</color> 2+ times in a single fight"
+msgstr "한 번의 전투에서 <color=#{notable}>균사 바위</color> 2회 이상 사용"
+
+msgctxt "effect_condition_performer_skill_hist_mmd_internal_fruiting_override"
+msgid "Use <color=#{notable}>Internal Fruiting</color> 2+ times in a single fight"
+msgstr "한 번의 전투에서 <color=#{notable}>체내 결실</color> 2회 이상 사용"
+
+msgctxt "effect_condition_performer_skill_hist_mmd_lycoperdonosis_override"
+msgid "Use <color=#{notable}>Lycoperdonosis</color> 2+ times in a single fight"
+msgstr "한 번의 전투에서 <color=#{notable}>말불버섯 포자증</color> 2회 이상 사용"
+
+msgctxt "effect_condition_performer_skill_hist_mmd_mycelium_mire_override"
+msgid "Use <color=#{notable}>Mycelium Mire</color> 2+ times in a single fight"
+msgstr "한 번의 전투에서 <color=#{notable}>균사체 늪</color> 2회 이상 사용"
+
+msgctxt "effect_condition_performer_skill_hist_mmd_parasitic_forms_override"
+msgid "Use <color=#{notable}>Parasitic Forms</color> 2+ times in a single fight"
+msgstr "한 번의 전투에서 <color=#{notable}>기생 형태</color> 2회 이상 사용"
+
+msgctxt "effect_condition_performer_skill_hist_mmd_slowdown_override"
+msgid "Use <color=#{notable}>Slowdown</color> 2+ times in a single fight"
+msgstr "한 번의 전투에서 <color=#{notable}>둔화</color> 2회 이상 사용"
+
+msgctxt "effect_skill_mmd_move_performer_override"
+msgid "Extra action if hero party contains a <color=#{deathdoor}>Corpse</color> (once per round)"
+msgstr "원정대에 <color=#{deathdoor}>시체</color>가 있으면 추가 행동 (라운드당 1회)"
+
+msgctxt "effect_skill_mmd_parasitic_forms_performer_override"
+msgid "If hero party has less than 4 allies:\nSummon <color=#cf795d>Corpse</color>"
+msgstr "아군이 4명 미만이면:\n<color=#cf795d>시체</color> 소환"
+
+msgctxt "effect_skill_mmd_parasitic_forms_u_performer_override"
+msgid "If hero party has less than 4 allies:\nSummon <color=#cf795d>Corpse</color><sprite name={q}icon_upgraded_skill{q}>"
+msgstr "아군이 4명 미만이면:\n<color=#cf795d>시체</color><sprite name={q}icon_upgraded_skill{q}> 소환"
+
+msgctxt "effect_tooltip_loot_id_mmd_forager_loot"
+msgid "<color=#{notable}>Get an Inn Item (50%)</color>"
+msgstr "<color=#{notable}>여관 아이템 획득 (50%)</color>"
+
+msgctxt "effect_tooltip_loot_id_mmd_forager_loot_baubles"
+msgid "<color=#{notable}>Get Baubles (50%)</color>"
+msgstr "<color=#{notable}>패물 획득 (50%)</color>"
+
+msgctxt "hero_name_canonical_mmd"
+msgid "Duncan"
+msgstr "던컨"
+
+msgctxt "hero_path_flavour_mmd_forager"
+msgid "\n"Wild herbs, at your disposal."\n"
+msgstr "\n「야생 약초가 그대의 손에.」\n"
+
+msgctxt "hero_path_flavour_mmd_mycologist"
+msgid "\n"Undone by the disorder within."\n"
+msgstr "\n「내면의 무질서에 무너지다.」\n"
+
+msgctxt "hero_path_flavour_mmd_reserve"
+msgid "\n"To seek is to find."\n"
+msgstr "\n「구하는 자가 찾을지니.」\n"
+
+msgctxt "hero_path_flavour_mmd_sporebound"
+msgid "\n"All life is connected beneath the surface."\n"
+msgstr "\n「모든 생명은 땅 아래에서 이어져 있다.」\n"
+
+msgctxt "hero_path_flavour_mmd_wanderer"
+msgid "\n"To seek is to find."\n"
+msgstr "\n「구하는 자가 찾을지니.」\n"
+
+msgctxt "hero_path_name_mmd_forager"
+msgid "Forager"
+msgstr "채집가"
+
+msgctxt "hero_path_name_mmd_mycologist"
+msgid "Constable"
+msgstr "치안관"
+
+msgctxt "hero_path_name_mmd_reserve"
+msgid "Wanderer"
+msgstr "방랑자"
+
+msgctxt "hero_path_name_mmd_sporebound"
+msgid "Aberrant"
+msgstr "이형체"
+
+msgctxt "hero_path_name_mmd_wanderer"
+msgid "Wanderer"
+msgstr "방랑자"
+
+msgctxt "hero_select_mmd"
+msgid "<sup><size=90%>The</size></sup> Metamorph"
+msgstr "<sup><size=90%></size></sup> 메타모프"
+
+msgctxt "hero_story_mmd_chapter_title_0"
+msgid "A Search Order"
+msgstr "수색 명령"
+
+msgctxt "hero_story_mmd_chapter_title_1"
+msgid "Ambushed"
+msgstr "매복"
+
+msgctxt "hero_story_mmd_chapter_title_2"
+msgid "A Faint Relief"
+msgstr "희미한 안도"
+
+msgctxt "hero_story_mmd_chapter_title_3"
+msgid "The Interrogation"
+msgstr "심문"
+
+msgctxt "hero_story_mmd_chapter_title_4"
+msgid "The Call of the Curse"
+msgstr "저주의 부름"
+
+msgctxt "item_name_mmd_penicillin"
+msgid "Wonder Drug"
+msgstr "기적의 약"
+
+msgctxt "item_name_trinket_hero_mmd_feathers"
+msgid "Sporebound Feathers"
+msgstr "포자에 잠식된 깃털"
+
+msgctxt "item_name_trinket_hero_mmd_sample"
+msgid "Sporebound Mold"
+msgstr "포자에 잠식된 곰팡이"
+
+msgctxt "item_name_trinket_hero_mmd_sword"
+msgid "Sporebound Sword"
+msgstr "포자에 잠식된 검"
+
+msgctxt "item_quote_mmd_penicillin"
+msgid "\n<i>"One sometimes finds what one is not looking for."</i>\n"
+msgstr "\n<i>「때로는 찾지 않던 것을 찾게 되는 법이다.」</i>\n"
+
+msgctxt "mmd"
+msgid "Metamorph"
+msgstr "메타모프"
+
+msgctxt "mmd_corpse"
+msgid "Parasitic Form"
+msgstr "기생체"
+
+msgctxt "mmd_corpse_dead"
+msgid "Corpse"
+msgstr "시체"
+
+msgctxt "mmd_corpse_dead_u"
+msgid "Corpse"
+msgstr "시체"
+
+msgctxt "mmd_corpse_u"
+msgid "Parasitic Form"
+msgstr "기생체"
+
+msgctxt "mmd_origin_hero_calm"
+msgid "Duncan"
+msgstr "던컨"
+
+msgctxt "mmd_origin_hero_fight"
+msgid "Duncan"
+msgstr "던컨"
+
+msgctxt "mmd_origin_hero_final"
+msgid "Duncan"
+msgstr "던컨"
+
+msgctxt "mmd_origin_hero_no_sword"
+msgid "Duncan"
+msgstr "던컨"
+
+msgctxt "mmd_skn_origin"
+msgid "Origin"
+msgstr "과거"
+
+msgctxt "mmd_story_cage"
+msgid "The Cage"
+msgstr "우리"
+
+msgctxt "mmd_story_door"
+msgid "Exit"
+msgstr "출구"
+
+msgctxt "mmd_story_form"
+msgid "Cursed Form"
+msgstr "저주받은 형체"
+
+msgctxt "mmd_story_pile"
+msgid "Motionless Pile"
+msgstr "미동 없는 더미"
+
+msgctxt "mmd_story_plate_1"
+msgid "Story"
+msgstr "이야기"
+
+msgctxt "mmd_story_plate_2"
+msgid "Story"
+msgstr "이야기"
+
+msgctxt "mmd_story_plate_3"
+msgid "Story"
+msgstr "이야기"
+
+msgctxt "mmd_story_plate_4"
+msgid "Story"
+msgstr "이야기"
+
+msgctxt "mmd_story_plate_5"
+msgid "Story"
+msgstr "이야기"
+
+msgctxt "mmd_story_plate_5_1"
+msgid "Story"
+msgstr "이야기"
+
+msgctxt "mmd_story_plate_5_2"
+msgid "Story"
+msgstr "이야기"
+
+msgctxt "mmd_story_plate_5_3"
+msgid "Story"
+msgstr "이야기"
+
+msgctxt "mmd_story_plate_5_4"
+msgid "Story"
+msgstr "이야기"
+
+msgctxt "mmd_story_plate_5_5"
+msgid "Story"
+msgstr "이야기"
+
+msgctxt "mmd_story_wall"
+msgid "Wall"
+msgstr "벽"
+
+msgctxt "mmd_WK1"
+msgid "Forager"
+msgstr "채집가"
+
+msgctxt "mmd_WK1a"
+msgid "Forager (Altered)"
+msgstr "채집가 (변형)"
+
+msgctxt "mmd_WK2"
+msgid "Constable"
+msgstr "치안관"
+
+msgctxt "mmd_WK2a"
+msgid "Constable (Altered)"
+msgstr "치안관 (변형)"
+
+msgctxt "mmd_WK3"
+msgid "Aberrant"
+msgstr "이형체"
+
+msgctxt "mmd_WK3a"
+msgid "Aberrant (Altered)"
+msgstr "이형체 (변형)"
+
+msgctxt "party_name_grave_robber_highwayman_man_at_arms_mmd"
+msgid "Kismet"
+msgstr "숙명"
+
+msgctxt "party_name_grave_robber_highwayman_mmd_man_at_arms"
+msgid "The Deathcap Court"
+msgstr "알광대버섯 궁정"
+
+msgctxt "party_name_grave_robber_highwayman_mmd_plague_doctor"
+msgid "Wart Disease"
+msgstr "사마귀병"
+
+msgctxt "party_name_grave_robber_highwayman_plague_doctor_mmd"
+msgid "Praesens"
+msgstr "프라이센스"
+
+msgctxt "party_name_grave_robber_man_at_arms_highwayman_mmd"
+msgid "Gospel of Dismay"
+msgstr "절망의 복음"
+
+msgctxt "party_name_grave_robber_man_at_arms_mmd_highwayman"
+msgid "Decaying Fellowship"
+msgstr "썩어가는 동지들"
+
+msgctxt "party_name_grave_robber_man_at_arms_mmd_plague_doctor"
+msgid "Sterigmata"
+msgstr "소경자"
+
+msgctxt "party_name_grave_robber_man_at_arms_plague_doctor_mmd"
+msgid "Dangervisit"
+msgstr "위험한 방문"
+
+msgctxt "party_name_grave_robber_mmd_highwayman_man_at_arms"
+msgid "Falciform Bolete"
+msgstr "낫 모양 그물버섯"
+
+msgctxt "party_name_grave_robber_mmd_highwayman_plague_doctor"
+msgid "Earth Stars"
+msgstr "땅별버섯"
+
+msgctxt "party_name_grave_robber_mmd_man_at_arms_highwayman"
+msgid "Inimical Colony"
+msgstr "적대적 군락"
+
+msgctxt "party_name_grave_robber_mmd_man_at_arms_plague_doctor"
+msgid "Overgrown Clachan"
+msgstr "무성해진 촌락"
+
+msgctxt "party_name_grave_robber_mmd_plague_doctor_highwayman"
+msgid "Sporelings"
+msgstr "포자 새끼들"
+
+msgctxt "party_name_grave_robber_mmd_plague_doctor_man_at_arms"
+msgid "Fierce Ceilidh"
+msgstr "사나운 잔치"
+
+msgctxt "party_name_grave_robber_plague_doctor_highwayman_mmd"
+msgid "Devolution"
+msgstr "퇴화"
+
+msgctxt "party_name_grave_robber_plague_doctor_man_at_arms_mmd"
+msgid "Glass Minds"
+msgstr "유리 정신"
+
+msgctxt "party_name_grave_robber_plague_doctor_mmd_highwayman"
+msgid "Putrescent Requiem"
+msgstr "부패의 진혼곡"
+
+msgctxt "party_name_grave_robber_plague_doctor_mmd_man_at_arms"
+msgid "Noble Rot"
+msgstr "귀부병"
+
+msgctxt "party_name_highwayman_grave_robber_man_at_arms_mmd"
+msgid "Moldmen"
+msgstr "곰팡이 인간들"
+
+msgctxt "party_name_highwayman_grave_robber_mmd_man_at_arms"
+msgid "Rotting Medulla"
+msgstr "썩어가는 연수"
+
+msgctxt "party_name_highwayman_grave_robber_mmd_plague_doctor"
+msgid "Choir of Mold"
+msgstr "곰팡이 성가대"
+
+msgctxt "party_name_highwayman_grave_robber_plague_doctor_mmd"
+msgid "I, the Devourer"
+msgstr "나, 포식자"
+
+msgctxt "party_name_highwayman_man_at_arms_grave_robber_mmd"
+msgid "Homunculi"
+msgstr "호문쿨루스들"
+
+msgctxt "party_name_highwayman_man_at_arms_mmd_grave_robber"
+msgid "Putrid Propagation "
+msgstr "부패한 번식"
+
+msgctxt "party_name_highwayman_man_at_arms_mmd_plague_doctor"
+msgid "Mycorrhizal Crown"
+msgstr "균근의 왕관"
+
+msgctxt "party_name_highwayman_man_at_arms_plague_doctor_mmd"
+msgid "Non-Replayable Intellects"
+msgstr "되감을 수 없는 지성"
+
+msgctxt "party_name_highwayman_mmd_grave_robber_man_at_arms"
+msgid "Hyphal Wall"
+msgstr "균사벽"
+
+msgctxt "party_name_highwayman_mmd_grave_robber_plague_doctor"
+msgid "Erumpent Decomposers"
+msgstr "돌출하는 분해자들"
+
+msgctxt "party_name_highwayman_mmd_man_at_arms_grave_robber"
+msgid "Withering Root"
+msgstr "시드는 뿌리"
+
+msgctxt "party_name_highwayman_mmd_man_at_arms_plague_doctor"
+msgid "Rapid Undergrowth"
+msgstr "급속한 덤불"
+
+msgctxt "party_name_highwayman_mmd_plague_doctor_grave_robber"
+msgid "Calafate Rust"
+msgstr "칼라파테 녹병"
+
+msgctxt "party_name_highwayman_mmd_plague_doctor_man_at_arms"
+msgid "Wood Web Terminal"
+msgstr "숲 그물 단말"
+
+msgctxt "party_name_highwayman_plague_doctor_grave_robber_mmd"
+msgid "Gore of Being"
+msgstr "존재의 선혈"
+
+msgctxt "party_name_highwayman_plague_doctor_man_at_arms_mmd"
+msgid "Momonji Caravan"
+msgstr "모몬지 대상단"
+
+msgctxt "party_name_highwayman_plague_doctor_mmd_grave_robber"
+msgid "Spreading Bloom"
+msgstr "번지는 개화"
+
+msgctxt "party_name_highwayman_plague_doctor_mmd_man_at_arms"
+msgid "Ground Truth"
+msgstr "지상 실측"
+
+msgctxt "party_name_man_at_arms_grave_robber_highwayman_mmd"
+msgid "Echo Sonata"
+msgstr "메아리 소나타"
+
+msgctxt "party_name_man_at_arms_grave_robber_mmd_highwayman"
+msgid "Parasitic Skein"
+msgstr "기생의 실타래"
+
+msgctxt "party_name_man_at_arms_grave_robber_mmd_plague_doctor"
+msgid "Superparasitism"
+msgstr "과기생"
+
+msgctxt "party_name_man_at_arms_grave_robber_plague_doctor_mmd"
+msgid "Unbecoming"
+msgstr "어울리지 않는 자들"
+
+msgctxt "party_name_man_at_arms_highwayman_grave_robber_mmd"
+msgid "Better Days"
+msgstr "좋았던 시절"
+
+msgctxt "party_name_man_at_arms_highwayman_mmd_grave_robber"
+msgid "Frontline Fungicide"
+msgstr "최전선 살균제"
+
+msgctxt "party_name_man_at_arms_highwayman_mmd_plague_doctor"
+msgid "Reign of Rot"
+msgstr "부패의 치세"
+
+msgctxt "party_name_man_at_arms_highwayman_plague_doctor_mmd"
+msgid "Castellum Raondo"
+msgstr "카스텔룸 라온도"
+
+msgctxt "party_name_man_at_arms_mmd_grave_robber_highwayman"
+msgid "Marginal Veil"
+msgstr "가장자리 막"
+
+msgctxt "party_name_man_at_arms_mmd_grave_robber_plague_doctor"
+msgid "Gleba"
+msgstr "기본체"
+
+msgctxt "party_name_man_at_arms_mmd_highwayman_grave_robber"
+msgid "Sporangium Cluster"
+msgstr "포자낭 무리"
+
+msgctxt "party_name_man_at_arms_mmd_highwayman_plague_doctor"
+msgid "Patients of Decay"
+msgstr "부패의 환자들"
+
+msgctxt "party_name_man_at_arms_mmd_plague_doctor_grave_robber"
+msgid "Necrocallers"
+msgstr "사령 소환사"
+
+msgctxt "party_name_man_at_arms_mmd_plague_doctor_highwayman"
+msgid "Fructicolous Nightmare"
+msgstr "과실 위의 악몽"
+
+msgctxt "party_name_man_at_arms_plague_doctor_grave_robber_mmd"
+msgid "Where The Skies End"
+msgstr "하늘이 끝나는 곳"
+
+msgctxt "party_name_man_at_arms_plague_doctor_highwayman_mmd"
+msgid "Perfect Attendants"
+msgstr "완벽한 시종들"
+
+msgctxt "party_name_man_at_arms_plague_doctor_mmd_grave_robber"
+msgid "Fever Maydis"
+msgstr "옥수수 열병"
+
+msgctxt "party_name_man_at_arms_plague_doctor_mmd_highwayman"
+msgid "Uncontrolled Hostage"
+msgstr "통제 불능의 인질"
+
+msgctxt "party_name_mmd_grave_robber_highwayman_man_at_arms"
+msgid "The Unusual Morels"
+msgstr "기이한 곰보버섯들"
+
+msgctxt "party_name_mmd_grave_robber_highwayman_plague_doctor"
+msgid "Harmful Inoculation"
+msgstr "해로운 접종"
+
+msgctxt "party_name_mmd_grave_robber_man_at_arms_highwayman"
+msgid "Dentate Gills"
+msgstr "톱니 주름살"
+
+msgctxt "party_name_mmd_grave_robber_man_at_arms_plague_doctor"
+msgid "Order of Blight"
+msgstr "역병 기사단"
+
+msgctxt "party_name_mmd_grave_robber_plague_doctor_highwayman"
+msgid "The Sporebound Suspects"
+msgstr "포자에 묶인 용의자들"
+
+msgctxt "party_name_mmd_grave_robber_plague_doctor_man_at_arms"
+msgid "Radiotrophic Growth"
+msgstr "방사선 영양 생장"
+
+msgctxt "party_name_mmd_highwayman_grave_robber_man_at_arms"
+msgid "One Fungus, One Name"
+msgstr "하나의 균, 하나의 이름"
+
+msgctxt "party_name_mmd_highwayman_grave_robber_plague_doctor"
+msgid "Mycorrhizal Alliance"
+msgstr "균근 동맹"
+
+msgctxt "party_name_mmd_highwayman_man_at_arms_grave_robber"
+msgid "Mucor Mucedo"
+msgstr "털곰팡이"
+
+msgctxt "party_name_mmd_highwayman_man_at_arms_plague_doctor"
+msgid "The Mycotoxic Gathering"
+msgstr "곰팡이독 회합"
+
+msgctxt "party_name_mmd_highwayman_plague_doctor_grave_robber"
+msgid "The Death’s Root"
+msgstr "죽음의 뿌리"
+
+msgctxt "party_name_mmd_highwayman_plague_doctor_man_at_arms"
+msgid "Pollen Haze"
+msgstr "꽃가루 안개"
+
+msgctxt "party_name_mmd_man_at_arms_grave_robber_highwayman"
+msgid "Imposition of Inhibition"
+msgstr "억제의 강요"
+
+msgctxt "party_name_mmd_man_at_arms_grave_robber_plague_doctor"
+msgid "Voila Pharmaceutica"
+msgstr "짜잔, 약학"
+
+msgctxt "party_name_mmd_man_at_arms_highwayman_grave_robber"
+msgid "Myco-Masquerade"
+msgstr "균류 가면극"
+
+msgctxt "party_name_mmd_man_at_arms_highwayman_plague_doctor"
+msgid "Bacillus Gram-Negative"
+msgstr "그람 음성 간균"
+
+msgctxt "party_name_mmd_man_at_arms_plague_doctor_grave_robber"
+msgid "Blighted Circulation"
+msgstr "중독된 순환"
+
+msgctxt "party_name_mmd_man_at_arms_plague_doctor_highwayman"
+msgid "Yellow Nails"
+msgstr "노란 손톱"
+
+msgctxt "party_name_mmd_plague_doctor_grave_robber_highwayman"
+msgid "Mycoplasmic Stream"
+msgstr "마이코플라스마 물결"
+
+msgctxt "party_name_mmd_plague_doctor_grave_robber_man_at_arms"
+msgid "Blastospore"
+msgstr "출아 포자"
+
+msgctxt "party_name_mmd_plague_doctor_highwayman_grave_robber"
+msgid "The Death Cap"
+msgstr "알광대버섯"
+
+msgctxt "party_name_mmd_plague_doctor_highwayman_man_at_arms"
+msgid "Foxfire Luciferase"
+msgstr "도깨비불 루시페레이스"
+
+msgctxt "party_name_mmd_plague_doctor_man_at_arms_grave_robber"
+msgid "Oxidative Burst"
+msgstr "산화적 폭발"
+
+msgctxt "party_name_mmd_plague_doctor_man_at_arms_highwayman"
+msgid "Incertae Sedis"
+msgstr "소속 불명"
+
+msgctxt "party_name_plague_doctor_grave_robber_highwayman_mmd"
+msgid "Animal Oddity"
+msgstr "기이한 짐승"
+
+msgctxt "party_name_plague_doctor_grave_robber_man_at_arms_mmd"
+msgid "That Ain’t No Crown"
+msgstr "그건 왕관이 아니야"
+
+msgctxt "party_name_plague_doctor_grave_robber_mmd_highwayman"
+msgid "Fatal Senescence"
+msgstr "치명적 노화"
+
+msgctxt "party_name_plague_doctor_grave_robber_mmd_man_at_arms"
+msgid "Lamellae"
+msgstr "주름살"
+
+msgctxt "party_name_plague_doctor_highwayman_grave_robber_mmd"
+msgid "Impose"
+msgstr "강요"
+
+msgctxt "party_name_plague_doctor_highwayman_man_at_arms_mmd"
+msgid "Gnothi Seauton"
+msgstr "너 자신을 알라"
+
+msgctxt "party_name_plague_doctor_highwayman_mmd_grave_robber"
+msgid "Arbuscular network"
+msgstr "수지상 균근망"
+
+msgctxt "party_name_plague_doctor_highwayman_mmd_man_at_arms"
+msgid "Unpleasant Pact"
+msgstr "불쾌한 협정"
+
+msgctxt "party_name_plague_doctor_man_at_arms_grave_robber_mmd"
+msgid "Dark on Me"
+msgstr "내게 드리운 어둠"
+
+msgctxt "party_name_plague_doctor_man_at_arms_highwayman_mmd"
+msgid "Armed Shells"
+msgstr "무장한 껍데기"
+
+msgctxt "party_name_plague_doctor_man_at_arms_mmd_grave_robber"
+msgid "The Tax Day"
+msgstr "세금 내는 날"
+
+msgctxt "party_name_plague_doctor_man_at_arms_mmd_highwayman"
+msgid "The Gilled Warden"
+msgstr "주름 달린 간수"
+
+msgctxt "party_name_plague_doctor_mmd_grave_robber_highwayman"
+msgid "Quorum Sense"
+msgstr "정족수 감지"
+
+msgctxt "party_name_plague_doctor_mmd_grave_robber_man_at_arms"
+msgid "Symbiotic Blether"
+msgstr "공생의 수다"
+
+msgctxt "party_name_plague_doctor_mmd_highwayman_grave_robber"
+msgid "Mirror Yeasts"
+msgstr "거울 효모"
+
+msgctxt "party_name_plague_doctor_mmd_highwayman_man_at_arms"
+msgid "Common Earthball"
+msgstr "어리알버섯"
+
+msgctxt "party_name_plague_doctor_mmd_man_at_arms_grave_robber"
+msgid "The Weeping Cairn"
+msgstr "흐느끼는 돌무덤"
+
+msgctxt "party_name_plague_doctor_mmd_man_at_arms_highwayman"
+msgid "The Creeping Mold"
+msgstr "기어드는 곰팡이"
+
+msgctxt "performer_buff_desc_mmd_internal_fruiting_dmg_boost_override"
+msgid "Repeating this skill deals additional damage"
+msgstr "이 기술을 반복하면 추가 피해를 줍니다"
+
+msgctxt "performer_buff_desc_mmd_slowdown_fake_ignore_resist_override"
+msgid "Ignores <sprite name={q}icon_debuff{q}> RES"
+msgstr "<sprite name={q}icon_debuff{q}> 저항 무시"
+
+msgctxt "skill_hover_bark_god_face_your_failure+mmd"
+msgid "Here I am!"
+msgstr "나 여기 있다!"
+
+msgctxt "skill_name_failure_mmd_attack"
+msgid "Regression"
+msgstr "회귀"
+
+msgctxt "skill_name_failure_ult_mmd"
+msgid "Exultation"
+msgstr "환희"
+
+msgctxt "skill_name_mmd_assortment"
+msgid "Weird Assortment"
+msgstr "기묘한 조합"
+
+msgctxt "skill_name_mmd_assortment_option_1"
+msgid "Disinfector"
+msgstr "소독제"
+
+msgctxt "skill_name_mmd_assortment_option_2"
+msgid "Convolutor"
+msgstr "지혈제"
+
+msgctxt "skill_name_mmd_assortment_option_3"
+msgid "Neutralizator"
+msgstr "중화제"
+
+msgctxt "skill_name_mmd_assortment_option_4"
+msgid "Inhibitor"
+msgstr "억제제"
+
+msgctxt "skill_name_mmd_assortment_option_5"
+msgid "Neuromodulator"
+msgstr "신경조절제"
+
+msgctxt "skill_name_mmd_assortment_u"
+msgid "Weird Assortment<sprite name={q}icon_upgraded_skill{q}>"
+msgstr "기묘한 조합<sprite name={q}icon_upgraded_skill{q}>"
+
+msgctxt "skill_name_mmd_concealing_mist"
+msgid "Concealing Mist"
+msgstr "은폐의 안개"
+
+msgctxt "skill_name_mmd_concealing_mist_u"
+msgid "Concealing Mist<sprite name={q}icon_upgraded_skill{q}>"
+msgstr "은폐의 안개<sprite name={q}icon_upgraded_skill{q}>"
+
+msgctxt "skill_name_mmd_corpse_attack"
+msgid "Abhorrent Attack"
+msgstr "혐오스러운 공격"
+
+msgctxt "skill_name_mmd_corpse_riposte"
+msgid "Abhorrent Drift"
+msgstr "혐오스러운 표류"
+
+msgctxt "skill_name_mmd_corpse_u_attack"
+msgid "Abhorrent Attack"
+msgstr "혐오스러운 공격"
+
+msgctxt "skill_name_mmd_corpse_u_riposte"
+msgid "Abhorrent Drift"
+msgstr "혐오스러운 표류"
+
+msgctxt "skill_name_mmd_disturbing_spores"
+msgid "Disturbing Spores"
+msgstr "교란 포자"
+
+msgctxt "skill_name_mmd_disturbing_spores_u"
+msgid "Disturbing Spores<sprite name={q}icon_upgraded_skill{q}>"
+msgstr "교란 포자<sprite name={q}icon_upgraded_skill{q}>"
+
+msgctxt "skill_name_mmd_healing_spores"
+msgid "Healing Spores"
+msgstr "치유 포자"
+
+msgctxt "skill_name_mmd_healing_spores_u"
+msgid "Healing Spores<sprite name={q}icon_upgraded_skill{q}>"
+msgstr "치유 포자<sprite name={q}icon_upgraded_skill{q}>"
+
+msgctxt "skill_name_mmd_heavy_cage"
+msgid "Heavy Cage"
+msgstr "무거운 우리"
+
+msgctxt "skill_name_mmd_heavy_cage_p3"
+msgid "Heavy Cage"
+msgstr "무거운 우리"
+
+msgctxt "skill_name_mmd_heavy_cage_p3_u"
+msgid "Heavy Cage<sprite name={q}icon_upgraded_skill{q}>"
+msgstr "무거운 우리<sprite name={q}icon_upgraded_skill{q}>"
+
+msgctxt "skill_name_mmd_heavy_cage_u"
+msgid "Heavy Cage<sprite name={q}icon_upgraded_skill{q}>"
+msgstr "무거운 우리<sprite name={q}icon_upgraded_skill{q}>"
+
+msgctxt "skill_name_mmd_hyphae_rock"
+msgid "Hyphae Rock"
+msgstr "균사 바위"
+
+msgctxt "skill_name_mmd_hyphae_rock_p3"
+msgid "Hyphae Rock"
+msgstr "균사 바위"
+
+msgctxt "skill_name_mmd_hyphae_rock_p3_u"
+msgid "Hyphae Rock<sprite name={q}icon_upgraded_skill{q}>"
+msgstr "균사 바위<sprite name={q}icon_upgraded_skill{q}>"
+
+msgctxt "skill_name_mmd_hyphae_rock_u"
+msgid "Hyphae Rock<sprite name={q}icon_upgraded_skill{q}>"
+msgstr "균사 바위<sprite name={q}icon_upgraded_skill{q}>"
+
+msgctxt "skill_name_mmd_internal_fruiting"
+msgid "Internal Fruiting"
+msgstr "체내 결실"
+
+msgctxt "skill_name_mmd_internal_fruiting_u"
+msgid "Internal Fruiting<sprite name={q}icon_upgraded_skill{q}>"
+msgstr "체내 결실<sprite name={q}icon_upgraded_skill{q}>"
+
+msgctxt "skill_name_mmd_lycoperdonosis"
+msgid "Lycoperdonosis"
+msgstr "말불버섯 포자증"
+
+msgctxt "skill_name_mmd_lycoperdonosis_p3"
+msgid "Lycoperdonosis"
+msgstr "말불버섯 포자증"
+
+msgctxt "skill_name_mmd_lycoperdonosis_p3_u"
+msgid "Lycoperdonosis<sprite name={q}icon_upgraded_skill{q}>"
+msgstr "말불버섯 포자증<sprite name={q}icon_upgraded_skill{q}>"
+
+msgctxt "skill_name_mmd_lycoperdonosis_u"
+msgid "Lycoperdonosis<sprite name={q}icon_upgraded_skill{q}>"
+msgstr "말불버섯 포자증<sprite name={q}icon_upgraded_skill{q}>"
+
+msgctxt "skill_name_mmd_move"
+msgid "<color=#{move}>Move</color>"
+msgstr "<color=#{move}>이동</color>"
+
+msgctxt "skill_name_mmd_mycelium_mire"
+msgid "Mycelium Mire"
+msgstr "균사체 늪"
+
+msgctxt "skill_name_mmd_mycelium_mire_p3"
+msgid "Mycelium Mire"
+msgstr "균사체 늪"
+
+msgctxt "skill_name_mmd_mycelium_mire_p3_u"
+msgid "Mycelium Mire<sprite name={q}icon_upgraded_skill{q}>"
+msgstr "균사체 늪<sprite name={q}icon_upgraded_skill{q}>"
+
+msgctxt "skill_name_mmd_mycelium_mire_u"
+msgid "Mycelium Mire<sprite name={q}icon_upgraded_skill{q}>"
+msgstr "균사체 늪<sprite name={q}icon_upgraded_skill{q}>"
+
+msgctxt "skill_name_mmd_origin_skill_5_basement"
+msgid "Descend into the basement"
+msgstr "지하실로 내려간다"
+
+msgctxt "skill_name_mmd_origin_skill_5_finish"
+msgid "Finish"
+msgstr "끝내기"
+
+msgctxt "skill_name_mmd_origin_skill_5_go_out"
+msgid "Exit the house"
+msgstr "집을 나선다"
+
+msgctxt "skill_name_mmd_origin_skill_5_sounds"
+msgid "Listen to strange sounds"
+msgstr "이상한 소리에 귀 기울인다"
+
+msgctxt "skill_name_mmd_origin_skill_5_sword"
+msgid "Look for the lost sword"
+msgstr "잃어버린 검을 찾는다"
+
+msgctxt "skill_name_mmd_origin_skill_attack"
+msgid "Frantic Strike"
+msgstr "광란의 일격"
+
+msgctxt "skill_name_mmd_origin_skill_continue"
+msgid "Continue"
+msgstr "계속"
+
+msgctxt "skill_name_mmd_origin_skill_escape"
+msgid "Escape"
+msgstr "탈출"
+
+msgctxt "skill_name_mmd_origin_skill_run"
+msgid "Retreat"
+msgstr "후퇴"
+
+msgctxt "skill_name_mmd_parasitic_forms"
+msgid "Parasitic Forms"
+msgstr "기생 형태"
+
+msgctxt "skill_name_mmd_parasitic_forms_p3"
+msgid "Parasitic Forms"
+msgstr "기생 형태"
+
+msgctxt "skill_name_mmd_parasitic_forms_p3_u"
+msgid "Parasitic Forms<sprite name={q}icon_upgraded_skill{q}>"
+msgstr "기생 형태<sprite name={q}icon_upgraded_skill{q}>"
+
+msgctxt "skill_name_mmd_parasitic_forms_u"
+msgid "Parasitic Forms<sprite name={q}icon_upgraded_skill{q}>"
+msgstr "기생 형태<sprite name={q}icon_upgraded_skill{q}>"
+
+msgctxt "skill_name_mmd_riposte"
+msgid "Riposte"
+msgstr "반격"
+
+msgctxt "skill_name_mmd_slowdown"
+msgid "Slowdown"
+msgstr "둔화"
+
+msgctxt "skill_name_mmd_slowdown_p3"
+msgid "Slowdown"
+msgstr "둔화"
+
+msgctxt "skill_name_mmd_slowdown_p3_u"
+msgid "Slowdown<sprite name={q}icon_upgraded_skill{q}>"
+msgstr "둔화<sprite name={q}icon_upgraded_skill{q}>"
+
+msgctxt "skill_name_mmd_slowdown_u"
+msgid "Slowdown<sprite name={q}icon_upgraded_skill{q}>"
+msgstr "둔화<sprite name={q}icon_upgraded_skill{q}>"
+
+msgctxt "skill_name_mmd_story_cage_skill_formation"
+msgid "Transformation"
+msgstr "변형"
+
+msgctxt "skill_name_mmd_story_cage_skill_germination"
+msgid "Germination"
+msgstr "발아"
+
+msgctxt "skill_name_mmd_story_cage_skill_primordium"
+msgid "Gruesome Transformation"
+msgstr "끔찍한 변형"
+
+msgctxt "skill_name_mmd_story_form_attack"
+msgid "Abhorrent Drift"
+msgstr "혐오스러운 표류"
+
+msgctxt "skill_name_mmd_story_form_riposte"
+msgid "Abhorrent Drift"
+msgstr "혐오스러운 표류"
+
+msgctxt "skill_name_mmd_token_internal_fruiting_chain_p"
+msgid "Senescence"
+msgstr "노화"
+
+msgctxt "story_bark_assist_avoid_101+mmd"
+msgid "Risk an ambush? No."
+msgstr "매복 위험을 감수하자고? 됐다."
+
+msgctxt "story_bark_assist_combat_items_1+mmd"
+msgid "There's fight in these folks yet."
+msgstr "이 자들에게는 아직 투지가 남아 있군."
+
+msgctxt "story_bark_assist_compassionate_1+mmd"
+msgid "Let this world not make monsters of us."
+msgstr "이 세상이 우릴 괴물로 만들게 두지 말자."
+
+msgctxt "story_bark_assist_curmudgeon_1+mmd"
+msgid "Let's just go."
+msgstr "그냥 가지."
+
+msgctxt "story_bark_assist_donate_1+mmd"
+msgid "This is an easy choice!"
+msgstr "쉬운 선택이군!"
+
+msgctxt "story_bark_assist_donate_2+mmd"
+msgid "Why hoard what we have?"
+msgstr "가진 걸 쌓아 둬서 뭐 하나?"
+
+msgctxt "story_bark_assist_donate_3+mmd"
+msgid "Seems fair."
+msgstr "공정하군."
+
+msgctxt "story_bark_assist_donate_4+mmd"
+msgid "Here. This coin's lucky - yours now."
+msgstr "자, 이건 행운의 동전이다. 이제 네 거야."
+
+msgctxt "story_bark_assist_donate_5+mmd"
+msgid "Let's ease their burden."
+msgstr "짐을 덜어 주자."
+
+msgctxt "story_bark_assist_food_1+mmd"
+msgid "Let's barter."
+msgstr "거래하지."
+
+msgctxt "story_bark_assist_greed_stealfood_1+mmd"
+msgid "I'm taking extra."
+msgstr "더 챙겨 가겠다."
+
+msgctxt "story_bark_assist_greed_stealrelics_1+mmd"
+msgid "I'm taking extra."
+msgstr "더 챙겨 가겠다."
+
+msgctxt "story_bark_assist_inn_items_1+mmd"
+msgid "Let's see what they've got."
+msgstr "뭘 갖고 있는지 보자."
+
+msgctxt "story_bark_assist_inspire_1+mmd"
+msgid "We gotta watch out for one another."
+msgstr "서로를 챙겨야 한다."
+
+msgctxt "story_bark_assist_inspire_2+mmd"
+msgid "I may not be some hero of legend, but..."
+msgstr "내가 무슨 전설 속 영웅은 아니지만..."
+
+msgctxt "story_bark_assist_inspire_3+mmd"
+msgid "We can't leave them in this state..."
+msgstr "이 사람들을 이대로 둘 순 없어..."
+
+msgctxt "story_bark_assist_inspire_4+mmd"
+msgid "It's a bleak world."
+msgstr "암울한 세상이다."
+
+msgctxt "story_bark_assist_inspire_5+mmd"
+msgid "Fate has put them in our path for a reason."
+msgstr "운명이 다 이유가 있어서 이들을 우리 앞에 보낸 거다."
+
+msgctxt "story_bark_assist_lazy_1+mmd"
+msgid "Let the others do it."
+msgstr "다른 놈들이 하게 둬."
+
+msgctxt "story_bark_assist_raconteur_1+mmd"
+msgid "Listen close..."
+msgstr "잘 들어..."
+
+msgctxt "story_bark_assist_repair_armor_1+mmd"
+msgid "We can't lag behind."
+msgstr "뒤처지면 안 된다."
+
+msgctxt "story_bark_assist_repair_wheels_1+mmd"
+msgid "All right, where's my hammer?"
+msgstr "좋아, 내 망치가 어디 있더라?"
+
+msgctxt "story_bark_assist_scout_1+mmd"
+msgid "They know these roads."
+msgstr "이 자들은 이 길을 잘 알지."
+
+msgctxt "story_bark_assist_selfish_1+mmd"
+msgid "I've my own things to attend."
+msgstr "나도 신경 쓸 일이 있다."
+
+msgctxt "story_bark_assist_stealfood_101+mmd"
+msgid "I'll take that."
+msgstr "그건 내가 가져가지."
+
+msgctxt "story_bark_assist_stealrelics_101+mmd"
+msgid "I'll take that."
+msgstr "그건 내가 가져가지."
+
+msgctxt "story_bark_assist_thanatomania_1+mmd"
+msgid "The dead speak to me."
+msgstr "죽은 자들이 내게 말을 건다."
+
+msgctxt "story_bark_assist_torch_1+mmd"
+msgid "Let's help 'em."
+msgstr "도와주지."
+
+msgctxt "story_bark_assist_torch_lowtorch_1+mmd"
+msgid "We ought to."
+msgstr "그래야겠지."
+
+msgctxt "story_bark_assist_vicious_slay_1+mmd"
+msgid "Die screaming, bastards."
+msgstr "비명 지르며 죽어라, 이 개자식들."
+
+msgctxt "story_bark_assist_vicious_stealrelics_1+mmd"
+msgid "Hand it over."
+msgstr "내놔."
+
+msgctxt "story_bark_herostory_MMD_01"
+msgid "A simple search, they said."
+msgstr "간단한 수색이라더군."
+
+msgctxt "story_bark_herostory_MMD_02"
+msgid "I was not aware of my actions."
+msgstr "내가 무슨 짓을 하는지도 몰랐다."
+
+msgctxt "story_bark_herostory_MMD_03"
+msgid "A cruel, uncarin’ void."
+msgstr "잔혹하고, 무심한 공허."
+
+msgctxt "story_bark_herostory_MMD_04"
+msgid "Answers. That’s all I wanted."
+msgstr "답. 내가 원한 건 그것뿐이었다."
+
+msgctxt "story_bark_herostory_MMD_05"
+msgid "I was hiding long enough."
+msgstr "숨어 지낸 건 그걸로 충분했다."
+
+msgctxt "story_bark_oasis_avoid_101+mmd"
+msgid "Could be a trap."
+msgstr "함정일지도 몰라."
+
+msgctxt "story_bark_oasis_high_stress_1+mmd"
+msgid "Alright."
+msgstr "알았다."
+
+msgctxt "story_bark_oasis_rare_1+mmd"
+msgid "Been ages since I had a scrub."
+msgstr "목욕한 게 언제였더라."
+
+msgctxt "story_bark_oasis_standard_1+mmd"
+msgid "Take reprieve when it's offered."
+msgstr "쉴 수 있을 때 쉬어 두자."
+
+msgctxt "story_bark_oasis_supplies_1+mmd"
+msgid "Let's fill our barrels."
+msgstr "통을 채우자."
+
+msgctxt "story_bark_valley_stagecoach_item_01+mmd"
+msgid "Attach it securely. "
+msgstr "단단히 묶어 둬."
+
+msgctxt "story_bark_valley_supply_01+mmd"
+msgid "The march begins."
+msgstr "행군을 시작한다."
+
+msgctxt "story_bark_valley_trinket_01+mmd"
+msgid "My past posessions..."
+msgstr "내 옛 소지품들..."
+
+msgctxt "tag_mmd_corpse_dead"
+msgid "<color=#cf795d>Corpse</color>"
+msgstr "<color=#cf795d>시체</color>"
+
+msgctxt "token_mmd_assortment_option_1"
+msgid "<color=#{disease_quirk}>Disinfector</color>"
+msgstr "<color=#{disease_quirk}>소독제</color>"
+
+msgctxt "token_mmd_assortment_option_1_description"
+msgid "Disease prevention"
+msgstr "질병 예방"
+
+msgctxt "token_mmd_assortment_option_1_empty"
+msgid "<color=#{disease_quirk}>Disinfector</color>"
+msgstr "<color=#{disease_quirk}>소독제</color>"
+
+msgctxt "token_mmd_assortment_option_1_empty_description"
+msgid "<color=#{stress}><i>Can't find!</i></color>"
+msgstr "<color=#{stress}><i>찾을 수 없다!</i></color>"
+
+msgctxt "token_mmd_assortment_option_2"
+msgid "<color=#{bleed}>Convolutor</color>"
+msgstr "<color=#{bleed}>지혈제</color>"
+
+msgctxt "token_mmd_assortment_option_2_description"
+msgid "Bleed prevention"
+msgstr "출혈 예방"
+
+msgctxt "token_mmd_assortment_option_2_empty"
+msgid "<color=#{bleed}>Convolutor</color>"
+msgstr "<color=#{bleed}>지혈제</color>"
+
+msgctxt "token_mmd_assortment_option_2_empty_description"
+msgid "<color=#{stress}><i>Can't find!</i></color>"
+msgstr "<color=#{stress}><i>찾을 수 없다!</i></color>"
+
+msgctxt "token_mmd_assortment_option_3"
+msgid "<color=#{blight}>Neutralizator</color>"
+msgstr "<color=#{blight}>중화제</color>"
+
+msgctxt "token_mmd_assortment_option_3_description"
+msgid "Blight prevention"
+msgstr "중독 예방"
+
+msgctxt "token_mmd_assortment_option_3_empty"
+msgid "<color=#{blight}>Neutralizator</color>"
+msgstr "<color=#{blight}>중화제</color>"
+
+msgctxt "token_mmd_assortment_option_3_empty_description"
+msgid "<color=#{stress}><i>Can't find!</i></color>"
+msgstr "<color=#{stress}><i>찾을 수 없다!</i></color>"
+
+msgctxt "token_mmd_assortment_option_4"
+msgid "<color=#{burn}>Inhibitor</color>"
+msgstr "<color=#{burn}>억제제</color>"
+
+msgctxt "token_mmd_assortment_option_4_description"
+msgid "Burn prevention"
+msgstr "화상 예방"
+
+msgctxt "token_mmd_assortment_option_4_empty"
+msgid "<color=#{burn}>Inhibitor</color>"
+msgstr "<color=#{burn}>억제제</color>"
+
+msgctxt "token_mmd_assortment_option_4_empty_description"
+msgid "<color=#{stress}><i>Can't find!</i></color>"
+msgstr "<color=#{stress}><i>찾을 수 없다!</i></color>"
+
+msgctxt "token_mmd_assortment_option_5"
+msgid "<color=#{stress}>Neuromodulator</color>"
+msgstr "<color=#{stress}>신경조절제</color>"
+
+msgctxt "token_mmd_assortment_option_5_description"
+msgid "Stress prevention"
+msgstr "스트레스 예방"
+
+msgctxt "token_mmd_assortment_option_5_empty"
+msgid "<color=#{stress}>Neuromodulator</color>"
+msgstr "<color=#{stress}>신경조절제</color>"
+
+msgctxt "token_mmd_assortment_option_5_empty_description"
+msgid "<color=#{stress}><i>Can't find!</i></color>"
+msgstr "<color=#{stress}><i>찾을 수 없다!</i></color>"
+
+msgctxt "token_mmd_token_cage"
+msgid "Germination"
+msgstr "발아"
+
+msgctxt "token_mmd_token_cage_description"
+msgid "Exit might be revealed soon.\nCursed Form transforms to Motionless Pile upon being killed\nMotionless Pile transforms to Cursed form upon being killed"
+msgstr "곧 출구가 드러날지도 모른다.\n저주받은 형체는 처치되면 미동 없는 더미로 변합니다\n미동 없는 더미는 처치되면 저주받은 형체로 변합니다"
+
+msgctxt "token_mmd_token_cage_warning"
+msgid "Cycle of Matter"
+msgstr "물질의 순환"
+
+msgctxt "token_mmd_token_cage_warning_description"
+msgid "Kills all enemies on its next turn."
+msgstr "다음 턴에 모든 적을 처치합니다."
+
+msgctxt "token_mmd_token_curse"
+msgid "<sprite={q}mmd_tokens{q} name={q}mmd_token_curse{q}>"
+msgstr "<sprite={q}mmd_tokens{q} name={q}mmd_token_curse{q}>"
+
+msgctxt "token_mmd_token_curse_description"
+msgid "<color=#{notable}>On being hit:</color> Switch <sprite name={q}token_combo{q}>\nThis token is rank locked\nLasts 2 rounds"
+msgstr "<color=#{notable}>피격 시:</color> <sprite name={q}token_combo{q}> 전환\n이 토큰은 해당 열에 고정\n2라운드 지속"
+
+msgctxt "token_mmd_token_curse_meta_p_token"
+msgid "<sprite={q}mmd_tokens{q} name={q}mmd_token_curse{q}>"
+msgstr "<sprite={q}mmd_tokens{q} name={q}mmd_token_curse{q}>"
+
+msgctxt "token_mmd_token_curse_meta_t_token"
+msgid "<sprite={q}mmd_tokens{q} name={q}mmd_token_curse{q}>"
+msgstr "<sprite={q}mmd_tokens{q} name={q}mmd_token_curse{q}>"
+
+msgctxt "token_mmd_token_curse_u"
+msgid "<sprite={q}mmd_tokens{q} name={q}mmd_token_curse_u{q}>"
+msgstr "<sprite={q}mmd_tokens{q} name={q}mmd_token_curse_u{q}>"
+
+msgctxt "token_mmd_token_curse_u_description"
+msgid "<color=#{notable}>On being hit:</color> Switch <sprite name={q}token_combo{q}>\nThis token is rank locked\nLasts 3 rounds"
+msgstr "<color=#{notable}>피격 시:</color> <sprite name={q}token_combo{q}> 전환\n이 토큰은 해당 열에 고정\n3라운드 지속"
+
+msgctxt "token_mmd_token_curse_u_meta_p_token"
+msgid "<sprite={q}mmd_tokens{q} name={q}mmd_token_curse_u{q}>"
+msgstr "<sprite={q}mmd_tokens{q} name={q}mmd_token_curse_u{q}>"
+
+msgctxt "token_mmd_token_curse_u_meta_t_token"
+msgid "<sprite={q}mmd_tokens{q} name={q}mmd_token_curse_u{q}>"
+msgstr "<sprite={q}mmd_tokens{q} name={q}mmd_token_curse_u{q}>"
+
+msgctxt "token_mmd_token_disturb"
+msgid "<sprite={q}mmd_tokens{q} name={q}mmd_token_disturb{q}>"
+msgstr "<sprite={q}mmd_tokens{q} name={q}mmd_token_disturb{q}>"
+
+msgctxt "token_mmd_token_disturb_description"
+msgid "<color=#{notable}>Round Start: First Ranks:</color> </color><color=#{move}>Move Backward</color> 1\nLasts 3 rounds"
+msgstr "<color=#{notable}>라운드 시작 시: 전방:</color> </color><color=#{move}>1칸 후퇴</color>\n3라운드 지속"
+
+msgctxt "token_mmd_token_disturb_meta"
+msgid "Disturbing Spores"
+msgstr "교란 포자"
+
+msgctxt "token_mmd_token_disturb_meta_u"
+msgid "Disturbing Spores"
+msgstr "교란 포자"
+
+msgctxt "token_mmd_token_disturb_u"
+msgid "<sprite={q}mmd_tokens{q} name={q}mmd_token_disturb_u{q}>"
+msgstr "<sprite={q}mmd_tokens{q} name={q}mmd_token_disturb_u{q}>"
+
+msgctxt "token_mmd_token_disturb_u_description"
+msgid "<color=#{notable}>Round Start: First Ranks:</color> </color><color=#{move}>Move Backward</color> 1\n<color=#{notable}>Round End: First Ranks:</color> <color=#{deathdoor}>Clear Corpse</color>\nLasts 4 rounds"
+msgstr "<color=#{notable}>라운드 시작 시: 전방:</color> </color><color=#{move}>1칸 후퇴</color>\n<color=#{notable}>라운드 종료 시: 전방:</color> <color=#{deathdoor}>시체 제거</color>\n4라운드 지속"
+
+msgctxt "token_mmd_token_heal"
+msgid "<sprite={q}mmd_tokens{q} name={q}mmd_token_heal{q}>"
+msgstr "<sprite={q}mmd_tokens{q} name={q}mmd_token_heal{q}>"
+
+msgctxt "token_mmd_token_heal_description"
+msgid "<color=#{notable}>Turn End:</color> Remove <sprite name={q}icon_blight{q}>, </color><color=#{heal}><sprite name={q}icon_healthup{q}> 10%</color> if <sprite name={q}icon_blight{q}>\nThis token is rank locked\nLasts 3 rounds"
+msgstr "<color=#{notable}>턴 종료 시:</color> <sprite name={q}icon_blight{q}> 상태면 <sprite name={q}icon_blight{q}> 제거, </color><color=#{heal}><sprite name={q}icon_healthup{q}> 10%</color>\n이 토큰은 해당 열에 고정\n3라운드 지속"
+
+msgctxt "token_mmd_token_heal_u"
+msgid "<sprite={q}mmd_tokens{q} name={q}mmd_token_heal_u{q}>"
+msgstr "<sprite={q}mmd_tokens{q} name={q}mmd_token_heal_u{q}>"
+
+msgctxt "token_mmd_token_heal_u_description"
+msgid "<color=#{notable}>Turn End:</color> Remove <sprite name={q}icon_blight{q}><sprite name={q}icon_bleed{q}>, </color><color=#{heal}><sprite name={q}icon_healthup{q}> 10%</color> if <sprite name={q}icon_blight{q}> or <sprite name={q}icon_bleed{q}>\nThis token is rank locked\nLasts 3 rounds"
+msgstr "<color=#{notable}>턴 종료 시:</color> <sprite name={q}icon_blight{q}> 또는 <sprite name={q}icon_bleed{q}> 상태면 <sprite name={q}icon_blight{q}><sprite name={q}icon_bleed{q}> 제거, </color><color=#{heal}><sprite name={q}icon_healthup{q}> 10%</color>\n이 토큰은 해당 열에 고정\n3라운드 지속"
+
+msgctxt "token_mmd_token_internal_fruiting"
+msgid "Germination"
+msgstr "발아"
+
+msgctxt "token_mmd_token_internal_fruiting_chain_p"
+msgid "Fruit body"
+msgstr "결실체"
+
+msgctxt "token_mmd_token_internal_fruiting_chain_p_description"
+msgid "Chained"
+msgstr "연결됨"
+
+msgctxt "token_mmd_token_internal_fruiting_chain_t"
+msgid "Fruit body"
+msgstr "결실체"
+
+msgctxt "token_mmd_token_internal_fruiting_chain_t_description"
+msgid "Chained"
+msgstr "연결됨"
+
+msgctxt "token_mmd_token_internal_fruiting_description"
+msgid "Internal Fruiting deals greater damage"
+msgstr "체내 결실의 피해량 증가"
+
+msgctxt "token_mmd_token_mire"
+msgid "<sprite={q}mmd_tokens{q} name={q}mmd_token_mire{q}>"
+msgstr "<sprite={q}mmd_tokens{q} name={q}mmd_token_mire{q}>"
+
+msgctxt "token_mmd_token_mire_description"
+msgid "<color=#{notable}>On being hit: Remove <sprite name={q}token_combo{q}> if <sprite name={q}token_combo{q}>, Gain <sprite name={q}token_vulnerable{q}>, Apply <sprite name={q}token_vulnerable{q}></color>\nThis token is rank locked\nLasts 2 rounds"
+msgstr "<color=#{notable}>피격 시: <sprite name={q}token_combo{q}> 상태면 <sprite name={q}token_combo{q}> 제거, <sprite name={q}token_vulnerable{q}> 획득, <sprite name={q}token_vulnerable{q}> 부여</color>\n이 토큰은 해당 열에 고정\n2라운드 지속"
+
+msgctxt "token_mmd_token_mire_meta_p_token"
+msgid "<sprite={q}mmd_tokens{q} name={q}mmd_token_mire{q}>"
+msgstr "<sprite={q}mmd_tokens{q} name={q}mmd_token_mire{q}>"
+
+msgctxt "token_mmd_token_mire_meta_t_token"
+msgid "<sprite={q}mmd_tokens{q} name={q}mmd_token_mire{q}>"
+msgstr "<sprite={q}mmd_tokens{q} name={q}mmd_token_mire{q}>"
+
+msgctxt "token_mmd_token_mire_u"
+msgid "<sprite={q}mmd_tokens{q} name={q}mmd_token_mire_u{q}>"
+msgstr "<sprite={q}mmd_tokens{q} name={q}mmd_token_mire_u{q}>"
+
+msgctxt "token_mmd_token_mire_u_description"
+msgid "<color=#{notable}>On being hit: Remove <sprite name={q}token_combo{q}> if <sprite name={q}token_combo{q}>, Gain <sprite name={q}token_vulnerable{q}>, Apply <sprite name={q}token_vulnerable{q}></color>\n<color=#{notable}>Round End:</color> <color=#{deathdoor}>Clear Corpse</color>\nThis token is rank locked\nLasts 2 rounds"
+msgstr "<color=#{notable}>피격 시: <sprite name={q}token_combo{q}> 상태면 <sprite name={q}token_combo{q}> 제거, <sprite name={q}token_vulnerable{q}> 획득, <sprite name={q}token_vulnerable{q}> 부여</color>\n<color=#{notable}>라운드 종료 시:</color> <color=#{deathdoor}>시체 제거</color>\n이 토큰은 해당 열에 고정\n2라운드 지속"
+
+msgctxt "token_mmd_token_mire_u_meta_p_token"
+msgid "<sprite={q}mmd_tokens{q} name={q}mmd_token_mire_u{q}>"
+msgstr "<sprite={q}mmd_tokens{q} name={q}mmd_token_mire_u{q}>"
+
+msgctxt "token_mmd_token_mire_u_meta_t_token"
+msgid "<sprite={q}mmd_tokens{q} name={q}mmd_token_mire_u{q}>"
+msgstr "<sprite={q}mmd_tokens{q} name={q}mmd_token_mire_u{q}>"
+
+msgctxt "token_name_mmd_assortment_option_1"
+msgid "<color=#{disease_quirk}>Disinfector</color>"
+msgstr "<color=#{disease_quirk}>소독제</color>"
+
+msgctxt "token_name_mmd_assortment_option_1_empty"
+msgid "<color=#{disease_quirk}>Disinfector</color>"
+msgstr "<color=#{disease_quirk}>소독제</color>"
+
+msgctxt "token_name_mmd_assortment_option_2"
+msgid "<color=#{bleed}>Convolutor</color>"
+msgstr "<color=#{bleed}>지혈제</color>"
+
+msgctxt "token_name_mmd_assortment_option_2_empty"
+msgid "<color=#{bleed}>Convolutor</color>"
+msgstr "<color=#{bleed}>지혈제</color>"
+
+msgctxt "token_name_mmd_assortment_option_3"
+msgid "<color=#{blight}>Neutralizator</color>"
+msgstr "<color=#{blight}>중화제</color>"
+
+msgctxt "token_name_mmd_assortment_option_3_empty"
+msgid "<color=#{blight}>Neutralizator</color>"
+msgstr "<color=#{blight}>중화제</color>"
+
+msgctxt "token_name_mmd_assortment_option_4"
+msgid "<color=#{burn}>Inhibitor</color>"
+msgstr "<color=#{burn}>억제제</color>"
+
+msgctxt "token_name_mmd_assortment_option_4_empty"
+msgid "<color=#{burn}>Inhibitor</color>"
+msgstr "<color=#{burn}>억제제</color>"
+
+msgctxt "token_name_mmd_assortment_option_5"
+msgid "<color=#{stress}>Neuromodulator</color>"
+msgstr "<color=#{stress}>신경조절제</color>"
+
+msgctxt "token_name_mmd_assortment_option_5_empty"
+msgid "<color=#{stress}>Neuromodulator</color>"
+msgstr "<color=#{stress}>신경조절제</color>"
+
+msgctxt "token_name_mmd_token_curse"
+msgid "<color=#{notable}>Cursed Spores</color>"
+msgstr "<color=#{notable}>저주받은 포자</color>"
+
+msgctxt "token_name_mmd_token_curse_u"
+msgid "<color=#{notable}>Cursed Spores<sprite name={q}icon_upgraded_skill{q}></color>"
+msgstr "<color=#{notable}>저주받은 포자<sprite name={q}icon_upgraded_skill{q}></color>"
+
+msgctxt "token_name_mmd_token_curse_u_sheet"
+msgid "<color=#{notable}>Cursed Spores+</color>"
+msgstr "<color=#{notable}>저주받은 포자+</color>"
+
+msgctxt "token_name_mmd_token_disturb"
+msgid "<color=#{notable}>Disturbing Spores</color>"
+msgstr "<color=#{notable}>교란 포자</color>"
+
+msgctxt "token_name_mmd_token_disturb_u"
+msgid "<color=#{notable}>Disturbing Spores<sprite name={q}icon_upgraded_skill{q}></color>"
+msgstr "<color=#{notable}>교란 포자<sprite name={q}icon_upgraded_skill{q}></color>"
+
+msgctxt "token_name_mmd_token_disturb_u_sheet"
+msgid "<color=#{notable}>Disturbing Spores+</color>"
+msgstr "<color=#{notable}>교란 포자+</color>"
+
+msgctxt "token_name_mmd_token_heal"
+msgid "<color=#{notable}>Healing Spores</color>"
+msgstr "<color=#{notable}>치유 포자</color>"
+
+msgctxt "token_name_mmd_token_heal_u"
+msgid "<color=#{notable}>Healing Spores<sprite name={q}icon_upgraded_skill{q}></color>"
+msgstr "<color=#{notable}>치유 포자<sprite name={q}icon_upgraded_skill{q}></color>"
+
+msgctxt "token_name_mmd_token_heal_u_sheet"
+msgid "<color=#{notable}>Healing Spores+</color>"
+msgstr "<color=#{notable}>치유 포자+</color>"
+
+msgctxt "token_name_mmd_token_mire"
+msgid "<color=#{notable}>Mutated Spores</color>"
+msgstr "<color=#{notable}>변이된 포자</color>"
+
+msgctxt "token_name_mmd_token_mire_u"
+msgid "<color=#{notable}>Mutated Spores<sprite name={q}icon_upgraded_skill{q}></color>"
+msgstr "<color=#{notable}>변이된 포자<sprite name={q}icon_upgraded_skill{q}></color>"
+
+msgctxt "token_name_mmd_token_mire_u_sheet"
+msgid "<color=#{notable}>Mutated Spores+</color>"
+msgstr "<color=#{notable}>변이된 포자+</color>"
+
+msgctxt "unlock_mmd_13_override"
+msgid "Sometimes when arriving at the <color=#{path_verbose}>Inn</color>, will find <color=#{buff}>Penicillin</color>"
+msgstr "<color=#{path_verbose}>여관</color>에 도착했을 때 가끔씩 <color=#{buff}>기적의 약</color>을 찾아냅니다."
+
+msgctxt "upgrade_track_mmd_1_title"
+msgid "Resolution"
+msgstr "결의"
+
+msgctxt "upgrade_track_mmd_10_title"
+msgid "Path"
+msgstr "길"
+
+msgctxt "upgrade_track_mmd_11_title"
+msgid "Sturdiness"
+msgstr "확고"
+
+msgctxt "upgrade_track_mmd_12_title"
+msgid "Resolution"
+msgstr "결의"
+
+msgctxt "upgrade_track_mmd_13_title"
+msgid "Trademark Item"
+msgstr "상징 아이템"
+
+msgctxt "upgrade_track_mmd_2_title"
+msgid "Trinket"
+msgstr "장신구"
+
+msgctxt "upgrade_track_mmd_4_title"
+msgid "Resolution"
+msgstr "결의"
+
+msgctxt "upgrade_track_mmd_5_title"
+msgid "Trinket"
+msgstr "장신구"
+
+msgctxt "upgrade_track_mmd_7_title"
+msgid "Toughness"
+msgstr "뚝심"
+
+msgctxt "upgrade_track_mmd_8_title"
+msgid "Resolution"
+msgstr "결의"
+
+msgctxt "upgrade_track_mmd_9_title"
+msgid "Trinket"
+msgstr "장신구"
+
+msgctxt "upgrade_track_mmd_WK1_title"
+msgid "Weapon Kit 1"
+msgstr "무장 1"
+
+msgctxt "upgrade_track_mmd_WK1a_title"
+msgid "Weapon Kit 1 (Altered)"
+msgstr "무장 1 (변형)"
+
+msgctxt "upgrade_track_mmd_WK2_title"
+msgid "Weapon Kit 2"
+msgstr "무장 2"
+
+msgctxt "upgrade_track_mmd_WK2a_title"
+msgid "Weapon Kit 2 (Altered)"
+msgstr "무장 2 (변형)"
+
+msgctxt "upgrade_track_mmd_WK3_title"
+msgid "Weapon Kit 3"
+msgstr "무장 3"
+
+msgctxt "upgrade_track_mmd_WK3a_title"
+msgid "Weapon Kit 3 (Altered)"
+msgstr "무장 3 (변형)"
+
