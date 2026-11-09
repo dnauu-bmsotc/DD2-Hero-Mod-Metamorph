@@ -46,6 +46,8 @@
 
 ## Intro
 
+Last updated in November 2026.
+
 This isn't exactly a guide, rather a document about everything I experienced while creating a new hero. Before this mod, I had never created any mods for any game, and I didn't consult with anyone experienced in this while creating it. Also English is not my first language.
 
 <!-- If you find something incorrect in this document, please open an issue post on this page explaining what needs to be changed, and I'll edit this document. -->
@@ -179,17 +181,41 @@ The same is applicable for weapon textures.
 
 The [official guide](https://docs.google.com/document/d/1ga3FNrL3eGDRMFekLx9-RKhTDLMxPO603XzXcZa8O78/edit?usp=drive_link) covers item creation, skins and palettes for vanilla heroes, publishing a mod, some basics and possible issues, local mod testing. I will repeat some things from this guide in this and following sections but in my own understanding.
 
-The Mod Kit can be downloaded from Steam in the Library's Tools category. Alternatively, the Kit can be accessed on [Google Drive](https://drive.google.com/drive/u/0/folders/1SlMxq3O2nuOp3P__G-0QIU748RGFIFnu).
+The Mod Kit (Darkside) can be downloaded from Steam in the Library's Tools category. Alternatively, the Kit can be accessed on [Google Drive](https://drive.google.com/drive/u/0/folders/1SlMxq3O2nuOp3P__G-0QIU748RGFIFnu).
 
-The Kit won’t start without Unity installed. The official guide requires to use the 2022.3.16f version. I went to the Unity Archive page and downloaded the 2022.3.16f1 version which I believe is the same.
+Darkside is a Unity Project. To open and use it, a Unity Editor is required.
 
-During installation Unity got stuck at “Installing playback engines”, and there was a recommendation on a Unity forum to shut down the Windows Module Installer process in the Task Manager.
+1. Download and install [Unity Hub](https://docs.unity.com/hub).
+2. In the Installs tab click Install Editor
 
-Then it also requires to install Unity Hub. After downloading it, the app suggested to download the newest Unity version. Instead I point to the already existing instance by specifying the .exe file of 2022.3.16f1 version somewhere in the Unity folder in Program Files.
+    ![Image: Unity Hub Installs Tab](images/unity01.png)\
+    *The Installs tab*
 
-Then I tried to launch the Mod Tools and got another error that said the project had invalid dependencies. After an hour the problem resolved itself, and I have no idea how it happened.
+3. It opens a new window. In the Archive tab select Version 2022 and find 2022.3.16f1 and click Install.
 
-After that I was able to open the Mod Tools. It greeted me with a bunch of windows. They can be closed. They can be opened again through the Window tab at the top. The Unity console showed a bunch of errors, but I could not be bothered with them.
+    ![Image: Unity Hub Archive list](images/unity02.png)\
+    *Unity Hub Archive list*
+
+4. It will open a list of optional modules. First option was to install VSCode. I already had it so I unchecked this option.
+
+    Also, at the time this part of the document was written (November 2026), there is an issue with new skins/heroes on macOS/Windows. If a skin/hero mod was built for Windows and it works fine on Windows, there is a chance that on macOS textures will break and all models will be magenta purple. The opposite issue happens with mods that were bult for macOS. on Windows, to be able to build for macOS, the Mac Build Support (Mono) module is required. But it will not automatically fix the issue.
+
+    ![Image: Unity Hub Modules](images/unity05.png)\
+    *Unity Hub Modules*
+
+5. After this Darkside can be opened.
+
+I didn't know about Unity Hub at first, so I went on a different path:
+
+> First I went to the Unity Archive web page and downloaded the 2022.3.16f1 version.
+
+> During installation Unity got stuck at “Installing playback engines”, and there was a recommendation on a Unity forum to shut down the Windows Module Installer process in the Task Manager.
+
+> Then it also requires to install Unity Hub. After downloading it, the app suggested to download the newest Unity version. Instead I point to the already existing instance by specifying the .exe file of 2022.3.16f1 version somewhere in the Unity folder in Program Files.
+
+> Then I tried to launch the Mod Tools and got another error that said the project had invalid dependencies. After an hour the problem resolved itself, and I have no idea how it happened.
+
+When Darkside opens, it creates many additional windows and they can be closed. They can be opened again through the Window tab at the top. The Unity console showed a bunch of errors, but I don't know if it is bad or not.
 
 Sometimes when I accidentally modified files outside my mod folder, the mod builder started glitching and produced less files than usual. It can be fixed with the Verify Integrity function in Steam.
 
