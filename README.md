@@ -39,8 +39,11 @@
 - [A summoning skill](#a-summoning-skill)
 - [CSV data III](#csv-data-iii)
 - [Testing](#testing)
+- [Missing textures on macOS/Windows](#missing-textures-on-macoswindows)
+- [Multiple Steam Workshop Items with one mod](#multiple-steam-workshop-items-with-one-mod)
 - [Cloning this mod](#cloning-this-mod)
 - [Locations of files and folders](#locations-of-files-and-folders)
+    - [Windows](#windows)
 
 <!-- /TOC -->
 
@@ -179,7 +182,7 @@ The same is applicable for weapon textures.
 
 ## Installing the Mod Kit
 
-The [official guide](https://docs.google.com/document/d/1ga3FNrL3eGDRMFekLx9-RKhTDLMxPO603XzXcZa8O78/edit?usp=drive_link) covers item creation, skins and palettes for vanilla heroes, publishing a mod, some basics and possible issues, local mod testing. I will repeat some things from this guide in this and following sections but in my own understanding.
+<!-- The [official guide](https://docs.google.com/document/d/1ga3FNrL3eGDRMFekLx9-RKhTDLMxPO603XzXcZa8O78/edit?usp=drive_link) covers item creation, skins and palettes for vanilla heroes, publishing a mod, some basics and possible issues, local mod testing. I will repeat some things from this guide in this and following sections but in my own understanding. -->
 
 The Mod Kit (Darkside) can be downloaded from Steam in the Library's Tools category. Alternatively, the Kit can be accessed on [Google Drive](https://drive.google.com/drive/u/0/folders/1SlMxq3O2nuOp3P__G-0QIU748RGFIFnu).
 
@@ -3898,6 +3901,53 @@ C:\Program Files (x86)\Steam\steamapps\workshop\content
 
 This folder only has files from `exports` folders. Source assets are not easily accessable, but CSV and localization data is open.
 
+## Missing textures on macOS/Windows
+
+As of November 2026, there is an issue with new skins/heroes on macOS/Windows. If a skin/hero mod was built for Windows, there is a chance that on macOS textures will disappear and all models will be magenta purple. The opposite issue happens with mods that were bult for macOS. There was an update that reduced the chance of this happening, but this still was happening.
+
+![Image: missing textures](images/mac1.png)\
+*Missing textures*
+
+One solution that was found by @chictimin, is to build the mod two times: once for Windows and once for macOS. Unfortunately this means that two separate versions of the mod should exist.
+
+Project build settings can be accessed in File -> Build Settings...
+
+![Image: Build Settings](images/mac2.png)\
+*Build Settings*
+
+If the Mac Build Support module was not installed, macOS option will not appear in Build Settings.
+
+If Unity Editor was installed via Unity Hub, this module can be installed in the Installs tab in Unity Hub.
+
+![Image: Managing modules in Unity Hub](images/mac3.png)\
+*Managing modules in Unity Hub*
+
+If Unity Editor was not installed via Unity Hub, the Manage modules option might not be there. It can be fixed by deleting the installed Unity Editor (not the Darkside project!) and reinstalling it via Unity Hub.
+
+## Multiple Steam Workshop Items with one mod
+
+One mod folder can produce multiple Steam Workshop items. What follows is my guess-work. Before following these steps, please do a test with a non-important mod first.
+
+When a mod is created, it's ID is set to 0. When it is first uploaded to the Workshop, Steam generates an ID, and the Steamworks tool copies and stores this ID.
+
+![Image: Mod ID](images/mac5.png)\
+*Steam Workshop item ID*
+
+After that, when a mod is updated is uploaded on Workshop, the same ID is used, so the Workshop item is updated and no new items are created.
+
+For a second Workshop item, a new ID is required. It can be achieved this way:
+1. Duplicate the Steamworks tool (ctrl+c, ctrl+v).
+2. Open the mod folder in Windows Explorer and edit the file using a text editor.
+3. Set m_ID to 0, save file.
+4. After publishing this mod using the duplicated tool, a new ID will be acquired, resulting in multiple Steam Workshop items.
+
+Now there are two Steamworks tools, each for a separate Workshop item.
+
+I used this to upload two versions of my mod.
+
+![Image: two mods](images/mac6.png)\
+*A separate Workshop item for macOS*
+
 ## Cloning this mod
 
 It is better to create a new hero from scratch, using the EmptyCharacterCreator tool. But if the goal is to base a mod on this particular one or to use it as an example, then, to add this mod to a Darkside project:
@@ -3990,6 +4040,8 @@ I don't know reliable this ID changing is, but I'm inclined to believe that ther
 
 ## Locations of files and folders
 
+### Windows
+
 Streaming Assets folder (contains CSV data, localization data, local mod folder):
 
 - Steam:
@@ -4004,7 +4056,7 @@ Streaming Assets folder (contains CSV data, localization data, local mod folder)
     C:\Programs\EPIC\Epic Games\DarkestDungeonII\Darkest Dungeon II_Data\StreamingAssets\
     ```
 
--   GOG:
+- GOG:
 
     ```
     C:\GOG Games\Darkest Dungeon II\Darkest Dungeon II_Data\StreamingAssets\
