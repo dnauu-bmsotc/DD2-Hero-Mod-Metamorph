@@ -1,0 +1,247 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>PO Translation Merge</title>
+</head>
+<body>
+
+<h3>1. Fully translated PO files</h3>
+<input type="file" id="badFiles" accept=".po" multiple>
+
+<h3>2. Partially translated PO files</h3>
+<input type="file" id="goodFiles" accept=".po" multiple>
+
+<p>
+	<button id="merge">Merge and download ZIP</button>
+</p>
+
+<p id="status"></p>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+
+<script>
+const badInput = document.getElementById("badFiles");
+const goodInput = document.getElementById("goodFiles");
+const status = document.getElementById("status");
+
+document.getElementById("merge").onclick = async () => {
+	const badFiles = [...badInput.files];
+	const goodFiles = [...goodInput.files];
+
+	if (!badFiles.length || !goodFiles.length) {
+		status.textContent = "Please select both sets of PO files.";
+		return;
+	}
+
+	const zip = new JSZip();
+	let totalUpdated = 0;
+
+	function parsePO(content) {
+		const entries = [];
+		const blocks = content.split(/\r?\n\s*\r?\n/);
+
+		for (const block of blocks) {
+			const entry = {
+				context: "",
+				id: "",
+				pluralId: "",
+				translations: {},
+				lines: block.split(/\r?\n/)
+			};
+
+			let current = null;
+
+			for (const line of entry.lines) {
+				const match = line.match(
+					/^(msgctxt|msgid_plural|msgid|msgstr(?:\[\d+\])?)\s+("(?:[^"\\]|\\.)*")/
+				);
+
+				if (match) {
+					current = match[1];
+					const value = JSON.parse(match[2]);
+
+					if (current === "msgctxt") {
+						entry.context = value;
+					} else if (current === "msgid") {
+						entry.id = value;
+					} else if (current === "msgid_plural") {
+						entry.pluralId = value;
+					} else {
+						entry.translations[current] = value;
+					}
+				} else if (current && line.trim().startsWith('"')) {
+					const value = JSON.parse(line.trim());
+					if (current === "msgctxt") {
+						entry.context += value;
+					} else if (current === "msgid") {
+						entry.id += value;
+					} else if (current === "msgid_plural") {
+						entry.pluralId += value;
+					} else {
+						entry.translations[current] += value;
+					}
+				}
+			}
+
+			if (entry.id !== "") {
+				entries.push(entry);
+			}
+		}
+
+		return entries;
+	}
+
+	function makeKey(entry) {
+		return JSON.stringify([
+			entry.context,
+			entry.id,
+			entry.pluralId
+		]);
+	}
+
+	try {
+		for (const badFile of badFiles) {
+			const goodFile = goodFiles.find(
+				file => file.name === badFile.name
+			);
+
+			const badText = await badFile.text();
+
+			if (!goodFile) {
+				// Keep fully translated files even when no partially translated
+				// counterpart exists; they still belong in the download.
+				zip.file(badFile.name, badText);
+				continue;
+			}
+
+			const goodText = await goodFile.text();
+
+			const badEntries = parsePO(badText);
+			const goodEntries = parsePO(goodText);
+
+			const goodMap = new Map(
+				goodEntries.map(entry => [makeKey(entry), entry])
+			);
+
+			const replacements = new Map();
+
+			for (const badEntry of badEntries) {
+				const goodEntry = goodMap.get(makeKey(badEntry));
+
+				if (!goodEntry) continue;
+
+				for (const [field, value] of
+					Object.entries(goodEntry.translations)) {
+
+					if (value.trim() !== "") {
+						replacements.set(
+							makeKey(badEntry) + "|" + field,
+							value
+						);
+						totalUpdated++;
+					}
+				}
+			}
+
+			// Replace only msgstr lines, preserving all other PO content.
+			let currentEntry = null;
+			let currentField = null;
+			let output = [];
+			let insideEntry = false;
+
+			const blocks = badText.split(/(\r?\n\s*\r?\n)/);
+
+			for (const block of blocks) {
+				if (/^\s*$/.test(block)) {
+					output.push(block);
+					currentEntry = null;
+					continue;
+				}
+
+				const entry = badEntries.find(e =>
+					e.lines.join("\n") === block
+				);
+
+				if (entry) {
+					currentEntry = entry;
+				}
+
+				const key = currentEntry
+					? makeKey(currentEntry)
+					: null;
+
+				const lines = block.split(/\r?\n/);
+				let field = null;
+				let result = [];
+
+				for (const line of lines) {
+					const match = line.match(
+						/^(msgstr(?:\[\d+\])?)\s+/
+					);
+
+					if (match) {
+						field = match[1];
+
+						const replacement = replacements.get(
+							key + "|" + field
+						);
+
+						if (replacement !== undefined) {
+							result.push(
+								field + " " + JSON.stringify(replacement)
+							);
+							continue;
+						}
+					} else if (
+						field &&
+						line.trim().startsWith('"')
+					) {
+						// Skip old continuation lines after replacement.
+						continue;
+					} else {
+						field = null;
+					}
+
+					result.push(line);
+				}
+
+				output.push(result.join("\n"));
+			}
+
+			zip.file(badFile.name, output.join(""));
+		}
+
+		if (Object.keys(zip.files).length === 0) {
+			status.textContent = "No matching files were found.";
+			return;
+		}
+
+		const blob = await zip.generateAsync({
+			type: "blob"
+		});
+
+		const url = URL.createObjectURL(blob);
+		const link = document.createElement("a");
+
+		link.href = url;
+		link.download = "merged-translations.zip";
+		link.click();
+
+		URL.revokeObjectURL(url);
+
+		status.textContent =
+			`Updated ${totalUpdated} translations. ZIP downloaded.`;
+
+	} catch (error) {
+		status.textContent = "Error: " + error.message;
+		console.error(error);
+	}
+};
+</script>
+
+</body>
+</html>
+
+

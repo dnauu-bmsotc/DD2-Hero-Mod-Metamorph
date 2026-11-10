@@ -2871,8 +2871,9 @@ To create PO files for other languages but with the same English text (I think i
 ![Image: po generator](images/po_generator.png)\
 *Generating placeholders for other languages*
 
-Editing PO files, same as TXT files, does not require restarting the game (reloading a save is enough for changes to be applied).
+<!-- [this page](https://dnauu-bmsotc.github.io/DD2-Hero-Mod-Metamorph/Source%20files/scripts/localization_adjustments.html) -->
 
+Editing PO files, same as TXT files, does not require restarting the game (reloading a save is enough for changes to be applied).
 
 ## Altar of Hope
 
@@ -3140,10 +3141,20 @@ To add text to a prefab file, I:
 4. RMB on the font file in the Unity Explorer, Create, TextMeshPro, FontAsset, SDF.
 5. In the prefab file, changed the font by inspecting the text element.
 
-![Image: Custom enemy](images/shrine_2.png)\
+![Image: Setting a font](images/shrine_2.png)\
 *Setting a font*
 
-With this approach each text plate is a different actor, I don't know how to optimize it. And I don't know if it is possible to add translations to other languages.
+The font I used didn't support all languages. And all unsupported symbols became squares. This can be fixed by adding another font that supports the needed language.
+
+![Image: Setting a fallback font](images/shrine7.png)\
+*Setting a fallback font*
+
+To make TextMeshPro elements available for translations, I added the Localize Text Bhv component on all of them. The `Loc Key` field is a localization key that can be chosen arbitrarily but it still should be unique. Then this key can be defined in the localization file, same as any other localization entry.
+
+![Image: custom localization key](images/shrine8.png)\
+*Adding a localization key for a TextMeshPro element*
+
+With this approach each text plate is a different actor, I don't know how to optimize it.
 
 ![Image: First reflection](images/shrine_3.png)\
 *Text block in the game*
