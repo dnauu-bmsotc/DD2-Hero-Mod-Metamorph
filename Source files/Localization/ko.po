@@ -124,12 +124,12 @@ msgid "At least I can render my own aid if this backfires..."
 msgstr "뭐, 이게 부작용이 나거든 내가 도울 수는 있겠지..."
 
 msgctxt "bark_item_morbid_joke+mmd"
-msgid "Let's see..."
-msgstr "어디 보자..."
+msgid "Hmm..."
+msgstr "흐음..."
 
 msgctxt "bark_item_oddly_tuned_lute+mmd"
-msgid "Let's see..."
-msgstr "어디 보자..."
+msgid "Hmm..."
+msgstr "흐음..."
 
 msgctxt "bark_item_precious_collection+mmd"
 msgid "Let's see..."
@@ -371,6 +371,10 @@ msgctxt "effect_condition_performer_skill_hist_mmd_slowdown_override"
 msgid "Use <color=#{notable}>Slowdown</color> 2+ times in a single fight"
 msgstr "한 번의 전투에서 <color=#{notable}>둔화</color> 2회 이상 사용"
 
+msgctxt "effect_skill_mmd_hyphae_rock_remove_all_hot_if_combo_primed_override"
+msgid "Remove <sprite name={q}icon_regen{q}> if target has <sprite name={q}token_combo{q}>\n<color=#{notable}>Ignores <sprite name={q}token_combo{q}> when target has no <sprite name={q}icon_regen{q}>"
+msgstr "대상이 <sprite name={q}token_combo{q}> 상태면 <sprite name={q}icon_regen{q}> 제거\n<color=#{notable}>대상이 <sprite name={q}icon_regen{q}> 상태가 아니면 <sprite name={q}token_combo{q}> 무시"
+
 msgctxt "effect_skill_mmd_move_performer_override"
 msgid "Extra action if hero party contains a <color=#{deathdoor}>Corpse</color> (once per round)"
 msgstr "원정대에 <color=#{deathdoor}>시체</color>가 있으면 추가 행동 (라운드당 1회)"
@@ -437,7 +441,7 @@ msgstr "방랑자"
 
 msgctxt "hero_select_mmd"
 msgid "<sup><size=90%>The</size></sup> Metamorph"
-msgstr "<sup><size=90%></size></sup> 메타모프"
+msgstr "<sup><size=90%></size></sup> 보균자"
 
 msgctxt "hero_story_mmd_chapter_title_0"
 msgid "A Search Order"
@@ -481,7 +485,7 @@ msgstr "\n<i>「때로는 찾지 않던 것을 찾게 되는 법이다.」</i>\n
 
 msgctxt "mmd"
 msgid "Metamorph"
-msgstr "메타모프"
+msgstr "보균자"
 
 msgctxt "mmd_corpse"
 msgid "Parasitic Form"
@@ -539,17 +543,33 @@ msgctxt "mmd_story_plate_1"
 msgid "Story"
 msgstr "이야기"
 
+msgctxt "mmd_story_plate_1_text"
+msgid "An order came through: a rare bird was stolen. The few existing clues pointed to a house on the edge of the city. Its occupant had once been accused of practicing occultic rituals."
+msgstr "명령이 하달되었다. 희귀한 새 한 마리가 도난당했다는 것이었다. 몇 안 되는 단서는 도시 변두리의 한 집을 가리켰다. 그 집의 주인은 한때 남몰래 사악한 주술 의식을 벌인다는 의혹으로 고발당한 적이 있는 자였다."
+
 msgctxt "mmd_story_plate_2"
 msgid "Story"
 msgstr "이야기"
+
+msgctxt "mmd_story_plate_2_text"
+msgid "The doors and windows were shut. Something was wrong. He could smell death inside the house. Knocks and shouts went unanswered, so he put his shoulder to the door and forced his way in. Down in the basement, an ambush was waiting for him."
+msgstr "문도, 창문도 굳게 닫혀 있었다. 뭔가 이상했다. 집 안에서 죽음의 냄새가 풍겨 왔다. 문을 두드리고 소리쳐 불러도 아무 대답이 없었다. 그는 어깨로 문을 들이받고 억지로 안으로 들어갔다. 그리고 지하실에는, 매복이 도사리고 있었다."
 
 msgctxt "mmd_story_plate_3"
 msgid "Story"
 msgstr "이야기"
 
+msgctxt "mmd_story_plate_3_text"
+msgid "Fear turned to rage as he fought back against the monstrous, formless things. Unsteady, reckless. A horrid blade knocked the sword out of his hand when he bolted for the door before finally escaping the house. As he stumbled away, incomprehensible images and symbols flooded his mind."
+msgstr "형체 없는 괴물들에 맞서 싸우는 동안 두려움은 분노로 바뀌었다. 그의 칼끝은 흔들렸고, 무모했다. 결국 문을 향해 몸을 날린 순간, 끔찍한 칼날이 그의 손에서 검을 쳐 냈다. 그는 간신히 집을 빠져나왔다. 비틀거리며 멀어지는 동안, 알 수 없는 형상과 상징들이 머릿속으로 밀려들었다."
+
 msgctxt "mmd_story_plate_4"
 msgid "Story"
 msgstr "이야기"
+
+msgctxt "mmd_story_plate_4_text"
+msgid "He found the owner of the house. Impatient and furious, he interrogated the suspect on his own account. He lost himself entirely, and regained consciousness only when the suspect began choking and coughing, dying from some invisible force."
+msgstr "그는 집주인을 찾아냈다. 초조함과 분노를 이기지 못한 그는 누구의 허락도 없이 직접 용의자를 심문했다. 그는 완전히 이성을 잃었다. 정신이 든 것은 용의자가 숨이 막혀 기침을 토해 내기 시작한 뒤였다. 보이지 않는 무언가가 그를 죽이고 있었다."
 
 msgctxt "mmd_story_plate_5"
 msgid "Story"
@@ -559,21 +579,41 @@ msgctxt "mmd_story_plate_5_1"
 msgid "Story"
 msgstr "이야기"
 
+msgctxt "mmd_story_plate_5_1_text"
+msgid "His tungue felt fuzzy, all hair fell out, and his skin got covered with bumps and ridges. Driven by a stomach-churning impulse, he returned to the cursed house. The interior's putrid smell wasn't as repulsive as before."
+msgstr "혀에 솜털이 돋은 듯 꺼끌꺼끌했다. 머리카락이 모두 빠졌고, 피부에는 혹과 돌기가 돋아났다. 속이 뒤틀리는 듯한 충동에 이끌려, 그는 저주받은 그 집으로 돌아갔다. 집 안의 썩은 냄새는 예전만큼 역겹지 않았다."
+
 msgctxt "mmd_story_plate_5_2"
 msgid "Story"
 msgstr "이야기"
+
+msgctxt "mmd_story_plate_5_2_text"
+msgid "He found it close to the entrance of the basement. It was snapped in half, covered in a thick organic matter with protruding mushrooms. He left it there, something else was of much more interest at that moment."
+msgstr "그것은 지하실 입구 근처에 있었다. 반으로 부러진 채, 버섯이 비죽비죽 솟아난 두꺼운 유기물에 덮여 있었다. 그는 그것을 내버려 두었다. 지금 그의 관심을 끄는 것은 따로 있었다."
 
 msgctxt "mmd_story_plate_5_3"
 msgid "Story"
 msgstr "이야기"
 
+msgctxt "mmd_story_plate_5_3_text"
+msgid "He noticed sounds coming from beneath. A low, vibrating humming. It was cold and unwelcoming. He shook his head and stomped on the mushrooms protruding from the cracks in the floor, trying to distract himself."
+msgstr "아래에서 소리가 들려왔다. 낮게 떨리는 웅웅거림. 차갑고, 그를 밀어내는 듯한 소리였다. 그는 고개를 내젓고, 바닥 틈새로 비집고 올라온 버섯들을 짓밟았다. 어떻게든 정신을 딴 데로 돌리려는 듯이."
+
 msgctxt "mmd_story_plate_5_4"
 msgid "Story"
 msgstr "이야기"
 
+msgctxt "mmd_story_plate_5_4_text"
+msgid "Walls were covered in brown bumpy sheets with white ridges, pulsing slowly and quietly. The monsters were gone, and in the center of the rotting space he saw the cage, it sat on a small, beat-up table. Thick grids connected the cage to the walls. He swept away the brown web and tore the cage off the table."
+msgstr "벽은 흰 주름이 진 울퉁불퉁한 갈색 막으로 뒤덮여 있었다. 막은 느리게, 소리 없이 맥동하고 있었다. 괴물들은 사라지고 없었다. 썩어 가는 공간 한가운데, 작고 낡은 탁자 위에 새장이 놓여 있었다. 굵은 그물이 새장과 벽을 잇고 있었다. 그는 갈색 막을 걷어 내고, 새장을 탁자에서 뜯어냈다."
+
 msgctxt "mmd_story_plate_5_5"
 msgid "Story"
 msgstr "이야기"
+
+msgctxt "mmd_story_plate_5_5_text"
+msgid "The cage in his hands was tranquil, but fear grew on him. This place was still hostile. He burst through the front door into the cold evening air. The city lights in the distance looked foreign. More foreign than ever before."
+msgstr "손에 든 새장은 고요했다. 그러나 두려움은 점점 커져 갔다. 이곳은 여전히 그를 적대하고 있었다. 그는 현관문을 박차고 차가운 저녁 공기 속으로 뛰쳐나갔다. 멀리 도시의 불빛이 낯설게 보였다. 그 어느 때보다도."
 
 msgctxt "mmd_story_wall"
 msgid "Wall"
@@ -602,6 +642,30 @@ msgstr "이형체"
 msgctxt "mmd_WK3a"
 msgid "Aberrant (Altered)"
 msgstr "이형체 (변형)"
+
+msgctxt "pal_mmd_1"
+msgid "Palette 1"
+msgstr "색상 1"
+
+msgctxt "pal_mmd_2"
+msgid "Palette 2"
+msgstr "색상 2"
+
+msgctxt "pal_mmd_3"
+msgid "Palette 3"
+msgstr "색상 3"
+
+msgctxt "pal_mmd_4"
+msgid "Palette 4"
+msgstr "색상 4"
+
+msgctxt "pal_mmd_5"
+msgid "Palette 5"
+msgstr "색상 5"
+
+msgctxt "pal_mmd_6"
+msgid "Palette 6"
+msgstr "색상 6"
 
 msgctxt "party_name_grave_robber_highwayman_man_at_arms_mmd"
 msgid "Kismet"
@@ -992,8 +1056,8 @@ msgid "Repeating this skill deals additional damage"
 msgstr "이 기술을 반복하면 추가 피해를 줍니다"
 
 msgctxt "performer_buff_desc_mmd_slowdown_fake_ignore_resist_override"
-msgid "Ignores <sprite name={q}icon_debuff{q}> RES"
-msgstr "<sprite name={q}icon_debuff{q}> 저항 무시"
+msgid "Ignores <sprite name={q}icon_stun{q}> RES"
+msgstr "<sprite name={q}icon_stun{q}> 저항 무시"
 
 msgctxt "skill_hover_bark_god_face_your_failure+mmd"
 msgid "Here I am!"
@@ -1427,6 +1491,10 @@ msgctxt "tag_mmd_corpse_dead"
 msgid "<color=#cf795d>Corpse</color>"
 msgstr "<color=#cf795d>시체</color>"
 
+msgctxt "target_buff_desc_mmd_lycoperdonosis_calculate_buffs_override"
+msgid "<color=#{buff}>+20%<sprite name={q}icon_stun{q}><sprite name={q}icon_move{q}> RES Piercing</color> when target <sprite name={q}token_daze{q}>"
+msgstr "<sprite name={q}token_daze{q}> 지정 시 <color=#{buff}>+20%<sprite name={q}icon_stun{q}><sprite name={q}icon_move{q}> 저항 무시</color>"
+
 msgctxt "token_mmd_assortment_option_1"
 msgid "<color=#{disease_quirk}>Disinfector</color>"
 msgstr "<color=#{disease_quirk}>소독제</color>"
@@ -1693,15 +1761,15 @@ msgstr "<color=#{stress}>신경조절제</color>"
 
 msgctxt "token_name_mmd_token_curse"
 msgid "<color=#{notable}>Cursed Spores</color>"
-msgstr "<color=#{notable}>저주받은 포자</color>"
+msgstr "<color=#{notable}>저주 포자</color>"
 
 msgctxt "token_name_mmd_token_curse_u"
 msgid "<color=#{notable}>Cursed Spores<sprite name={q}icon_upgraded_skill{q}></color>"
-msgstr "<color=#{notable}>저주받은 포자<sprite name={q}icon_upgraded_skill{q}></color>"
+msgstr "<color=#{notable}>저주 포자<sprite name={q}icon_upgraded_skill{q}></color>"
 
 msgctxt "token_name_mmd_token_curse_u_sheet"
 msgid "<color=#{notable}>Cursed Spores+</color>"
-msgstr "<color=#{notable}>저주받은 포자+</color>"
+msgstr "<color=#{notable}>저주 포자+</color>"
 
 msgctxt "token_name_mmd_token_disturb"
 msgid "<color=#{notable}>Disturbing Spores</color>"
